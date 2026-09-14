@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "caypollard"
+version = "0.2.0"
+description = "Reproducible experiments on image, knowledge-graph, and multimodal embeddings for cultural heritage retrieval."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "scikit-learn>=1.5",
+  "pyyaml>=6.0",
+  "rdflib>=7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "jupyterlab>=4.2",
+  "pytest>=8.0",
+  "ruff>=0.6",
+]
+vision = [
+  "torch>=2.4",
+  "transformers>=4.44",
+  "open-clip-torch>=2.26",
+  "pillow>=10.4",
+]
+retrieval = [
+  "faiss-cpu>=1.8",
+]
+graph = [
+  "pykeen>=1.11",
+  "networkx>=3.3",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/caypollard"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

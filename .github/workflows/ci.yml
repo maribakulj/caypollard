@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+      - name: Set up Python
+        run: uv python install 3.11
+      - name: Install
+        run: uv sync --extra dev
+      - name: Lint
+        run: uv run ruff check src tests scripts
+      - name: Test
+        run: uv run pytest -q
+      - name: Execute research notebooks
+        run: |
+          uv run jupyter nbconvert --to notebook --execute notebooks/00_project_overview.ipynb --output /tmp/00_project_overview.executed.ipynb --ExecutePreprocessor.timeout=120
+          uv run jupyter nbconvert --to notebook --execute notebooks/01_iconclass_graph.ipynb --output /tmp/01_iconclass_graph.executed.ipynb --ExecutePreprocessor.timeout=120
+          uv run jupyter nbconvert --to notebook --execute notebooks/02_visual_embeddings.ipynb --output /tmp/02_visual_embeddings.executed.ipynb --ExecutePreprocessor.timeout=120

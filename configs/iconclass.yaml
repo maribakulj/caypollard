@@ -1,0 +1,25 @@
+dataset:
+  name: Iconclass AI Test Set
+  landing_page: https://iconclass.org/testset/
+  archive_md5: 779ba2ca9e977c58d818e3823a676973
+
+vocabulary:
+  repository: https://github.com/iconclass/data
+  ref: 0aeced694cf0a57dd5ff5dfb4587da99f698b686
+
+split:
+  diagnostic_seed: iconclass-v0.1
+  ratios: [0.8, 0.1, 0.1]
+  headline_requires_duplicate_groups: true
+  headline_requires_provenance_groups: true
+
+evaluation:
+  primary_metric: ndcg@10
+  hierarchy_relevance: inverse_shortest_common_ancestor_distance
+  multilabel_aggregation: max
+  secondary_metrics:
+    - recall@1
+    - recall@5
+    - recall@10
+    - mrr
+    - map

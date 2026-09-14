@@ -1,0 +1,24 @@
+# Phase-2 discovery configuration. Published benchmark runs must replace mutable
+# Hub refs with immutable commit revisions, recorded in the embedding sidecar.
+models:
+  - key: dinov2-base
+    family: dinov2
+    model_id: facebook/dinov2-base
+    revision: null
+  - key: clip-vit-b32
+    family: clip
+    model_id: openai/clip-vit-base-patch32
+    revision: null
+  - key: siglip-base-224
+    family: siglip
+    model_id: google/siglip-base-patch16-224
+    revision: null
+normalize_embeddings: true
+batch_size: 32
+retrieval:
+  baseline: exact_cosine
+  exclude_query_image: true
+  ks: [1, 5, 10, 50]
+release_gate:
+  require_resolved_revision: true
+  require_manifest_sha256: true

@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local research data
+/data/raw/
+/data/interim/
+/data/processed/
+/data/derived/
+/embeddings/
+/models/
+
+# Results that should be explicitly versioned rather than dumped
+/results/tmp/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

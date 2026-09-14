@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software or benchmark, please cite the repository release."
+title: "caypollard"
+type: software
+authors:
+  - alias: "maribakulj"
+version: 0.2.0
+date-released: 2026-09-14
+license: MIT
+keywords:
+  - cultural heritage
+  - knowledge graphs
+  - multimodal embeddings
+  - image retrieval
+  - Iconclass
+  - digital humanities
