@@ -1,0 +1,95 @@
+name: Validate and publish caypollard
+
+on:
+  push:
+    branches:
+      - import/project-state
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - name: Reassemble and verify exact project archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive=/tmp/caypollard.tar.xz
+          : > "$archive"
+          for sha in \
+            88da708322ad385d0ba7f986089c1b13fc98dc88 \
+            4ccf092ced71f5c0f7bfe7b08fb4bb760ff58dc8 \
+            abca02aedfddaf97bf570da78ce43e14db053a49 \
+            f5dd9de64378d15a2dcab21cb2a69d887cdc9e47 \
+            1ca9cdd57de560ef7315ceca5a525ad925fd91fa \
+            572328e99ba037266bac1fe46fe38f4f1823d894 \
+            6f1e8fda6121e6eb1679714942854c228477cf59 \
+            85b3a55270b04d0235a106fb892802ddd64d99ee \
+            45b8b48a8852d8721eb7cc92f54cfa2bd7914483 \
+            8fc6f9e76e6f3db7a81fb16c8c7bd6ad658e0643 \
+            d41305e83248c889fde802b69b23917932ceae16
+          do
+            curl --fail --silent --show-error \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/git/blobs/$sha" \
+              | jq -r '.content' | base64 --decode >> "$archive"
+          done
+          echo "a70011e47bed82abc103f9c5390fc7a627b2d53781870015ced6809437f2cddc  $archive" | sha256sum --check
+          mkdir -p /tmp/caypollard-import
+          tar -xJf "$archive" -C /tmp/caypollard-import
+      - name: Replace staging tree with project
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a /tmp/caypollard-import/caypollard/. ./
+      - name: Install environment
+        run: uv sync --extra dev --extra alignment
+      - name: Lint
+        run: uv run ruff check src tests
+      - name: Tests
+        run: uv run pytest -q
+      - name: Execute notebooks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/caypollard-nb
+          for nb in \
+            notebooks/00_project_overview.ipynb \
+            notebooks/01_iconclass_graph.ipynb \
+            notebooks/02_visual_embeddings.ipynb \
+            notebooks/03_kg_embeddings.ipynb \
+            notebooks/04_visual_retrieval_baseline.ipynb \
+            notebooks/05_graph_retrieval_baseline.ipynb \
+            notebooks/06_multimodal_fusion.ipynb \
+            notebooks/06b_learned_joint_alignment.ipynb \
+            notebooks/07_hard_pairs_evaluation.ipynb
+          do
+            uv run jupyter nbconvert --to notebook --execute "$nb" \
+              --ExecutePreprocessor.timeout=180 \
+              --output-dir /tmp/caypollard-nb \
+              --output "$(basename "$nb")"
+          done
+      - name: Publish clean validated commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan published-main
+          git rm -rf --cached . >/dev/null 2>&1 || true
+          git add -A
+          git commit -m "feat: publish caypollard v0.4.0 research repository"
+          git push --force origin HEAD:main
+          git push --force origin HEAD:import/project-state
