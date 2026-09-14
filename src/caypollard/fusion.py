@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Sequence
 from dataclasses import asdict, dataclass
-from typing import Iterable, Sequence
 
 import numpy as np
 
@@ -113,7 +113,9 @@ def _aligned_unit_vectors(
     if len(selected) < 2:
         raise ValueError("at least two aligned embedding ids are required")
     left_matrix = l2_normalize(np.stack([left.vectors[left_row[item_id]] for item_id in selected]))
-    right_matrix = l2_normalize(np.stack([right.vectors[right_row[item_id]] for item_id in selected]))
+    right_matrix = l2_normalize(
+        np.stack([right.vectors[right_row[item_id]] for item_id in selected])
+    )
     return selected, left_matrix, right_matrix
 
 
@@ -181,7 +183,7 @@ def rerank_visual_candidates(
     visual_row = {item_id: index for index, item_id in enumerate(visual.ids)}
     graph_row = {item_id: index for index, item_id in enumerate(graph.ids)}
     shared_candidates = sorted(
-        set(str(item_id) for item_id in candidate_ids).intersection(visual_row, graph_row)
+        {str(item_id) for item_id in candidate_ids}.intersection(visual_row, graph_row)
     )
     if query_id not in visual_row or query_id not in graph_row:
         raise ValueError("query id must exist in both representations")

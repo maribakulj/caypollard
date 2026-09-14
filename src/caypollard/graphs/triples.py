@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import csv
 import hashlib
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
 
 Triple = tuple[str, str, str]
 
@@ -127,7 +127,7 @@ class ProjectionAudit:
         *,
         projection_id: str,
         masked_triples: int = 0,
-    ) -> "ProjectionAudit":
+    ) -> ProjectionAudit:
         rows = normalize_triples(triples)
         return cls(
             projection_id=projection_id,

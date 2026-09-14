@@ -11,8 +11,8 @@ from __future__ import annotations
 
 import re
 from collections import defaultdict, deque
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 from urllib.parse import quote
 
 from rdflib import Graph, Literal, Namespace, URIRef

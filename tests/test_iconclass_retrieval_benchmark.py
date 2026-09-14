@@ -6,8 +6,8 @@ from caypollard.benchmarks.iconclass_retrieval import (
     IconclassRelevanceIndex,
     evaluate_iconclass_retrieval,
 )
-from caypollard.graphs.iconclass import build_parent_index, child_edges, parse_notations
 from caypollard.embeddings.store import EmbeddingTable
+from caypollard.graphs.iconclass import build_parent_index, child_edges, parse_notations
 
 FIXTURE = Path("data/samples/iconclass_notations_fixture.txt")
 

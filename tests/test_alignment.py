@@ -54,12 +54,12 @@ def test_training_is_reproducible_and_never_optimises_on_test_ids():
         learning_rate=0.02,
         seed=7,
     )
-    kwargs = dict(
-        train_ids=visual.ids[:8],
-        validation_ids=visual.ids[8:10],
-        output_ids=visual.ids,
-        config=config,
-    )
+    kwargs = {
+        "train_ids": visual.ids[:8],
+        "validation_ids": visual.ids[8:10],
+        "output_ids": visual.ids,
+        "config": config,
+    }
     first = train_joint_alignment(visual, graph, **kwargs)
     second = train_joint_alignment(visual, graph, **kwargs)
     assert np.allclose(first.joint_projected, second.joint_projected, atol=1e-6)

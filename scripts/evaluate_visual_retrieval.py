@@ -9,9 +9,9 @@ import json
 from pathlib import Path
 
 from caypollard.benchmarks.iconclass_retrieval import evaluate_iconclass_retrieval
+from caypollard.embeddings.store import load_embedding_table
 from caypollard.graphs.iconclass import build_parent_index, child_edges, parse_notations
 from caypollard.provenance import manifest_digest, read_jsonl, sha256_file
-from caypollard.embeddings.store import load_embedding_table
 
 
 def main() -> None:

@@ -2,16 +2,16 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Iterable, Sequence
+from typing import Any
 
 import numpy as np
 
 from caypollard.benchmarks.iconclass_retrieval import IconclassRelevanceIndex
 from caypollard.embeddings.store import EmbeddingTable, l2_normalize
 from caypollard.provenance import write_jsonl
-
 
 PAIR_CLASSES = (
     "easy_positive",
@@ -167,7 +167,8 @@ def _top_visual_candidates(
                 break
         return output
     scores, indices = faiss_index.search(
-        np.ascontiguousarray(query_vector[None, :], dtype=np.float32), min(k + 1, len(candidate_ids))
+        np.ascontiguousarray(query_vector[None, :], dtype=np.float32),
+        min(k + 1, len(candidate_ids)),
     )
     output = []
     for score, position in zip(scores[0], indices[0], strict=True):
@@ -224,7 +225,9 @@ def mine_hard_pairs(
         try:
             import faiss
         except ImportError as exc:
-            raise RuntimeError("FAISS backend requested but retrieval extra is not installed") from exc
+            raise RuntimeError(
+                "FAISS backend requested but retrieval extra is not installed"
+            ) from exc
         faiss_index = faiss.IndexFlatIP(candidate_matrix.shape[1])
         faiss_index.add(np.ascontiguousarray(candidate_matrix, dtype=np.float32))
 
@@ -234,7 +237,9 @@ def mine_hard_pairs(
         relevance = IconclassRelevanceIndex((by_id[item_id] for item_id in union), parents)
         relevance.candidate_ids = frozenset(candidates)
         # Candidate-only inverted indices prevent query-only rows from leaking into BFS results.
-        candidate_index = IconclassRelevanceIndex((by_id[item_id] for item_id in candidates), parents)
+        candidate_index = IconclassRelevanceIndex(
+            (by_id[item_id] for item_id in candidates), parents
+        )
         relevance.resolved_to_ids = candidate_index.resolved_to_ids
         relevance.exact_to_ids = candidate_index.exact_to_ids
 
@@ -305,7 +310,13 @@ def mine_hard_pairs(
         values = sorted(pools[pair_class].values(), key=sort_key[pair_class])
         available_counts[pair_class] = len(values)
         selected.extend(values[:max_per_class])
-    selected.sort(key=lambda pair: (PAIR_CLASSES.index(pair.pair_class), pair.query_id, pair.candidate_id))
+    selected.sort(
+        key=lambda pair: (
+            PAIR_CLASSES.index(pair.pair_class),
+            pair.query_id,
+            pair.candidate_id,
+        )
+    )
     metadata = {
         "method": "pre-fusion-hard-pair-mining",
         "seed": seed,

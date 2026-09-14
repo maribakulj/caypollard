@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from typing import Iterable, Sequence
+from collections.abc import Iterable, Sequence
 
 import numpy as np
 from scipy.stats import spearmanr
@@ -30,7 +30,7 @@ def neighbor_occurrence_counts(table: EmbeddingTable, *, k: int = 10) -> dict[st
     if len(table.ids) < 2:
         raise ValueError("at least two embeddings are required")
     effective_k = min(k, len(table.ids) - 1)
-    counts: Counter[str] = Counter({item_id: 0 for item_id in table.ids})
+    counts: Counter[str] = Counter(dict.fromkeys(table.ids, 0))
     for index, vector in enumerate(table.vectors):
         for result in top_k_cosine(
             vector,

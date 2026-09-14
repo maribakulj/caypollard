@@ -8,7 +8,6 @@ from caypollard.benchmarks.hard_pairs import (
 )
 from caypollard.embeddings.store import EmbeddingTable
 
-
 PARENTS = {
     "A": set(),
     "A1": {"A"},

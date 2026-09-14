@@ -82,7 +82,9 @@ def main() -> None:
         "hard_pairs_file": str(Path(args.output)),
     }
     metadata_path = Path(args.output).with_suffix(Path(args.output).suffix + ".metadata.json")
-    metadata_path.write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    metadata_path.write_text(
+        json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     print(json.dumps(metadata, indent=2, sort_keys=True))
 
 

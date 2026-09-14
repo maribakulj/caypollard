@@ -7,10 +7,12 @@ frozen and only projection heads are trained. Test identifiers must never be sup
 
 from __future__ import annotations
 
-from copy import deepcopy
+import contextlib
 import hashlib
+from collections.abc import Iterable, Sequence
+from copy import deepcopy
 from dataclasses import asdict, dataclass
-from typing import Any, Iterable, Sequence
+from typing import Any
 
 import numpy as np
 
@@ -127,7 +129,7 @@ def _torch_imports():
 
 
 def _build_projection_head(input_dim: int, config: AlignmentConfig):
-    torch, nn, _ = _torch_imports()
+    _, nn, _ = _torch_imports()
     if config.hidden_dim is None:
         return nn.Linear(input_dim, config.projection_dim)
     return nn.Sequential(
@@ -166,10 +168,10 @@ def _set_deterministic_seed(seed: int) -> None:
     torch.manual_seed(seed)
     if torch.cuda.is_available():  # pragma: no cover - no CUDA in CI
         torch.cuda.manual_seed_all(seed)
-    try:
+    # Not every backend supports deterministic kernels; the seeding above still
+    # applies when this toggle is unavailable.
+    with contextlib.suppress(Exception):  # pragma: no cover - backend-dependent
         torch.use_deterministic_algorithms(True)
-    except Exception:  # pragma: no cover - backend-dependent
-        pass
 
 
 def _project_numpy(head, matrix: np.ndarray, device: str) -> np.ndarray:

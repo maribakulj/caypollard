@@ -5,17 +5,17 @@ from __future__ import annotations
 
 import argparse
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from caypollard.embeddings.store import save_embedding_table
 from caypollard.provenance import sha256_file
 from caypollard.vision.encoders import (
     DEFAULT_MODELS,
     HuggingFaceVisionEncoder,
     VisionModelSpec,
 )
-from caypollard.embeddings.store import save_embedding_table
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -106,7 +106,7 @@ def main() -> None:
 
     matrix = np.concatenate(vectors, axis=0)
     metadata = encoder.metadata | {
-        "created_at": datetime.now(timezone.utc).isoformat(),
+        "created_at": datetime.now(UTC).isoformat(),
         "manifest_file": args.manifest.name,
         "manifest_sha256": sha256_file(args.manifest),
         "image_dir": str(args.image_dir),

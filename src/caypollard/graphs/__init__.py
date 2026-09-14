@@ -7,8 +7,8 @@ from .iconclass import (
     hierarchy_depth,
     image_hierarchical_similarity,
     normalize_notation,
-    resolve_notation,
     parse_notations,
+    resolve_notation,
     semantic_distance,
 )
 
@@ -19,7 +19,7 @@ __all__ = [
     "hierarchy_depth",
     "image_hierarchical_similarity",
     "normalize_notation",
-    "resolve_notation",
     "parse_notations",
+    "resolve_notation",
     "semantic_distance",
 ]

@@ -37,7 +37,7 @@ def main() -> None:
         "source_repository": "https://github.com/iconclass/data",
         "source_url": url,
         "ref": args.ref,
-        "retrieved_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+        "retrieved_at": dt.datetime.now(dt.UTC).isoformat(),
         "sha256": sha256_file(destination),
         "license": "CC0-1.0",
     }

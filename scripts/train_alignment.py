@@ -7,7 +7,11 @@ import argparse
 import json
 from pathlib import Path
 
-from caypollard.alignment import AlignmentConfig, embedding_collapse_diagnostics, train_joint_alignment
+from caypollard.alignment import (
+    AlignmentConfig,
+    embedding_collapse_diagnostics,
+    train_joint_alignment,
+)
 from caypollard.embeddings.store import load_embedding_table, save_embedding_table
 from caypollard.provenance import read_jsonl
 
