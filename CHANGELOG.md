@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.4.0 — 2026-09-14
+
+### Added
+
+- frozen-encoder learned visual/KG alignment with linear or one-hidden-layer projection heads;
+- symmetric InfoNCE with same-object positives and in-batch negatives;
+- strict train/validation partitioning, early stopping, partition digests, and no test-driven checkpoint selection;
+- learned-embedding collapse diagnostics using off-diagonal cosine statistics and effective rank;
+- `protocol-v0.4`, `configs/alignment.yaml`, `scripts/train_alignment.py`, and executable `06b_learned_joint_alignment.ipynb`;
+- dedicated `alignment` optional dependency group for PyTorch.
+
+### Changed
+
+- advanced package and citation metadata to v0.4.0;
+- extended CI to execute the learned-alignment notebook with the alignment dependency group.
+
 ## 0.3.0 — 2026-09-14
 
 ### Added

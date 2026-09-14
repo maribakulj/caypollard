@@ -11,6 +11,7 @@ Notebooks are readable experiment interfaces. Reusable logic belongs in `src/cay
 | `04_visual_retrieval_baseline.ipynb` | **executable** | protocol-aligned visual-only evaluation and disagreement inspection |
 | `05_graph_retrieval_baseline.ipynb` | **executable** | graph retrieval, visual/graph overlap, and degree/hubness diagnostics |
 | `06_multimodal_fusion.ipynb` | **executable** | validation-calibrated late fusion and graph reranking smoke test |
+| `06b_learned_joint_alignment.ipynb` | **executable** | frozen-encoder visual/KG projection heads, InfoNCE, and collapse diagnostics |
 | `07_hard_pairs_evaluation.ipynb` | **executable** | pre-fusion visual/iconographic disagreement benchmark |
 | `08_emblematica_case_study.ipynb` | planned | historical emblem case study |
 | `09_cross_collection_transfer.ipynb` | planned | external collection evaluation |

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "caypollard"
-version = "0.3.0"
+version = "0.4.0"
 description = "Reproducible experiments on image, knowledge-graph, and multimodal embeddings for cultural heritage retrieval."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -32,6 +32,9 @@ vision = [
 ]
 retrieval = [
   "faiss-cpu>=1.8",
+]
+alignment = [
+  "torch>=2.4",
 ]
 graph = [
   "pykeen>=1.11,<1.12",

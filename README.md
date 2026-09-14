@@ -2,7 +2,7 @@
 
 **Research code and reproducible notebooks for testing whether structured cultural-heritage knowledge changes and improves visual similarity.**
 
-Status: **Phases 1–3 infrastructure implemented; hard-pair and transparent-fusion foundations active / v0.3.0**
+Status: **Phases 1–3 infrastructure implemented; hard-pair, transparent-fusion, and learned-alignment foundations active / v0.4.0**
 
 ## Core research question
 
@@ -31,7 +31,7 @@ The central test concerns cases where `S_v` and `S_g` disagree.
 
 ### KG target-leakage rule
 
-A graph condition is not evidence-bearing if the test image's Iconclass labels are directly fed into the graph representation while the same labels define evaluation relevance. `caypollard` therefore distinguishes taxonomy-derived **oracle controls** from context-only or target-masked graph conditions. See [`docs/GRAPH_PROJECTIONS.md`](docs/GRAPH_PROJECTIONS.md) and [`docs/protocol-v0.3.md`](docs/protocol-v0.3.md).
+A graph condition is not evidence-bearing if the test image's Iconclass labels are directly fed into the graph representation while the same labels define evaluation relevance. `caypollard` therefore distinguishes taxonomy-derived **oracle controls** from context-only or target-masked graph conditions. See [`docs/GRAPH_PROJECTIONS.md`](docs/GRAPH_PROJECTIONS.md) and [`docs/protocol-v0.4.md`](docs/protocol-v0.4.md).
 
 ## Corpus strategy
 
@@ -135,6 +135,7 @@ caypollard/
 │   ├── 04_visual_retrieval_baseline.ipynb    # executable
 │   ├── 05_graph_retrieval_baseline.ipynb     # executable graph-control retrieval
 │   ├── 06_multimodal_fusion.ipynb            # executable transparent fusion
+│   ├── 06b_learned_joint_alignment.ipynb     # executable learned-alignment fixture
 │   ├── 07_hard_pairs_evaluation.ipynb        # executable hard-pair mining
 │   ├── 08_emblematica_case_study.ipynb       # planned
 │   └── 09_cross_collection_transfer.ipynb    # planned
@@ -165,7 +166,7 @@ The repository now includes a working Iconclass data layer rather than only a pl
 - explicit downloader for the ~3.1 GB official test set with MD5 verification;
 - pinned vocabulary downloader with provenance sidecar;
 - `01_iconclass_graph.ipynb`, executable entirely from tiny repository fixtures;
-- versioned pre-results protocols, with target-leakage, hard-pair, and fusion rules frozen in `docs/protocol-v0.3.md`.
+- versioned pre-results protocols, with target-leakage, hard-pair, and fusion rules frozen through `docs/protocol-v0.4.md`.
 
 ### Phase 2 foundation now included
 
@@ -180,6 +181,10 @@ The repository contains an executable taxonomy-only graph control (`03_kg_embedd
 ### Hard-pair and transparent-fusion foundations
 
 `07_hard_pairs_evaluation.ipynb` now freezes the logic for the four visual/semantic pair classes. Visual cutoffs are calibrated from validation embeddings only, while semantic cutoffs use the predeclared Iconclass hierarchy relevance. `06_multimodal_fusion.ipynb` implements validation-calibrated weighted late fusion and visual-candidate graph reranking. The selected fusion weight is tuned on validation nDCG@10 and evaluated once on test; ties prefer the more visual model so graph complexity has to earn its contribution. Full-corpus thresholds and result tables remain pending the real image/model runs.
+
+### Phase 6 learned-alignment foundation
+
+`06b_learned_joint_alignment.ipynb` and `scripts/train_alignment.py` implement the deliberately small learned V+G condition: frozen precomputed visual and graph embeddings, two projection heads, symmetric InfoNCE with in-batch negatives, validation-loss checkpoint selection, and no test-driven optimisation. Every run records partition digests and collapse diagnostics (off-diagonal cosine statistics and effective rank). Protocol v0.4 requires at least three predeclared seeds and comparison against the strongest transparent fusion baseline before a learned model can support a headline claim.
 
 ## Quick start
 
@@ -210,7 +215,13 @@ uv run jupyter nbconvert --to notebook --execute \
   --output /tmp/01_iconclass_graph.executed.ipynb
 ```
 
-For the real corpus, read `docs/ICONCLASS_DATA_CARD.md` and `docs/protocol-v0.3.md` first. The project deliberately refuses to make a 3.1 GB research-data download an invisible side effect of setup.
+For the real corpus, read `docs/ICONCLASS_DATA_CARD.md` and `docs/protocol-v0.4.md` first. The project deliberately refuses to make a 3.1 GB research-data download an invisible side effect of setup.
+
+For the learned projection-head experiments, install the optional PyTorch layer explicitly:
+
+```bash
+uv sync --extra dev --extra alignment
+```
 
 ## Reproducibility and FAIR principles
 

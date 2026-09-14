@@ -60,9 +60,9 @@ Use frozen source encoders initially:
 
 `z_g = P_g(g)`
 
-Optimise a contrastive loss over known image/entity correspondences and carefully selected negatives.
+Protocol v0.4 trains two deliberately small projection heads with symmetric InfoNCE. The same object across visual and graph modalities is the positive pair; other objects in the minibatch are negatives. Optimisation uses train IDs only, checkpoint selection uses validation InfoNCE only, and test rows may be projected only after fitting.
 
-The first learned model should be deliberately small. If it cannot beat transparent fusion, increasing parameter count is not evidence of progress.
+Every learned run records train/validation partition digests plus off-diagonal cosine and effective-rank collapse diagnostics. At least three predeclared seeds are required before a learned result is treated as confirmatory. If the learned model cannot beat transparent fusion, increasing parameter count is not evidence of progress.
 
 ## Hard-pair evaluation
 

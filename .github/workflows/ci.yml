@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
       - name: Install
-        run: uv sync --extra dev
+        run: uv sync --extra dev --extra alignment
       - name: Lint
         run: uv run ruff check src tests scripts
       - name: Test
@@ -29,4 +29,5 @@ jobs:
           uv run jupyter nbconvert --to notebook --execute notebooks/04_visual_retrieval_baseline.ipynb --output /tmp/04_visual_retrieval_baseline.executed.ipynb --ExecutePreprocessor.timeout=120
           uv run jupyter nbconvert --to notebook --execute notebooks/05_graph_retrieval_baseline.ipynb --output /tmp/05_graph_retrieval_baseline.executed.ipynb --ExecutePreprocessor.timeout=120
           uv run jupyter nbconvert --to notebook --execute notebooks/06_multimodal_fusion.ipynb --output /tmp/06_multimodal_fusion.executed.ipynb --ExecutePreprocessor.timeout=120
+          uv run jupyter nbconvert --to notebook --execute notebooks/06b_learned_joint_alignment.ipynb --output /tmp/06b_learned_joint_alignment.executed.ipynb --ExecutePreprocessor.timeout=120
           uv run jupyter nbconvert --to notebook --execute notebooks/07_hard_pairs_evaluation.ipynb --output /tmp/07_hard_pairs_evaluation.executed.ipynb --ExecutePreprocessor.timeout=120

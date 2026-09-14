@@ -265,13 +265,13 @@ KG embedding     -> projection --+
 
 ### Tasks
 
-- [ ] Implement projection heads.
-- [ ] Define positive/negative sampling strategy.
-- [ ] Train with fixed data partitions.
-- [ ] Compare against late fusion and reranking.
-- [ ] Run seed sensitivity analysis.
-- [ ] Evaluate representation collapse/hubness.
-- [ ] Conduct modality ablation.
+- [x] Implement small linear/MLP projection heads over frozen embeddings.
+- [x] Define positive/negative sampling strategy (same-object positives, in-batch negatives).
+- [x] Implement fixed train/validation partition training with validation-loss checkpoint selection; full-corpus runs remain pending.
+- [ ] Compare real-corpus results against late fusion and reranking.
+- [ ] Run the preregistered >=3-seed sensitivity analysis on real embeddings.
+- [x] Implement representation-collapse diagnostics (off-diagonal cosine + effective rank); combine with existing hubness diagnostics in real runs.
+- [ ] Conduct modality/capacity ablations on real embeddings.
 
 ### Model matrix
 

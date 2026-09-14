@@ -1,0 +1,30 @@
+protocol: protocol-v0.4
+method: frozen-encoder-symmetric-infonce-projection
+projection:
+  dimension: 128
+  hidden_dimension: null
+optimisation:
+  temperature: 0.07
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  batch_size: 256
+  maximum_epochs: 100
+  early_stopping_patience: 15
+  seed: 42
+partition_policy:
+  optimisation: train
+  checkpoint_selection: validation_info_nce
+  test_use_during_training: forbidden
+negative_sampling: in_batch
+minimum_reported_seeds: 3
+comparison_gate:
+  must_compare_against:
+    - strongest_visual_baseline
+    - strongest_valid_G1_or_G2_graph_baseline
+    - weighted_late_fusion
+    - graph_reranking
+collapse_diagnostics:
+  - mean_off_diagonal_cosine
+  - std_off_diagonal_cosine
+  - max_off_diagonal_cosine
+  - effective_rank

@@ -72,3 +72,7 @@ A research release should freeze:
 - software version.
 
 Prefer a DOI-bearing archive for paper-associated releases. A release must not be tagged until the dependency lockfile can be regenerated and CI can reproduce it from network-accessible package indexes.
+
+## Optional learned-alignment environment
+
+The learned projection-head path is intentionally isolated behind the `alignment` extra. CI installs `dev` + `alignment` so the learned notebook and tests are executed rather than silently skipped. Full release environments should be reconstructed from the regenerated lockfile before tagging.
