@@ -1,0 +1,16 @@
+image:a	part_of	book:alpha
+image:b	part_of	book:alpha
+image:c	part_of	book:beta
+image:d	part_of	book:beta
+image:e	part_of	book:gamma
+book:alpha	created_by	person:maker-1
+book:beta	created_by	person:maker-1
+book:gamma	created_by	person:maker-2
+book:alpha	printed_at	place:antwerp
+book:beta	printed_at	place:antwerp
+book:gamma	printed_at	place:paris
+image:a	has_iconclass	iconclass:25G411
+image:b	has_iconclass	iconclass:25G411
+image:c	has_iconclass	iconclass:25G412
+image:d	has_iconclass	iconclass:25G412
+image:e	has_iconclass	iconclass:25G41

@@ -55,6 +55,24 @@ and multi-level fusion for several multimodal KG tasks.
 *not* the starting baseline here. A learned architecture is only justified after transparent
 late-fusion and reranking baselines demonstrate complementary graph signal.
 
+
+## 2a. Graph-embedding methods used as baselines
+
+The repository's graph baselines are intentionally conventional. DeepWalk (Perozzi et al.,
+2014) established truncated random walks plus language-model-style representation learning;
+node2vec (Grover & Leskovec, 2016) introduced biased walks controlled by return/in-out
+parameters; RDF2Vec (Ristoski & Paulheim, 2016) adapted walk/language-model ideas to RDF
+graphs; ComplEx (Trouillon et al., 2016) introduced complex-valued factorisation capable of
+representing asymmetric relations; and RotatE (Sun et al., 2019) models relations as rotations
+in complex space.
+
+Caypollard uses two lightweight CI controls, `node2vec-style-ppmi-svd` and
+`rdf2vec-style-ppmi-svd`. They factorise positive-PMI co-occurrence matrices from deterministic
+walk corpora instead of claiming to reproduce the original Word2Vec optimisation. Canonical
+relation-aware ComplEx/RotatE runs are delegated to the optional PyKEEN backend and versioned
+separately. This naming distinction is deliberate: methodological convenience should not
+quietly become bibliographic fiction.
+
 ## 3. Multimodal representation for art
 
 ### Garcia & Vogiatzis (2018), SemArt

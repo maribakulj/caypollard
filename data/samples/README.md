@@ -8,3 +8,5 @@ Sources checked 2026-09-14:
 
 - https://iconclass.org/testset/
 - https://github.com/iconclass/data
+
+`context_triples_fixture.tsv` is a tiny synthetic heritage-context graph used to test G1/G2 graph projection, relation-aware walks, target-edge masking, and hubness diagnostics. It intentionally mixes contextual relations (`part_of`, `created_by`, `printed_at`) with `has_iconclass` target edges so leakage controls are exercised in CI. It is not heritage evidence and must never be reported as an empirical result.

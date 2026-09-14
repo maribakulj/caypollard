@@ -1,0 +1,21 @@
+protocol: protocol-v0.3
+status: calibration_method_frozen_threshold_values_pending_real_validation_run
+seed: 42
+visual_threshold_calibration:
+  source_split: validation
+  random_pairs: 20000
+  close_quantile: 0.95
+  distant_quantile: 0.50
+semantic_thresholds:
+  close_min: 0.5
+  distant_max: 0.2
+mining:
+  visual_top_k: 50
+  random_distant_per_query: 50
+  max_per_class: 250
+  preferred_backend: faiss
+classes:
+  - easy_positive
+  - hard_negative
+  - hard_positive
+  - easy_negative

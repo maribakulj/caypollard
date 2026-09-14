@@ -2,7 +2,7 @@
 
 **Research code and reproducible notebooks for testing whether structured cultural-heritage knowledge changes and improves visual similarity.**
 
-Status: **Phase 1 implemented; Phase 2 in progress / v0.2.0**
+Status: **Phases 1–3 infrastructure implemented; hard-pair and transparent-fusion foundations active / v0.3.0**
 
 ## Core research question
 
@@ -31,7 +31,7 @@ The central test concerns cases where `S_v` and `S_g` disagree.
 
 ### KG target-leakage rule
 
-A graph condition is not evidence-bearing if the test image's Iconclass labels are directly fed into the graph representation while the same labels define evaluation relevance. `caypollard` therefore distinguishes taxonomy-derived **oracle controls** from context-only or target-masked graph conditions. See [`docs/GRAPH_PROJECTIONS.md`](docs/GRAPH_PROJECTIONS.md) and [`docs/protocol-v0.2.md`](docs/protocol-v0.2.md).
+A graph condition is not evidence-bearing if the test image's Iconclass labels are directly fed into the graph representation while the same labels define evaluation relevance. `caypollard` therefore distinguishes taxonomy-derived **oracle controls** from context-only or target-masked graph conditions. See [`docs/GRAPH_PROJECTIONS.md`](docs/GRAPH_PROJECTIONS.md) and [`docs/protocol-v0.3.md`](docs/protocol-v0.3.md).
 
 ## Corpus strategy
 
@@ -134,8 +134,8 @@ caypollard/
 │   ├── 03_kg_embeddings.ipynb                # executable graph control
 │   ├── 04_visual_retrieval_baseline.ipynb    # executable
 │   ├── 05_graph_retrieval_baseline.ipynb     # executable graph-control retrieval
-│   ├── 06_multimodal_fusion.ipynb            # planned
-│   ├── 07_hard_pairs_evaluation.ipynb        # planned
+│   ├── 06_multimodal_fusion.ipynb            # executable transparent fusion
+│   ├── 07_hard_pairs_evaluation.ipynb        # executable hard-pair mining
 │   ├── 08_emblematica_case_study.ipynb       # planned
 │   └── 09_cross_collection_transfer.ipynb    # planned
 ├── src/caypollard/
@@ -165,7 +165,7 @@ The repository now includes a working Iconclass data layer rather than only a pl
 - explicit downloader for the ~3.1 GB official test set with MD5 verification;
 - pinned vocabulary downloader with provenance sidecar;
 - `01_iconclass_graph.ipynb`, executable entirely from tiny repository fixtures;
-- versioned pre-results protocols, with target-leakage-controlled headline rules in `docs/protocol-v0.2.md`.
+- versioned pre-results protocols, with target-leakage, hard-pair, and fusion rules frozen in `docs/protocol-v0.3.md`.
 
 ### Phase 2 foundation now included
 
@@ -173,9 +173,13 @@ The repository also contains the visual-baseline infrastructure: a lazy Hugging 
 
 The full image corpus is intentionally not committed or downloaded by CI. See `docs/ICONCLASS_DATA_CARD.md`.
 
-### Phase 3 foundation now included
+### Phase 3 relation-aware graph foundation now included
 
-The repository now also contains an executable taxonomy-only graph control (`03_kg_embeddings.ipynb`) and image-level graph retrieval smoke test (`05_graph_retrieval_baseline.ipynb`). The implemented adjacency-SVD representation is deliberately labeled an **oracle/control** because it is derived from the same Iconclass structure used by the evaluator. Headline KG experiments must instead use context-only (`G1`) or target-masked (`G2`) projections defined in `docs/GRAPH_PROJECTIONS.md`.
+The repository contains an executable taxonomy-only graph control (`03_kg_embeddings.ipynb`) and image-level graph retrieval smoke test (`05_graph_retrieval_baseline.ipynb`). In addition to adjacency-SVD, it now implements deterministic Node2Vec/DeepWalk-style PPMI-SVD and predicate-aware RDF2Vec-style PPMI-SVD controls, plus optional PyKEEN-backed ComplEx and RotatE training. Graph degree/hubness diagnostics and target-edge masking are part of the same tested package. The taxonomy-derived `G0` representation remains an **oracle/control**; headline KG experiments must use context-only (`G1`) or target-masked (`G2`) projections.
+
+### Hard-pair and transparent-fusion foundations
+
+`07_hard_pairs_evaluation.ipynb` now freezes the logic for the four visual/semantic pair classes. Visual cutoffs are calibrated from validation embeddings only, while semantic cutoffs use the predeclared Iconclass hierarchy relevance. `06_multimodal_fusion.ipynb` implements validation-calibrated weighted late fusion and visual-candidate graph reranking. The selected fusion weight is tuned on validation nDCG@10 and evaluated once on test; ties prefer the more visual model so graph complexity has to earn its contribution. Full-corpus thresholds and result tables remain pending the real image/model runs.
 
 ## Quick start
 
@@ -206,7 +210,7 @@ uv run jupyter nbconvert --to notebook --execute \
   --output /tmp/01_iconclass_graph.executed.ipynb
 ```
 
-For the real corpus, read `docs/ICONCLASS_DATA_CARD.md` and `docs/protocol-v0.2.md` first. The project deliberately refuses to make a 3.1 GB research-data download an invisible side effect of setup.
+For the real corpus, read `docs/ICONCLASS_DATA_CARD.md` and `docs/protocol-v0.3.md` first. The project deliberately refuses to make a 3.1 GB research-data download an invisible side effect of setup.
 
 ## Reproducibility and FAIR principles
 

@@ -28,3 +28,5 @@ jobs:
           uv run jupyter nbconvert --to notebook --execute notebooks/03_kg_embeddings.ipynb --output /tmp/03_kg_embeddings.executed.ipynb --ExecutePreprocessor.timeout=120
           uv run jupyter nbconvert --to notebook --execute notebooks/04_visual_retrieval_baseline.ipynb --output /tmp/04_visual_retrieval_baseline.executed.ipynb --ExecutePreprocessor.timeout=120
           uv run jupyter nbconvert --to notebook --execute notebooks/05_graph_retrieval_baseline.ipynb --output /tmp/05_graph_retrieval_baseline.executed.ipynb --ExecutePreprocessor.timeout=120
+          uv run jupyter nbconvert --to notebook --execute notebooks/06_multimodal_fusion.ipynb --output /tmp/06_multimodal_fusion.executed.ipynb --ExecutePreprocessor.timeout=120
+          uv run jupyter nbconvert --to notebook --execute notebooks/07_hard_pairs_evaluation.ipynb --output /tmp/07_hard_pairs_evaluation.executed.ipynb --ExecutePreprocessor.timeout=120

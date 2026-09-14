@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0 — 2026-09-14
+
+### Added
+
+- deterministic Node2Vec/DeepWalk-style PPMI-SVD and predicate-aware RDF2Vec-style graph controls;
+- optional PyKEEN ComplEx/RotatE training adapter with provenance-bearing entity embeddings;
+- canonical relation-triple IO, projection checksums, G2 target-edge masking, and projection audits;
+- graph degree / embedding-neighbour hubness diagnostics;
+- protocol-v0.3 hard-pair calibration and balanced mining with canonical frozen artifacts;
+- validation-only late-fusion calibration, alpha selection, weighted-concatenation ranking, and graph reranking;
+- executable `06_multimodal_fusion.ipynb` and `07_hard_pairs_evaluation.ipynb`;
+- CLI entry points for generic KG embedding, hard-pair mining, and transparent fusion evaluation.
+
+### Changed
+
+- declared SciPy as a direct dependency rather than relying on scikit-learn to install it transitively;
+- extended CI to execute eight committed research notebooks;
+- updated graph and fusion roadmaps to distinguish implemented infrastructure from external-data-dependent result generation.
+
 ## 0.2.0 — 2026-09-14
 
 ### Changed

@@ -10,7 +10,7 @@ Record:
 
 - git commit SHA;
 - Python version;
-- dependency lockfile;
+- dependency lockfile (release gate; regenerate `uv.lock` before tagging);
 - hardware/device;
 - random seed(s);
 - dataset manifest version/checksum;
@@ -71,4 +71,4 @@ A research release should freeze:
 - executed notebooks;
 - software version.
 
-Prefer a DOI-bearing archive for paper-associated releases.
+Prefer a DOI-bearing archive for paper-associated releases. A release must not be tagged until the dependency lockfile can be regenerated and CI can reproduce it from network-accessible package indexes.

@@ -111,6 +111,40 @@ class IconclassRelevanceIndex:
             self.parents,
         )
 
+    def candidate_ids_within_distance(self, query_id: str, max_distance: int) -> set[str]:
+        """Return candidate IDs reachable within a hierarchy distance cutoff.
+
+        The search is a multi-source BFS from all resolved query labels and uses
+        the candidate-only inverted index, so it scales with the local hierarchy
+        neighbourhood rather than with every possible image pair.
+        """
+        if max_distance < 0:
+            raise ValueError("max_distance must be non-negative")
+        query_nodes = {
+            node
+            for label in self.labels_by_id[query_id]
+            if (node := resolve_notation(label, self.parents)) is not None
+        }
+        if not query_nodes:
+            return set()
+        distances = {node: 0 for node in query_nodes}
+        queue: deque[str] = deque(sorted(query_nodes))
+        output: set[str] = set()
+        while queue:
+            node = queue.popleft()
+            distance = distances[node]
+            if distance > max_distance:
+                continue
+            output.update(self.resolved_to_ids.get(node, set()))
+            if distance == max_distance:
+                continue
+            for neighbour in sorted(self.adjacency.get(node, set())):
+                if neighbour not in distances:
+                    distances[neighbour] = distance + 1
+                    queue.append(neighbour)
+        output.discard(query_id)
+        return output.intersection(self.candidate_ids)
+
     def ideal_relevance(self, query_id: str, k: int) -> list[float]:
         """Return the exact ideal top-k graded-relevance values efficiently.
 
@@ -230,7 +264,7 @@ def evaluate_iconclass_retrieval(
     if not ks or any(k <= 0 for k in ks):
         raise ValueError("ks must contain positive integers")
     if ndcg_k != 10:
-        raise ValueError("protocol-v0.1 fixes the primary endpoint at nDCG@10")
+        raise ValueError("protocol-v0.2 keeps the primary endpoint fixed at nDCG@10")
     if persist_top_k <= 0 or batch_size <= 0:
         raise ValueError("persist_top_k and batch_size must be positive")
     if query_limit is not None and query_limit <= 0:

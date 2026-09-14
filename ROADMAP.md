@@ -152,9 +152,9 @@ Determine whether graph proximity captures an interpretable semantic structure t
 
 - [x] Define graph projections and target-leakage policy explicitly (`G0` taxonomy oracle, `G1` context-only, `G2` masked-label).
 - [x] Separate taxonomy-only oracle/control experiments from richer evidence-bearing relational projections.
-- [ ] Train relation-aware KGE baselines with fixed seeds; dependency-light adjacency-SVD taxonomy control is implemented.
+- [x] Implement fixed-seed relation-aware KGE code paths: predicate-aware RDF2Vec-style control plus optional PyKEEN ComplEx/RotatE; full-corpus training remains pending external data/model runs.
 - [ ] Evaluate full-corpus graph neighbourhood quality using hierarchical relevance; the executable fixture pipeline is implemented.
-- [ ] Analyse hubness and degree effects.
+- [x] Implement degree-vs-neighbour-hubness diagnostics; populate full-corpus correlations once real G1/G2 embeddings are available.
 - [x] Implement graph-neighbour vs visual-neighbour overlap metric; populate full-corpus results after real embeddings are available.
 
 ### Planned notebooks
@@ -189,12 +189,12 @@ Create an evaluation subset where visual resemblance and iconographic relatednes
 
 ### Tasks
 
-- [ ] Define quantitative preselection criteria for visual closeness.
-- [ ] Define quantitative criteria for hierarchical iconographic closeness.
-- [ ] Sample balanced candidate pairs.
+- [x] Freeze validation-only visual threshold calibration (95th percentile close, median distant) in protocol v0.3.
+- [x] Freeze semantic thresholds in protocol v0.3 (`>=0.5` close, `<=0.2` distant).
+- [x] Implement deterministic balanced mining from visual top-k, semantic BFS, and random distant candidates; full-corpus artifact pending.
 - [ ] Manually inspect an evaluation subset.
-- [ ] Record rationale/provenance for curated pairs.
-- [ ] Freeze a test set before fusion experiments.
+- [x] Persist pair class, visual/semantic scores, labels, calibration metadata, and checksum in canonical JSONL/JSON artifacts.
+- [ ] Freeze the **real full-corpus** hard-pair test artifact before reporting fusion results; the procedure is frozen and fixture-tested.
 
 ### Planned notebook
 
@@ -228,9 +228,9 @@ Evaluate a predeclared alpha grid and tune only on validation data.
 
 ### Tasks
 
-- [ ] Implement score normalisation.
-- [ ] Implement alpha sweep.
-- [ ] Implement visual candidate + graph reranking.
+- [x] Implement validation-pair min-max score calibration with no test-derived bounds.
+- [x] Implement preregistered alpha sweep `[0, .25, .5, .75, 1]` with validation nDCG@10 selection and conservative tie-break.
+- [x] Implement fixed visual candidate-pool reranking with validation-calibrated modality scores.
 - [ ] Compare overall and hard-pair performance.
 - [ ] Quantify how often graph information changes a top-K result.
 - [ ] Produce explanations for changed rankings.

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "caypollard"
-version = "0.2.0"
+version = "0.3.0"
 description = "Reproducible experiments on image, knowledge-graph, and multimodal embeddings for cultural heritage retrieval."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -15,6 +15,7 @@ dependencies = [
   "scikit-learn>=1.5",
   "pyyaml>=6.0",
   "rdflib>=7.0",
+  "scipy>=1.13",
 ]
 
 [project.optional-dependencies]
@@ -33,7 +34,7 @@ retrieval = [
   "faiss-cpu>=1.8",
 ]
 graph = [
-  "pykeen>=1.11",
+  "pykeen>=1.11,<1.12",
   "networkx>=3.3",
 ]
 

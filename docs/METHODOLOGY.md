@@ -28,7 +28,7 @@ For normalised visual vectors `v_i` and `v_j`:
 
 ## Baseline 2: graph cosine similarity
 
-Graph experiments are split into oracle/control and evidence-bearing conditions. Direct image → Iconclass target edges may be used only in an explicitly labeled taxonomy oracle. Headline graph conditions must use context-only structure or mask evaluation-image target edges as defined in `GRAPH_PROJECTIONS.md` and `protocol-v0.2.md`.
+Graph experiments are split into oracle/control and evidence-bearing conditions. Direct image → Iconclass target edges may be used only in an explicitly labeled taxonomy oracle. Headline graph conditions must use context-only structure or mask evaluation-image target edges as defined in `GRAPH_PROJECTIONS.md` and `protocol-v0.3.md`.
 
 For graph vectors `g_i` and `g_j`:
 
@@ -42,7 +42,7 @@ After calibration/normalisation:
 
 `S(i,j) = alpha * S_v(i,j) + (1-alpha) * S_g(i,j)`
 
-Tune `alpha` on validation data only.
+Tune `alpha` on validation data only. The initial grid is `[0, 0.25, 0.5, 0.75, 1]`; ties on validation hierarchical nDCG@10 favour the larger visual weight. Min/max similarity bounds are also fitted from validation pairs only.
 
 ## Baseline 4: graph reranking
 
@@ -78,7 +78,7 @@ Candidate hard negatives satisfy:
 - low `d_v`;
 - high `d_h`.
 
-Thresholds should be determined from training/validation distributions and frozen before final test evaluation.
+Thresholds are fixed by `protocol-v0.3`: visual close/distant thresholds come from the 95th and 50th percentiles of a fixed validation random-pair similarity sample, while semantic close/distant thresholds are `>=0.5` and `<=0.2` under the frozen hierarchy relevance. The resulting test-pair artifact is checksummed before fusion evaluation.
 
 ## Hierarchical relevance
 
