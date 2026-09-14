@@ -1,0 +1,30 @@
+name: Bootstrap caypollard
+
+on:
+  push:
+    branches:
+      - import/project-state
+
+permissions:
+  contents: write
+
+jobs:
+  import-project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract project archive
+        run: |
+          mkdir -p /tmp/caypollard-import
+          tar -xJf .bootstrap/caypollard.tar.xz -C /tmp/caypollard-import
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a /tmp/caypollard-import/caypollard/. ./
+      - name: Commit imported repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "feat: import caypollard v0.4.0 research repository"
+          git push origin HEAD:import/project-state
