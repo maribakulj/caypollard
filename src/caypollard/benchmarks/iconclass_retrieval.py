@@ -8,19 +8,20 @@ exact-label relevance judgements.
 from __future__ import annotations
 
 from collections import Counter, defaultdict, deque
+from collections.abc import Iterable, Sequence
 from dataclasses import asdict, dataclass
 from statistics import mean, median
-from typing import Any, Iterable, Sequence
+from typing import Any
 
 import numpy as np
 
+from caypollard.embeddings.store import EmbeddingTable, l2_normalize
 from caypollard.evaluation import average_precision, ndcg_at_k, reciprocal_rank
 from caypollard.graphs.iconclass import (
     hierarchy_depth,
     image_hierarchical_similarity,
     resolve_notation,
 )
-from caypollard.embeddings.store import EmbeddingTable, l2_normalize
 
 
 @dataclass(frozen=True)
@@ -127,7 +128,7 @@ class IconclassRelevanceIndex:
         }
         if not query_nodes:
             return set()
-        distances = {node: 0 for node in query_nodes}
+        distances = dict.fromkeys(query_nodes, 0)
         queue: deque[str] = deque(sorted(query_nodes))
         output: set[str] = set()
         while queue:
@@ -163,7 +164,7 @@ class IconclassRelevanceIndex:
         if not query_nodes:
             return [0.0] * k
 
-        distances: dict[str, int] = {node: 0 for node in query_nodes}
+        distances: dict[str, int] = dict.fromkeys(query_nodes, 0)
         queue: deque[str] = deque(sorted(query_nodes))
         candidate_distance: dict[str, int] = {}
         completed_distance = -1
@@ -174,9 +175,12 @@ class IconclassRelevanceIndex:
 
             # If the previous distance layer already supplied k candidates, no
             # farther node can improve the ideal top-k values.
-            if distance > completed_distance and completed_distance >= 0:
-                if len(candidate_distance) >= k:
-                    break
+            if (
+                completed_distance >= 0
+                and distance > completed_distance
+                and len(candidate_distance) >= k
+            ):
+                break
             completed_distance = distance
 
             for candidate_id in self.resolved_to_ids.get(node, set()):
@@ -362,7 +366,7 @@ def evaluate_iconclass_retrieval(
                 )
 
             ranked_ids = [candidate_ids[position] for position, _score in ranked_pairs]
-            score_by_position = {position: score for position, score in ranked_pairs}
+            score_by_position = dict(ranked_pairs)
 
             exact_relevant = relevance_index.exact_relevant_ids(query_id).intersection(
                 candidate_ids
@@ -388,7 +392,7 @@ def evaluate_iconclass_retrieval(
             else:
                 rr_value = None
                 ap_value = None
-                recalls = {k: None for k in ks}
+                recalls = dict.fromkeys(ks)
 
             frequency, depth = relevance_index.query_diagnostics(query_id)
             persisted = tuple(
@@ -407,7 +411,7 @@ def evaluate_iconclass_retrieval(
                     query_id=query_id,
                     n_candidates=len(ranked_ids),
                     n_exact_relevant=n_exact,
-                    ndcg_at_10=ndcg_value if ndcg_k == 10 else ndcg_value,
+                    ndcg_at_10=ndcg_value,
                     reciprocal_rank=rr_value,
                     average_precision=ap_value,
                     recall_at_1=recalls.get(1),

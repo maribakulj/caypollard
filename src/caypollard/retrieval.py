@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from .embeddings.store import l2_normalize
+from .embeddings.store import EmbeddingTable, l2_normalize
 
 
 @dataclass(frozen=True)
@@ -55,8 +55,8 @@ def top_k_cosine(
 
 
 def neighbor_overlap_at_k(
-    left: "EmbeddingTable",
-    right: "EmbeddingTable",
+    left: EmbeddingTable,
+    right: EmbeddingTable,
     *,
     k: int = 10,
 ) -> tuple[float, dict[str, float]]:
@@ -66,8 +66,6 @@ def neighbor_overlap_at_k(
     both representations. Only identifiers present in both tables are used.
     """
     from statistics import mean
-
-    from .embeddings.store import EmbeddingTable
 
     if not isinstance(left, EmbeddingTable) or not isinstance(right, EmbeddingTable):
         raise TypeError("left and right must be EmbeddingTable instances")

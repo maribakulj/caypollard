@@ -62,7 +62,10 @@ def mean_average_precision(
     totals = list(total_relevant)
     if len(totals) != len(rows):
         raise ValueError("total_relevant must contain one value per ranking")
-    return mean(average_precision(row, total_relevant=total) for row, total in zip(rows, totals))
+    return mean(
+        average_precision(row, total_relevant=total)
+        for row, total in zip(rows, totals, strict=True)
+    )
 
 
 def dcg_at_k(relevance: Sequence[float], k: int) -> float:
