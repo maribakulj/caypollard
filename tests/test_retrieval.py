@@ -27,3 +27,23 @@ def test_excluded_query_is_never_returned_even_when_k_is_large():
     results = top_k_cosine(candidates[0], candidates, k=10, exclude_index=0)
     assert len(results) == 2
     assert 0 not in [result.index for result in results]
+
+
+def test_neighbor_overlap_at_k_compares_two_spaces():
+    from caypollard.embeddings.store import EmbeddingTable
+    from caypollard.retrieval import neighbor_overlap_at_k
+
+    ids = ("a", "b", "c", "d")
+    left = EmbeddingTable(
+        ids,
+        np.asarray([[1, 0], [0.9, 0.1], [0, 1], [0.1, 0.9]], dtype=np.float32),
+        {},
+    )
+    right = EmbeddingTable(
+        ids,
+        np.asarray([[1, 0], [0, 1], [0.9, 0.1], [0.1, 0.9]], dtype=np.float32),
+        {},
+    )
+    score, per_query = neighbor_overlap_at_k(left, right, k=1)
+    assert 0.0 <= score <= 1.0
+    assert set(per_query) == set(ids)

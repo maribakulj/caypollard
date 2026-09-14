@@ -28,6 +28,20 @@ def manifest_digest(records: Iterable[dict[str, Any]]) -> str:
     return hashlib.sha256(canonical_jsonl(records).encode("utf-8")).hexdigest()
 
 
+def read_jsonl(path: str | Path) -> list[dict[str, Any]]:
+    """Read a UTF-8 JSONL file into a list of object records."""
+    rows: list[dict[str, Any]] = []
+    with Path(path).open("r", encoding="utf-8") as handle:
+        for line_number, line in enumerate(handle, start=1):
+            if not line.strip():
+                continue
+            value = json.loads(line)
+            if not isinstance(value, dict):
+                raise ValueError(f"JSONL line {line_number} is not an object")
+            rows.append(value)
+    return rows
+
+
 def write_jsonl(records: Iterable[dict[str, Any]], path: str | Path) -> str:
     content = canonical_jsonl(records)
     destination = Path(path)

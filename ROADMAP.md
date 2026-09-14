@@ -117,9 +117,9 @@ Measure what visual models already capture before attributing any gain to graph 
 - [x] Implement extraction and cache format; full-corpus extraction remains data/model dependent.
 - [x] Record model identifier, resolved revision, processor config, library versions, pooling, manifest checksum, and vector dimension.
 - [x] Build exact cosine search baseline with self-match exclusion.
-- [ ] Add FAISS index as a scaling layer, not as a methodological dependency.
-- [ ] Evaluate standard retrieval metrics.
-- [ ] Analyse retrieval by Iconclass depth/frequency.
+- [x] Add optional exact FAISS `IndexFlatIP` as a scaling backend while retaining NumPy exact cosine as the reference implementation.
+- [x] Implement standard retrieval evaluation (hierarchical nDCG@10, Recall@1/5/10, MRR, mAP); full-model result tables remain pending.
+- [x] Implement fixed depth/frequency stratification; populate it with real encoder runs once the full corpus is reconstructed.
 - [ ] Collect representative successes and failures.
 
 ### Planned notebooks
@@ -150,12 +150,12 @@ Determine whether graph proximity captures an interpretable semantic structure t
 
 ### Tasks
 
-- [ ] Define graph projection(s) explicitly.
-- [ ] Separate taxonomy-only and richer relational graph experiments.
-- [ ] Train or compute KGE baselines with fixed seeds.
-- [ ] Evaluate neighbourhood quality using hierarchical relevance.
+- [x] Define graph projections and target-leakage policy explicitly (`G0` taxonomy oracle, `G1` context-only, `G2` masked-label).
+- [x] Separate taxonomy-only oracle/control experiments from richer evidence-bearing relational projections.
+- [ ] Train relation-aware KGE baselines with fixed seeds; dependency-light adjacency-SVD taxonomy control is implemented.
+- [ ] Evaluate full-corpus graph neighbourhood quality using hierarchical relevance; the executable fixture pipeline is implemented.
 - [ ] Analyse hubness and degree effects.
-- [ ] Compare graph-neighbour and visual-neighbour overlap.
+- [x] Implement graph-neighbour vs visual-neighbour overlap metric; populate full-corpus results after real embeddings are available.
 
 ### Planned notebooks
 

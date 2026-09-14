@@ -15,7 +15,7 @@ from caypollard.vision.encoders import (
     HuggingFaceVisionEncoder,
     VisionModelSpec,
 )
-from caypollard.vision.store import save_embedding_table
+from caypollard.embeddings.store import save_embedding_table
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:

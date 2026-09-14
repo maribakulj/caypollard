@@ -6,6 +6,13 @@
 
 - unified the repository, Python distribution, import namespace, notebooks, scripts, documentation, and citation identity under `caypollard`;
 - reset the local Git history so the current project identity contains no reachable legacy-branded files or commits.
+- added protocol-aligned visual retrieval evaluation with hierarchical nDCG@10, Recall@1/5/10, MRR, mAP, coverage, and fixed depth/frequency strata;
+- added executable `04_visual_retrieval_baseline.ipynb` and a CLI producing summary, per-query JSONL, and CSV artifacts;
+- added an optional exact FAISS `IndexFlatIP` ranking backend with deterministic post-ordering.
+- generalized embedding persistence so visual and graph representations share one storage layer;
+- added an adjacency-SVD Iconclass taxonomy control, concept-to-image graph pooling, and visual/graph neighbour-overlap metric;
+- added executable `03_kg_embeddings.ipynb` and `05_graph_retrieval_baseline.ipynb`;
+- added protocol v0.2 and explicit graph projections preventing target Iconclass leakage from being mistaken for KG evidence.
 
 ## 0.1.1 — 2026-09-14
 

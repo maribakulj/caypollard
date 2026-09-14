@@ -246,7 +246,7 @@ This allows retrieval examples to become evidence rather than decoration.
 
 Using Iconclass to train graph representations and then evaluating only on Iconclass structure risks circularity.
 
-**Response:** separate training/evaluation partitions; use transfer evaluation and expert judgement.
+**Response:** treat direct taxonomy-derived image vectors as oracle controls only; for headline KG conditions, remove test-image target Iconclass edges or use context-only graph projections, then use transfer evaluation and expert judgement. See `GRAPH_PROJECTIONS.md` and `protocol-v0.2.md`.
 
 ### Collection bias
 

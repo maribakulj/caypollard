@@ -28,6 +28,8 @@ For normalised visual vectors `v_i` and `v_j`:
 
 ## Baseline 2: graph cosine similarity
 
+Graph experiments are split into oracle/control and evidence-bearing conditions. Direct image → Iconclass target edges may be used only in an explicitly labeled taxonomy oracle. Headline graph conditions must use context-only structure or mask evaluation-image target edges as defined in `GRAPH_PROJECTIONS.md` and `protocol-v0.2.md`.
+
 For graph vectors `g_i` and `g_j`:
 
 `S_g(i,j) = g_i · g_j`

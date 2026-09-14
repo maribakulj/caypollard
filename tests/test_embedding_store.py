@@ -3,7 +3,7 @@ import json
 import numpy as np
 import pytest
 
-from caypollard.vision.store import (
+from caypollard.embeddings.store import (
     EmbeddingTable,
     l2_normalize,
     load_embedding_table,

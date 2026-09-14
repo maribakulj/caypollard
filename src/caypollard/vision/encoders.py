@@ -12,7 +12,7 @@ from typing import Any, Iterable
 
 import numpy as np
 
-from .store import l2_normalize
+from ..embeddings.store import l2_normalize
 
 
 @dataclass(frozen=True)

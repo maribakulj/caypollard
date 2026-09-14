@@ -29,6 +29,10 @@ Formally, the project compares:
 
 The central test concerns cases where `S_v` and `S_g` disagree.
 
+### KG target-leakage rule
+
+A graph condition is not evidence-bearing if the test image's Iconclass labels are directly fed into the graph representation while the same labels define evaluation relevance. `caypollard` therefore distinguishes taxonomy-derived **oracle controls** from context-only or target-masked graph conditions. See [`docs/GRAPH_PROJECTIONS.md`](docs/GRAPH_PROJECTIONS.md) and [`docs/protocol-v0.2.md`](docs/protocol-v0.2.md).
+
 ## Corpus strategy
 
 The project uses corpora for different experimental roles rather than forcing everything into one graph.
@@ -127,9 +131,9 @@ caypollard/
 │   ├── 00_project_overview.ipynb
 │   ├── 01_iconclass_graph.ipynb              # executable
 │   ├── 02_visual_embeddings.ipynb            # executable Phase-2 foundation
-│   ├── 03_kg_embeddings.ipynb                # planned
-│   ├── 04_visual_retrieval_baseline.ipynb    # planned
-│   ├── 05_graph_retrieval_baseline.ipynb     # planned
+│   ├── 03_kg_embeddings.ipynb                # executable graph control
+│   ├── 04_visual_retrieval_baseline.ipynb    # executable
+│   ├── 05_graph_retrieval_baseline.ipynb     # executable graph-control retrieval
 │   ├── 06_multimodal_fusion.ipynb            # planned
 │   ├── 07_hard_pairs_evaluation.ipynb        # planned
 │   ├── 08_emblematica_case_study.ipynb       # planned
@@ -161,13 +165,17 @@ The repository now includes a working Iconclass data layer rather than only a pl
 - explicit downloader for the ~3.1 GB official test set with MD5 verification;
 - pinned vocabulary downloader with provenance sidecar;
 - `01_iconclass_graph.ipynb`, executable entirely from tiny repository fixtures;
-- a frozen pre-results protocol in `docs/protocol-v0.1.md`.
+- versioned pre-results protocols, with target-leakage-controlled headline rules in `docs/protocol-v0.2.md`.
 
 ### Phase 2 foundation now included
 
-The repository also contains the first visual-baseline infrastructure: a lazy Hugging Face encoder adapter for DINOv2, CLIP, and SigLIP; a provenance-bearing NPZ+JSON embedding format; exact cosine retrieval with query self-match exclusion; and an executable `02_visual_embeddings.ipynb` smoke test. Full heritage-model runs remain explicit because neither model weights nor the 3.1 GB image archive belong in CI.
+The repository also contains the visual-baseline infrastructure: a lazy Hugging Face encoder adapter for DINOv2, CLIP, and SigLIP; a provenance-bearing NPZ+JSON embedding format; exact cosine retrieval with query self-match exclusion; and executable `02_visual_embeddings.ipynb` and `04_visual_retrieval_baseline.ipynb` notebooks. The evaluator reports hierarchical nDCG@10, exact-label Recall@1/5/10, MRR, mAP, query coverage, and fixed hierarchy-depth / label-frequency strata. Full heritage-model runs remain explicit because neither model weights nor the 3.1 GB image archive belong in CI.
 
 The full image corpus is intentionally not committed or downloaded by CI. See `docs/ICONCLASS_DATA_CARD.md`.
+
+### Phase 3 foundation now included
+
+The repository now also contains an executable taxonomy-only graph control (`03_kg_embeddings.ipynb`) and image-level graph retrieval smoke test (`05_graph_retrieval_baseline.ipynb`). The implemented adjacency-SVD representation is deliberately labeled an **oracle/control** because it is derived from the same Iconclass structure used by the evaluator. Headline KG experiments must instead use context-only (`G1`) or target-masked (`G2`) projections defined in `docs/GRAPH_PROJECTIONS.md`.
 
 ## Quick start
 
@@ -198,7 +206,7 @@ uv run jupyter nbconvert --to notebook --execute \
   --output /tmp/01_iconclass_graph.executed.ipynb
 ```
 
-For the real corpus, read `docs/ICONCLASS_DATA_CARD.md` and `docs/protocol-v0.1.md` first. The project deliberately refuses to make a 3.1 GB research-data download an invisible side effect of setup.
+For the real corpus, read `docs/ICONCLASS_DATA_CARD.md` and `docs/protocol-v0.2.md` first. The project deliberately refuses to make a 3.1 GB research-data download an invisible side effect of setup.
 
 ## Reproducibility and FAIR principles
 

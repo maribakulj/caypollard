@@ -1,7 +1,39 @@
-models:
+protocol: protocol-v0.2
+seed: 42
+
+projections:
+  taxonomy_oracle:
+    id: G0
+    evidence_status: control_only
+    nodes: [iconclass_concept]
+    relations: [broader]
+    direct_test_target_edges: true
+    text_features: false
+
+  context_main:
+    id: G1
+    evidence_status: headline_eligible
+    nodes: [image, artwork, book, edition, person, printer, place, collection]
+    relations: [has_pictura, part_of, created_by, printed_by, published_at, held_by]
+    direct_test_target_edges: false
+    text_features: false
+
+  masked_iconclass:
+    id: G2
+    evidence_status: headline_eligible
+    target_edge_policy: mask_evaluation_image_iconclass_edges
+    text_features: false
+
+controls:
+  adjacency_svd:
+    dimension: 64
+    undirected: true
+    self_loops: true
+
+planned_models:
   - node2vec
   - rdf2vec
   - complex
   - rotate
-embedding_dim: 256
-seed: 42
+
+relation_aware_embedding_dim: 256
