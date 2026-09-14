@@ -14,7 +14,21 @@
 ### Changed
 
 - advanced package and citation metadata to v0.4.0;
-- extended CI to execute the learned-alignment notebook with the alignment dependency group.
+- extended CI to execute the learned-alignment notebook with the alignment dependency group;
+- declared an explicit ruff rule set and pinned the linter to a minor series so the lint
+  contract belongs to the project rather than to whichever release CI resolves;
+- split CI into a fast fixture job and a separate PyTorch alignment job, and moved the
+  notebook list into `make notebooks` / `make notebooks-alignment` so CI and local runs
+  execute the same set;
+- recorded the full author name in `LICENSE` and `CITATION.cff`.
+
+### Fixed
+
+- `neighbor_overlap_at_k` annotated `EmbeddingTable` without importing it at module scope,
+  leaving the annotation unresolvable to `typing.get_type_hints` and documentation tooling;
+- removed a tautological `ndcg_at_10` conditional left over from the protocol-v0.2 endpoint
+  freeze;
+- `mean_average_precision` paired rankings with totals using a non-strict `zip`.
 
 ## 0.3.0 — 2026-09-14
 

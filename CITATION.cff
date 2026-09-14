@@ -2,8 +2,16 @@ cff-version: 1.2.0
 message: "If you use this software or benchmark, please cite the repository release."
 title: "caypollard"
 type: software
+repository-code: "https://github.com/maribakulj/caypollard"
+url: "https://github.com/maribakulj/caypollard"
+abstract: >-
+  Research code and reproducible notebooks testing whether structured
+  cultural-heritage knowledge improves the retrieval of iconographically
+  related images beyond visual embeddings alone.
 authors:
-  - alias: "maribakulj"
+  - family-names: "Bautista-Kuljevan"
+    given-names: "Marcel"
+    alias: "maribakulj"
 version: 0.4.0
 date-released: 2026-09-14
 license: MIT

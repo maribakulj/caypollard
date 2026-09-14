@@ -1,5 +1,9 @@
 # caypollard
 
+[![CI](https://github.com/maribakulj/caypollard/actions/workflows/ci.yml/badge.svg)](https://github.com/maribakulj/caypollard/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
+
 **Research code and reproducible notebooks for testing whether structured cultural-heritage knowledge changes and improves visual similarity.**
 
 Status: **Phases 1–3 infrastructure implemented; hard-pair, transparent-fusion, and learned-alignment foundations active / v0.4.0**
@@ -191,7 +195,7 @@ The repository contains an executable taxonomy-only graph control (`03_kg_embedd
 The project uses Python 3.11+ and is prepared for `uv`.
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/maribakulj/caypollard.git
 cd caypollard
 uv sync --extra dev
 uv run pytest
