@@ -1,0 +1,24 @@
+{
+  "alpha": 0.75,
+  "dimension": 896,
+  "embedding_file": "selected-fusion.npz",
+  "family": "multimodal",
+  "graph_bounds": {
+    "high": 0.8992018699645996,
+    "low": -0.07072189450263977,
+    "method": "validation_random_pair_minmax"
+  },
+  "graph_source": "rdf2vec-style-ppmi-svd",
+  "l2_normalized": false,
+  "method": "validation-minmax-late-fusion",
+  "n_items": 1864,
+  "protocol": "protocol-v0.3",
+  "ranking_equivalence": "weighted concatenated cosine",
+  "selected_on": "validation",
+  "visual_bounds": {
+    "high": 0.9383594989776611,
+    "low": -0.062053922563791275,
+    "method": "validation_random_pair_minmax"
+  },
+  "visual_source": "facebook/dinov2-base"
+}

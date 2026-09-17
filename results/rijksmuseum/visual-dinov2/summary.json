@@ -1,0 +1,157 @@
+{
+  "bootstrap_intervals": {
+    "map": {
+      "ci_high": 0.5200354658248367,
+      "ci_low": 0.46353216140040693,
+      "confidence": 0.95,
+      "mean": 0.4919057230175826,
+      "n_queries": 277,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_ndcg_at_10": {
+      "ci_high": 0.6264938379033841,
+      "ci_low": 0.5592771795344129,
+      "confidence": 0.95,
+      "mean": 0.5925814354567909,
+      "n_queries": 309,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_1": {
+      "ci_high": 0.03946467702475377,
+      "ci_low": 0.019607689561816223,
+      "confidence": 0.95,
+      "mean": 0.02855231698630107,
+      "n_queries": 277,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_10": {
+      "ci_high": 0.1814957513040332,
+      "ci_low": 0.1313504835884256,
+      "confidence": 0.95,
+      "mean": 0.15568152781273104,
+      "n_queries": 277,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_5": {
+      "ci_high": 0.11985775627832095,
+      "ci_low": 0.07837061712835108,
+      "confidence": 0.95,
+      "mean": 0.09837291562733809,
+      "n_queries": 277,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mrr": {
+      "ci_high": 0.7647022551688708,
+      "ci_low": 0.6749522213260943,
+      "confidence": 0.95,
+      "mean": 0.7196726694489914,
+      "n_queries": 277,
+      "n_resamples": 10000,
+      "seed": 42
+    }
+  },
+  "candidate_split": "test",
+  "embedding_file": "data/derived/rijksmuseum-v0.1/embeddings/dinov2-base.npz",
+  "embedding_metadata": {
+    "created_at": "2026-09-17T10:12:03.405954+00:00",
+    "device": "mps",
+    "dimension": 768,
+    "embedding_file": "dinov2-base.npz",
+    "family": "dinov2",
+    "image_dir": "data/raw/rijksmuseum/images",
+    "l2_normalized": true,
+    "manifest_file": "manifest.jsonl",
+    "manifest_sha256": "cb7c2bd0852dd985e3c47b0a23ea2d391f415abaec958d078b4d66ca5801fab6",
+    "model_id": "facebook/dinov2-base",
+    "n_items": 1864,
+    "normalization": "L2",
+    "pooling": "CLS token",
+    "processor_class": "BitImageProcessor",
+    "processor_config": {
+      "crop_size": {
+        "height": 224,
+        "width": 224
+      },
+      "do_center_crop": true,
+      "do_convert_rgb": true,
+      "do_normalize": true,
+      "do_rescale": true,
+      "do_resize": true,
+      "image_mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "image_processor_type": "BitImageProcessor",
+      "image_std": [
+        0.229,
+        0.224,
+        0.225
+      ],
+      "resample": 3,
+      "rescale_factor": 0.00392156862745098,
+      "size": {
+        "shortest_edge": 256
+      }
+    },
+    "requested_revision": null,
+    "resolved_revision": "f9e44c814b77203eaa57a6bdbbd535f21ede1415",
+    "torch_version": "2.14.0",
+    "transformers_version": "5.17.0"
+  },
+  "exact_coverage": 0.8964401294498382,
+  "exact_evaluable_queries": 277,
+  "hierarchical_coverage": 1.0,
+  "hierarchical_evaluable_queries": 309,
+  "manifest_file": "data/derived/rijksmuseum-v0.1/manifest.jsonl",
+  "manifest_sha256": "62eb754e30af166c0fd73eae9ce4834ab2bb0ea8247e279108a6a64827e955d2",
+  "map": 0.4919057230175826,
+  "mean_ndcg_at_10": 0.5925814354567909,
+  "mean_recall_at_1": 0.02855231698630107,
+  "mean_recall_at_10": 0.15568152781273104,
+  "mean_recall_at_5": 0.0983729156273381,
+  "mrr": 0.7196726694489914,
+  "n_candidates": 309,
+  "n_queries": 309,
+  "ndcg_k": 10,
+  "notations_file": "data/raw/iconclass/notations.txt",
+  "notations_sha256": "3802b42ed433fc1dafab1cd7a88dc2192b8238f78ae194041c4ff3459212f185",
+  "query_limit": null,
+  "query_split": "test",
+  "ranking_backend": "numpy",
+  "strata": {
+    "hierarchy_depth": {
+      "deep_6_plus": {
+        "mean_ndcg_at_10": 0.37420702870702965,
+        "n_queries": 41
+      },
+      "middle_3_5": {
+        "mean_ndcg_at_10": 0.6241584359722032,
+        "n_queries": 256
+      },
+      "shallow_0_2": {
+        "mean_ndcg_at_10": 0.6650513141896772,
+        "n_queries": 12
+      }
+    },
+    "label_frequency": {
+      "medium_11_100": {
+        "mean_ndcg_at_10": 0.7276443828452156,
+        "n_queries": 175
+      },
+      "rare_2_10": {
+        "mean_ndcg_at_10": 0.45770747370902004,
+        "n_queries": 100
+      },
+      "singleton": {
+        "mean_ndcg_at_10": 0.29409262315687185,
+        "n_queries": 34
+      }
+    }
+  }
+}

@@ -524,12 +524,15 @@ Rijksmuseum, using its structured metadata, classifications, and image/IIIF infr
 
 ### Tasks
 
-- [ ] Define target subset and mapping coverage.
-- [ ] Freeze model before target evaluation.
-- [ ] Test zero-shot or minimally calibrated transfer.
-- [ ] Compare image-only and multimodal ranking.
-- [ ] Measure performance by object type, date, and concept coverage.
-- [ ] Conduct failure analysis for metadata and vocabulary mismatch.
+- [x] Define target subset and mapping coverage: 1 864 Rijksmuseum works reached without an API
+      key, through Wikidata `depicts` joined to Iconclass by P1256. See
+      [`RIJKSMUSEUM_DATA_CARD.md`](docs/RIJKSMUSEUM_DATA_CARD.md).
+- [x] Freeze model before target evaluation: encoders are pretrained and never fitted, and the
+      zero-shot arm carries the source corpus's `alpha` unchanged.
+- [x] Test zero-shot and minimally calibrated transfer, both.
+- [x] Compare image-only and multimodal ranking across three encoders and two graph variants.
+- [x] Measure performance by object type, date, and concept coverage.
+- [x] Conduct failure analysis for metadata and vocabulary mismatch.
 
 ### Planned notebook
 

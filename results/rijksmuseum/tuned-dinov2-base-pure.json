@@ -1,0 +1,153 @@
+{
+  "label": "Rijksmuseum · dinov2-base · g-pure (calibré cible)",
+  "protocol": "protocol-v0.5",
+  "visual": "data/derived/rijksmuseum-v0.1/embeddings/dinov2-base.npz",
+  "graph": "data/derived/rijksmuseum-v0.1/embeddings/g-pure.npz",
+  "key_policy": "keep",
+  "visual_calibration": {
+    "method": "validation_random_pair_minmax",
+    "seed": 42,
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "validation_id_count": 297,
+    "low": -0.062053922563791275,
+    "high": 0.9383594989776611,
+    "mean": 0.26320755216426917,
+    "std": 0.15868943806054187
+  },
+  "graph_calibration": {
+    "method": "validation_random_pair_minmax",
+    "seed": 42,
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "validation_id_count": 297,
+    "low": -0.07072189450263977,
+    "high": 0.8992018699645996,
+    "mean": 0.1530005064054858,
+    "std": 0.11001011427971258
+  },
+  "rules": [
+    {
+      "rule": "visuel seul",
+      "selected_alpha": 1.0,
+      "validation_sweep": [],
+      "test": {
+        "mean_ndcg_at_10": 0.5925814354567909,
+        "map": 0.4919057230175826,
+        "mrr": 0.7196726694489914,
+        "mean_recall_at_10": 0.15568152781273104,
+        "n_queries": 309,
+        "ndcg_ci95": {
+          "mean": 0.5925814354567909,
+          "ci_low": 0.5592771795344129,
+          "ci_high": 0.6264938379033841,
+          "confidence": 0.95,
+          "n_queries": 309,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    },
+    {
+      "rule": "graphe seul",
+      "selected_alpha": 0.0,
+      "validation_sweep": [],
+      "test": {
+        "mean_ndcg_at_10": 0.4337650901974102,
+        "map": 0.3384756626232103,
+        "mrr": 0.5914152268375655,
+        "mean_recall_at_10": 0.11783881253068669,
+        "n_queries": 309,
+        "ndcg_ci95": {
+          "mean": 0.4337650901974103,
+          "ci_low": 0.4069554264639257,
+          "ci_high": 0.46098661515362876,
+          "confidence": 0.95,
+          "n_queries": 309,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    },
+    {
+      "rule": "linear",
+      "selected_alpha": 0.75,
+      "validation_sweep": [
+        {
+          "alpha": 0.0,
+          "ndcg": 0.39555691979319896
+        },
+        {
+          "alpha": 0.25,
+          "ndcg": 0.45115254394373433
+        },
+        {
+          "alpha": 0.5,
+          "ndcg": 0.5206783625081755
+        },
+        {
+          "alpha": 0.75,
+          "ndcg": 0.5646320373406105
+        },
+        {
+          "alpha": 1.0,
+          "ndcg": 0.5520947035499717
+        }
+      ],
+      "test": {
+        "mean_ndcg_at_10": 0.6134109658996317,
+        "map": 0.5058383383973906,
+        "mrr": 0.7649494205253677,
+        "mean_recall_at_10": 0.17602560804920905,
+        "n_queries": 309,
+        "ndcg_ci95": {
+          "mean": 0.6134109658996317,
+          "ci_low": 0.580466224208377,
+          "ci_high": 0.6462757997449192,
+          "confidence": 0.95,
+          "n_queries": 309,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "first": "linear",
+      "second": "visuel seul",
+      "mean_first": 0.6134109658996317,
+      "mean_second": 0.5925814354567909,
+      "mean_difference": 0.02082953044284082,
+      "ci_low": 0.008795864042157025,
+      "ci_high": 0.03293068239565541,
+      "confidence": 0.95,
+      "excludes_zero": true,
+      "p_value": 0.000999900009999,
+      "cohens_d": 0.19100095948807017,
+      "cliffs_delta": 0.03369256710759209,
+      "n_queries": 309,
+      "n_resamples": 10000,
+      "n_permutations": 10000,
+      "seed": 42
+    },
+    {
+      "first": "linear",
+      "second": "graphe seul",
+      "mean_first": 0.6134109658996317,
+      "mean_second": 0.4337650901974103,
+      "mean_difference": 0.17964587570222146,
+      "ci_low": 0.15254562591683005,
+      "ci_high": 0.20677480417692734,
+      "confidence": 0.95,
+      "excludes_zero": true,
+      "p_value": 9.999000099990002e-05,
+      "cohens_d": 0.7410065835740759,
+      "cliffs_delta": 0.375739675956473,
+      "n_queries": 309,
+      "n_resamples": 10000,
+      "n_permutations": 10000,
+      "seed": 42
+    }
+  ]
+}

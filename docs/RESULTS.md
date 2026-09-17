@@ -18,7 +18,9 @@ and vice versa.
 ## Headline
 
 **H1 holds and replicates on two independent corpora. The transparent fusion gain replicates in
-every encoder-corpus combination tested, and the text modality adds an independent smaller gain.
+every encoder-corpus combination on those two, and the text modality adds an independent smaller
+gain — but the gain does not transfer to a third collection, and the mixing weight actively harms
+retrieval when carried across.
 H2 is not supported, and the reason is structural rather than empirical: on the corpus where the
 graph could reach a cross-volume pair it separates hard positives at 0.505, and on the corpus
 where it appears to separate them at 0.649 it provably holds no path between them. H3 is not
@@ -290,6 +292,75 @@ distribution, so a symmetric window offers far more candidates above the target 
 the control came out reliably *more* similar to the query than the positive was. The visual arm,
 which the design requires at chance, read 0.395-0.468. Balancing the draw fixes it, and raises
 the Iconclass figures — which is what made the two controls above necessary.
+
+## Transfer to a third collection — the gain does not survive
+
+Phase 8 asks whether any of this holds outside the cataloguing environment it was developed in.
+1 864 Rijksmuseum works were ingested through Wikidata and Commons, with subject terms joined to
+Iconclass by P1256, so the relevance path is identical and a drop measures transfer rather than
+method. See [`RIJKSMUSEUM_DATA_CARD.md`](RIJKSMUSEUM_DATA_CARD.md) for what the corpus is and is
+not.
+
+**With `alpha` re-selected on the target's own validation split:**
+
+| encoder | graph | visual | graph alone | fused | difference | p |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| DINOv2 | `pure` | 0.5926 | 0.4338 | **0.6134** | **+0.0208** | 0.0010 |
+| DINOv2 | `creator` | 0.5926 | 0.3571 | 0.5764 | **−0.0161** | 0.0246 |
+| CLIP | `pure` | 0.6294 | 0.4338 | 0.6294 | 0.0000 | — |
+| CLIP | `creator` | 0.6294 | 0.3571 | 0.6294 | 0.0000 | — |
+| SigLIP | `pure` | 0.6408 | 0.4338 | 0.6331 | −0.0077 | 0.2311 |
+| SigLIP | `creator` | 0.6408 | 0.3571 | 0.6408 | 0.0000 | — |
+
+One condition of six gains, one loses significantly, three have `alpha = 1.0` selected — the
+validation sweep preferring **no fusion at all** — and one is inconclusive. Against 9 of 9 gains
+on the two development corpora, this is a failure to transfer, not a weaker version of the same
+result.
+
+**With the source corpus's `alpha` carried over unchanged — the zero-shot arm:**
+
+| encoder | α = 0.25 (Iconclass-selected) | α = 0.75 (Emblematica-selected) |
+| --- | ---: | ---: |
+| DINOv2 | −0.0946, p = 0.0001 | +0.0208, p = 0.0010 |
+| CLIP | −0.1342, p = 0.0001 | −0.0089, p = 0.1867 |
+| SigLIP | −0.1429, p = 0.0001 | −0.0077, p = 0.2311 |
+
+Importing a mixing weight destroys a sixth to a quarter of retrieval quality. **The weight is not
+a property of the method; it is a property of the corpus it was fitted on.** A deployment
+elsewhere must re-select it there, and should expect no gain even then.
+
+**One thing does transfer: the construction lesson.** The hub-shaped `creator` graph — items
+linked through a creator node, the exact shape that failed as volume membership on Emblematica —
+trails the projected-attribute `pure` graph by 0.077 of graph-alone nDCG@10 and turns the fusion
+significantly negative. Projecting a hub's attributes onto its items and dropping the hub is a
+real finding about graph construction, and it is the only part of the method that held up in a
+new collection.
+
+**Where the small gain lives.** Stratified on properties of the query, never on its score:
+
+| dimension | stratum | n | visual | fused | difference | p |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| notations per work | 4 or more | 29 | 0.620 | 0.679 | +0.0595 | 0.0009 |
+| notations per work | 1 only | 188 | 0.620 | 0.636 | +0.0157 | 0.0370 |
+| notations per work | 2 to 3 | 92 | 0.527 | 0.547 | +0.0192 | 0.1480 |
+| century | 17xx | 54 | 0.649 | 0.689 | +0.0398 | 0.0295 |
+| century | 15xx | 28 | 0.546 | 0.585 | +0.0392 | 0.0374 |
+| century | 16xx | 104 | 0.497 | 0.511 | +0.0140 | 0.2067 |
+| object type | painting | 249 | 0.600 | 0.620 | +0.0195 | 0.0051 |
+| object type | watercolour | 27 | 0.539 | 0.541 | +0.0025 | 0.8977 |
+
+The gain is largest where the annotation is richest — three times larger on works carrying four
+or more subject terms than on works carrying one. That is consistent with everything above: the
+graph helps when there is enough iconographic ground truth for a graded metric to register the
+help, and this corpus averages 1.85 terms per work against Emblematica's 10.68.
+
+**Failure analysis — metadata and vocabulary mismatch.** Three mismatches account for the drop,
+and none is a defect in the method. Subject terms are assigned by Wikidata editors rather than
+Iconclass specialists, so they are sparse and shallow. The P1256 alignment reaches only 4 125
+notations, so a richly catalogued work whose subject falls outside that set is invisible. And
+selection compounds both: a work enters only if an editor added a `depicts` statement *and* the
+depicted entity happens to be aligned, which favours frequently catalogued subjects — 500 of
+1 864 works carry `25G3` (trees) and 435 carry `31D15` (old age).
 
 ## What each modality actually sees
 

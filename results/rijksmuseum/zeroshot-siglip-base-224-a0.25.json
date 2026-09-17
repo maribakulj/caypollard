@@ -1,0 +1,137 @@
+{
+  "label": "Rijksmuseum · siglip-base-224 · alpha source 0.25",
+  "protocol": "protocol-v0.5",
+  "visual": "data/derived/rijksmuseum-v0.1/embeddings/siglip-base-224.npz",
+  "graph": "data/derived/rijksmuseum-v0.1/embeddings/g-pure.npz",
+  "key_policy": "keep",
+  "visual_calibration": {
+    "method": "validation_random_pair_minmax",
+    "seed": 42,
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "validation_id_count": 297,
+    "low": 0.3234434127807617,
+    "high": 0.9588666558265686,
+    "mean": 0.598173986312747,
+    "std": 0.08387044982607313
+  },
+  "graph_calibration": {
+    "method": "validation_random_pair_minmax",
+    "seed": 42,
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "validation_id_count": 297,
+    "low": -0.07072189450263977,
+    "high": 0.8992018699645996,
+    "mean": 0.1530005064054858,
+    "std": 0.11001011427971258
+  },
+  "rules": [
+    {
+      "rule": "visuel seul",
+      "selected_alpha": 1.0,
+      "validation_sweep": [],
+      "test": {
+        "mean_ndcg_at_10": 0.640764136399843,
+        "map": 0.5206263059225927,
+        "mrr": 0.7909352419728527,
+        "mean_recall_at_10": 0.1816540895868236,
+        "n_queries": 309,
+        "ndcg_ci95": {
+          "mean": 0.6407641363998431,
+          "ci_low": 0.6082189228884721,
+          "ci_high": 0.6730553673338368,
+          "confidence": 0.95,
+          "n_queries": 309,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    },
+    {
+      "rule": "graphe seul",
+      "selected_alpha": 0.0,
+      "validation_sweep": [],
+      "test": {
+        "mean_ndcg_at_10": 0.4337650901974102,
+        "map": 0.3384756626232103,
+        "mrr": 0.5914152268375655,
+        "mean_recall_at_10": 0.11783881253068669,
+        "n_queries": 309,
+        "ndcg_ci95": {
+          "mean": 0.4337650901974103,
+          "ci_low": 0.4069554264639257,
+          "ci_high": 0.46098661515362876,
+          "confidence": 0.95,
+          "n_queries": 309,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    },
+    {
+      "rule": "linear",
+      "selected_alpha": 0.25,
+      "validation_sweep": [
+        {
+          "alpha": 0.25,
+          "ndcg": 0.4503580948723478
+        }
+      ],
+      "test": {
+        "mean_ndcg_at_10": 0.4978951749942027,
+        "map": 0.41223168544037864,
+        "mrr": 0.6586362948413881,
+        "mean_recall_at_10": 0.13868555620094758,
+        "n_queries": 309,
+        "ndcg_ci95": {
+          "mean": 0.49789517499420266,
+          "ci_low": 0.4690725285909385,
+          "ci_high": 0.5270377057171997,
+          "confidence": 0.95,
+          "n_queries": 309,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "first": "linear",
+      "second": "visuel seul",
+      "mean_first": 0.49789517499420266,
+      "mean_second": 0.6407641363998431,
+      "mean_difference": -0.14286896140564032,
+      "ci_low": -0.16620083011966694,
+      "ci_high": -0.11947820930493831,
+      "confidence": 0.95,
+      "excludes_zero": true,
+      "p_value": 9.999000099990002e-05,
+      "cohens_d": -0.6761640505553049,
+      "cliffs_delta": -0.3180632796053665,
+      "n_queries": 309,
+      "n_resamples": 10000,
+      "n_permutations": 10000,
+      "seed": 42
+    },
+    {
+      "first": "linear",
+      "second": "graphe seul",
+      "mean_first": 0.49789517499420266,
+      "mean_second": 0.4337650901974103,
+      "mean_difference": 0.06413008479679247,
+      "ci_low": 0.05423445971911168,
+      "ci_high": 0.07422636596058561,
+      "confidence": 0.95,
+      "excludes_zero": true,
+      "p_value": 9.999000099990002e-05,
+      "cohens_d": 0.7128213542278022,
+      "cliffs_delta": 0.14687738921879745,
+      "n_queries": 309,
+      "n_resamples": 10000,
+      "n_permutations": 10000,
+      "seed": 42
+    }
+  ]
+}

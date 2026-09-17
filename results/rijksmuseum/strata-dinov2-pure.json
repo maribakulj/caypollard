@@ -1,0 +1,149 @@
+{
+  "label": "Rijksmuseum · DINOv2 + g-pure",
+  "metric": "ndcg_at_10",
+  "n_queries": 309,
+  "min_stratum_size": 15,
+  "breakdown": {
+    "créateur connu": [
+      {
+        "stratum": "oui",
+        "n": 309,
+        "visual": 0.5926,
+        "fused": 0.6134,
+        "difference": 0.0208,
+        "ci95": [
+          0.0088,
+          0.0329
+        ],
+        "p_value": 0.000999900009999,
+        "cohens_d": 0.191
+      }
+    ],
+    "notations par œuvre": [
+      {
+        "stratum": "4 et plus",
+        "n": 29,
+        "visual": 0.6196,
+        "fused": 0.6791,
+        "difference": 0.0595,
+        "ci95": [
+          0.0277,
+          0.0902
+        ],
+        "p_value": 0.0008999100089991,
+        "cohens_d": 0.672
+      },
+      {
+        "stratum": "2 à 3",
+        "n": 92,
+        "visual": 0.5274,
+        "fused": 0.5466,
+        "difference": 0.0192,
+        "ci95": [
+          -0.006,
+          0.0449
+        ],
+        "p_value": 0.147985201479852,
+        "cohens_d": 0.151
+      },
+      {
+        "stratum": "1 seule",
+        "n": 188,
+        "visual": 0.6203,
+        "fused": 0.636,
+        "difference": 0.0157,
+        "ci95": [
+          0.0012,
+          0.0304
+        ],
+        "p_value": 0.036996300369963,
+        "cohens_d": 0.154
+      }
+    ],
+    "siècle": [
+      {
+        "stratum": "17xx",
+        "n": 54,
+        "visual": 0.6489,
+        "fused": 0.6887,
+        "difference": 0.0398,
+        "ci95": [
+          0.0044,
+          0.0756
+        ],
+        "p_value": 0.029497050294970503,
+        "cohens_d": 0.298
+      },
+      {
+        "stratum": "15xx",
+        "n": 28,
+        "visual": 0.5462,
+        "fused": 0.5854,
+        "difference": 0.0392,
+        "ci95": [
+          0.0045,
+          0.0733
+        ],
+        "p_value": 0.037396260373962605,
+        "cohens_d": 0.41
+      },
+      {
+        "stratum": "18xx",
+        "n": 105,
+        "visual": 0.6472,
+        "fused": 0.6665,
+        "difference": 0.0193,
+        "ci95": [
+          0.0009,
+          0.038
+        ],
+        "p_value": 0.04279572042795721,
+        "cohens_d": 0.2
+      },
+      {
+        "stratum": "16xx",
+        "n": 104,
+        "visual": 0.4973,
+        "fused": 0.5113,
+        "difference": 0.014,
+        "ci95": [
+          -0.007,
+          0.0364
+        ],
+        "p_value": 0.20667933206679331,
+        "cohens_d": 0.126
+      }
+    ],
+    "type d'objet": [
+      {
+        "stratum": "Q3305213",
+        "n": 249,
+        "visual": 0.6002,
+        "fused": 0.6197,
+        "difference": 0.0195,
+        "ci95": [
+          0.0067,
+          0.0327
+        ],
+        "p_value": 0.005099490050994901,
+        "cohens_d": 0.183
+      },
+      {
+        "stratum": "Q18761202",
+        "n": 27,
+        "visual": 0.5389,
+        "fused": 0.5414,
+        "difference": 0.0025,
+        "ci95": [
+          -0.0359,
+          0.0375
+        ],
+        "p_value": 0.8977102289771023,
+        "cohens_d": 0.025
+      }
+    ]
+  },
+  "strata_helped": 10,
+  "strata_hurt": 0,
+  "reading": "Strata are cut on properties of the query, never on its score. A stratum whose interval spans zero is not evidence either way at this corpus size."
+}
