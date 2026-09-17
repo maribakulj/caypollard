@@ -1,0 +1,157 @@
+{
+  "label": "Emblematica · graphe pure + texte LaBSE",
+  "protocol": "protocol-v0.5",
+  "visual": "data/derived/emblematica-eval/embeddings/g-pure.npz",
+  "graph": "data/derived/emblematica-eval/embeddings/text-labse.npz",
+  "key_policy": "keep",
+  "visual_calibration": {
+    "method": "validation_random_pair_minmax",
+    "seed": 42,
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "validation_id_count": 2981,
+    "low": -0.2024502158164978,
+    "high": 0.9999999403953552,
+    "mean": 0.11506298550059,
+    "std": 0.3015132949237464
+  },
+  "graph_calibration": {
+    "method": "validation_random_pair_minmax",
+    "seed": 42,
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "validation_id_count": 2981,
+    "low": 0.22711312770843506,
+    "high": 0.9333504438400269,
+    "mean": 0.5956395564049483,
+    "std": 0.09423991135213822
+  },
+  "rules": [
+    {
+      "rule": "visuel seul",
+      "selected_alpha": 1.0,
+      "validation_sweep": [],
+      "test": {
+        "mean_ndcg_at_10": 0.6828944314086045,
+        "map": 0.34177844341872,
+        "mrr": 0.5905022274767273,
+        "mean_recall_at_10": 0.01905996166775972,
+        "n_queries": 2563,
+        "ndcg_ci95": {
+          "mean": 0.6828944314086045,
+          "ci_low": 0.6729203290988798,
+          "ci_high": 0.6929104275350584,
+          "confidence": 0.95,
+          "n_queries": 2563,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    },
+    {
+      "rule": "graphe seul",
+      "selected_alpha": 0.0,
+      "validation_sweep": [],
+      "test": {
+        "mean_ndcg_at_10": 0.6281174602933216,
+        "map": 0.2192948345070245,
+        "mrr": 0.596494619848559,
+        "mean_recall_at_10": 0.01613873541430425,
+        "n_queries": 2563,
+        "ndcg_ci95": {
+          "mean": 0.6281174602933216,
+          "ci_low": 0.6190819067236837,
+          "ci_high": 0.6370412511154914,
+          "confidence": 0.95,
+          "n_queries": 2563,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    },
+    {
+      "rule": "linear",
+      "selected_alpha": 0.25,
+      "validation_sweep": [
+        {
+          "alpha": 0.0,
+          "ndcg": 0.4972842302433865
+        },
+        {
+          "alpha": 0.25,
+          "ndcg": 0.5433027245907843
+        },
+        {
+          "alpha": 0.5,
+          "ndcg": 0.5421849870959388
+        },
+        {
+          "alpha": 0.75,
+          "ndcg": 0.5401082005697038
+        },
+        {
+          "alpha": 1.0,
+          "ndcg": 0.5027925050629384
+        }
+      ],
+      "test": {
+        "mean_ndcg_at_10": 0.7025917942682282,
+        "map": 0.33644849124368026,
+        "mrr": 0.6460208049416631,
+        "mean_recall_at_10": 0.021709028284127463,
+        "n_queries": 2563,
+        "ndcg_ci95": {
+          "mean": 0.7025917942682282,
+          "ci_low": 0.6927340116110612,
+          "ci_high": 0.7120940202245168,
+          "confidence": 0.95,
+          "n_queries": 2563,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    },
+    {
+      "rule": "rank_linear",
+      "selected_alpha": 0.25,
+      "validation_sweep": [
+        {
+          "alpha": 0.0,
+          "ndcg": 0.4972842302433865
+        },
+        {
+          "alpha": 0.25,
+          "ndcg": 0.5217304312842563
+        },
+        {
+          "alpha": 0.5,
+          "ndcg": 0.5190741951340171
+        },
+        {
+          "alpha": 0.75,
+          "ndcg": 0.5164797861521998
+        },
+        {
+          "alpha": 1.0,
+          "ndcg": 0.5027925050629384
+        }
+      ],
+      "test": {
+        "mean_ndcg_at_10": 0.6820887942430108,
+        "map": 0.2665995829369777,
+        "mrr": 0.6133222688869833,
+        "mean_recall_at_10": 0.018661896716241362,
+        "n_queries": 2563,
+        "ndcg_ci95": {
+          "mean": 0.6820887942430109,
+          "ci_low": 0.6723937933869625,
+          "ci_high": 0.6918735834317606,
+          "confidence": 0.95,
+          "n_queries": 2563,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    }
+  ]
+}

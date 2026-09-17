@@ -1,0 +1,153 @@
+{
+  "label": "Emblematica · DINOv2 + texte LaBSE",
+  "protocol": "protocol-v0.5",
+  "visual": "data/derived/emblematica-eval/embeddings/dinov2-base.npz",
+  "graph": "data/derived/emblematica-eval/embeddings/text-labse.npz",
+  "key_policy": "keep",
+  "visual_calibration": {
+    "method": "validation_random_pair_minmax",
+    "seed": 42,
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "validation_id_count": 2981,
+    "low": 0.037687718868255615,
+    "high": 1.0000001192092896,
+    "mean": 0.4503310559369624,
+    "std": 0.14105505688658743
+  },
+  "graph_calibration": {
+    "method": "validation_random_pair_minmax",
+    "seed": 42,
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "validation_id_count": 2981,
+    "low": 0.22711312770843506,
+    "high": 0.9333504438400269,
+    "mean": 0.5956395564049483,
+    "std": 0.09423991135213822
+  },
+  "rules": [
+    {
+      "rule": "visuel seul",
+      "selected_alpha": 1.0,
+      "validation_sweep": [],
+      "test": {
+        "mean_ndcg_at_10": 0.7178473892849091,
+        "map": 0.3482534646365613,
+        "mrr": 0.69178863868567,
+        "mean_recall_at_10": 0.023812158091780094,
+        "n_queries": 2563,
+        "ndcg_ci95": {
+          "mean": 0.7178473892849091,
+          "ci_low": 0.7083047227673483,
+          "ci_high": 0.7271062662719352,
+          "confidence": 0.95,
+          "n_queries": 2563,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    },
+    {
+      "rule": "graphe seul",
+      "selected_alpha": 0.0,
+      "validation_sweep": [],
+      "test": {
+        "mean_ndcg_at_10": 0.6281174602933216,
+        "map": 0.2192948345070245,
+        "mrr": 0.596494619848559,
+        "mean_recall_at_10": 0.01613873541430425,
+        "n_queries": 2563,
+        "ndcg_ci95": {
+          "mean": 0.6281174602933216,
+          "ci_low": 0.6190819067236837,
+          "ci_high": 0.6370412511154914,
+          "confidence": 0.95,
+          "n_queries": 2563,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    },
+    {
+      "rule": "linear",
+      "selected_alpha": 0.75,
+      "validation_sweep": [
+        {
+          "alpha": 0.0,
+          "ndcg": 0.4972842302433865
+        },
+        {
+          "alpha": 0.25,
+          "ndcg": 0.5599452870995975
+        },
+        {
+          "alpha": 0.5,
+          "ndcg": 0.5908398503875886
+        },
+        {
+          "alpha": 0.75,
+          "ndcg": 0.6029097630712124
+        },
+        {
+          "alpha": 1.0,
+          "ndcg": 0.5996588007301635
+        }
+      ],
+      "test": {
+        "mean_ndcg_at_10": 0.7318598681796086,
+        "map": 0.3555619938137051,
+        "mrr": 0.7081393269600054,
+        "mean_recall_at_10": 0.02479719376514905,
+        "n_queries": 2563,
+        "ndcg_ci95": {
+          "mean": 0.7318598681796087,
+          "ci_low": 0.7224465458787536,
+          "ci_high": 0.7410693407203173,
+          "confidence": 0.95,
+          "n_queries": 2563,
+          "n_resamples": 10000,
+          "seed": 42
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "first": "linear",
+      "second": "visuel seul",
+      "mean_first": 0.7318598681796087,
+      "mean_second": 0.7178473892849091,
+      "mean_difference": 0.014012478894699514,
+      "ci_low": 0.010860518613985575,
+      "ci_high": 0.01723575329944075,
+      "confidence": 0.95,
+      "excludes_zero": true,
+      "p_value": 9.999000099990002e-05,
+      "cohens_d": 0.17283535512459622,
+      "cliffs_delta": 0.029601144410941808,
+      "n_queries": 2563,
+      "n_resamples": 10000,
+      "n_permutations": 10000,
+      "seed": 42
+    },
+    {
+      "first": "linear",
+      "second": "graphe seul",
+      "mean_first": 0.7318598681796087,
+      "mean_second": 0.6281174602933216,
+      "mean_difference": 0.10374240788628697,
+      "ci_low": 0.09672271222819089,
+      "ci_high": 0.11079025934830314,
+      "confidence": 0.95,
+      "excludes_zero": true,
+      "p_value": 9.999000099990002e-05,
+      "cohens_d": 0.5698314835928247,
+      "cliffs_delta": 0.2572473701733103,
+      "n_queries": 2563,
+      "n_resamples": 10000,
+      "n_permutations": 10000,
+      "seed": 42
+    }
+  ]
+}

@@ -5,6 +5,7 @@
   "visual": "data/derived/embeddings/siglip-base-224.npz",
   "graph": "data/derived/embeddings/g1-node2vec.npz",
   "n_hard_positives": 250,
+  "n_dropped_query_not_in_both_modalities": 0,
   "n_matched": 246,
   "skipped": {
     "unknown_item": 0,
@@ -26,7 +27,42 @@
     "control_shares_query_volume": 0.248,
     "n_cross_volume_pairs": 137
   },
+  "graph_reachability": {
+    "triples_file": "data/derived/graph-g1/context_triples.tsv",
+    "connected_components": 1246,
+    "components_holding_more_than_one_volume": 0,
+    "cross_volume_pairs_are_reachable": false,
+    "reading": "Every volume is its own component, so two items of different volumes share no path at all. Any separation the embedding shows between them is a property of the embedding method, not information in the graph."
+  },
   "auc": {
+    "taille du volume seule": {
+      "toutes_paires": {
+        "auc": 0.5508130081300813,
+        "ci_low": 0.5020325203252033,
+        "ci_high": 0.6016260162601625,
+        "n_pairs": 246,
+        "n_resamples": 2000
+      },
+      "hors_volume_commun": {
+        "auc": 0.44525547445255476,
+        "ci_low": 0.3722627737226277,
+        "ci_high": 0.5182481751824818,
+        "n_pairs": 137,
+        "n_resamples": 2000
+      },
+      "toutes_paires_across_draws": {
+        "mean": 0.5541,
+        "min": 0.5467,
+        "max": 0.565,
+        "n_draws": 5
+      },
+      "hors_volume_commun_across_draws": {
+        "mean": 0.4475,
+        "min": 0.4307,
+        "max": 0.4669,
+        "n_draws": 5
+      }
+    },
     "visuel seul": {
       "toutes_paires": {
         "auc": 0.5,
@@ -239,6 +275,22 @@
         "n_cross_volume_pairs": 137
       },
       "auc": {
+        "taille du volume seule": {
+          "toutes_paires": {
+            "auc": 0.5508130081300813,
+            "ci_low": 0.5020325203252033,
+            "ci_high": 0.6016260162601625,
+            "n_pairs": 246,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.44525547445255476,
+            "ci_low": 0.3722627737226277,
+            "ci_high": 0.5182481751824818,
+            "n_pairs": 137,
+            "n_resamples": 2000
+          }
+        },
         "visuel seul": {
           "toutes_paires": {
             "auc": 0.5,
@@ -367,6 +419,22 @@
         "n_cross_volume_pairs": 136
       },
       "auc": {
+        "taille du volume seule": {
+          "toutes_paires": {
+            "auc": 0.5650406504065041,
+            "ci_low": 0.5142276422764228,
+            "ci_high": 0.6138211382113821,
+            "n_pairs": 246,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.46691176470588236,
+            "ci_low": 0.3897058823529411,
+            "ci_high": 0.5404411764705882,
+            "n_pairs": 136,
+            "n_resamples": 2000
+          }
+        },
         "visuel seul": {
           "toutes_paires": {
             "auc": 0.5,
@@ -495,6 +563,22 @@
         "n_cross_volume_pairs": 135
       },
       "auc": {
+        "taille du volume seule": {
+          "toutes_paires": {
+            "auc": 0.5609756097560976,
+            "ci_low": 0.5101626016260162,
+            "ci_high": 0.6097560975609756,
+            "n_pairs": 246,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.45925925925925926,
+            "ci_low": 0.3814814814814815,
+            "ci_high": 0.5259259259259259,
+            "n_pairs": 135,
+            "n_resamples": 2000
+          }
+        },
         "visuel seul": {
           "toutes_paires": {
             "auc": 0.5,
@@ -623,6 +707,22 @@
         "n_cross_volume_pairs": 132
       },
       "auc": {
+        "taille du volume seule": {
+          "toutes_paires": {
+            "auc": 0.5467479674796748,
+            "ci_low": 0.49593495934959353,
+            "ci_high": 0.5975609756097561,
+            "n_pairs": 246,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.4356060606060606,
+            "ci_low": 0.35984848484848486,
+            "ci_high": 0.5075757575757576,
+            "n_pairs": 132,
+            "n_resamples": 2000
+          }
+        },
         "visuel seul": {
           "toutes_paires": {
             "auc": 0.5,
@@ -751,6 +851,22 @@
         "n_cross_volume_pairs": 137
       },
       "auc": {
+        "taille du volume seule": {
+          "toutes_paires": {
+            "auc": 0.5467479674796748,
+            "ci_low": 0.49390243902439024,
+            "ci_high": 0.5995934959349594,
+            "n_pairs": 246,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.43065693430656937,
+            "ci_low": 0.354014598540146,
+            "ci_high": 0.5036496350364964,
+            "n_pairs": 137,
+            "n_resamples": 2000
+          }
+        },
         "visuel seul": {
           "toutes_paires": {
             "auc": 0.5,

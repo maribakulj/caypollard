@@ -31,7 +31,7 @@ from caypollard.graphs.iconclass import (
     parse_notations,
 )
 from caypollard.provenance import read_jsonl
-from caypollard.statistics import bootstrap_mean_ci
+from caypollard.statistics import bootstrap_mean_ci, compare_methods
 
 
 def _parse_list(value: str) -> list[str]:
@@ -123,6 +123,7 @@ def main() -> None:
     )
 
     results = []
+    per_query: dict[str, dict[str, float]] = {}
     for name, alpha in (("visuel seul", 1.0), ("graphe seul", 0.0)):
         summary, queries = evaluate_iconclass_retrieval(
             restricted,
@@ -133,6 +134,9 @@ def main() -> None:
             score_matrix_fn=make_scorer("linear", alpha),
         )
         ndcgs = [row.ndcg_at_10 for row in queries if row.ndcg_at_10 is not None]
+        per_query[name] = {
+            row.query_id: row.ndcg_at_10 for row in queries if row.ndcg_at_10 is not None
+        }
         results.append(
             {
                 "rule": name,
@@ -177,6 +181,9 @@ def main() -> None:
             score_matrix_fn=make_scorer(rule, alpha),
         )
         ndcgs = [row.ndcg_at_10 for row in test_queries if row.ndcg_at_10 is not None]
+        per_query[rule] = {
+            row.query_id: row.ndcg_at_10 for row in test_queries if row.ndcg_at_10 is not None
+        }
         results.append(
             {
                 "rule": rule,
@@ -195,6 +202,25 @@ def main() -> None:
         best = results[-1]["test"]["mean_ndcg_at_10"]
         print(f"{rule:12s} alpha={alpha:<5} nDCG@10={best:.4f}", flush=True)
 
+    # A table of levels invites reading a difference that may be noise. Every
+    # rule is compared against both single modalities on the identical queries,
+    # so each row carries its interval, its p-value and its effect size.
+    comparisons = []
+    for rule in args.rules:
+        for baseline in ("visuel seul", "graphe seul"):
+            shared = sorted(set(per_query[rule]) & set(per_query[baseline]))
+            if len(shared) < 3:
+                continue
+            comparisons.append(
+                compare_methods(
+                    [per_query[rule][q] for q in shared],
+                    [per_query[baseline][q] for q in shared],
+                    first_name=rule,
+                    second_name=baseline,
+                    seed=args.seed,
+                )
+            )
+
     report = {
         "label": args.label,
         "protocol": "protocol-v0.5",
@@ -204,6 +230,7 @@ def main() -> None:
         "visual_calibration": visual_calibration,
         "graph_calibration": graph_calibration,
         "rules": results,
+        "comparisons": comparisons,
     }
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)

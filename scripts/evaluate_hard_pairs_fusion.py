@@ -56,6 +56,13 @@ def main() -> None:
     )
     parser.add_argument("--test-split", default="test")
     parser.add_argument("--validation-split", default="validation")
+    parser.add_argument(
+        "--graph-triples",
+        help="Triples the graph embedding was trained on. Reported as a reachability "
+             "check: an AUC above chance on pairs the graph holds no path between is "
+             "an embedding artifact, not information, and only the edge list can say "
+             "which case applies.",
+    )
     parser.add_argument("--label", default="")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
@@ -88,6 +95,37 @@ def main() -> None:
         alphas.update({entry["rule"]: float(entry["selected_alpha"]) for entry in report["rules"]})
 
     pool = sorted(item for item in common if str(records[item].get("split")) == args.test_split)
+
+    # A structural null. G1 is a disjoint union of one star per volume, so two
+    # items in different volumes share no path and any cross-volume separation it
+    # shows must come from something else the embedding is sensitive to. Volume
+    # size is the obvious candidate, because a PPMI-SVD embedding places nodes
+    # partly by degree. Scoring the pairs on volume-size proximity alone says
+    # whether that is what the graph is really reporting.
+    volume_size: dict[str, int] = {}
+    for row in records.values():
+        book = row.get("book_id")
+        if book is not None:
+            volume_size[str(book)] = volume_size.get(str(book), 0) + 1
+
+    def size_of(item: str) -> float | None:
+        book = records[item].get("book_id")
+        return float(volume_size[str(book)]) if book is not None else None
+
+    def size_proximity(query: str, candidate: str) -> float:
+        a, b = size_of(query), size_of(candidate)
+        if a is None or b is None:
+            return 0.0
+        return -abs(np.log((a + 1.0) / (b + 1.0)))
+    # A modality with partial coverage -- mottoes reach 94% of emblems -- leaves
+    # some queries with no vector at all. Dropping them here rather than failing
+    # keeps the measurement on the items every scorer can actually score, and the
+    # count is reported so the shrinkage is visible.
+    usable = [pair for pair in pairs if str(pair["query_id"]) in common]
+    dropped_queries = len(pairs) - len(usable)
+    pairs = usable
+    if not pairs:
+        raise SystemExit("no hard positive has a query representable in both modalities")
 
     def visual_similarity(query: str, candidates: list[str]) -> np.ndarray:
         return v_unit[[visual_row[item] for item in candidates]] @ v_unit[visual_row[query]]
@@ -131,6 +169,10 @@ def main() -> None:
         control_columns = np.asarray([position[item] for item in controls])
 
         measurements = {
+            "taille du volume seule": (
+                np.asarray([size_proximity(q, i) for q, i in zip(queries, positives, strict=True)]),
+                np.asarray([size_proximity(q, i) for q, i in zip(queries, controls, strict=True)]),
+            ),
             "visuel seul": (
                 full_visual[rows, positive_columns],
                 full_visual[rows, control_columns],
@@ -213,6 +255,66 @@ def main() -> None:
     control_same_book = primary["mechanism"]["control_shares_query_volume"]
     cross_volume_count = primary["mechanism"]["n_cross_volume_pairs"]
 
+    reachability: dict[str, Any] | None = None
+    if args.graph_triples:
+        import collections
+
+        adjacency: dict[str, set[str]] = collections.defaultdict(set)
+        with open(args.graph_triples, encoding="utf-8") as handle:
+            for line in handle:
+                parts = line.rstrip("\n").split("\t")
+                if len(parts) != 3:
+                    continue
+                subject, _predicate, obj = parts
+                adjacency[subject].add(obj)
+                adjacency[obj].add(subject)
+        component_of: dict[str, int] = {}
+        components = 0
+        for node in adjacency:
+            if node in component_of:
+                continue
+            stack = [node]
+            component_of[node] = components
+            while stack:
+                current = stack.pop()
+                for neighbour in adjacency[current]:
+                    if neighbour not in component_of:
+                        component_of[neighbour] = components
+                        stack.append(neighbour)
+            components += 1
+
+        # The discriminating question is not whether two items of different
+        # volumes share a direct edge -- in every projection here they never do --
+        # but whether any path connects them. A projection that links volumes
+        # through shared creator or place nodes joins them at distance two; one
+        # that carries only membership and plate order leaves each volume its own
+        # island, and then no cross-volume similarity it reports can be
+        # information about the pair.
+        volumes_per_component: dict[int, set[str]] = {}
+        for item, book in (
+            (row, str(records[row].get("book_id")))
+            for row in records
+            if records[row].get("book_id") is not None and row in component_of
+        ):
+            volumes_per_component.setdefault(component_of[item], set()).add(book)
+        joined = sum(1 for books in volumes_per_component.values() if len(books) > 1)
+        reachable = joined > 0
+        reachability = {
+            "triples_file": args.graph_triples,
+            "connected_components": components,
+            "components_holding_more_than_one_volume": joined,
+            "cross_volume_pairs_are_reachable": reachable,
+            "reading": (
+                "Items of different volumes lie in one component, so the graph can "
+                "carry information about such a pair."
+                if reachable
+                else "Every volume is its own component, so two items of different "
+                "volumes share no path at all. Any separation the embedding shows "
+                "between them is a property of the embedding method, not information "
+                "in the graph."
+            ),
+        }
+
     report = {
         "label": args.label,
         "protocol": "protocol-v0.5",
@@ -220,6 +322,7 @@ def main() -> None:
         "visual": args.visual,
         "graph": args.graph,
         "n_hard_positives": len(pairs),
+        "n_dropped_query_not_in_both_modalities": dropped_queries,
         "n_matched": len(matched),
         "skipped": skipped,
         "tolerance": args.tolerance,
@@ -231,6 +334,7 @@ def main() -> None:
             "control_shares_query_volume": control_same_book,
             "n_cross_volume_pairs": cross_volume_count,
         },
+        "graph_reachability": reachability,
         "auc": results,
         "draws": draws,
     }
