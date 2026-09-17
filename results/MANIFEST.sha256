@@ -56,7 +56,8 @@ f817d045e4ab7517f49ddcc314c7a30ef6d23c1edf53ce56066fc8d601ade146    10084387  re
 88d162acd0db93e221b9e8f8fa76319042a1d8af4cdec349483e258f19194b40         685  versioned  results/fusion/siglip-base-224/selected-fusion.npz.metadata.json
 5ff1f2f54071e1b5cd7a5c58e802f07b205063e31aa78785be186aa779eb200f        5884  versioned  results/fusion-variants/emblematica-dinov2-base.json
 f87d2aaddf45af1f81d8fea82dc3e41971a68c8ba9ecfe66ddc2841579daf46e        4196  versioned  results/fusion-variants/emblematica-dinov2-text.json
-df1b372de70b791a899df65397134410d78b50e5530eca0ca439fa24c6423976        4074  versioned  results/fusion-variants/emblematica-graph-text.json
+94f3de70cb4ac4cecfa3bb140c99484053415a057f0d8ed8e376cc80667a1247        4199  versioned  results/fusion-variants/emblematica-graph-text.json
+8c10abfd04e4b3a00da50dfb5acd87434896ccea170ecd5cdc1acdf7e1af2650        4100  versioned  results/fusion-variants/emblematica-vgt.json
 4c2896c43e13c5de82df9f7a90179654183539727cbfade050569ab384858d05        5861  versioned  results/fusion-variants/iconclass-clip-vit-b32.json
 3d9f83c74562a6468c4c55d43c5aafe46545092a9b24957dbaff9c09391674fc        5854  versioned  results/fusion-variants/iconclass-dinov2-base.json
 a5d2f11709aae3476eea99fcf4dacc553ac6035494867ca399c7a05456b9ee99        5866  versioned  results/fusion-variants/iconclass-siglip-base-224.json

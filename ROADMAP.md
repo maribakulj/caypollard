@@ -360,7 +360,10 @@ KG embedding     -> projection --+
 - [ ] Compare real-corpus results against late fusion and reranking.
 - [ ] Run the preregistered >=3-seed sensitivity analysis on real embeddings.
 - [x] Implement representation-collapse diagnostics (off-diagonal cosine + effective rank); combine with existing hubness diagnostics in real runs.
-- [ ] Conduct modality/capacity ablations on real embeddings.
+- [x] Conduct modality ablations on real embeddings: T alone 0.6281, G 0.6829, V 0.7178,
+      G+T 0.7026, V+T 0.7319, V+G 0.7450, V+G+T 0.7450 — the validation sweep gives the text
+      arm zero weight once the graph is present, so text is redundant with it, not additive.
+- [ ] Conduct capacity ablations (linear vs MLP heads) on real embeddings.
 
 ### Model matrix
 

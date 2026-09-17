@@ -17,14 +17,15 @@ and vice versa.
 
 ## Headline
 
-**H1 holds, replicated on two independent corpora. The transparent fusion gain replicates in
-all six encoder-corpus combinations. H2 is not supported: once the hard-pair benchmark is
-controlled for digitisation format, the graph sits weakly above chance in three conditions of
-four and below it in the fourth. H3 is consistently wrong-signed.**
+**H1 holds and replicates on two independent corpora. The transparent fusion gain replicates in
+every encoder-corpus combination tested, and the text modality adds an independent smaller gain.
+H2 is not supported, and the reason is structural rather than empirical: on the corpus where the
+graph could reach a cross-volume pair it separates hard positives at 0.505, and on the corpus
+where it appears to separate them at 0.649 it provably holds no path between them. H3 is not
+testable under this ground truth at all.**
 
-A first version of this document reported H2 as firmly refuted with a mechanism. That was
-computed on confounded pairs and has been corrected in place — see *H2 and H3* below. The
-correction is retained rather than deleted so the error stays legible.
+This document has reported H2 wrongly twice, each time because a control was missing. Both
+readings are retained below rather than deleted, with the control that overturned each.
 
 ## The two benchmarks
 
@@ -99,6 +100,63 @@ scored against Iconclass relevance, which is independent of format, so the gain 
 artifact of it; but no claim about *why* the modalities are complementary should rest on the
 aggregate alone.
 
+## The model matrix, filled in
+
+Phase 0 declared seven conditions — V, G, T, V+T, G+T, V+G, V+G+T — and until now T had no
+implementation at all. Mottoes are transcribed for 97.7% of Emblematica emblems, in Latin,
+German, French, Dutch and English, and 5 544 of the 5 889 evaluation emblems carry one. They are
+encoded with LaBSE under mean pooling over the attention mask.
+
+All rows below are computed on the emblems that carry a motto, so V reads 0.7178 here rather
+than the 0.7293 it reaches on the full evaluation set; comparing a partially covered modality
+against a fully covered one on different query sets would not be a comparison.
+
+| condition | nDCG@10 | against | difference | p | d |
+| --- | ---: | --- | ---: | ---: | ---: |
+| T (mottoes alone) | 0.6281 | — | — | — | — |
+| G (`pure`) | 0.6829 | — | — | — | — |
+| V (DINOv2) | 0.7178 | — | — | — | — |
+| G+T | 0.7026 | G | +0.0197 | 0.0001 | 0.163 |
+| V+T | 0.7319 | V | +0.0140 | 0.0001 | 0.173 |
+| V+G | 0.7450 | V | +0.0272 | 0.0001 | — |
+| V+G+T | 0.7450 | V+G | **+0.0000** | 1.0000 | 0.000 |
+
+Three readings follow. **Text is a real and independent signal**: mottoes alone rank at 0.628,
+far above the 0.431 random control, and improve both other modalities significantly. **Text is
+weaker than either** visual or graph on its own. And **text is redundant once the graph is
+present**: the validation sweep for V+G+T selects `alpha = 1.0`, giving the text arm zero weight,
+so the condition is V+G exactly. Whatever the mottoes contribute, the bibliographic graph has
+already contributed it — unsurprising once one notices that emblems of one volume share a
+compositor's phrasing as well as a printer.
+
+The dissociation matters for the hard cases: this same text modality scores **0.422** on hard
+positives, below chance. A multilingual semantic encoder, which does not need shared words to
+match paraphrases, does not bring together two emblems that share an Iconclass concept.
+
+## Does the combination rule matter?
+
+The weighted sum is one rule among several, and the flooding behaviour that costs hard positives
+their place — a plateau of near-equal graph scores from a query's own volume taking the top of
+the list — is a property of summation. Four alternatives were run through the identical
+calibration, alpha-selection and evaluation path. The `linear` row reproduces the frozen
+published figure exactly, which is the check that nothing else changed.
+
+| rule | Iconclass · DINOv2 | Iconclass · CLIP | Iconclass · SigLIP | Emblematica · DINOv2 |
+| --- | ---: | ---: | ---: | ---: |
+| `linear` (frozen baseline) | **0.6026** | **0.5980** | **0.6015** | 0.7624 |
+| `product` (geometric mean) | 0.6025 | 0.5979 | 0.6013 | **0.7637** |
+| `rrf` (reciprocal rank) | 0.5848 | 0.5835 | 0.5917 | 0.7469 |
+| `rank_linear` | 0.5767 | 0.5874 | 0.5864 | 0.7311 → collapses to V |
+| `max` | 0.5247 | 0.5739 → collapses to V | 0.5754 → collapses to V | 0.7311 → collapses to V |
+
+No rule beats the weighted sum by more than 0.0013, and three of them lose to it. Rank-based
+rules discard score magnitude, which is most of the information; `max` is frequently sent to
+`alpha = 1.0` by the validation sweep, meaning the sweep prefers no fusion at all to that rule.
+A collapsed rule is labelled as such in the artifacts rather than printed as a fusion result.
+
+On hard positives the ordering is the same, so the combination rule is not what stands between
+the current system and H2. What stands there is that the graph holds no edge to reach the pair.
+
 ## What the gain is made of
 
 A mean gain of +0.03 is compatible with a nudge on every query or a rescue of a few. Comparing
@@ -142,74 +200,93 @@ because the graph promotes five plates of the query's own volume at graded relev
 flooding by a saturated context score, and it is the same behaviour that makes hard positives
 difficult: the items H2 is about are exactly the ones a volume plateau displaces.
 
-## H2 and H3 — not supported, after one confound was removed
+## H2 and H3 — not supported, and now for a structural reason
 
-Three explanations were eliminated in turn.
+This section has been rewritten twice. Both earlier readings are recorded at the end, because
+each was overturned by a control that should have been there from the start, and the sequence is
+the useful part.
 
-**Not the corpus.** Emblematica supplies creator, place, date and work for 99.6% of volumes.
+### The measurement as it now stands
 
-**Not the graph construction.** The first graph built on Emblematica reproduced the earlier
-failure — 100% of an emblem's top-5 neighbours came from its own volume — because within-book
-edges outnumbered bibliographic ones 29 to 1 and book nodes are hubs of ~96 emblems. Projecting
-book attributes onto emblems and dropping within-book edges fixes it: measured on 589
-same-author against 589 different-author volume couples,
+Hard positives are mined within one collection (`--stratum-key collection`), so both items share
+a scanning format. Each is paired with a control drawn from the same collection at the same
+visual similarity to the query, within ±0.02, sharing no notation with it. The draw is balanced
+above and below the target, and repeated over five seeds. Visual similarity then carries no
+information about which candidate is the positive, and its AUC sits at 0.500-0.502 in every
+draw, which is the check that the design works.
+
+| corpus · encoder | volume size alone | visual | graph | linear fusion | graph, cross-volume only | cross-volume reachable |
+| --- | ---: | ---: | ---: | ---: | ---: | :--: |
+| Iconclass · DINOv2 | 0.578 | 0.502 | 0.677 | **0.693** | 0.649 | **no** |
+| Iconclass · SigLIP | 0.551 | 0.500 | 0.659 | 0.642 | 0.639 | **no** |
+| Iconclass · CLIP | 0.444 | 0.502 | 0.488 | 0.477 | 0.593 | **no** |
+| Emblematica · DINOv2 | 0.588 | 0.502 | 0.543 | 0.519 | **0.505** | yes |
+| Emblematica · DINOv2 + mottoes | 0.668 | 0.500 | 0.422 | 0.398 | 0.393 | — |
+
+Read without the last column, the Iconclass rows say H2 holds: fusion reaches 0.693
+[0.632, 0.749] across a 0.680-0.706 spread over five control draws, and keeps 0.653 when
+restricted to pairs whose two items sit in different volumes. Two controls say otherwise.
+
+### Control 1 — volume size
+
+A PPMI-SVD embedding places nodes partly by degree, and hard positives drawn across volumes come
+from volumes of far more unequal size than random same-collection pairs do: median size ratio 4.0
+against 1.9. Scoring the pairs on volume-size proximity alone reaches 0.578 on Iconclass and
+0.588 on Emblematica, so this is a genuine confound in the aggregate figures. It is **not** the
+explanation of the cross-volume result, where it falls to 0.475.
+
+### Control 2 — can the graph reach the pair at all?
+
+`G1` carries `part_of` and `adjacent_to` and nothing else, and both are within-volume relations.
+The projection is therefore a **disjoint union of 1 246 components, one per volume, with no path
+of any length between items of different volumes**. The graph holds no information about such a
+pair, so the 0.649 it scores on them is not information: it is PPMI-SVD placing structurally
+similar but unconnected components near one another. Embedding a disconnected graph produces
+coordinates for every component, and nothing forbids two islands from landing close together.
+
+Emblematica's `pure` projection links volumes through shared creator, place and date nodes, so
+there the question is meaningful — every volume lies in one component. The answer there is
+**0.505**, chance to three decimals.
+
+**Where the graph can carry cross-volume information it carries none; where it appears to, it
+structurally cannot.** Publication gate 2 is unsupported on both corpora, and the reachability
+check is now written into every hard-pair artifact so the distinction cannot be lost again.
+
+H3 remains wrong-signed throughout, for the separate reason given under *What the ground truth
+can and cannot express*: Iconclass cannot express it.
+
+### What the graph is good at, stated positively
+
+The same graph separates **same-author from different-author volume couples at AUC 0.963** under
+the `pure` projection, measured on 589 couples of each kind:
 
 | graph variant | same-author score | other | AUC |
 | --- | ---: | ---: | ---: |
-| `book` (volume membership; the graph that failed) | +0.0752 | +0.0752 | **0.457** |
+| `book` (volume membership; the graph that failed) | +0.0752 | +0.0752 | 0.457 |
 | `full` | +0.2132 | +0.0830 | 0.620 |
 | `pure` (projected attributes) | +0.3461 | +0.0168 | **0.963** |
 
-**Correction — this section was wrong, and the corrected result is different.**
+So the graph is an excellent bibliographic instrument and a null iconographic one. The
+aggregate fusion gain is real because plates of one volume, and volumes of one author, do share
+iconography often enough to move nDCG. It is not evidence that the graph recognises a motif.
 
-The paragraph that follows was written on hard pairs mined without a format control, and that
-invalidated it. Holding libraries scan differently: Wolfenbüttel serves full pages with a colour
-chart and ruler in frame (median aspect ratio 1.52), Glasgow and Illinois serve cropped picturae
-(0.81 and 0.98). "Visually distant" therefore collapsed into "different holding library" — of
-250 hard positives mined with CLIP on Emblematica, **247 crossed collections while 0 of 250 hard
-negatives did**; on Iconclass AI the same pattern held at 243 and 0. Concluding from those pairs
-that hard positives share no bibliographic attribute was circular: pairs drawn from different
-libraries are necessarily from different books, authors and places.
+### The two superseded readings, retained
 
-Re-mined with `--stratum-key collection`, so both items of every pair come from one library and
-one scanning format, and compared against a control matched on visual similarity (±0.02, same
-collection, no shared notation) so that the two classes are equally distant to the eye:
+**First reading — "H2 firmly refuted, because hard positives are bibliographically unrelated."**
+Computed on pairs mined without a format control. Holding libraries scan differently:
+Wolfenbüttel serves full pages with a colour chart and ruler in frame at median aspect ratio
+1.52, Glasgow and Illinois serve cropped picturae at 0.81 and 0.98. "Visually distant" collapsed
+into "different holding library" — 247 of 250 CLIP-mined hard positives crossed collections
+against 0 of 250 hard negatives, and 243 against 0 on Iconclass. Pairs drawn from different
+libraries are necessarily from different books and authors, so their bibliographic unrelatedness
+followed from the sampling. The reasoning was circular and is withdrawn.
 
-| corpus | encoder | n | graph AUC on H2 | 95% CI | reading |
-| --- | --- | ---: | ---: | --- | --- |
-| Emblematica | DINOv2 | 175 | 0.449 | [0.387, 0.510] | inconclusive |
-| Emblematica | CLIP | 140 | 0.633 | [0.567, 0.697] | above chance |
-| Iconclass AI | DINOv2 | 250 | 0.691 | [0.646, 0.736] | above chance |
-| Iconclass AI | CLIP | 249 | 0.582 | [0.532, 0.633] | above chance |
-
-The matched control brings the *visual* AUC to 0.34-0.49, near chance, which is what makes the
-comparison fair; before matching it ranged from 0.00 to 0.79 depending on the direction of the
-imbalance.
-
-**The corrected finding is weaker than a refutation and weaker than support.** Three of four
-conditions put the graph above chance on hard positives, by 0.08 to 0.19 of AUC; the fourth is
-inconclusive and sits below 0.5. H3 remains consistently wrong-signed (0.10-0.43): the graph
-rewards hard negatives, which are disproportionately same-volume pairs. So the graph carries a
-weak and encoder-dependent signal on hard positives, not the null previously reported, and
-nothing that supports publication gate 2.
-
-**The superseded reasoning follows, retained so the error is legible.**
-
-**The actual reason: hard positives are bibliographically unrelated.** Of 250 hard positives
-mined with DINOv2, **243 share no bibliographic attribute at all** and 2 share an author; of 250
-mined with CLIP, **none share an author**, and the 66 sharing anything share only a *decade*.
-That weak attribute is what produces CLIP's apparent H2 AUC of 0.759 against DINOv2's 0.521 —
-chronological coincidence, not iconographic knowledge. Hard *negatives* meanwhile do share
-attributes (36 and 20 shared authors), pushing the score the wrong way.
-
-Mottoes do not bridge it either: at most 11 of 250 hard-positive pairs share one content word.
-
-**Interpretation.** Two emblems depicting the same subject in visually unlike ways are
-systematically drawn from unrelated books — different authors, places and centuries.
-Iconographic recurrence does not follow bibliographic lineage. This is what emblem scholarship
-describes as the circulation of motifs, and it means a context-only graph is structurally
-incapable of recovering hard positives however well it is constructed. Publication gate 2 is
-unsupported on two independent corpora.
+**Second reading — "weakly above chance in three conditions of four."** Computed with controls
+drawn uniformly inside the caliper. Hard positives sit in the low tail of the similarity
+distribution, so a symmetric window offers far more candidates above the target than below, and
+the control came out reliably *more* similar to the query than the positive was. The visual arm,
+which the design requires at chance, read 0.395-0.468. Balancing the draw fixes it, and raises
+the Iconclass figures — which is what made the two controls above necessary.
 
 ## Two annotation artifacts found along the way
 
@@ -293,4 +370,9 @@ share a single content word.
   not a baseline. The matched control above exists to make the comparison fair, and the residual
   visual AUC of 0.34-0.49 shows the matching is good but not exact.
 - Phase 6 (learned joint alignment) was not run on real corpora. Its inputs would be the same
-  graph shown here to hold no edge between hard positives.
+  graph shown here to hold no path at all between the items of a cross-volume hard positive, so
+  no projection head can recover what is not present.
+- The text modality is evaluated on Emblematica only. Iconclass AI carries no transcribed text.
+- `G1` results rest on an embedding of a disconnected graph. Cross-volume similarities it
+  produces are artifacts of the method and should not be read as weak evidence of anything; the
+  `graph_reachability` block of each hard-pair artifact records this.

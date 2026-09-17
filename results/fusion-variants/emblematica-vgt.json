@@ -1,7 +1,7 @@
 {
-  "label": "Emblematica · graphe pure + texte LaBSE (G+T)",
+  "label": "Emblematica · (DINOv2+graphe) + texte LaBSE (V+G+T)",
   "protocol": "protocol-v0.5",
-  "visual": "data/derived/emblematica-eval/embeddings/g-pure.npz",
+  "visual": "results/emblematica/fusion/dinov2-base-g-pure/selected-fusion.npz",
   "graph": "data/derived/emblematica-eval/embeddings/text-labse.npz",
   "key_policy": "keep",
   "visual_calibration": {
@@ -10,10 +10,10 @@
     "sample_pairs_requested": 20000,
     "sample_pairs_used": 20000,
     "validation_id_count": 2981,
-    "low": -0.2024502158164978,
-    "high": 0.9999999403953552,
-    "mean": 0.11506298550059,
-    "std": 0.3015132949237464
+    "low": 0.050778426229953766,
+    "high": 1.0,
+    "mean": 0.380432403094694,
+    "std": 0.14266488805374583
   },
   "graph_calibration": {
     "method": "validation_random_pair_minmax",
@@ -32,15 +32,15 @@
       "selected_alpha": 1.0,
       "validation_sweep": [],
       "test": {
-        "mean_ndcg_at_10": 0.6828944314086045,
-        "map": 0.34177844341872,
-        "mrr": 0.5905022274767273,
-        "mean_recall_at_10": 0.01905996166775972,
+        "mean_ndcg_at_10": 0.7449914856744149,
+        "map": 0.372874787224414,
+        "mrr": 0.7043985720718577,
+        "mean_recall_at_10": 0.025859644390901246,
         "n_queries": 2563,
         "ndcg_ci95": {
-          "mean": 0.6828944314086045,
-          "ci_low": 0.6729203290988798,
-          "ci_high": 0.6929104275350584,
+          "mean": 0.744991485674415,
+          "ci_low": 0.7353717848186491,
+          "ci_high": 0.7544796432117883,
           "confidence": 0.95,
           "n_queries": 2563,
           "n_resamples": 10000,
@@ -71,7 +71,7 @@
     },
     {
       "rule": "linear",
-      "selected_alpha": 0.25,
+      "selected_alpha": 1.0,
       "validation_sweep": [
         {
           "alpha": 0.0,
@@ -79,31 +79,31 @@
         },
         {
           "alpha": 0.25,
-          "ndcg": 0.5433027245907843
+          "ndcg": 0.5675280186519843
         },
         {
           "alpha": 0.5,
-          "ndcg": 0.5421849870959388
+          "ndcg": 0.592788897223118
         },
         {
           "alpha": 0.75,
-          "ndcg": 0.5401082005697038
+          "ndcg": 0.6061619543789901
         },
         {
           "alpha": 1.0,
-          "ndcg": 0.5027925050629384
+          "ndcg": 0.6085553348147348
         }
       ],
       "test": {
-        "mean_ndcg_at_10": 0.7025917942682282,
-        "map": 0.33644849124368026,
-        "mrr": 0.6460208049416631,
-        "mean_recall_at_10": 0.021709028284127463,
+        "mean_ndcg_at_10": 0.7449914856744149,
+        "map": 0.372874787224414,
+        "mrr": 0.7043985720718577,
+        "mean_recall_at_10": 0.025859644390901246,
         "n_queries": 2563,
         "ndcg_ci95": {
-          "mean": 0.7025917942682282,
-          "ci_low": 0.6927340116110612,
-          "ci_high": 0.7120940202245168,
+          "mean": 0.744991485674415,
+          "ci_low": 0.7353717848186491,
+          "ci_high": 0.7544796432117883,
           "confidence": 0.95,
           "n_queries": 2563,
           "n_resamples": 10000,
@@ -116,16 +116,16 @@
     {
       "first": "linear",
       "second": "visuel seul",
-      "mean_first": 0.7025917942682282,
-      "mean_second": 0.6828944314086045,
-      "mean_difference": 0.019697362859623604,
-      "ci_low": 0.01496128476664284,
-      "ci_high": 0.024486629132750314,
+      "mean_first": 0.744991485674415,
+      "mean_second": 0.744991485674415,
+      "mean_difference": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
       "confidence": 0.95,
-      "excludes_zero": true,
-      "p_value": 9.999000099990002e-05,
-      "cohens_d": 0.16261556382855719,
-      "cliffs_delta": 0.043555693442913185,
+      "excludes_zero": false,
+      "p_value": 1.0,
+      "cohens_d": 0.0,
+      "cliffs_delta": 0.0,
       "n_queries": 2563,
       "n_resamples": 10000,
       "n_permutations": 10000,
@@ -134,16 +134,16 @@
     {
       "first": "linear",
       "second": "graphe seul",
-      "mean_first": 0.7025917942682282,
+      "mean_first": 0.744991485674415,
       "mean_second": 0.6281174602933216,
-      "mean_difference": 0.07447433397490646,
-      "ci_low": 0.0692528650448918,
-      "ci_high": 0.07965198696900382,
+      "mean_difference": 0.11687402538109326,
+      "ci_low": 0.10959197080137256,
+      "ci_high": 0.12426004947712593,
       "confidence": 0.95,
       "excludes_zero": true,
       "p_value": 9.999000099990002e-05,
-      "cohens_d": 0.5585967617945632,
-      "cliffs_delta": 0.18151265442111236,
+      "cohens_d": 0.6153040230623464,
+      "cliffs_delta": 0.2893239410933436,
       "n_queries": 2563,
       "n_resamples": 10000,
       "n_permutations": 10000,
