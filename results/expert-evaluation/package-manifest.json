@@ -1,0 +1,46 @@
+{
+  "methods": [
+    "A",
+    "B",
+    "C"
+  ],
+  "k": 5,
+  "seed": 42,
+  "queries_per_band": 8,
+  "bands": {
+    "accord_relatif": 934,
+    "partiel": 934,
+    "desaccord": 936
+  },
+  "band_definition": "observed terciles of the top-k union ratio",
+  "union_ratio_range": [
+    1.2,
+    3.0
+  ],
+  "queries_selected": 24,
+  "pairs_to_rate": 255,
+  "dimensions": [
+    {
+      "name": "ressemblance_visuelle",
+      "question": "Les deux images se ressemblent-elles formellement ?"
+    },
+    {
+      "name": "parente_iconographique",
+      "question": "Représentent-elles le même sujet ou motif ?"
+    },
+    {
+      "name": "pertinence_historique",
+      "question": "Un lien historique ou contextuel les relie-t-il ?"
+    },
+    {
+      "name": "utilite_pour_la_recherche",
+      "question": "Ce rapprochement serait-il utile à une recherche ?"
+    },
+    {
+      "name": "confiance",
+      "question": "Quelle confiance accordez-vous à vos réponses ci-dessus ?"
+    }
+  ],
+  "scale": "1 = pas du tout · 2 = un peu · 3 = moyennement · 4 = beaucoup · 5 = tout à fait · ? = ne peut juger",
+  "blinding": "package.jsonl carries no method label and no rank. The mapping back to method and rank is in KEY-do-not-open.jsonl, which the analysis reads and the rater does not."
+}

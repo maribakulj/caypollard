@@ -596,15 +596,28 @@ Do not collapse these dimensions into one vague “relevance” score.
 
 ### Tasks
 
-- [ ] Define annotation protocol.
-- [ ] Pilot inter-rater agreement.
-- [ ] Blind method labels during evaluation.
-- [ ] Compare human rankings with automatic metrics.
-- [ ] Analyse disagreements rather than hiding them.
+- [x] Define annotation protocol: five dimensions, a 1-5 ordinal scale with an explicit
+      "cannot judge", tercile-stratified sampling, and the analysis fixed in advance. See
+      [`EXPERT_EVALUATION_PROTOCOL.md`](docs/EXPERT_EVALUATION_PROTOCOL.md).
+- [ ] Pilot inter-rater agreement — **needs experts, which is a decision outside this repository.**
+      Everything else is built and tested so that the ask is an afternoon rather than a project.
+- [x] Blind method labels during evaluation: `scripts/build_expert_evaluation.py` pools the
+      methods' top-5 per query, shuffles with a fixed seed, and writes the method/rank mapping to
+      a separate key the analysis reads and the rater never sees.
+- [x] Compare human rankings with automatic metrics: Kendall's tau-b between each dimension and
+      the graded relevance assigned to the same pair, in `scripts/analyse_expert_evaluation.py`.
+- [x] Analyse disagreements rather than hiding them: pairs differing by two points or more are
+      returned whole and worst-first, not summarised as a variance.
 
 ### Exit criterion
 
 The project can distinguish “metric improvement” from “useful scholarly retrieval.”
+
+**Instrumented, not yet answered.** The protocol fixes in advance what each outcome would mean,
+including the one the project expects: given that the fused ranking shares 0.811 of its top-10
+with its own visual arm and fails every hard-case test, a null human result is the likely finding
+and is to be reported as plainly as a positive one. The measurement chain is built and exercised
+end to end on synthetic judgements; only the raters are missing.
 
 ---
 

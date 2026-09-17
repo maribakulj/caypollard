@@ -1,0 +1,255 @@
+{"pair_id": "emblematica:E001325__01", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E031462", "band": "partiel", "retrieved_by": {"A": 3}}
+{"pair_id": "emblematica:E001325__02", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E001326", "band": "partiel", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E001325__03", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E001330", "band": "partiel", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E001325__04", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E001327", "band": "partiel", "retrieved_by": {"B": 3, "C": 1}}
+{"pair_id": "emblematica:E001325__05", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E001329", "band": "partiel", "retrieved_by": {"B": 1, "C": 2}}
+{"pair_id": "emblematica:E001325__06", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E004157", "band": "partiel", "retrieved_by": {"A": 4}}
+{"pair_id": "emblematica:E001325__07", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E029881", "band": "partiel", "retrieved_by": {"A": 2, "C": 4}}
+{"pair_id": "emblematica:E001325__08", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E001332", "band": "partiel", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E001325__09", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E001324", "band": "partiel", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E001325__10", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E009446", "band": "partiel", "retrieved_by": {"A": 1, "C": 3}}
+{"pair_id": "emblematica:E001325__11", "query_id": "emblematica:E001325", "candidate_id": "emblematica:E009638", "band": "partiel", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E001698__01", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E010956", "band": "desaccord", "retrieved_by": {"A": 4}}
+{"pair_id": "emblematica:E001698__02", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E001673", "band": "desaccord", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E001698__03", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E001692", "band": "desaccord", "retrieved_by": {"C": 2}}
+{"pair_id": "emblematica:E001698__04", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E001697", "band": "desaccord", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E001698__05", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E001714", "band": "desaccord", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E001698__06", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E010955", "band": "desaccord", "retrieved_by": {"A": 3}}
+{"pair_id": "emblematica:E001698__07", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E001678", "band": "desaccord", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E001698__08", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E001710", "band": "desaccord", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E001698__09", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E018938", "band": "desaccord", "retrieved_by": {"A": 2}}
+{"pair_id": "emblematica:E001698__10", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E018942", "band": "desaccord", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E001698__11", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E001696", "band": "desaccord", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E001698__12", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E001681", "band": "desaccord", "retrieved_by": {"C": 4}}
+{"pair_id": "emblematica:E001698__13", "query_id": "emblematica:E001698", "candidate_id": "emblematica:E001699", "band": "desaccord", "retrieved_by": {"B": 2, "C": 3}}
+{"pair_id": "emblematica:E003047__01", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E003038", "band": "partiel", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E003047__02", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E001676", "band": "partiel", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E003047__03", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E003052", "band": "partiel", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E003047__04", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E003042", "band": "partiel", "retrieved_by": {"B": 3, "C": 5}}
+{"pair_id": "emblematica:E003047__05", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E003045", "band": "partiel", "retrieved_by": {"B": 4, "C": 4}}
+{"pair_id": "emblematica:E003047__06", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E001683", "band": "partiel", "retrieved_by": {"A": 4}}
+{"pair_id": "emblematica:E003047__07", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E001712", "band": "partiel", "retrieved_by": {"A": 2}}
+{"pair_id": "emblematica:E003047__08", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E001689", "band": "partiel", "retrieved_by": {"A": 3}}
+{"pair_id": "emblematica:E003047__09", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E003050", "band": "partiel", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E003047__10", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E003044", "band": "partiel", "retrieved_by": {"C": 2}}
+{"pair_id": "emblematica:E003047__11", "query_id": "emblematica:E003047", "candidate_id": "emblematica:E003046", "band": "partiel", "retrieved_by": {"B": 2, "C": 3}}
+{"pair_id": "emblematica:E003819__01", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003796", "band": "accord_relatif", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E003819__02", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003793", "band": "accord_relatif", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E003819__03", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003822", "band": "accord_relatif", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E003819__04", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003778", "band": "accord_relatif", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E003819__05", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003882", "band": "accord_relatif", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E003819__06", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003857", "band": "accord_relatif", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E003819__07", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003808", "band": "accord_relatif", "retrieved_by": {"A": 5, "C": 5}}
+{"pair_id": "emblematica:E003819__08", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003781", "band": "accord_relatif", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E003819__09", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003814", "band": "accord_relatif", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E003819__10", "query_id": "emblematica:E003819", "candidate_id": "emblematica:E003834", "band": "accord_relatif", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E005241__01", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005199", "band": "accord_relatif", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E005241__02", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005254", "band": "accord_relatif", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E005241__03", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005207", "band": "accord_relatif", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E005241__04", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005218", "band": "accord_relatif", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E005241__05", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005214", "band": "accord_relatif", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E005241__06", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005213", "band": "accord_relatif", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E005241__07", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005246", "band": "accord_relatif", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E005241__08", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005196", "band": "accord_relatif", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E005241__09", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005181", "band": "accord_relatif", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E005241__10", "query_id": "emblematica:E005241", "candidate_id": "emblematica:E005264", "band": "accord_relatif", "retrieved_by": {"A": 5, "C": 5}}
+{"pair_id": "emblematica:E009275__01", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009379", "band": "partiel", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E009275__02", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009290", "band": "partiel", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E009275__03", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009621", "band": "partiel", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E009275__04", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009454", "band": "partiel", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E009275__05", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009486", "band": "partiel", "retrieved_by": {"A": 5, "C": 4}}
+{"pair_id": "emblematica:E009275__06", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009626", "band": "partiel", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E009275__07", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009273", "band": "partiel", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E009275__08", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009300", "band": "partiel", "retrieved_by": {"A": 4, "C": 3}}
+{"pair_id": "emblematica:E009275__09", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009271", "band": "partiel", "retrieved_by": {"A": 3}}
+{"pair_id": "emblematica:E009275__10", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009304", "band": "partiel", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E009275__11", "query_id": "emblematica:E009275", "candidate_id": "emblematica:E009317", "band": "partiel", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E009338__01", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E004139", "band": "accord_relatif", "retrieved_by": {"A": 1, "C": 3}}
+{"pair_id": "emblematica:E009338__02", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E009301", "band": "accord_relatif", "retrieved_by": {"A": 2, "C": 1}}
+{"pair_id": "emblematica:E009338__03", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E009600", "band": "accord_relatif", "retrieved_by": {"A": 5, "C": 5}}
+{"pair_id": "emblematica:E009338__04", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E009359", "band": "accord_relatif", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E009338__05", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E009643", "band": "accord_relatif", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E009338__06", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E009302", "band": "accord_relatif", "retrieved_by": {"A": 3, "C": 2}}
+{"pair_id": "emblematica:E009338__07", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E009659", "band": "accord_relatif", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E009338__08", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E009429", "band": "accord_relatif", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E009338__09", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E009325", "band": "accord_relatif", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E009338__10", "query_id": "emblematica:E009338", "candidate_id": "emblematica:E009545", "band": "accord_relatif", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E009364__01", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009521", "band": "partiel", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E009364__02", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009298", "band": "partiel", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E009364__03", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009504", "band": "partiel", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E009364__04", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009308", "band": "partiel", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E009364__05", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009423", "band": "partiel", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E009364__06", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009292", "band": "partiel", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E009364__07", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009309", "band": "partiel", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E009364__08", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009487", "band": "partiel", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E009364__09", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009419", "band": "partiel", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E009364__10", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009525", "band": "partiel", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E009364__11", "query_id": "emblematica:E009364", "candidate_id": "emblematica:E009347", "band": "partiel", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E009374__01", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009479", "band": "accord_relatif", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E009374__02", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009447", "band": "accord_relatif", "retrieved_by": {"A": 5, "C": 5}}
+{"pair_id": "emblematica:E009374__03", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009581", "band": "accord_relatif", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E009374__04", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009553", "band": "accord_relatif", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E009374__05", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009614", "band": "accord_relatif", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E009374__06", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009388", "band": "accord_relatif", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E009374__07", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009536", "band": "accord_relatif", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E009374__08", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009366", "band": "accord_relatif", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E009374__09", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009552", "band": "accord_relatif", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E009374__10", "query_id": "emblematica:E009374", "candidate_id": "emblematica:E009540", "band": "accord_relatif", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E009421__01", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009293", "band": "accord_relatif", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E009421__02", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009554", "band": "accord_relatif", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E009421__03", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009656", "band": "accord_relatif", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E009421__04", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009486", "band": "accord_relatif", "retrieved_by": {"A": 3, "C": 5}}
+{"pair_id": "emblematica:E009421__05", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009585", "band": "accord_relatif", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E009421__06", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009304", "band": "accord_relatif", "retrieved_by": {"A": 4, "C": 3}}
+{"pair_id": "emblematica:E009421__07", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009634", "band": "accord_relatif", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E009421__08", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009372", "band": "accord_relatif", "retrieved_by": {"A": 5, "C": 4}}
+{"pair_id": "emblematica:E009421__09", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009314", "band": "accord_relatif", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E009421__10", "query_id": "emblematica:E009421", "candidate_id": "emblematica:E009374", "band": "accord_relatif", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E010560__01", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E011142", "band": "partiel", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E010560__02", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E011003", "band": "partiel", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E010560__03", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E010553", "band": "partiel", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E010560__04", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E010960", "band": "partiel", "retrieved_by": {"A": 5, "C": 4}}
+{"pair_id": "emblematica:E010560__05", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E010567", "band": "partiel", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E010560__06", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E010559", "band": "partiel", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E010560__07", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E010768", "band": "partiel", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E010560__08", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E011123", "band": "partiel", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E010560__09", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E011004", "band": "partiel", "retrieved_by": {"A": 3, "C": 5}}
+{"pair_id": "emblematica:E010560__10", "query_id": "emblematica:E010560", "candidate_id": "emblematica:E010959", "band": "partiel", "retrieved_by": {"A": 4, "C": 3}}
+{"pair_id": "emblematica:E010913__01", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E011186", "band": "desaccord", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E010913__02", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010880", "band": "desaccord", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E010913__03", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010682", "band": "desaccord", "retrieved_by": {"C": 4}}
+{"pair_id": "emblematica:E010913__04", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010914", "band": "desaccord", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E010913__05", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010969", "band": "desaccord", "retrieved_by": {"A": 4}}
+{"pair_id": "emblematica:E010913__06", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010973", "band": "desaccord", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E010913__07", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010970", "band": "desaccord", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E010913__08", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010984", "band": "desaccord", "retrieved_by": {"A": 3, "C": 2}}
+{"pair_id": "emblematica:E010913__09", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E011133", "band": "desaccord", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E010913__10", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010681", "band": "desaccord", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E010913__11", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010983", "band": "desaccord", "retrieved_by": {"A": 2, "C": 3}}
+{"pair_id": "emblematica:E010913__12", "query_id": "emblematica:E010913", "candidate_id": "emblematica:E010758", "band": "desaccord", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E010953__01", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E011162", "band": "partiel", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E010953__02", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E010954", "band": "partiel", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E010953__03", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E010926", "band": "partiel", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E010953__04", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E011232", "band": "partiel", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E010953__05", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E010807", "band": "partiel", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E010953__06", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E011212", "band": "partiel", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E010953__07", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E010565", "band": "partiel", "retrieved_by": {"A": 2, "C": 3}}
+{"pair_id": "emblematica:E010953__08", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E010615", "band": "partiel", "retrieved_by": {"A": 4, "C": 5}}
+{"pair_id": "emblematica:E010953__09", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E010566", "band": "partiel", "retrieved_by": {"A": 3, "C": 2}}
+{"pair_id": "emblematica:E010953__10", "query_id": "emblematica:E010953", "candidate_id": "emblematica:E010616", "band": "partiel", "retrieved_by": {"A": 5, "C": 4}}
+{"pair_id": "emblematica:E011162__01", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E010566", "band": "partiel", "retrieved_by": {"A": 5, "C": 4}}
+{"pair_id": "emblematica:E011162__02", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E010571", "band": "partiel", "retrieved_by": {"A": 2, "C": 3}}
+{"pair_id": "emblematica:E011162__03", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E010638", "band": "partiel", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E011162__04", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E010572", "band": "partiel", "retrieved_by": {"A": 3, "C": 2}}
+{"pair_id": "emblematica:E011162__05", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E010633", "band": "partiel", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E011162__06", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E010778", "band": "partiel", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E011162__07", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E010565", "band": "partiel", "retrieved_by": {"A": 4, "C": 5}}
+{"pair_id": "emblematica:E011162__08", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E011165", "band": "partiel", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E011162__09", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E011161", "band": "partiel", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E011162__10", "query_id": "emblematica:E011162", "candidate_id": "emblematica:E011219", "band": "partiel", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E011179__01", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E011166", "band": "desaccord", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E011179__02", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E010871", "band": "desaccord", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E011179__03", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E011180", "band": "desaccord", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E011179__04", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E010818", "band": "desaccord", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E011179__05", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E011106", "band": "desaccord", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E011179__06", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E011208", "band": "desaccord", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E011179__07", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E010606", "band": "desaccord", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E011179__08", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E011323", "band": "desaccord", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E011179__09", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E011324", "band": "desaccord", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E011179__10", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E011165", "band": "desaccord", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E011179__11", "query_id": "emblematica:E011179", "candidate_id": "emblematica:E011305", "band": "desaccord", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E017502__01", "query_id": "emblematica:E017502", "candidate_id": "emblematica:E017503", "band": "accord_relatif", "retrieved_by": {"A": 5, "C": 5}}
+{"pair_id": "emblematica:E017502__02", "query_id": "emblematica:E017502", "candidate_id": "emblematica:E017515", "band": "accord_relatif", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E017502__03", "query_id": "emblematica:E017502", "candidate_id": "emblematica:E017524", "band": "accord_relatif", "retrieved_by": {"A": 4, "B": 4, "C": 4}}
+{"pair_id": "emblematica:E017502__04", "query_id": "emblematica:E017502", "candidate_id": "emblematica:E017534", "band": "accord_relatif", "retrieved_by": {"A": 2, "C": 1}}
+{"pair_id": "emblematica:E017502__05", "query_id": "emblematica:E017502", "candidate_id": "emblematica:E017523", "band": "accord_relatif", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E017502__06", "query_id": "emblematica:E017502", "candidate_id": "emblematica:E017527", "band": "accord_relatif", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E017502__07", "query_id": "emblematica:E017502", "candidate_id": "emblematica:E017509", "band": "accord_relatif", "retrieved_by": {"A": 1, "C": 2}}
+{"pair_id": "emblematica:E017502__08", "query_id": "emblematica:E017502", "candidate_id": "emblematica:E017513", "band": "accord_relatif", "retrieved_by": {"A": 3, "B": 2, "C": 3}}
+{"pair_id": "emblematica:E017506__01", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017523", "band": "desaccord", "retrieved_by": {"A": 3, "C": 2}}
+{"pair_id": "emblematica:E017506__02", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017508", "band": "desaccord", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E017506__03", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017530", "band": "desaccord", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E017506__04", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017534", "band": "desaccord", "retrieved_by": {"A": 2, "C": 1}}
+{"pair_id": "emblematica:E017506__05", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017540", "band": "desaccord", "retrieved_by": {"A": 1, "C": 3}}
+{"pair_id": "emblematica:E017506__06", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017527", "band": "desaccord", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E017506__07", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017525", "band": "desaccord", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E017506__08", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017546", "band": "desaccord", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E017506__09", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017528", "band": "desaccord", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E017506__10", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017509", "band": "desaccord", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E017506__11", "query_id": "emblematica:E017506", "candidate_id": "emblematica:E017529", "band": "desaccord", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E018851__01", "query_id": "emblematica:E018851", "candidate_id": "emblematica:E018869", "band": "accord_relatif", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E018851__02", "query_id": "emblematica:E018851", "candidate_id": "emblematica:E018852", "band": "accord_relatif", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E018851__03", "query_id": "emblematica:E018851", "candidate_id": "emblematica:E018853", "band": "accord_relatif", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E018851__04", "query_id": "emblematica:E018851", "candidate_id": "emblematica:E018865", "band": "accord_relatif", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E018851__05", "query_id": "emblematica:E018851", "candidate_id": "emblematica:E018867", "band": "accord_relatif", "retrieved_by": {"A": 5, "B": 1, "C": 5}}
+{"pair_id": "emblematica:E018851__06", "query_id": "emblematica:E018851", "candidate_id": "emblematica:E018861", "band": "accord_relatif", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E018851__07", "query_id": "emblematica:E018851", "candidate_id": "emblematica:E018870", "band": "accord_relatif", "retrieved_by": {"A": 1, "B": 2, "C": 1}}
+{"pair_id": "emblematica:E018851__08", "query_id": "emblematica:E018851", "candidate_id": "emblematica:E018850", "band": "accord_relatif", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E018876__01", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018932", "band": "desaccord", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E018876__02", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018904", "band": "desaccord", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E018876__03", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018901", "band": "desaccord", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E018876__04", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018955", "band": "desaccord", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E018876__05", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018934", "band": "desaccord", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E018876__06", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018921", "band": "desaccord", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E018876__07", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018897", "band": "desaccord", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E018876__08", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018881", "band": "desaccord", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E018876__09", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018883", "band": "desaccord", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E018876__10", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E018970", "band": "desaccord", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E018876__11", "query_id": "emblematica:E018876", "candidate_id": "emblematica:E017526", "band": "desaccord", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E018927__01", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018873", "band": "partiel", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E018927__02", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018899", "band": "partiel", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E018927__03", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018934", "band": "partiel", "retrieved_by": {"B": 2, "C": 5}}
+{"pair_id": "emblematica:E018927__04", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018928", "band": "partiel", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E018927__05", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018901", "band": "partiel", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E018927__06", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018871", "band": "partiel", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E018927__07", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018891", "band": "partiel", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E018927__08", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018932", "band": "partiel", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E018927__09", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018948", "band": "partiel", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E018927__10", "query_id": "emblematica:E018927", "candidate_id": "emblematica:E018895", "band": "partiel", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E018977__01", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E019051", "band": "desaccord", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E018977__02", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E019020", "band": "desaccord", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E018977__03", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E019035", "band": "desaccord", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E018977__04", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E019023", "band": "desaccord", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E018977__05", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E019021", "band": "desaccord", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E018977__06", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E018992", "band": "desaccord", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E018977__07", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E019003", "band": "desaccord", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E018977__08", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E018996", "band": "desaccord", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E018977__09", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E018981", "band": "desaccord", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E018977__10", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E019007", "band": "desaccord", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E018977__11", "query_id": "emblematica:E018977", "candidate_id": "emblematica:E018995", "band": "desaccord", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E020679__01", "query_id": "emblematica:E020679", "candidate_id": "emblematica:E020659", "band": "accord_relatif", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E020679__02", "query_id": "emblematica:E020679", "candidate_id": "emblematica:E020655", "band": "accord_relatif", "retrieved_by": {"A": 3, "C": 3}}
+{"pair_id": "emblematica:E020679__03", "query_id": "emblematica:E020679", "candidate_id": "emblematica:E020720", "band": "accord_relatif", "retrieved_by": {"A": 4, "C": 4}}
+{"pair_id": "emblematica:E020679__04", "query_id": "emblematica:E020679", "candidate_id": "emblematica:E020752", "band": "accord_relatif", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E020679__05", "query_id": "emblematica:E020679", "candidate_id": "emblematica:E020663", "band": "accord_relatif", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E020679__06", "query_id": "emblematica:E020679", "candidate_id": "emblematica:E020678", "band": "accord_relatif", "retrieved_by": {"A": 2, "C": 2}}
+{"pair_id": "emblematica:E020679__07", "query_id": "emblematica:E020679", "candidate_id": "emblematica:E020682", "band": "accord_relatif", "retrieved_by": {"A": 5, "B": 4, "C": 5}}
+{"pair_id": "emblematica:E020679__08", "query_id": "emblematica:E020679", "candidate_id": "emblematica:E020693", "band": "accord_relatif", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E020679__09", "query_id": "emblematica:E020679", "candidate_id": "emblematica:E020667", "band": "accord_relatif", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E029894__01", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029911", "band": "desaccord", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E029894__02", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E010906", "band": "desaccord", "retrieved_by": {"A": 2}}
+{"pair_id": "emblematica:E029894__03", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029860", "band": "desaccord", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E029894__04", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029865", "band": "desaccord", "retrieved_by": {"C": 3}}
+{"pair_id": "emblematica:E029894__05", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029931", "band": "desaccord", "retrieved_by": {"C": 4}}
+{"pair_id": "emblematica:E029894__06", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E028314", "band": "desaccord", "retrieved_by": {"A": 4}}
+{"pair_id": "emblematica:E029894__07", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029875", "band": "desaccord", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E029894__08", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E010887", "band": "desaccord", "retrieved_by": {"A": 5}}
+{"pair_id": "emblematica:E029894__09", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029862", "band": "desaccord", "retrieved_by": {"C": 2}}
+{"pair_id": "emblematica:E029894__10", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029878", "band": "desaccord", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E029894__11", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E010905", "band": "desaccord", "retrieved_by": {"A": 1}}
+{"pair_id": "emblematica:E029894__12", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029968", "band": "desaccord", "retrieved_by": {"A": 3, "C": 1}}
+{"pair_id": "emblematica:E029894__13", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029948", "band": "desaccord", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E029894__14", "query_id": "emblematica:E029894", "candidate_id": "emblematica:E029959", "band": "desaccord", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E029907__01", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029962", "band": "desaccord", "retrieved_by": {"C": 3}}
+{"pair_id": "emblematica:E029907__02", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029961", "band": "desaccord", "retrieved_by": {"C": 4}}
+{"pair_id": "emblematica:E029907__03", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029916", "band": "desaccord", "retrieved_by": {"B": 4}}
+{"pair_id": "emblematica:E029907__04", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029891", "band": "desaccord", "retrieved_by": {"A": 1, "C": 1}}
+{"pair_id": "emblematica:E029907__05", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029958", "band": "desaccord", "retrieved_by": {"A": 5, "C": 2}}
+{"pair_id": "emblematica:E029907__06", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029872", "band": "desaccord", "retrieved_by": {"B": 3}}
+{"pair_id": "emblematica:E029907__07", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E020692", "band": "desaccord", "retrieved_by": {"A": 2}}
+{"pair_id": "emblematica:E029907__08", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029957", "band": "desaccord", "retrieved_by": {"B": 5}}
+{"pair_id": "emblematica:E029907__09", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029922", "band": "desaccord", "retrieved_by": {"B": 2}}
+{"pair_id": "emblematica:E029907__10", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029896", "band": "desaccord", "retrieved_by": {"C": 5}}
+{"pair_id": "emblematica:E029907__11", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E003882", "band": "desaccord", "retrieved_by": {"A": 3}}
+{"pair_id": "emblematica:E029907__12", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E029911", "band": "desaccord", "retrieved_by": {"B": 1}}
+{"pair_id": "emblematica:E029907__13", "query_id": "emblematica:E029907", "candidate_id": "emblematica:E031361", "band": "desaccord", "retrieved_by": {"A": 4}}
