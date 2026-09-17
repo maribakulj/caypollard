@@ -35,11 +35,19 @@ FEATURES = ("area", "elongation", "solidity")
 
 
 def descriptor(region: dict) -> np.ndarray:
-    """A support-invariant description of one region."""
+    """A support-invariant description of one region.
+
+    The contour signature is included when the segmenter recorded one. Moments
+    alone were measured not to carry iconography -- a vocabulary built on them
+    ranks a cross-medium partner at median 151 of 4 587 and still cannot predict
+    a notation better than counting -- and the suspected reason is that four
+    moment invariants conflate shapes a contour profile separates.
+    """
     hu = [float(v) for v in region.get("hu", [0, 0, 0, 0])]
     # Moment invariants span many orders of magnitude; a signed log keeps their
     # sign and brings them onto a scale a Euclidean metric can use.
     hu = [float(np.sign(v) * np.log1p(abs(v) * 1e4)) for v in hu]
+    radial = [float(v) for v in region.get("radial", ())]
     return np.asarray(
         [
             np.log1p(float(region["area"]) * 100.0),
@@ -47,6 +55,7 @@ def descriptor(region: dict) -> np.ndarray:
             float(region["solidity"]),
             1.0 if region.get("tone") == "sombre" else 0.0,
             *hu,
+            *radial,
         ],
         dtype=np.float32,
     )

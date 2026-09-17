@@ -12,8 +12,11 @@ gradient asks only "where does one region end", which is a question a print and 
 painting answer the same way. Each region is then described by properties that
 survive a change of support:
 
-* **shape** -- area, elongation, solidity, the first Hu moments, all
-  scale- and rotation-normalised;
+* **shape** -- area, elongation, solidity, the first Hu moments, and a
+  twenty-four bin radial signature of the contour, all scale- and
+  rotation-normalised. The signature is there because the moments alone were
+  measured not to carry iconography: a representation built on them ranks a
+  cross-medium partner well and cannot predict a notation better than counting;
 * **position** -- the centroid in a normalised frame, so relations between
   regions can be read off later;
 * **tone** -- whether the region is darker or lighter than the page, which is
@@ -38,6 +41,37 @@ from PIL import Image
 from scipy import ndimage
 
 from caypollard.provenance import read_jsonl
+
+
+def radial_signature(mask: np.ndarray, *, bins: int = 24) -> list[float]:
+    """Distance from the centroid to the region's edge, by angle.
+
+    Moment invariants summarise a shape in four numbers and are known to
+    discriminate poorly: an anchor and a cloud can share them. A radial signature
+    keeps the contour's profile -- where the shape reaches out and where it is
+    hollow -- at a fixed cost, and is made rotation-comparable by starting at the
+    longest radius and scale-free by dividing through by the mean.
+    """
+    ys, xs = np.nonzero(mask)
+    if xs.size < 12:
+        return [0.0] * bins
+    cx, cy = xs.mean(), ys.mean()
+    dx, dy = xs - cx, ys - cy
+    radius = np.hypot(dx, dy)
+    angle = (np.arctan2(dy, dx) + 2 * math.pi) % (2 * math.pi)
+    index = np.minimum((angle / (2 * math.pi) * bins).astype(int), bins - 1)
+    profile = np.zeros(bins, dtype=float)
+    for slot in range(bins):
+        selected = radius[index == slot]
+        profile[slot] = float(selected.max()) if selected.size else 0.0
+    mean = profile.mean()
+    if mean <= 0:
+        return [0.0] * bins
+    profile = profile / mean
+    # Rotation is a nuisance here, not a signal: a tilted anchor is an anchor.
+    # Starting the profile at its longest radius removes it.
+    shift = int(np.argmax(profile))
+    return [round(float(v), 4) for v in np.roll(profile, -shift)]
 
 
 def hu_moments(mask: np.ndarray) -> list[float]:
@@ -101,6 +135,7 @@ def segment(path: Path, *, side: int, min_area: float, max_regions: int) -> list
                     "extent_x": round(width, 4),
                     "extent_y": round(height, 4),
                     "hu": [round(v, 6) if math.isfinite(v) else 0.0 for v in hu_moments(mask)],
+                    "radial": radial_signature(mask),
                 }
             )
     regions.sort(key=lambda region: -region["area"])

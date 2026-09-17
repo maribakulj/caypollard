@@ -280,6 +280,7 @@ ae9c24f589c0df03335f7ba36a8d13302bd7430d34476d2e7368df1bc39c57ce     3079871  re
 464f6aa5d3f282f6dd2f044ec6e948318190195f2df3646f9902f75e01f0bf55        1175  versioned  results/shapes/composite-coherence.json
 d07a0984052c943c50a9bf3b94471faa4bf9ab7c049619750392fa1feb7c9787        1119  versioned  results/shapes/cross-medium-groups-r3.json
 a1b0e0d490ef7e02995065df5be7914b55bcaaf3a7f9ff657beda634e14f4526        1120  versioned  results/shapes/cross-medium-groups-r6.json
+81f6d55a3456246b5a50f0fa07936c84f23a586bdf308eb5b341623997db8513        1122  versioned  results/shapes/cross-medium-radial.json
 3f285df152d673d4af60b7b766c48e26513b87248ac840cec74695e13ae87396        1122  versioned  results/shapes/cross-medium-v1024.json
 d265a492fa3f09f8f1f127f7dd26e6f193b8619cde69518ea24ee0cf3f48ed33        1121  versioned  results/shapes/cross-medium-v128.json
 9042262cdb3216b3afa0ed07c25bc53092e16d1658f32e043fe3bb28ba833225        1121  versioned  results/shapes/cross-medium-v256.json
@@ -289,6 +290,8 @@ e6dc2c556c674a13a82473acec108c6dc3e67a07c2bce699c9aba8a408875847        1122  ve
 0250b7791bee28c20e7284e44dd3dae1546500821562994f23792f836a7187b0        1121  versioned  results/shapes/cross-medium-v64.json
 ae6807f241ed4efc6f69abc442edff61a0a977266b31a4f7abb1b4a12ddb4a4d        1080  versioned  results/shapes/labels-composites-k1.json
 573c7f11990fc46de952449f14d668ddfe3f11a8c9031197e5851e7bce575d5f        1083  versioned  results/shapes/labels-composites.json
+26ae8c97bad5b73623bc37c377fd565d89864e803a1c151320c2fd2191b5eca5        1053  versioned  results/shapes/labels-dinov2-control.json
+a396c472cb5d57f8aea1deffc757e2e08af6f588cd709bb01f7d03e399f90b60        1084  versioned  results/shapes/labels-radial.json
 679b363752132a4659f3dfbe8b2ba4c33731a554aaf05edd9bb882362745c7f3        1121  versioned  results/shapes/record-forme_+_palette___.json
 4682b53a62bf0c81d04ab298af6c3db113d3f8eea11fb8d094cb2e5d1d24aaf5        1121  versioned  results/shapes/record-forme_+_relations_.json
 3411f68dc6966bc9b97e4e83c058c6dfd8f4400cc4b8e8dd0f442a0391fc9a7d        1122  versioned  results/shapes/record-forme_seule_______.json
