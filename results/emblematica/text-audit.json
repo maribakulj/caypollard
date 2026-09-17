@@ -1,0 +1,27 @@
+{
+  "xml_dir": "data/raw/emblematica/xml",
+  "counts": {
+    "records": 31041,
+    "with_iconclass": 25463,
+    "with_motto": 30402,
+    "with_subscriptio": 455,
+    "subscriptio_with_iconclass": 1,
+    "with_pictura_description": 5178
+  },
+  "median_length_characters": {
+    "motto": 38.0,
+    "subscriptio": 99.0,
+    "pictura_description": 60.0
+  },
+  "subscriptio_and_iconclass_on_the_same_record": {
+    "n": 1,
+    "ids": [
+      "E050205"
+    ]
+  },
+  "hosts_of_subscriptio_records_without_iconclass": {
+    "diglib.hab.de": 422,
+    "collections.carli.illinois.edu": 32
+  },
+  "reading": "A subscriptio can only be joined to graded relevance through an Iconclass annotation on the same record. Where that intersection is near-empty, the interpretive text cannot serve as ground truth for H3 in this corpus."
+}

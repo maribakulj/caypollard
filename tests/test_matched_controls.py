@@ -95,3 +95,31 @@ def test_bootstrap_interval_brackets_the_point_estimate() -> None:
 def test_tolerance_must_be_positive() -> None:
     with pytest.raises(ValueError, match="tolerance"):
         match_controls(PAIRS, RECORDS, similarity, pool=list(SIMILARITIES), tolerance=0.0)
+
+
+def test_controls_are_balanced_around_the_target_similarity() -> None:
+    # Hard positives sit in the low tail, so a symmetric caliper offers many more
+    # candidates above the target than below it. Drawing uniformly would make the
+    # control reliably more similar to the query than the positive is, and the
+    # visual AUC would land near 0.40 where the design requires 0.50.
+    records = {"q": {"id": "q", "collection": "A", "iconclass": ["11H"]}}
+    similarities = {"pos": 0.50}
+    for index in range(3):
+        records[f"low{index}"] = {"id": f"low{index}", "collection": "A", "iconclass": ["99Z"]}
+        similarities[f"low{index}"] = 0.49
+    for index in range(30):
+        records[f"high{index}"] = {"id": f"high{index}", "collection": "A", "iconclass": ["99Z"]}
+        similarities[f"high{index}"] = 0.51
+    records["pos"] = {"id": "pos", "collection": "A", "iconclass": ["11H"]}
+
+    def sim(query: str, candidates):
+        return np.asarray([similarities[item] for item in candidates], dtype=float)
+
+    pairs = [
+        {"query_id": "q", "candidate_id": "pos", "pair_class": "hard_positive"} for _ in range(20)
+    ]
+    matched, _ = match_controls(pairs, records, sim, pool=list(similarities), tolerance=0.02)
+    differences = [t.control_similarity - t.positive_similarity for t in matched]
+    below = sum(1 for d in differences if d <= 0)
+    assert len(matched) == 20
+    assert abs(below - len(matched) / 2) <= 1

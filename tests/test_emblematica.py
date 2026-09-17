@@ -175,3 +175,14 @@ def test_real_notations_survive_alongside_a_template_comment():
       <iconclass><skos:notation>31A233</skos:notation></iconclass>
     </pictura></emblem>"""
     assert parse_emblem_xml(mixed, emblem_id="E2").iconclass == ("31A233",)
+
+
+def test_character_references_are_resolved_in_transcriptions() -> None:
+    xml = (
+        "<emblem:emblem><emblem:motto><emblem:transcription>"
+        "<tei:p>Deine Recht wil ich halten/ verla&#223; mich nimmermehr</tei:p>"
+        "</emblem:transcription></emblem:motto></emblem:emblem>"
+    )
+    record = parse_emblem_xml(xml, emblem_id="E1")
+    # Left encoded, "&#223;" reaches a text model as five literal characters.
+    assert record.motto == "Deine Recht wil ich halten/ verlaß mich nimmermehr"

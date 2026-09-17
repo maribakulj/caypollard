@@ -22,6 +22,7 @@ from __future__ import annotations
 import re
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
+from html import unescape
 from typing import Any
 
 from .bsb_metadata import VolumeMetadata, slug
@@ -51,9 +52,16 @@ _PICTURA_BOOK = re.compile(r"emblemimages\.library\.illinois\.edu/(\w+)/")
 
 
 def _plain(fragment: str | None) -> str | None:
+    """Strip markup and resolve character references to real characters.
+
+    Transcriptions arrive with numeric entities for every non-ASCII letter --
+    ``verla&#223;`` for *verlaß*, ``angez&#252;ndet`` for *angezündet*. Left
+    encoded they survive into any text model as literal ampersand sequences, so
+    the entity is resolved here, once, at the point where markup is removed.
+    """
     if not fragment:
         return None
-    text = re.sub(r"\s+", " ", _TAGS.sub(" ", fragment)).strip()
+    text = re.sub(r"\s+", " ", unescape(_TAGS.sub(" ", fragment))).strip()
     return text or None
 
 

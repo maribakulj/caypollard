@@ -30,6 +30,11 @@ vision = [
   "open-clip-torch>=2.26",
   "pillow>=10.4",
 ]
+text = [
+  "torch>=2.4",
+  "transformers>=4.44",
+  "sentencepiece>=0.2",
+]
 retrieval = [
   "faiss-cpu>=1.8",
 ]

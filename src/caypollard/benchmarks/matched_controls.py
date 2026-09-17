@@ -101,6 +101,7 @@ def match_controls(
         return {str(label) for label in records[item].get(label_key, [])}
 
     generator = np.random.default_rng(seed)
+    drawn = {"below": 0, "above": 0}
     matched: list[MatchedTriple] = []
     skipped = {"unknown_item": 0, "empty_stratum": 0, "no_eligible_control": 0}
     for pair in pairs:
@@ -128,7 +129,22 @@ def match_controls(
         if not eligible:
             skipped["no_eligible_control"] += 1
             continue
-        control, control_score = eligible[int(generator.integers(0, len(eligible)))]
+        # Drawing uniformly from the caliper biases the control upward. Hard
+        # positives sit in the low tail of the similarity distribution, so within
+        # a symmetric window there are far more candidates above the target than
+        # below it, and the control ends up reliably more similar to the query
+        # than the positive is -- which shows up as a visual AUC near 0.40 where
+        # the design requires 0.50. So the side of the target is balanced across
+        # the whole set: whichever side has been drawn from less often so far is
+        # preferred while both remain available.
+        below = [item for item in eligible if item[1] <= target]
+        above = [item for item in eligible if item[1] > target]
+        if below and above:
+            side = below if drawn["below"] <= drawn["above"] else above
+        else:
+            side = below or above
+        control, control_score = side[int(generator.integers(0, len(side)))]
+        drawn["below" if control_score <= target else "above"] += 1
         matched.append(
             MatchedTriple(
                 query_id=query,
