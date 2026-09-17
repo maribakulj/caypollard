@@ -1,0 +1,154 @@
+{
+  "url": "https://ministere-culture.s3.sbg.io.cloud.ovh.net/POP/joconde.csv",
+  "file_bytes": 1224052704,
+  "sampled_fractions": [
+    0.05,
+    0.2,
+    0.35,
+    0.5,
+    0.65,
+    0.8,
+    0.95
+  ],
+  "slice_bytes": 4000000,
+  "records_sampled": 22957,
+  "columns": 68,
+  "has_image_url_column": false,
+  "image_flag": {
+    "non": 4708,
+    "oui": 18249
+  },
+  "records_with_a_subject": 10584,
+  "subject_coverage": 0.461,
+  "distinct_subject_terms": 12801,
+  "subject_term_occurrences": 78700,
+  "terms_occurring_once": 7465,
+  "share_of_terms_occurring_once": 0.5832,
+  "terms_with_facet_syntax": 1080,
+  "distinct_head_terms": 12279,
+  "most_common_terms": [
+    [
+      "en buste",
+      1845
+    ],
+    [
+      "homme",
+      1406
+    ],
+    [
+      "de profil",
+      1277
+    ],
+    [
+      "en pied",
+      1168
+    ],
+    [
+      "femme",
+      1054
+    ],
+    [
+      "avers)",
+      1001
+    ],
+    [
+      "revers)",
+      997
+    ],
+    [
+      "portrait (empereur romain : couronne",
+      845
+    ],
+    [
+      "draperie",
+      779
+    ],
+    [
+      "soldat",
+      776
+    ],
+    [
+      "assis",
+      637
+    ],
+    [
+      "allégorie",
+      601
+    ],
+    [
+      "fusil",
+      539
+    ],
+    [
+      "de trois-quarts",
+      478
+    ],
+    [
+      "de face",
+      417
+    ]
+  ],
+  "most_common_head_terms": [
+    [
+      "en buste",
+      1845
+    ],
+    [
+      "homme",
+      1421
+    ],
+    [
+      "de profil",
+      1277
+    ],
+    [
+      "en pied",
+      1168
+    ],
+    [
+      "femme",
+      1062
+    ],
+    [
+      "avers)",
+      1001
+    ],
+    [
+      "revers)",
+      997
+    ],
+    [
+      "portrait (empereur romain : couronne",
+      845
+    ],
+    [
+      "draperie",
+      779
+    ],
+    [
+      "soldat",
+      776
+    ],
+    [
+      "assis",
+      637
+    ],
+    [
+      "allégorie",
+      611
+    ],
+    [
+      "fusil",
+      539
+    ],
+    [
+      "de trois-quarts",
+      478
+    ],
+    [
+      "paysage",
+      459
+    ]
+  ],
+  "divergence": "Sujet_Represente is a free-text faceted phrase -- a head term with parenthesised qualifiers -- not a classification. There is no parent relation to walk, so graded hierarchical relevance, this project's primary endpoint, is undefined on it. Exact match degenerates too: most terms occur once in the sample."
+}

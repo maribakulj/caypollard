@@ -554,10 +554,19 @@ Position the retrieval work against multimodal cultural-heritage KG literature a
 
 ### Tasks
 
-- [ ] Reproduce a relevant published WJoconde baseline where feasible.
-- [ ] Map the repository's representation/fusion interface onto WJoconde.
-- [ ] Separate retrieval claims from KG-completion claims.
-- [ ] Report where methods transfer and where task definitions diverge.
+- [x] Reproduce a relevant published WJoconde baseline where feasible — it is **not** feasible.
+      The paper's abstract page links no dataset, so the baseline cannot be reproduced from
+      materials this pipeline can reach. Recorded rather than left open.
+- [x] Map the repository's representation/fusion interface onto WJoconde: the interface ports,
+      and the Rijksmuseum ingestion proves it in a day. The **relevance definition** does not.
+- [x] Separate retrieval claims from KG-completion claims. See
+      [`POSITIONING.md`](docs/POSITIONING.md).
+- [x] Report where methods transfer and where task definitions diverge, with measurement rather
+      than assertion: `scripts/audit_joconde.py` samples 22 957 records across seven byte ranges
+      of the 1.2 GB national export. `Sujet_Represente` is a free-text faceted phrase, not a
+      classification — 58.3% of its 12 801 terms occur exactly once, and no column carries an
+      image URL. Graded hierarchical relevance, the project's primary endpoint, is undefined on
+      it.
 
 ### Exit criterion
 

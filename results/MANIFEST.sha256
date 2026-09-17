@@ -151,6 +151,7 @@ d25c7231310369769fb296671edb9af470665a428d80ef4bafb9fe188da5ec4b      336828  ve
 e6d7f7a0e94766313f6772d7d903cf9b6fb98316b0e3e67556cef1178b47422c       28880  versioned  results/hard-pairs-fusion/iconclass-clip-vit-b32.json
 335a4667db81b8b3b1e37ee5b3ecbe0175d25a0f30bdcf847da6221b1efe9726       28690  versioned  results/hard-pairs-fusion/iconclass-dinov2-base.json
 6be6c8524d4a9d895092b76f26521ff0c9e50dda4db73f50f15579cacded7987       28617  versioned  results/hard-pairs-fusion/iconclass-siglip-base-224.json
+3ad5d7896a3e28dfbe97c12324da01233181f8a4a4fd3895f6f2ad8acd4b9c61        2313  versioned  results/joconde/schema-audit.json
 69205dd8d746fefad24c1cbd74b300c043dda793299b0b639358a1c42ca5f978        3047  versioned  results/metrics/iconclass_phase1_smoke.json
 3202a81b7eddeb2365a0d3e626b63eabfe7deceb6ee8b15730f078b72546fa3d         645  versioned  results/metrics/wikidata-alignment-iconclass.json
 cb40b985c8d1ca524d735716cc939ba969bcbd4e67269a8b77c029877e7d1cb5       26397  versioned  results/rank-changes/emblematica-clip-vit-b32.json
