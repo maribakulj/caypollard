@@ -1,0 +1,57 @@
+{
+  "calibration": {
+    "close_quantile": 0.95,
+    "distant_quantile": 0.5,
+    "method": "validation-random-pair-quantiles",
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "seed": 42,
+    "thresholds": {
+      "semantic_close_min": 0.5,
+      "semantic_distant_max": 0.2,
+      "visual_close_min": 0.8985726654529571,
+      "visual_distant_max": 0.765942245721817
+    },
+    "validation_id_count": 1303,
+    "visual_similarity_mean": 0.7701103001356124,
+    "visual_similarity_std": 0.0753416779143176
+  },
+  "hard_pairs_file": "results/sensitivity/strip/hardpairs-clip-vit-b32.json",
+  "hard_pairs_sha256": "7caac34e10ec1560fb913e747a7426ada59c66882f006a2373143264dc650308",
+  "mining": {
+    "available_counts": {
+      "easy_negative": 38819,
+      "easy_positive": 7724,
+      "hard_negative": 10515,
+      "hard_positive": 197439
+    },
+    "backend": "numpy",
+    "candidate_count": 1714,
+    "max_per_class": 250,
+    "method": "pre-fusion-hard-pair-mining",
+    "query_count": 1714,
+    "random_distant_per_query": 50,
+    "seed": 42,
+    "selected_counts": {
+      "easy_negative": 250,
+      "easy_positive": 250,
+      "hard_negative": 250,
+      "hard_positive": 250
+    },
+    "semantic_max_distance": 1,
+    "thresholds": {
+      "semantic_close_min": 0.5,
+      "semantic_distant_max": 0.2,
+      "visual_close_min": 0.8985726654529571,
+      "visual_distant_max": 0.765942245721817
+    },
+    "visual_top_k": 50
+  },
+  "protocol": "protocol-v0.3",
+  "thresholds": {
+    "semantic_close_min": 0.5,
+    "semantic_distant_max": 0.2,
+    "visual_close_min": 0.8985726654529571,
+    "visual_distant_max": 0.765942245721817
+  }
+}

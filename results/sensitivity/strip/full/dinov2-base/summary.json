@@ -1,0 +1,161 @@
+{
+  "bootstrap_intervals": {
+    "map": {
+      "ci_high": 0.20272219271882108,
+      "ci_low": 0.1931481370625521,
+      "confidence": 0.95,
+      "mean": 0.19778084437552929,
+      "n_queries": 8156,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_ndcg_at_10": {
+      "ci_high": 0.5422401936603164,
+      "ci_low": 0.5281878019269017,
+      "confidence": 0.95,
+      "mean": 0.5352130392979524,
+      "n_queries": 8783,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_1": {
+      "ci_high": 0.009628122868982458,
+      "ci_low": 0.007264063384199973,
+      "confidence": 0.95,
+      "mean": 0.008384024802853796,
+      "n_queries": 8156,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_10": {
+      "ci_high": 0.035895328392424666,
+      "ci_low": 0.031897620101759866,
+      "confidence": 0.95,
+      "mean": 0.03385390261231938,
+      "n_queries": 8156,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_5": {
+      "ci_high": 0.02432263562734722,
+      "ci_low": 0.020839743746144442,
+      "confidence": 0.95,
+      "mean": 0.022527679895294597,
+      "n_queries": 8156,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mrr": {
+      "ci_high": 0.5569468656438089,
+      "ci_low": 0.5383392335075824,
+      "confidence": 0.95,
+      "mean": 0.5475522941796698,
+      "n_queries": 8156,
+      "n_resamples": 10000,
+      "seed": 42
+    }
+  },
+  "candidate_split": "test",
+  "embedding_file": "data/derived/embeddings/dinov2-base.npz",
+  "embedding_metadata": {
+    "created_at": "2026-09-15T10:12:50.636209+00:00",
+    "device": "mps",
+    "dimension": 768,
+    "embedding_file": "dinov2-base.npz",
+    "family": "dinov2",
+    "image_dir": "data/raw/iconclass-testset",
+    "l2_normalized": true,
+    "manifest_file": "manifest.jsonl",
+    "manifest_sha256": "47cd452f680de6d1bd6b2818be23a61b52bcfb8105a2f787f1dfb1e05e07ab13",
+    "model_id": "facebook/dinov2-base",
+    "n_items": 87744,
+    "normalization": "L2",
+    "pooling": "CLS token",
+    "processor_class": "BitImageProcessor",
+    "processor_config": {
+      "crop_size": {
+        "height": 224,
+        "width": 224
+      },
+      "do_center_crop": true,
+      "do_convert_rgb": true,
+      "do_normalize": true,
+      "do_rescale": true,
+      "do_resize": true,
+      "image_mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "image_processor_type": "BitImageProcessor",
+      "image_std": [
+        0.229,
+        0.224,
+        0.225
+      ],
+      "resample": 3,
+      "rescale_factor": 0.00392156862745098,
+      "size": {
+        "shortest_edge": 256
+      }
+    },
+    "requested_revision": null,
+    "resolved_revision": "f9e44c814b77203eaa57a6bdbbd535f21ede1415",
+    "torch_version": "2.14.0",
+    "transformers_version": "5.17.0"
+  },
+  "exact_coverage": 0.9163015391529041,
+  "exact_evaluable_queries": 8156,
+  "hierarchical_coverage": 0.9867430625772385,
+  "hierarchical_evaluable_queries": 8783,
+  "manifest_file": "data/derived/iconclass-v0.1/manifest.jsonl",
+  "manifest_sha256": "47cd452f680de6d1bd6b2818be23a61b52bcfb8105a2f787f1dfb1e05e07ab13",
+  "map": 0.19778084437552929,
+  "mean_ndcg_at_10": 0.5352130392979524,
+  "mean_recall_at_1": 0.008384024802853796,
+  "mean_recall_at_10": 0.033853902612319374,
+  "mean_recall_at_5": 0.022527679895294597,
+  "mrr": 0.5475522941796698,
+  "n_candidates": 8901,
+  "n_queries": 8901,
+  "ndcg_k": 10,
+  "notations_file": "data/raw/iconclass/notations.txt",
+  "notations_sha256": "3802b42ed433fc1dafab1cd7a88dc2192b8238f78ae194041c4ff3459212f185",
+  "query_limit": null,
+  "query_split": "test",
+  "ranking_backend": "numpy",
+  "strata": {
+    "hierarchy_depth": {
+      "deep_6_plus": {
+        "mean_ndcg_at_10": 0.42587864867931907,
+        "n_queries": 1254
+      },
+      "middle_3_5": {
+        "mean_ndcg_at_10": 0.5496821158990155,
+        "n_queries": 7011
+      },
+      "shallow_0_2": {
+        "mean_ndcg_at_10": 0.6040598149460472,
+        "n_queries": 518
+      }
+    },
+    "label_frequency": {
+      "frequent_gt_100": {
+        "mean_ndcg_at_10": 0.7798398683507077,
+        "n_queries": 2241
+      },
+      "medium_11_100": {
+        "mean_ndcg_at_10": 0.5014240401529074,
+        "n_queries": 3232
+      },
+      "rare_2_10": {
+        "mean_ndcg_at_10": 0.3784248692402978,
+        "n_queries": 2364
+      },
+      "singleton": {
+        "mean_ndcg_at_10": 0.4629556982259191,
+        "n_queries": 946
+      }
+    }
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "bootstrap_intervals": {
+    "map": {
+      "ci_high": 0.24467710459211897,
+      "ci_low": 0.21582493867992705,
+      "confidence": 0.95,
+      "mean": 0.23025128821964433,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_ndcg_at_10": {
+      "ci_high": 0.5869215263341361,
+      "ci_low": 0.5611388382319948,
+      "confidence": 0.95,
+      "mean": 0.5739231572132959,
+      "n_queries": 1706,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_1": {
+      "ci_high": 0.025779653726008017,
+      "ci_low": 0.017352203319973506,
+      "confidence": 0.95,
+      "mean": 0.02131343335514628,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_10": {
+      "ci_high": 0.11487584865037762,
+      "ci_low": 0.09775131551381909,
+      "confidence": 0.95,
+      "mean": 0.10601978020109025,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_5": {
+      "ci_high": 0.07476954215983816,
+      "ci_low": 0.060350904460201096,
+      "confidence": 0.95,
+      "mean": 0.06727836984620297,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mrr": {
+      "ci_high": 0.5454239135713831,
+      "ci_low": 0.49793672335985045,
+      "confidence": 0.95,
+      "mean": 0.5219310547400352,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    }
+  },
+  "candidate_split": "test",
+  "embedding_file": "data/derived/g1-subcorpus/clip-vit-b32.npz",
+  "embedding_metadata": {
+    "created_at": "2026-09-15T10:33:50.138496+00:00",
+    "device": "mps",
+    "dimension": 512,
+    "embedding_file": "clip-vit-b32.npz",
+    "family": "clip",
+    "image_dir": "data/raw/iconclass-testset",
+    "l2_normalized": true,
+    "manifest_file": "manifest.jsonl",
+    "manifest_sha256": "47cd452f680de6d1bd6b2818be23a61b52bcfb8105a2f787f1dfb1e05e07ab13",
+    "model_id": "openai/clip-vit-base-patch32",
+    "n_items": 1714,
+    "normalization": "L2",
+    "pooling": "model.get_image_features",
+    "processor_class": "CLIPImageProcessor",
+    "processor_config": {
+      "crop_size": {
+        "height": 224,
+        "width": 224
+      },
+      "do_center_crop": true,
+      "do_convert_rgb": true,
+      "do_normalize": true,
+      "do_rescale": true,
+      "do_resize": true,
+      "image_mean": [
+        0.48145466,
+        0.4578275,
+        0.40821073
+      ],
+      "image_processor_type": "CLIPImageProcessor",
+      "image_std": [
+        0.26862954,
+        0.26130258,
+        0.27577711
+      ],
+      "resample": 3,
+      "rescale_factor": 0.00392156862745098,
+      "size": {
+        "shortest_edge": 224
+      }
+    },
+    "requested_revision": null,
+    "resolved_revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "restricted_to": "test \u2229 G1",
+    "torch_version": "2.14.0",
+    "transformers_version": "5.17.0"
+  },
+  "exact_coverage": 0.7677946324387398,
+  "exact_evaluable_queries": 1316,
+  "hierarchical_coverage": 0.9953325554259043,
+  "hierarchical_evaluable_queries": 1706,
+  "manifest_file": "data/derived/g1-subcorpus/manifest.jsonl",
+  "manifest_sha256": "99c0cd757c7e0edcd3c644765465580ef05d23717923332fde6ba6d836d14833",
+  "map": 0.2302512882196443,
+  "mean_ndcg_at_10": 0.5739231572132959,
+  "mean_recall_at_1": 0.02131343335514628,
+  "mean_recall_at_10": 0.10601978020109026,
+  "mean_recall_at_5": 0.06727836984620299,
+  "mrr": 0.5219310547400352,
+  "n_candidates": 1714,
+  "n_queries": 1714,
+  "ndcg_k": 10,
+  "notations_file": "data/raw/iconclass/notations.txt",
+  "notations_sha256": "3802b42ed433fc1dafab1cd7a88dc2192b8238f78ae194041c4ff3459212f185",
+  "query_limit": null,
+  "query_split": "test",
+  "ranking_backend": "numpy",
+  "strata": {
+    "hierarchy_depth": {
+      "deep_6_plus": {
+        "mean_ndcg_at_10": 0.4451907750888442,
+        "n_queries": 204
+      },
+      "middle_3_5": {
+        "mean_ndcg_at_10": 0.5649785115776317,
+        "n_queries": 1394
+      },
+      "shallow_0_2": {
+        "mean_ndcg_at_10": 0.9325365087827785,
+        "n_queries": 108
+      }
+    },
+    "label_frequency": {
+      "frequent_gt_100": {
+        "mean_ndcg_at_10": 0.9194709280321159,
+        "n_queries": 101
+      },
+      "medium_11_100": {
+        "mean_ndcg_at_10": 0.8078781124050048,
+        "n_queries": 114
+      },
+      "rare_2_10": {
+        "mean_ndcg_at_10": 0.5079022857006316,
+        "n_queries": 848
+      },
+      "singleton": {
+        "mean_ndcg_at_10": 0.5652365464795225,
+        "n_queries": 643
+      }
+    }
+  }
+}

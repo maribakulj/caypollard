@@ -1,0 +1,149 @@
+{
+  "bootstrap_intervals": {
+    "map": {
+      "ci_high": 0.3673120306091023,
+      "ci_low": 0.34377668771397496,
+      "confidence": 0.95,
+      "mean": 0.3554273710651685,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_ndcg_at_10": {
+      "ci_high": 0.7132734506936836,
+      "ci_low": 0.6936658837880665,
+      "confidence": 0.95,
+      "mean": 0.7035738017207596,
+      "n_queries": 2804,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_1": {
+      "ci_high": 0.0025071842079581893,
+      "ci_low": 0.002054653529027164,
+      "confidence": 0.95,
+      "mean": 0.002270187991841279,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_10": {
+      "ci_high": 0.022095958576253377,
+      "ci_low": 0.019634495341037377,
+      "confidence": 0.95,
+      "mean": 0.020843616782087068,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_5": {
+      "ci_high": 0.0113142121026176,
+      "ci_low": 0.00999380423192578,
+      "confidence": 0.95,
+      "mean": 0.010645262303370005,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mrr": {
+      "ci_high": 0.637251100079779,
+      "ci_low": 0.6058533002635057,
+      "confidence": 0.95,
+      "mean": 0.6214675004954031,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    }
+  },
+  "candidate_split": "test",
+  "embedding_file": "data/derived/emblematica-eval/embeddings/g-book.npz",
+  "embedding_metadata": {
+    "dimension": 128,
+    "embedding_file": "g-book.npz",
+    "explained_variance_ratio_sum": 0.19801168143749237,
+    "family": "graph",
+    "include_inverse": true,
+    "l2_normalized": true,
+    "mask_entities_file": null,
+    "masked_relations": [],
+    "method": "rdf2vec-style-ppmi-svd",
+    "n_items": 5889,
+    "n_relations": 2,
+    "n_triples": 50662,
+    "n_walks": 257270,
+    "ppmi_nonzero": 1118982,
+    "projection": {
+      "masked_triples": 0,
+      "n_entities": 25727,
+      "n_relations": 2,
+      "n_triples": 50662,
+      "projection_id": "G-book",
+      "sha256": "11585d77de73a950a4db2f1c2bef26f6e2db1a01a9c02274111b333818d745c8"
+    },
+    "relation_aware": true,
+    "requested_dimension": 128,
+    "restricted_to": "emblematica validation+test",
+    "seed": 42,
+    "source_triples": "data/derived/emblematica-v0.1/variants/book.tsv",
+    "triples_sha256": "11585d77de73a950a4db2f1c2bef26f6e2db1a01a9c02274111b333818d745c8",
+    "vocabulary_size": 25731,
+    "walk_length": 8,
+    "walks_per_entity": 10,
+    "warning": "predicate-aware RDF2Vec-style control using PPMI-SVD, not the canonical RDF2Vec Word2Vec implementation",
+    "window": 5
+  },
+  "exact_coverage": 0.9657631954350927,
+  "exact_evaluable_queries": 2708,
+  "hierarchical_coverage": 1.0,
+  "hierarchical_evaluable_queries": 2804,
+  "manifest_file": "data/derived/emblematica-eval/manifest.jsonl",
+  "manifest_sha256": "15e70b829bed4ef3fb9929ce7cde6c1d8dc6dcaa8f176ac93262b71efa8905f5",
+  "map": 0.3554273710651685,
+  "mean_ndcg_at_10": 0.7035738017207596,
+  "mean_recall_at_1": 0.002270187991841279,
+  "mean_recall_at_10": 0.020843616782087068,
+  "mean_recall_at_5": 0.010645262303370007,
+  "mrr": 0.6214675004954031,
+  "n_candidates": 2804,
+  "n_queries": 2804,
+  "ndcg_k": 10,
+  "notations_file": "data/raw/iconclass/notations.txt",
+  "notations_sha256": "3802b42ed433fc1dafab1cd7a88dc2192b8238f78ae194041c4ff3459212f185",
+  "query_limit": null,
+  "query_split": "test",
+  "ranking_backend": "numpy",
+  "strata": {
+    "hierarchy_depth": {
+      "deep_6_plus": {
+        "mean_ndcg_at_10": 0.5738809967594433,
+        "n_queries": 83
+      },
+      "middle_3_5": {
+        "mean_ndcg_at_10": 0.6984080954101931,
+        "n_queries": 2612
+      },
+      "shallow_0_2": {
+        "mean_ndcg_at_10": 0.9261180925004733,
+        "n_queries": 109
+      }
+    },
+    "label_frequency": {
+      "frequent_gt_100": {
+        "mean_ndcg_at_10": 0.9475728721006093,
+        "n_queries": 84
+      },
+      "medium_11_100": {
+        "mean_ndcg_at_10": 0.7769117135833346,
+        "n_queries": 815
+      },
+      "rare_2_10": {
+        "mean_ndcg_at_10": 0.6610006754998885,
+        "n_queries": 1588
+      },
+      "singleton": {
+        "mean_ndcg_at_10": 0.663636276038858,
+        "n_queries": 317
+      }
+    }
+  }
+}

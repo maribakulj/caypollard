@@ -1,0 +1,24 @@
+{
+  "alpha": 0.75,
+  "dimension": 640,
+  "embedding_file": "selected-fusion.npz",
+  "family": "multimodal",
+  "graph_bounds": {
+    "high": 1.0000001192092896,
+    "low": -0.20302939414978027,
+    "method": "validation_random_pair_minmax"
+  },
+  "graph_source": "rdf2vec-style-ppmi-svd",
+  "l2_normalized": false,
+  "method": "validation-minmax-late-fusion",
+  "n_items": 5889,
+  "protocol": "protocol-v0.3",
+  "ranking_equivalence": "weighted concatenated cosine",
+  "selected_on": "validation",
+  "visual_bounds": {
+    "high": 1.0000001192092896,
+    "low": 0.486534059047699,
+    "method": "validation_random_pair_minmax"
+  },
+  "visual_source": "openai/clip-vit-base-patch32"
+}

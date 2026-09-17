@@ -1,0 +1,61 @@
+{
+  "pairs_file": "results/stratified/iconclass-clip-vit-b32.json",
+  "n_pairs": 1000,
+  "composition": {
+    "easy_negative": {
+      "n": 250,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 0,
+      "top_strata": [
+        "bsb+bsb:224",
+        "uiuc+uiuc:9",
+        "embstma+embstma:8"
+      ]
+    },
+    "easy_positive": {
+      "n": 250,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 215,
+      "top_strata": [
+        "bsb+bsb:191",
+        "gri271934+gri271934:50",
+        "norris90200+norris90200:4"
+      ]
+    },
+    "hard_negative": {
+      "n": 250,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 0,
+      "top_strata": [
+        "bsb+bsb:249",
+        "76g14+76g14:1"
+      ]
+    },
+    "hard_positive": {
+      "n": 250,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 205,
+      "top_strata": [
+        "uiuc+uiuc:147",
+        "embhab+embhab:56",
+        "embstma+embstma:26"
+      ]
+    }
+  },
+  "auc": {
+    "graphe": {
+      "H2_hard_positive_vs_easy_negative": 0.3486,
+      "H3_hard_positive_vs_hard_negative": 0.098024,
+      "control_easy_positive_vs_easy_negative": 0.958632
+    },
+    "visuel": {
+      "H2_hard_positive_vs_easy_negative": 0.474496,
+      "H3_hard_positive_vs_hard_negative": 0.0,
+      "control_easy_positive_vs_easy_negative": 1.0
+    }
+  }
+}

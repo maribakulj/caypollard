@@ -1,0 +1,64 @@
+{
+  "pairs_file": "results/stratified/emblematica-clip-vit-b32.json",
+  "n_pairs": 774,
+  "composition": {
+    "easy_negative": {
+      "n": 123,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 0,
+      "top_strata": [
+        "HAB+HAB:68",
+        "Glasgow+Glasgow:34",
+        "Illinois+Illinois:21"
+      ]
+    },
+    "easy_positive": {
+      "n": 250,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 244,
+      "top_strata": [
+        "HAB+HAB:250"
+      ]
+    },
+    "hard_negative": {
+      "n": 151,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 0,
+      "top_strata": [
+        "Glasgow+Glasgow:76",
+        "HAB+HAB:73",
+        "Illinois+Illinois:2"
+      ]
+    },
+    "hard_positive": {
+      "n": 250,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 236,
+      "top_strata": [
+        "HAB+HAB:203",
+        "Illinois+Illinois:47"
+      ]
+    }
+  },
+  "auc": {
+    "graphe": {
+      "H2_hard_positive_vs_easy_negative": 0.6054959349593496,
+      "H3_hard_positive_vs_hard_negative": 0.3660927152317881,
+      "control_easy_positive_vs_easy_negative": 0.949560975609756
+    },
+    "graphe_book": {
+      "H2_hard_positive_vs_easy_negative": 0.3737886178861789,
+      "H3_hard_positive_vs_hard_negative": 0.23690066225165562,
+      "control_easy_positive_vs_easy_negative": 0.9605691056910569
+    },
+    "visuel": {
+      "H2_hard_positive_vs_easy_negative": 0.0,
+      "H3_hard_positive_vs_hard_negative": 0.0,
+      "control_easy_positive_vs_easy_negative": 1.0
+    }
+  }
+}

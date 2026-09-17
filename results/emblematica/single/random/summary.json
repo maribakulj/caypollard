@@ -1,0 +1,123 @@
+{
+  "bootstrap_intervals": {
+    "map": {
+      "ci_high": 0.13544201151397797,
+      "ci_low": 0.1271212034279056,
+      "confidence": 0.95,
+      "mean": 0.13118431568055774,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_ndcg_at_10": {
+      "ci_high": 0.4365609054688261,
+      "ci_low": 0.4257852509949966,
+      "confidence": 0.95,
+      "mean": 0.4311926614681888,
+      "n_queries": 2804,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_1": {
+      "ci_high": 0.0005072810863303826,
+      "ci_low": 0.00028505084951111674,
+      "confidence": 0.95,
+      "mean": 0.0003737464115298606,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_10": {
+      "ci_high": 0.0035456300471293973,
+      "ci_low": 0.0030901540003927083,
+      "confidence": 0.95,
+      "mean": 0.003307735882130891,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_5": {
+      "ci_high": 0.0018479695635445462,
+      "ci_low": 0.0015130319892361598,
+      "confidence": 0.95,
+      "mean": 0.0016663309343338331,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mrr": {
+      "ci_high": 0.2797297691894951,
+      "ci_low": 0.25551528096123344,
+      "confidence": 0.95,
+      "mean": 0.26765432267884526,
+      "n_queries": 2708,
+      "n_resamples": 10000,
+      "seed": 42
+    }
+  },
+  "candidate_split": "test",
+  "embedding_file": "data/derived/emblematica-eval/embeddings/random.npz",
+  "embedding_metadata": {
+    "dimension": 128,
+    "embedding_file": "random.npz",
+    "family": "control",
+    "l2_normalized": true,
+    "model_id": "random-gaussian",
+    "n_items": 5889,
+    "seed": 42
+  },
+  "exact_coverage": 0.9657631954350927,
+  "exact_evaluable_queries": 2708,
+  "hierarchical_coverage": 1.0,
+  "hierarchical_evaluable_queries": 2804,
+  "manifest_file": "data/derived/emblematica-eval/manifest.jsonl",
+  "manifest_sha256": "15e70b829bed4ef3fb9929ce7cde6c1d8dc6dcaa8f176ac93262b71efa8905f5",
+  "map": 0.13118431568055774,
+  "mean_ndcg_at_10": 0.43119266146818874,
+  "mean_recall_at_1": 0.00037374641152986064,
+  "mean_recall_at_10": 0.0033077358821308914,
+  "mean_recall_at_5": 0.0016663309343338333,
+  "mrr": 0.26765432267884526,
+  "n_candidates": 2804,
+  "n_queries": 2804,
+  "ndcg_k": 10,
+  "notations_file": "data/raw/iconclass/notations.txt",
+  "notations_sha256": "3802b42ed433fc1dafab1cd7a88dc2192b8238f78ae194041c4ff3459212f185",
+  "query_limit": null,
+  "query_split": "test",
+  "ranking_backend": "numpy",
+  "strata": {
+    "hierarchy_depth": {
+      "deep_6_plus": {
+        "mean_ndcg_at_10": 0.3671821628471179,
+        "n_queries": 83
+      },
+      "middle_3_5": {
+        "mean_ndcg_at_10": 0.4182464458199689,
+        "n_queries": 2612
+      },
+      "shallow_0_2": {
+        "mean_ndcg_at_10": 0.7901686858599245,
+        "n_queries": 109
+      }
+    },
+    "label_frequency": {
+      "frequent_gt_100": {
+        "mean_ndcg_at_10": 0.3223828755820879,
+        "n_queries": 84
+      },
+      "medium_11_100": {
+        "mean_ndcg_at_10": 0.4509973166895239,
+        "n_queries": 815
+      },
+      "rare_2_10": {
+        "mean_ndcg_at_10": 0.4072259909007864,
+        "n_queries": 1588
+      },
+      "singleton": {
+        "mean_ndcg_at_10": 0.5291683739920982,
+        "n_queries": 317
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "emblematica-dinov2-base": {
+    "n": 175,
+    "auc": 0.4485,
+    "ci": [
+      0.3873,
+      0.5098
+    ],
+    "verdict": "NON CONCLUANT"
+  },
+  "emblematica-clip-vit-b32": {
+    "n": 140,
+    "auc": 0.633,
+    "ci": [
+      0.5666,
+      0.6966
+    ],
+    "verdict": "au-dessus du hasard"
+  },
+  "iconclass-dinov2-base": {
+    "n": 250,
+    "auc": 0.6912,
+    "ci": [
+      0.6461,
+      0.7359
+    ],
+    "verdict": "au-dessus du hasard"
+  },
+  "iconclass-clip-vit-b32": {
+    "n": 249,
+    "auc": 0.5822,
+    "ci": [
+      0.5321,
+      0.6334
+    ],
+    "verdict": "au-dessus du hasard"
+  }
+}

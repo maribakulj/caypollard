@@ -1,0 +1,124 @@
+{
+  "bootstrap_intervals": {
+    "map": {
+      "ci_high": 0.028118094588432237,
+      "ci_low": 0.025492059343910904,
+      "confidence": 0.95,
+      "mean": 0.026813014930677448,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_ndcg_at_10": {
+      "ci_high": 0.3390088105631983,
+      "ci_low": 0.3155543585369117,
+      "confidence": 0.95,
+      "mean": 0.3273232722478638,
+      "n_queries": 1706,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_1": {
+      "ci_high": 0.001076805797221436,
+      "ci_low": 0.00031170322719526876,
+      "confidence": 0.95,
+      "mean": 0.0006352789490122609,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_10": {
+      "ci_high": 0.009275198929079647,
+      "ci_low": 0.004733798918964593,
+      "confidence": 0.95,
+      "mean": 0.006718896015233919,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_5": {
+      "ci_high": 0.003575596747535979,
+      "ci_low": 0.0020736419974402447,
+      "confidence": 0.95,
+      "mean": 0.0027682028194484253,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mrr": {
+      "ci_high": 0.08817430719996275,
+      "ci_low": 0.07011219137037099,
+      "confidence": 0.95,
+      "mean": 0.07883947818764435,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    }
+  },
+  "candidate_split": "test",
+  "embedding_file": "data/derived/g1-subcorpus/random.npz",
+  "embedding_metadata": {
+    "dimension": 128,
+    "embedding_file": "random.npz",
+    "family": "control",
+    "l2_normalized": true,
+    "model_id": "random-gaussian",
+    "n_items": 1714,
+    "note": "chance baseline through the identical ranking and metric path",
+    "seed": 42
+  },
+  "exact_coverage": 0.7677946324387398,
+  "exact_evaluable_queries": 1316,
+  "hierarchical_coverage": 0.9953325554259043,
+  "hierarchical_evaluable_queries": 1706,
+  "manifest_file": "data/derived/g1-subcorpus/manifest.jsonl",
+  "manifest_sha256": "99c0cd757c7e0edcd3c644765465580ef05d23717923332fde6ba6d836d14833",
+  "map": 0.026813014930677448,
+  "mean_ndcg_at_10": 0.32732327224786373,
+  "mean_recall_at_1": 0.0006352789490122609,
+  "mean_recall_at_10": 0.006718896015233919,
+  "mean_recall_at_5": 0.0027682028194484253,
+  "mrr": 0.07883947818764436,
+  "n_candidates": 1714,
+  "n_queries": 1714,
+  "ndcg_k": 10,
+  "notations_file": "data/raw/iconclass/notations.txt",
+  "notations_sha256": "3802b42ed433fc1dafab1cd7a88dc2192b8238f78ae194041c4ff3459212f185",
+  "query_limit": null,
+  "query_split": "test",
+  "ranking_backend": "numpy",
+  "strata": {
+    "hierarchy_depth": {
+      "deep_6_plus": {
+        "mean_ndcg_at_10": 0.23921980442218013,
+        "n_queries": 193
+      },
+      "middle_3_5": {
+        "mean_ndcg_at_10": 0.33536441555013435,
+        "n_queries": 1373
+      },
+      "shallow_0_2": {
+        "mean_ndcg_at_10": 0.3699195546502879,
+        "n_queries": 140
+      }
+    },
+    "label_frequency": {
+      "frequent_gt_100": {
+        "mean_ndcg_at_10": 0.1589530985000676,
+        "n_queries": 101
+      },
+      "medium_11_100": {
+        "mean_ndcg_at_10": 0.13389501607722123,
+        "n_queries": 114
+      },
+      "rare_2_10": {
+        "mean_ndcg_at_10": 0.3720304897249892,
+        "n_queries": 848
+      },
+      "singleton": {
+        "mean_ndcg_at_10": 0.3291031918923089,
+        "n_queries": 643
+      }
+    }
+  }
+}

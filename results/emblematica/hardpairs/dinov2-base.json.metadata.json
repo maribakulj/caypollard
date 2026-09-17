@@ -1,0 +1,57 @@
+{
+  "calibration": {
+    "close_quantile": 0.95,
+    "distant_quantile": 0.5,
+    "method": "validation-random-pair-quantiles",
+    "sample_pairs_requested": 20000,
+    "sample_pairs_used": 20000,
+    "seed": 42,
+    "thresholds": {
+      "semantic_close_min": 0.5,
+      "semantic_distant_max": 0.2,
+      "visual_close_min": 0.6891484200954436,
+      "visual_distant_max": 0.4400393217802048
+    },
+    "validation_id_count": 3085,
+    "visual_similarity_mean": 0.4464185608224943,
+    "visual_similarity_std": 0.1422862372098213
+  },
+  "hard_pairs_file": "results/emblematica/hardpairs/dinov2-base.json",
+  "hard_pairs_sha256": "bd6bec9c3b54a7814b45d212d5c7919436dd7a4a5bdb5b4e2a75f9ae5b098726",
+  "mining": {
+    "available_counts": {
+      "easy_negative": 8870,
+      "easy_positive": 43495,
+      "hard_negative": 1279,
+      "hard_positive": 145082
+    },
+    "backend": "numpy",
+    "candidate_count": 2804,
+    "max_per_class": 250,
+    "method": "pre-fusion-hard-pair-mining",
+    "query_count": 2804,
+    "random_distant_per_query": 50,
+    "seed": 42,
+    "selected_counts": {
+      "easy_negative": 250,
+      "easy_positive": 250,
+      "hard_negative": 250,
+      "hard_positive": 250
+    },
+    "semantic_max_distance": 1,
+    "thresholds": {
+      "semantic_close_min": 0.5,
+      "semantic_distant_max": 0.2,
+      "visual_close_min": 0.6891484200954436,
+      "visual_distant_max": 0.4400393217802048
+    },
+    "visual_top_k": 50
+  },
+  "protocol": "protocol-v0.3",
+  "thresholds": {
+    "semantic_close_min": 0.5,
+    "semantic_distant_max": 0.2,
+    "visual_close_min": 0.6891484200954436,
+    "visual_distant_max": 0.4400393217802048
+  }
+}

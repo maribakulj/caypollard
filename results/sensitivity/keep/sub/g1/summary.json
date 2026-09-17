@@ -1,0 +1,149 @@
+{
+  "bootstrap_intervals": {
+    "map": {
+      "ci_high": 0.1880900374207998,
+      "ci_low": 0.16277200226577368,
+      "confidence": 0.95,
+      "mean": 0.1754774071696521,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_ndcg_at_10": {
+      "ci_high": 0.5384462693674633,
+      "ci_low": 0.5093322062211657,
+      "confidence": 0.95,
+      "mean": 0.5238480801612094,
+      "n_queries": 1706,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_1": {
+      "ci_high": 0.009134132244572544,
+      "ci_low": 0.006473983494924154,
+      "confidence": 0.95,
+      "mean": 0.0077276704311398025,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_10": {
+      "ci_high": 0.08195413771264778,
+      "ci_low": 0.06845702331354546,
+      "confidence": 0.95,
+      "mean": 0.0749504240905512,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_5": {
+      "ci_high": 0.04481752746127449,
+      "ci_low": 0.03494096533873127,
+      "confidence": 0.95,
+      "mean": 0.03963777737055023,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mrr": {
+      "ci_high": 0.41936519525957555,
+      "ci_low": 0.37287999256235504,
+      "confidence": 0.95,
+      "mean": 0.396236932463835,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    }
+  },
+  "candidate_split": "test",
+  "embedding_file": "data/derived/g1-subcorpus/g1.npz",
+  "embedding_metadata": {
+    "dimension": 128,
+    "embedding_file": "g1.npz",
+    "explained_variance_ratio_sum": 0.2895224392414093,
+    "family": "graph",
+    "include_inverse": true,
+    "l2_normalized": true,
+    "mask_entities_file": null,
+    "masked_relations": [],
+    "method": "rdf2vec-style-ppmi-svd",
+    "n_items": 1714,
+    "n_relations": 2,
+    "n_triples": 28044,
+    "n_walks": 158910,
+    "ppmi_nonzero": 434859,
+    "projection": {
+      "masked_triples": 0,
+      "n_entities": 15891,
+      "n_relations": 2,
+      "n_triples": 28044,
+      "projection_id": "G1",
+      "sha256": "4ebdbcfd316cb6ec0f8b7accf7c989853ecae343de82040e65542b288c8e1e65"
+    },
+    "relation_aware": true,
+    "requested_dimension": 128,
+    "restricted_to": "test \u2229 G1",
+    "seed": 42,
+    "source_triples": "data/derived/graph-g1/context_triples.tsv",
+    "triples_sha256": "4ebdbcfd316cb6ec0f8b7accf7c989853ecae343de82040e65542b288c8e1e65",
+    "vocabulary_size": 15895,
+    "walk_length": 8,
+    "walks_per_entity": 10,
+    "warning": "predicate-aware RDF2Vec-style control using PPMI-SVD, not the canonical RDF2Vec Word2Vec implementation",
+    "window": 5
+  },
+  "exact_coverage": 0.7677946324387398,
+  "exact_evaluable_queries": 1316,
+  "hierarchical_coverage": 0.9953325554259043,
+  "hierarchical_evaluable_queries": 1706,
+  "manifest_file": "data/derived/g1-subcorpus/manifest.jsonl",
+  "manifest_sha256": "99c0cd757c7e0edcd3c644765465580ef05d23717923332fde6ba6d836d14833",
+  "map": 0.17547740716965207,
+  "mean_ndcg_at_10": 0.5238480801612093,
+  "mean_recall_at_1": 0.007727670431139803,
+  "mean_recall_at_10": 0.0749504240905512,
+  "mean_recall_at_5": 0.039637777370550235,
+  "mrr": 0.39623693246383496,
+  "n_candidates": 1714,
+  "n_queries": 1714,
+  "ndcg_k": 10,
+  "notations_file": "data/raw/iconclass/notations.txt",
+  "notations_sha256": "3802b42ed433fc1dafab1cd7a88dc2192b8238f78ae194041c4ff3459212f185",
+  "query_limit": null,
+  "query_split": "test",
+  "ranking_backend": "numpy",
+  "strata": {
+    "hierarchy_depth": {
+      "deep_6_plus": {
+        "mean_ndcg_at_10": 0.3597019109330748,
+        "n_queries": 204
+      },
+      "middle_3_5": {
+        "mean_ndcg_at_10": 0.5169745658625376,
+        "n_queries": 1394
+      },
+      "shallow_0_2": {
+        "mean_ndcg_at_10": 0.9226212047435038,
+        "n_queries": 108
+      }
+    },
+    "label_frequency": {
+      "frequent_gt_100": {
+        "mean_ndcg_at_10": 0.9869412836068631,
+        "n_queries": 101
+      },
+      "medium_11_100": {
+        "mean_ndcg_at_10": 0.798783693645913,
+        "n_queries": 114
+      },
+      "rare_2_10": {
+        "mean_ndcg_at_10": 0.4351294174844599,
+        "n_queries": 848
+      },
+      "singleton": {
+        "mean_ndcg_at_10": 0.5193665132321523,
+        "n_queries": 643
+      }
+    }
+  }
+}

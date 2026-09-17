@@ -1,0 +1,65 @@
+{
+  "pairs_file": "results/stratified/emblematica-dinov2-base.json",
+  "n_pairs": 844,
+  "composition": {
+    "easy_negative": {
+      "n": 204,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 1,
+      "top_strata": [
+        "Glasgow+Glasgow:130",
+        "HAB+HAB:53",
+        "Illinois+Illinois:21"
+      ]
+    },
+    "easy_positive": {
+      "n": 250,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 241,
+      "top_strata": [
+        "HAB+HAB:250"
+      ]
+    },
+    "hard_negative": {
+      "n": 140,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 1,
+      "top_strata": [
+        "HAB+HAB:77",
+        "Illinois+Illinois:42",
+        "Glasgow+Glasgow:21"
+      ]
+    },
+    "hard_positive": {
+      "n": 250,
+      "cross_stratum": 0,
+      "cross_stratum_fraction": 0.0,
+      "pairs_sharing_an_exact_notation": 193,
+      "top_strata": [
+        "Illinois+Illinois:192",
+        "HAB+HAB:38",
+        "Glasgow+Glasgow:20"
+      ]
+    }
+  },
+  "auc": {
+    "graphe": {
+      "H2_hard_positive_vs_easy_negative": 0.33684313725490195,
+      "H3_hard_positive_vs_hard_negative": 0.3356857142857143,
+      "control_easy_positive_vs_easy_negative": 0.8006862745098039
+    },
+    "graphe_book": {
+      "H2_hard_positive_vs_easy_negative": 0.406656862745098,
+      "H3_hard_positive_vs_hard_negative": 0.21195714285714284,
+      "control_easy_positive_vs_easy_negative": 0.8457352941176471
+    },
+    "visuel": {
+      "H2_hard_positive_vs_easy_negative": 0.0018627450980392157,
+      "H3_hard_positive_vs_hard_negative": 0.0,
+      "control_easy_positive_vs_easy_negative": 1.0
+    }
+  }
+}
