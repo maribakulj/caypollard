@@ -18,7 +18,17 @@ attributable rather than assumed:
     squaring removes a cue before any edge detection is credited with it.
 ``edges``
     The above, then a Gaussian-smoothed Sobel magnitude, contrast-normalised.
-    Tone, paper colour and ink density go; contour stays.
+    Tone, paper colour and ink density go; contour stays -- and so, it turns out,
+    does the hatching that identifies an engraving.
+``shape``
+    Reduced to a coarse grid before being restored to size, which averages
+    hatching and brushwork out of existence while keeping gross composition.
+    An engraving is already made of lines and a painting is not, so any
+    rendering that preserves line structure preserves the medium; this one
+    deliberately cannot.
+``silhouette``
+    The above, then thresholded at its own median into black and white
+    regions. The closest cheap approximation to an abstract vector drawing.
 
 The referee is a linear probe on the resulting embeddings: if it can still name
 the holding library, the rendering has not done its job, whatever it looks like.
@@ -37,9 +47,24 @@ from scipy import ndimage
 from caypollard.provenance import read_jsonl
 
 
-def render(path: Path, *, mode: str, side: int, sigma: float) -> Image.Image:
+def render(path: Path, *, mode: str, side: int, sigma: float, coarse: int = 48) -> Image.Image:
     image = Image.open(path).convert("L").resize((side, side), Image.LANCZOS)
     array = np.asarray(image, dtype=np.float32) / 255.0
+    if mode in {"shape", "silhouette"}:
+        small = Image.fromarray((array * 255).astype(np.uint8)).resize(
+            (coarse, coarse), Image.LANCZOS
+        )
+        array = np.asarray(small, dtype=np.float32) / 255.0
+        # Local contrast normalisation: a dark paper and a bright one should give
+        # the same silhouette, and only the relative values carry the shape.
+        low, high = np.percentile(array, 2.0), np.percentile(array, 98.0)
+        array = np.clip((array - low) / (high - low), 0.0, 1.0) if high > low else array
+        if mode == "silhouette":
+            array = (array > np.median(array)).astype(np.float32)
+        array = np.asarray(
+            Image.fromarray((array * 255).astype(np.uint8)).resize((side, side), Image.BILINEAR),
+            dtype=np.float32,
+        ) / 255.0
     if mode == "edges":
         smoothed = ndimage.gaussian_filter(array, sigma=sigma)
         gx = ndimage.sobel(smoothed, axis=1)
@@ -58,7 +83,15 @@ def main() -> None:
     parser.add_argument("manifest")
     parser.add_argument("image_dir")
     parser.add_argument("output_dir")
-    parser.add_argument("--mode", choices=("gray", "edges"), required=True)
+    parser.add_argument(
+        "--mode", choices=("gray", "edges", "shape", "silhouette"), required=True
+    )
+    parser.add_argument(
+        "--coarse",
+        type=int,
+        default=48,
+        help="Grid the image is reduced to before restoration, for shape modes",
+    )
     parser.add_argument("--side", type=int, default=448)
     parser.add_argument("--sigma", type=float, default=1.2)
     parser.add_argument("--limit", type=int)
@@ -83,7 +116,9 @@ def main() -> None:
             skipped += 1
             continue
         try:
-            render(origin, mode=args.mode, side=args.side, sigma=args.sigma).save(
+            render(
+                origin, mode=args.mode, side=args.side, sigma=args.sigma, coarse=args.coarse
+            ).save(
                 target, format="JPEG", quality=92
             )
             written += 1
