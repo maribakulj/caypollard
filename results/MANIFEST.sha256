@@ -54,6 +54,7 @@ cdaed928f385569bc6717bed6c949eb9ba169b5950ca1abd9f1d99647277c45d    10075598  re
 843f6aa0eec6d815903a7dfacf52a68b9f5fb66fcbf3f03170af684cb16b6a0b     4240814  rebuild    results/fusion/siglip-base-224/fusion-evaluation.json
 f817d045e4ab7517f49ddcc314c7a30ef6d23c1edf53ce56066fc8d601ade146    10084387  rebuild    results/fusion/siglip-base-224/selected-fusion.npz
 88d162acd0db93e221b9e8f8fa76319042a1d8af4cdec349483e258f19194b40         685  versioned  results/fusion/siglip-base-224/selected-fusion.npz.metadata.json
+b3df2e76f9c0ef5e8b95d72859fe8cfec2a431038cedd52298aef67c332dfb20        7060  versioned  results/fusion-variants/emblematica-clip-vit-b32.json
 5ff1f2f54071e1b5cd7a5c58e802f07b205063e31aa78785be186aa779eb200f        5884  versioned  results/fusion-variants/emblematica-dinov2-base.json
 f87d2aaddf45af1f81d8fea82dc3e41971a68c8ba9ecfe66ddc2841579daf46e        4196  versioned  results/fusion-variants/emblematica-dinov2-text.json
 94f3de70cb4ac4cecfa3bb140c99484053415a057f0d8ed8e376cc80667a1247        4199  versioned  results/fusion-variants/emblematica-graph-text.json
