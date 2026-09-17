@@ -126,7 +126,8 @@ Measure what visual models already capture before attributing any gain to graph 
 - [x] Add optional exact FAISS `IndexFlatIP` as a scaling backend while retaining NumPy exact cosine as the reference implementation.
 - [x] Implement standard retrieval evaluation (hierarchical nDCG@10, Recall@1/5/10, MRR, mAP); full-model result tables remain pending.
 - [x] Implement fixed depth/frequency stratification; populate it with real encoder runs once the full corpus is reconstructed.
-- [ ] Collect representative successes and failures.
+- [x] Collect representative successes and failures (`scripts/analyse_rank_changes.py` persists
+      the largest gains and the largest regressions with the evidence for each).
 
 ### Planned notebooks
 
@@ -303,8 +304,12 @@ Evaluate a predeclared alpha grid and tune only on validation data.
 - [x] Implement preregistered alpha sweep `[0, .25, .5, .75, 1]` with validation nDCG@10 selection and conservative tie-break.
 - [x] Implement fixed visual candidate-pool reranking with validation-calibrated modality scores.
 - [x] Compare overall performance against visual baselines; hard-pair comparison pending the frozen artifact.
-- [ ] Quantify how often graph information changes a top-K result.
-- [ ] Produce explanations for changed rankings.
+- [x] Quantify how often graph information changes a top-K result: 51-67% of queries, 1.2-3.4
+      items swapped, improvements outnumbering regressions 1.6 to 2.4 to one.
+- [x] Produce explanations for changed rankings: each promoted item is classified by what it
+      shares with the query. On Emblematica 55-63% share an Iconclass notation as well as a
+      bibliographic attribute; on Iconclass only 21-26% do and about half share nothing but
+      the volume. Regressions have one mechanism, a volume plateau flooding the top-10.
 
 ### Planned notebook
 
@@ -416,6 +421,10 @@ so it is ingested as a second benchmark rather than as an illustration. See
 - [x] Construct minimal RDF-style graph: `part_of`, `adjacent_to`, `created_by`,
       `published_at`, `published_in`, `instance_of`.
 - [ ] Map concepts to existing vocabularies when stable mappings exist.
+- [x] Establish whether the emblem's interpretive verse can serve as ground truth for H3: it
+      cannot. 455 of 31 041 records carry a transcribed subscriptio and 454 of those carry no
+      Iconclass annotation, so verse and ground truth coexist on one record. Expert judgement
+      (phase 10) is the only remaining route.
 - [ ] Compare visual, graph, and fused neighbours for emblem queries.
 - [x] Establish that cross-volume paths exist at all: 272 of 368 emblem books (74%) share a
       creator with another book and 254 (69%) share a place, against 0% reachable in the

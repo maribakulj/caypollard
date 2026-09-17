@@ -99,6 +99,49 @@ scored against Iconclass relevance, which is independent of format, so the gain 
 artifact of it; but no claim about *why* the modalities are complementary should rest on the
 aggregate alone.
 
+## What the gain is made of
+
+A mean gain of +0.03 is compatible with a nudge on every query or a rescue of a few. Comparing
+the visual and fused top-10 of every test query, under the identical relevance path, separates
+them. The `linear` rule reproduces the published nDCG exactly through this second code path,
+which is the check that nothing else changed.
+
+| corpus | encoder | top-10 changed | items swapped | improved | degraded | unchanged | top decile of the gain |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Iconclass | DINOv2 | 66.5% | 3.37 | 697 | 286 | 723 | 35.7% |
+| Iconclass | CLIP | 54.4% | 2.23 | 577 | 243 | 886 | 35.4% |
+| Iconclass | SigLIP | 51.2% | 2.31 | 560 | 225 | 921 | 35.1% |
+| Emblematica | DINOv2 | 64.9% | 1.89 | 939 | 542 | 1 323 | 39.7% |
+| Emblematica | CLIP | 58.8% | 1.20 | 808 | 509 | 1 487 | 45.1% |
+| Emblematica | SigLIP | 62.8% | 1.43 | 852 | 565 | 1 387 | 42.9% |
+
+The gain is broad rather than concentrated — a third to a half of it comes from the top decile of
+improving queries, and a third of queries are untouched — and promoted items are more relevant
+than the items they displace in every condition, by 0.11 to 0.16 of graded relevance.
+
+**What a promoted item shares with its query is the substantive finding**, because it separates
+an iconographic retrieval from the generic contextual one.
+
+| corpus | encoder | notation and context | context only | notation only | nothing |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Emblematica | DINOv2 | 54.7% | 45.2% | — | 0.1% |
+| Emblematica | CLIP | 62.7% | 37.2% | — | 0.1% |
+| Emblematica | SigLIP | 63.3% | 36.6% | — | 0.1% |
+| Iconclass | DINOv2 | 25.8% | 54.0% | 1.4% | 18.8% |
+| Iconclass | CLIP | 20.6% | 50.6% | 2.6% | 26.2% |
+| Iconclass | SigLIP | 24.5% | 45.9% | 2.5% | 27.1% |
+
+On Emblematica the majority of promotions share an Iconclass notation with the query as well as a
+bibliographic attribute, so the gain there is largely iconographic. On Iconclass only a fifth to
+a quarter do, and roughly half share nothing but the volume — the generic contextual gain
+described earlier, now measured rather than inferred.
+
+**Regressions have a single mechanism.** In the worst case on Emblematica, nDCG falls 0.43
+because the graph promotes five plates of the query's own volume at graded relevance 0.14 to
+0.25 and evicts a cross-volume emblem at relevance 1.0 that shares notation `46C215`. That is
+flooding by a saturated context score, and it is the same behaviour that makes hard positives
+difficult: the items H2 is about are exactly the ones a volume plateau displaces.
+
 ## H2 and H3 — not supported, after one confound was removed
 
 Three explanations were eliminated in turn.
@@ -211,8 +254,28 @@ being scanned book pages.
 
 So the consistently wrong-signed H3 figures reported above measure the graph's relation to
 scanning format, not to iconographic contradiction. Testing H3 as stated would require an
-annotation that separates a motif from its allegorical reading — Iconclass keys, emblem
-subscriptiones, or expert judgement — none of which this ground truth provides.
+annotation that separates a motif from its allegorical reading.
+
+**The emblem's own interpretive verse was the obvious candidate, and it is not available.** The
+subscriptio states what the picture means, which is precisely the layer Iconclass omits. Counting
+it across all 31 041 SPINE records (`scripts/audit_emblem_text.py`):
+
+| field | records carrying it | median length |
+| --- | ---: | ---: |
+| motto | 30 402 | 38 characters |
+| pictura description | 5 178 | 60 characters |
+| **subscriptio** | **455** | 99 characters |
+| Iconclass annotation | 25 463 | — |
+| **subscriptio *and* Iconclass on the same record** | **1** | — |
+
+454 of the 455 transcribed subscriptiones carry no Iconclass annotation at all — 422 of them from
+Wolfenbüttel, 32 from Illinois. The verse and the ground truth therefore cannot be joined: there
+is one record on which both exist. Whatever the literary value of those 455 transcriptions, they
+cannot supply graded relevance for a hard-negative test, so this route is closed by the corpus
+rather than by the method. **Expert judgement (phase 10) is the only remaining route to H3.**
+
+Mottoes do not substitute. They are short, formulaic, and at most 11 of 250 hard-positive pairs
+share a single content word.
 
 ## Limits on these results
 

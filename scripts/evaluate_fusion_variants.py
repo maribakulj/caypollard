@@ -58,6 +58,14 @@ def main() -> None:
     parser.add_argument("--test-split", default="test")
     parser.add_argument("--sample-pairs", type=int, default=20_000)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--restrict-to",
+        action="append",
+        default=[],
+        help="Further restrict evaluation to ids present in this table, repeatable. "
+             "Needed to compare a modality with partial coverage against one with "
+             "full coverage: without it each pair is scored on a different query set.",
+    )
     parser.add_argument("--label", default="")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
@@ -72,6 +80,10 @@ def main() -> None:
         )
 
     common = set(visual.ids).intersection(graph.ids)
+    for path in args.restrict_to:
+        common &= set(load_embedding_table(path).ids)
+    if len(common) < 3:
+        raise SystemExit("restriction left fewer than three aligned items")
     validation_ids = sorted(
         str(record["id"])
         for record in records
@@ -111,6 +123,33 @@ def main() -> None:
     )
 
     results = []
+    for name, alpha in (("visuel seul", 1.0), ("graphe seul", 0.0)):
+        summary, queries = evaluate_iconclass_retrieval(
+            restricted,
+            aligned,
+            parents,
+            query_split=args.test_split,
+            candidate_split=args.test_split,
+            score_matrix_fn=make_scorer("linear", alpha),
+        )
+        ndcgs = [row.ndcg_at_10 for row in queries if row.ndcg_at_10 is not None]
+        results.append(
+            {
+                "rule": name,
+                "selected_alpha": alpha,
+                "validation_sweep": [],
+                "test": {
+                    "mean_ndcg_at_10": summary.get("mean_ndcg_at_10"),
+                    "map": summary.get("map"),
+                    "mrr": summary.get("mrr"),
+                    "mean_recall_at_10": summary.get("mean_recall_at_10"),
+                    "n_queries": summary.get("n_queries"),
+                    "ndcg_ci95": bootstrap_mean_ci(ndcgs, seed=args.seed),
+                },
+            }
+        )
+        print(f"{name:12s} {' ':11s} nDCG@10={summary.get('mean_ndcg_at_10'):.4f}", flush=True)
+
     for rule in args.rules:
         validation_runs = []
         for alpha in args.alphas:
