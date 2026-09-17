@@ -61,6 +61,7 @@ e09054a014e7c6e09823e721c55201685a03103b04f292d93189a62cbf126055     3182211  re
 c6d3feea3898a5146d23f7f5db4a513ca22c9991182916818cf61aea7466d172      202238  versioned  results/alignment-eval/mlp-seed44/per_query.csv
 c8dd17af2c7cb04be5813227c146c1efa7d3ec14704febc3c279a4fd18d33a8b     3181813  rebuild    results/alignment-eval/mlp-seed44/per_query.jsonl
 0245fb38cafa3d9f511f61cd95111a33faceade52e96313200716e3b9b5a6214        4346  versioned  results/alignment-eval/mlp-seed44/summary.json
+6cada0e94317f014abae86b74953c57c6de669d44dd09b2c3cfe6f3c21d9d608        1121  versioned  results/cross-medium/emblemes-vs-musee.json
 1afb3edfafa37e041bafd4476a14327454fa9a669ff09e817d14ed90a3f620f9         696  versioned  results/emblematica/compositional-signs-random.json
 edd4328344f9a9ce88db1d90a325fc07a5da9b6113da150aa6045664c53ba8b2         725  versioned  results/emblematica/compositional-signs.json
 45c5d12b42c962ea9ada5ede7a789dd1078d9a612c6dde358a337224b030f55c       16114  versioned  results/emblematica/cross-book-retrievals.json

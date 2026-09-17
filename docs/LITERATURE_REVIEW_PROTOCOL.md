@@ -21,6 +21,12 @@ constructed.
   contextual similarity?
 - **LRQ6:** Which cultural-heritage systems combine vector retrieval with symbolic KG
   reasoning, and which instead learn a shared embedding space?
+- **LRQ7:** What intermediate representations allow objects in different media — print, painting,
+  relief, metalwork, architecture — to be compared iconographically, and how is invariance to the
+  support measured rather than asserted? *Added 2026-09-17, after the cross-medium measurement
+  showed a visual encoder naming the holding corpus 98.1% of the time while placing an object's
+  best cross-medium partner at the middle of the pool. The orientation map for this question is
+  [`VISUAL_LANGUAGE.md`](VISUAL_LANGUAGE.md); a publication-grade review of it has not been run.*
 
 ## 2. Sources
 
