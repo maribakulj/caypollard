@@ -1,0 +1,26 @@
+{
+  "label": "Emblematica · voisinages comparés",
+  "split": "test",
+  "k": 10,
+  "n_items": 2563,
+  "modalities": [
+    "fusion V+G",
+    "graphe pure",
+    "texte LaBSE",
+    "visuel CLIP",
+    "visuel DINOv2"
+  ],
+  "mean_overlap_at_k": {
+    "fusion V+G ↔ graphe pure": 0.1208,
+    "fusion V+G ↔ texte LaBSE": 0.0476,
+    "fusion V+G ↔ visuel CLIP": 0.2612,
+    "fusion V+G ↔ visuel DINOv2": 0.8108,
+    "graphe pure ↔ texte LaBSE": 0.0417,
+    "graphe pure ↔ visuel CLIP": 0.0996,
+    "graphe pure ↔ visuel DINOv2": 0.0813,
+    "texte LaBSE ↔ visuel CLIP": 0.0431,
+    "texte LaBSE ↔ visuel DINOv2": 0.042,
+    "visuel CLIP ↔ visuel DINOv2": 0.2275
+  },
+  "reading": "Overlap between two visual encoders is the reference: it is how much two honest views of the same evidence agree. A modality pair well below it is seeing something different; a fused ranking well above its own visual arm has barely moved."
+}

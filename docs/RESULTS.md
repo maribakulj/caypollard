@@ -288,6 +288,69 @@ the control came out reliably *more* similar to the query than the positive was.
 which the design requires at chance, read 0.395-0.468. Balancing the draw fixes it, and raises
 the Iconclass figures — which is what made the two controls above necessary.
 
+## What each modality actually sees
+
+Mean overlap of the top 10, on the Emblematica test split, every table restricted to the same
+candidate pool. The reference figure is the overlap between two visual encoders: that is how
+much two honest views of the same evidence agree.
+
+| pair | overlap@10 |
+| --- | ---: |
+| **fused V+G ↔ its own visual arm** | **0.811** |
+| visual DINOv2 ↔ visual CLIP | 0.228 |
+| fused V+G ↔ visual CLIP | 0.261 |
+| fused V+G ↔ graph | 0.121 |
+| graph ↔ visual CLIP | 0.100 |
+| graph ↔ visual DINOv2 | 0.081 |
+| fused V+G ↔ text | 0.048 |
+| text ↔ visual CLIP | 0.043 |
+| text ↔ visual DINOv2 | 0.042 |
+| graph ↔ text | 0.042 |
+
+Two things follow. **The fused system is four fifths its visual arm** — which agrees with the
+rank-change analysis, measured by a different route, that 1.89 of 10 results change on
+Emblematica. And **the three modalities are close to mutually independent**: the graph shares a
+twelfth of its neighbourhood with a visual encoder, and the text a twenty-fourth with either.
+
+This refines the V+G+T result rather than contradicting it. The text is *not* redundant in what
+it sees; it is redundant in what it contributes **to this relevance definition** once the graph
+is present. Mottoes bring a genuinely different neighbourhood that graded Iconclass relevance
+does not reward.
+
+## Cross-volume retrieval, and what can be claimed from it
+
+Of the 28 040 top-10 slots the fused system fills on the Emblematica test corpus, **346 point
+outside the query's own volume** — 1.2%. Each is classified by the evidence joining the two
+volumes, using the attributes the graph itself carries.
+
+| class | n | share | what it is worth |
+| --- | ---: | ---: | --- |
+| `réseau` — shared place or decade | 124 | 35.8% | restates a catalogue fact |
+| `inexpliqué` — nothing shared at all | 118 | 34.1% | a failure, or a resemblance the annotation omits |
+| `atelier` — shared creator | 87 | 25.1% | restates a catalogue fact |
+| **`circulation`** — no shared attribute, shared notation | **17** | **4.9%** | **can suggest a hypothesis** |
+
+Only the last class is doing work no catalogue does. Seventeen retrievals across the whole test
+corpus join two volumes that share no creator, place or decade, through an Iconclass concept.
+The clearest sets a German emblem book against a French one on `46C215` (anchor) and `54D5`:
+*Sine his periculum* beside *Prince procurant la saulveté de ses subjectz*. That is a hypothesis
+a historian could take up, not a finding, and the distinction is the deliverable.
+
+## Concept alignment to an external vocabulary
+
+The Iconclass SKOS export shipped with the benchmark carries only `notation`, `broader` and
+`narrower` — no `exactMatch`, no `sameAs` — so an alignment has to come from outside. Wikidata's
+property P1256 holds an Iconclass notation, and one SPARQL query is the whole mapping: **4 125
+distinct notations**.
+
+| corpus | assignments covered | items with at least one mapped notation |
+| --- | ---: | ---: |
+| Iconclass AI | 37.5% | 68.3% |
+| Emblematica | 28.2% | 83.0% |
+
+Enough to name a concept in readable words for the demonstrator and for error analysis; nowhere
+near enough to serve as ground truth or to re-derive relevance.
+
 ## Phase 6 — the learned model loses to the transparent one
 
 Projection heads over frozen encoders, trained with symmetric InfoNCE and in-batch negatives on

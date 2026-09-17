@@ -1,0 +1,451 @@
+{
+  "label": "Emblematica · DINOv2 + graphe pure",
+  "fused": "results/emblematica/fusion/dinov2-base-g-pure/fusion-evaluation.json",
+  "k": 10,
+  "cross_volume_results": 346,
+  "composition": {
+    "réseau": {
+      "n": 124,
+      "share": 0.3584
+    },
+    "inexpliqué": {
+      "n": 118,
+      "share": 0.341
+    },
+    "atelier": {
+      "n": 87,
+      "share": 0.2514
+    },
+    "circulation": {
+      "n": 17,
+      "share": 0.0491
+    }
+  },
+  "reading": "Only the 'circulation' class can suggest a hypothesis: the two volumes share no creator, place or decade, so nothing in the catalogue joins them and the shared notation is what the retrieval found. 'atelier' and 'réseau' restate bibliographic facts, and should be reported as recovery rather than discovery.",
+  "examples": {
+    "circulation": [
+      {
+        "query_id": "emblematica:E001328",
+        "item_id": "emblematica:E029877",
+        "rank": 1,
+        "relevance": 1.0,
+        "shares": [
+          "notation 46C215(ANCHOR), 54D5(+4)"
+        ],
+        "query_book": "pyramisodersinnr00grie",
+        "candidate_book": "A39a",
+        "query_motto": "Ohne diese Gefahr. Ohne diese Gefahr. Sine his periculum.",
+        "candidate_motto": "Princeps subditorum incolumitatem procurans. Prince procurant la saulvete de ses subjectz."
+      },
+      {
+        "query_id": "emblematica:E029959",
+        "item_id": "emblematica:E011251",
+        "rank": 2,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25I1"
+        ],
+        "query_book": "A39a",
+        "candidate_book": "659008459",
+        "query_motto": "Tumulus Ioannis Galeacii Vicecomitis primi Ducis Mediolani. Au sepulchre duc Viconte Galeace.",
+        "candidate_motto": "Optime Domi."
+      },
+      {
+        "query_id": "emblematica:E029959",
+        "item_id": "emblematica:E011252",
+        "rank": 3,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25I1, 61E(ANCONA)"
+        ],
+        "query_book": "A39a",
+        "candidate_book": "659008459",
+        "query_motto": "Tumulus Ioannis Galeacii Vicecomitis primi Ducis Mediolani. Au sepulchre duc Viconte Galeace.",
+        "candidate_motto": "In Me Mihi Omnia."
+      },
+      {
+        "query_id": "emblematica:E029959",
+        "item_id": "emblematica:E011189",
+        "rank": 4,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25I1, 31D14"
+        ],
+        "query_book": "A39a",
+        "candidate_book": "659008459",
+        "query_motto": "Tumulus Ioannis Galeacii Vicecomitis primi Ducis Mediolani. Au sepulchre duc Viconte Galeace.",
+        "candidate_motto": "Corvus Non Albescit."
+      },
+      {
+        "query_id": "emblematica:E029959",
+        "item_id": "emblematica:E011190",
+        "rank": 5,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25I1"
+        ],
+        "query_book": "A39a",
+        "candidate_book": "659008459",
+        "query_motto": "Tumulus Ioannis Galeacii Vicecomitis primi Ducis Mediolani. Au sepulchre duc Viconte Galeace.",
+        "candidate_motto": "Sauciatus Medico Indiget."
+      },
+      {
+        "query_id": "emblematica:E001325",
+        "item_id": "emblematica:E031462",
+        "rank": 7,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25G3(+21)"
+        ],
+        "query_book": "pyramisodersinnr00grie",
+        "candidate_book": "A67a",
+        "query_motto": "Auf blutigen Krieg/ Honig s&#252;sser Fried. Nach blutigem Krieg, honig-s&#252;sser Friede. Post bella mella",
+        "candidate_motto": "Mentem non formam plus pollere. Das Gem&#252;t ist uber die gestalt."
+      },
+      {
+        "query_id": "emblematica:E001328",
+        "item_id": "emblematica:E009618",
+        "rank": 7,
+        "relevance": 1.0,
+        "shares": [
+          "notation 46C215(ANCHOR)"
+        ],
+        "query_book": "pyramisodersinnr00grie",
+        "candidate_book": "gedanckenmusteru00weig",
+        "query_motto": "Ohne diese Gefahr. Ohne diese Gefahr. Sine his periculum.",
+        "candidate_motto": "Vereinigung ist unser Trieb. Vereinigung ist unser Trieb. Ut coniungamur."
+      },
+      {
+        "query_id": "emblematica:E028346",
+        "item_id": "emblematica:E009622",
+        "rank": 7,
+        "relevance": 1.0,
+        "shares": [
+          "notation 46B3311"
+        ],
+        "query_book": "FMOb",
+        "candidate_book": "gedanckenmusteru00weig",
+        "query_motto": "EX FIDE VICTURUS EST",
+        "candidate_motto": "Die Mitte macht Gleichheit. Die Mitte macht Gleichheit. Pondus aequale."
+      }
+    ],
+    "inexpliqué": [
+      {
+        "query_id": "emblematica:E020685",
+        "item_id": "emblematica:E031475",
+        "rank": 1,
+        "relevance": 1.0,
+        "shares": [],
+        "query_book": "emblemataphysico00taur",
+        "candidate_book": "A67a",
+        "query_motto": "Media ferar usque tabella",
+        "candidate_motto": "In avaros, vel quibus melior conditio ab extraneis offertur. Wider die Geitzigen, oder denen den bessers gl&#252;ck von den frembden wider fehrt."
+      },
+      {
+        "query_id": "emblematica:E001327",
+        "item_id": "emblematica:E009455",
+        "rank": 3,
+        "relevance": 1.0,
+        "shares": [],
+        "query_book": "pyramisodersinnr00grie",
+        "candidate_book": "gedanckenmusteru00weig",
+        "query_motto": "Mit unabgewendten Augen. Mit unabgewendeten Augen. Fixis oculis.",
+        "candidate_motto": "Er F&#252;hrt und sch&#252;tzt. Er f&#252;hrt und sch&#252;tzt. More et ore."
+      },
+      {
+        "query_id": "emblematica:E031475",
+        "item_id": "emblematica:E020685",
+        "rank": 3,
+        "relevance": 1.0,
+        "shares": [],
+        "query_book": "A67a",
+        "candidate_book": "emblemataphysico00taur",
+        "query_motto": "In avaros, vel quibus melior conditio ab extraneis offertur. Wider die Geitzigen, oder denen den bessers gl&#252;ck von den frembden wider fehrt.",
+        "candidate_motto": "Media ferar usque tabella"
+      },
+      {
+        "query_id": "emblematica:E029905",
+        "item_id": "emblematica:E020685",
+        "rank": 4,
+        "relevance": 1.0,
+        "shares": [],
+        "query_book": "A39a",
+        "candidate_book": "emblemataphysico00taur",
+        "query_motto": "In facil&#232; &#224; virtute desciscentes. A ceulx qui facilement laissent vertus.",
+        "candidate_motto": "Media ferar usque tabella"
+      },
+      {
+        "query_id": "emblematica:E020685",
+        "item_id": "emblematica:E029890",
+        "rank": 5,
+        "relevance": 1.0,
+        "shares": [],
+        "query_book": "emblemataphysico00taur",
+        "candidate_book": "A39a",
+        "query_motto": "Media ferar usque tabella",
+        "candidate_motto": "Spes proxima. Prochaine espoir."
+      },
+      {
+        "query_id": "emblematica:E029890",
+        "item_id": "emblematica:E020685",
+        "rank": 5,
+        "relevance": 1.0,
+        "shares": [],
+        "query_book": "A39a",
+        "candidate_book": "emblemataphysico00taur",
+        "query_motto": "Spes proxima. Prochaine espoir.",
+        "candidate_motto": "Media ferar usque tabella"
+      },
+      {
+        "query_id": "emblematica:E011621",
+        "item_id": "emblematica:E041082",
+        "rank": 6,
+        "relevance": 1.0,
+        "shares": [],
+        "query_book": "661579891",
+        "candidate_book": "64299577X",
+        "query_motto": "Una Salus Ambobus Erit. Bewerther Fre&#252;ndtschafft.",
+        "candidate_motto": "Von oben herab. Von oben herab."
+      },
+      {
+        "query_id": "emblematica:E031384",
+        "item_id": "emblematica:E020685",
+        "rank": 6,
+        "relevance": 1.0,
+        "shares": [],
+        "query_book": "A67a",
+        "candidate_book": "emblemataphysico00taur",
+        "query_motto": "Spes proxima. Hoffnung am nechsten.",
+        "candidate_motto": "Media ferar usque tabella"
+      }
+    ],
+    "réseau": [
+      {
+        "query_id": "emblematica:E016802",
+        "item_id": "emblematica:E010656",
+        "rank": 3,
+        "relevance": 1.0,
+        "shares": [
+          "notation 26A",
+          "lieu place:nurnberg"
+        ],
+        "query_book": "660779226",
+        "candidate_book": "659008459",
+        "query_motto": "Hostiles temnit.",
+        "candidate_motto": "Dies Et Ingenium."
+      },
+      {
+        "query_id": "emblematica:E016791",
+        "item_id": "emblematica:E010687",
+        "rank": 4,
+        "relevance": 1.0,
+        "shares": [
+          "lieu place:nurnberg"
+        ],
+        "query_book": "660779226",
+        "candidate_book": "659008459",
+        "query_motto": "Er erquicket mich mit Blumen und labet mich mit Aepffeln.",
+        "candidate_motto": "Amicus Animae Dimidum, Vitae Medicamentum."
+      },
+      {
+        "query_id": "emblematica:E011618",
+        "item_id": "emblematica:E019179",
+        "rank": 5,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25H213",
+          "date decade:1640s"
+        ],
+        "query_book": "661579891",
+        "candidate_book": "571510760",
+        "query_motto": "Elige Principium. Gleicher hoheit.",
+        "candidate_motto": "Der k&#252;nstlich-s&#252;sse Ton/ bringt gleich so viel darvon."
+      },
+      {
+        "query_id": "emblematica:E011620",
+        "item_id": "emblematica:E019175",
+        "rank": 5,
+        "relevance": 1.0,
+        "shares": [
+          "date decade:1640s"
+        ],
+        "query_book": "661579891",
+        "candidate_book": "571510760",
+        "query_motto": "Fata Fidem Non Solvunt Eines Getrewen Hertzen.",
+        "candidate_motto": "In dem man Lacht, Der Tod erwacht, Und Ende macht."
+      },
+      {
+        "query_id": "emblematica:E016795",
+        "item_id": "emblematica:E011056",
+        "rank": 5,
+        "relevance": 1.0,
+        "shares": [
+          "notation 31D14",
+          "lieu place:nurnberg"
+        ],
+        "query_book": "660779226",
+        "candidate_book": "659008459",
+        "query_motto": "Cavete Vobis.",
+        "candidate_motto": "Christo Milite Victor Ero."
+      },
+      {
+        "query_id": "emblematica:E016791",
+        "item_id": "emblematica:E010909",
+        "rank": 6,
+        "relevance": 1.0,
+        "shares": [
+          "lieu place:nurnberg"
+        ],
+        "query_book": "660779226",
+        "candidate_book": "659008459",
+        "query_motto": "Er erquicket mich mit Blumen und labet mich mit Aepffeln.",
+        "candidate_motto": "Non Divitiis Sed Castitate."
+      },
+      {
+        "query_id": "emblematica:E016793",
+        "item_id": "emblematica:E017517",
+        "rank": 7,
+        "relevance": 1.0,
+        "shares": [
+          "notation 31D15",
+          "lieu place:nurnberg"
+        ],
+        "query_book": "660779226",
+        "candidate_book": "344937739",
+        "query_motto": "Vanitas.",
+        "candidate_motto": "Ero navis amoris, habens Te astrum lucidum. L` occhio amato &#232; la mia stella. Son oeil mon nord. Dein Aug mein Leitstern."
+      },
+      {
+        "query_id": "emblematica:E016797",
+        "item_id": "emblematica:E017533",
+        "rank": 7,
+        "relevance": 1.0,
+        "shares": [
+          "notation 56B2",
+          "lieu place:nurnberg"
+        ],
+        "query_book": "660779226",
+        "candidate_book": "344937739",
+        "query_motto": "Qui custodit, non dormit.",
+        "candidate_motto": "Audaces fortuna iuvat. Gli audaci la fortuna ajuta. Fortune aide aux hardis Gl&#252;ck steht Verw&#228;gnen bey."
+      }
+    ],
+    "atelier": [
+      {
+        "query_id": "emblematica:E029959",
+        "item_id": "emblematica:E031318",
+        "rank": 1,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25F42, 25H14, 25H2322",
+          "créateur person:name-alciati"
+        ],
+        "query_book": "A39a",
+        "candidate_book": "A67a",
+        "query_motto": "Tumulus Ioannis Galeacii Vicecomitis primi Ducis Mediolani. Au sepulchre duc Viconte Galeace.",
+        "candidate_motto": "Tumulus Ioannis Galeatii vicecomitis, primi ducis Mediolani. An den Durchleuchtigen, Hochgebornen F&#252;rsten und Herrn, Herrn Johannis Galeatii Viceconten und ersten Hertzogen zu Meyland."
+      },
+      {
+        "query_id": "emblematica:E031318",
+        "item_id": "emblematica:E029959",
+        "rank": 1,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25F42, 25H14, 25H2322",
+          "créateur person:name-alciati"
+        ],
+        "query_book": "A67a",
+        "candidate_book": "A39a",
+        "query_motto": "Tumulus Ioannis Galeatii vicecomitis, primi ducis Mediolani. An den Durchleuchtigen, Hochgebornen F&#252;rsten und Herrn, Herrn Johannis Galeatii Viceconten und ersten Hertzogen zu Meyland.",
+        "candidate_motto": "Tumulus Ioannis Galeacii Vicecomitis primi Ducis Mediolani. Au sepulchre duc Viconte Galeace."
+      },
+      {
+        "query_id": "emblematica:E031384",
+        "item_id": "emblematica:E029890",
+        "rank": 2,
+        "relevance": 1.0,
+        "shares": [
+          "notation 24D, 25H23, 25H2311",
+          "créateur person:name-alciati"
+        ],
+        "query_book": "A67a",
+        "candidate_book": "A39a",
+        "query_motto": "Spes proxima. Hoffnung am nechsten.",
+        "candidate_motto": "Spes proxima. Prochaine espoir."
+      },
+      {
+        "query_id": "emblematica:E031475",
+        "item_id": "emblematica:E029890",
+        "rank": 2,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25H23, 25H2311, 26A",
+          "créateur person:name-alciati"
+        ],
+        "query_book": "A67a",
+        "candidate_book": "A39a",
+        "query_motto": "In avaros, vel quibus melior conditio ab extraneis offertur. Wider die Geitzigen, oder denen den bessers gl&#252;ck von den frembden wider fehrt.",
+        "candidate_motto": "Spes proxima. Prochaine espoir."
+      },
+      {
+        "query_id": "emblematica:E029890",
+        "item_id": "emblematica:E031475",
+        "rank": 3,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25H23, 25H2311, 26A",
+          "créateur person:name-alciati"
+        ],
+        "query_book": "A39a",
+        "candidate_book": "A67a",
+        "query_motto": "Spes proxima. Prochaine espoir.",
+        "candidate_motto": "In avaros, vel quibus melior conditio ab extraneis offertur. Wider die Geitzigen, oder denen den bessers gl&#252;ck von den frembden wider fehrt."
+      },
+      {
+        "query_id": "emblematica:E029905",
+        "item_id": "emblematica:E031475",
+        "rank": 3,
+        "relevance": 1.0,
+        "shares": [
+          "notation 25H23, 25H2311, 46C24(+63)",
+          "créateur person:name-alciati"
+        ],
+        "query_book": "A39a",
+        "candidate_book": "A67a",
+        "query_motto": "In facil&#232; &#224; virtute desciscentes. A ceulx qui facilement laissent vertus.",
+        "candidate_motto": "In avaros, vel quibus melior conditio ab extraneis offertur. Wider die Geitzigen, oder denen den bessers gl&#252;ck von den frembden wider fehrt."
+      },
+      {
+        "query_id": "emblematica:E019176",
+        "item_id": "emblematica:E019093",
+        "rank": 4,
+        "relevance": 1.0,
+        "shares": [
+          "notation 52A5",
+          "créateur person:name-endter, person:name-harsdoerffer",
+          "lieu place:nurnberg",
+          "date decade:1640s",
+          "œuvre work:frauenzimmer-gesprechspiele-so"
+        ],
+        "query_book": "571510760",
+        "candidate_book": "571329403",
+        "query_motto": "Gar subtil dient nicht viel.",
+        "candidate_motto": "Es Nutzet und behagt. Auff manche art."
+      },
+      {
+        "query_id": "emblematica:E029890",
+        "item_id": "emblematica:E031384",
+        "rank": 4,
+        "relevance": 1.0,
+        "shares": [
+          "notation 24D, 25H23, 25H2311",
+          "créateur person:name-alciati"
+        ],
+        "query_book": "A39a",
+        "candidate_book": "A67a",
+        "query_motto": "Spes proxima. Prochaine espoir.",
+        "candidate_motto": "Spes proxima. Hoffnung am nechsten."
+      }
+    ]
+  }
+}

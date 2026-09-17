@@ -17,6 +17,7 @@ import argparse
 import json
 import sys
 import time
+from html import unescape
 from pathlib import Path
 from typing import Any
 
@@ -66,7 +67,12 @@ def main() -> None:
     ids: list[str] = []
     empty = 0
     for record in records:
-        parts = [str(record.get(field)).strip() for field in fields if record.get(field)]
+        # A frozen manifest may predate the parser fix that resolved character
+        # references, and a quarter of the Emblematica mottoes still read
+        # "angez&#252;ndet" rather than "angezündet". Left alone, the encoder sees
+        # five literal characters where a letter belongs, so the reference is
+        # resolved here too; on already-clean text unescape is a no-op.
+        parts = [unescape(str(record.get(field))).strip() for field in fields if record.get(field)]
         if not parts:
             empty += 1
             continue

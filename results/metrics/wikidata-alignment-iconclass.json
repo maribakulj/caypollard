@@ -1,0 +1,17 @@
+{
+  "endpoint": "https://query.wikidata.org/sparql",
+  "property": "P1256 (Iconclass notation)",
+  "retrieved_at": "2026-09-17T11:22:31+0200",
+  "elapsed_seconds": 23.8,
+  "wikidata_rows": 4202,
+  "distinct_notations_in_wikidata": 4125,
+  "manifest": "data/derived/iconclass-v0.1/manifest.jsonl",
+  "distinct_notations_in_corpus": 34720,
+  "assignments_in_corpus": 391244,
+  "assignments_covered_exact": 125978,
+  "assignments_covered_after_normalisation": 146523,
+  "coverage_of_assignments": 0.3745,
+  "items_with_at_least_one_mapped_notation": 59951,
+  "coverage_of_items": 0.6832,
+  "mapping_file": "data/derived/iconclass-wikidata.jsonl"
+}

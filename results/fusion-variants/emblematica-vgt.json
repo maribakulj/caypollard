@@ -1,5 +1,5 @@
 {
-  "label": "Emblematica · (DINOv2+graphe) + texte LaBSE (V+G+T)",
+  "label": "Emblematica · (DINOv2+graphe) + texte (V+G+T)",
   "protocol": "protocol-v0.5",
   "visual": "results/emblematica/fusion/dinov2-base-g-pure/selected-fusion.npz",
   "graph": "data/derived/emblematica-eval/embeddings/text-labse.npz",
@@ -23,8 +23,8 @@
     "validation_id_count": 2981,
     "low": 0.22711312770843506,
     "high": 0.9333504438400269,
-    "mean": 0.5956395564049483,
-    "std": 0.09423991135213822
+    "mean": 0.5834100147798658,
+    "std": 0.09101791772346879
   },
   "rules": [
     {
@@ -53,15 +53,15 @@
       "selected_alpha": 0.0,
       "validation_sweep": [],
       "test": {
-        "mean_ndcg_at_10": 0.6281174602933216,
-        "map": 0.2192948345070245,
-        "mrr": 0.596494619848559,
-        "mean_recall_at_10": 0.01613873541430425,
+        "mean_ndcg_at_10": 0.6318084726553165,
+        "map": 0.2225131909252106,
+        "mrr": 0.6026574481601777,
+        "mean_recall_at_10": 0.01670422150759275,
         "n_queries": 2563,
         "ndcg_ci95": {
-          "mean": 0.6281174602933216,
-          "ci_low": 0.6190819067236837,
-          "ci_high": 0.6370412511154914,
+          "mean": 0.6318084726553165,
+          "ci_low": 0.6228317088529215,
+          "ci_high": 0.6407053570919653,
           "confidence": 0.95,
           "n_queries": 2563,
           "n_resamples": 10000,
@@ -75,19 +75,19 @@
       "validation_sweep": [
         {
           "alpha": 0.0,
-          "ndcg": 0.4972842302433865
+          "ndcg": 0.5037810544764381
         },
         {
           "alpha": 0.25,
-          "ndcg": 0.5675280186519843
+          "ndcg": 0.568911558094351
         },
         {
           "alpha": 0.5,
-          "ndcg": 0.592788897223118
+          "ndcg": 0.5927395405916581
         },
         {
           "alpha": 0.75,
-          "ndcg": 0.6061619543789901
+          "ndcg": 0.6064984946815845
         },
         {
           "alpha": 1.0,
@@ -135,15 +135,15 @@
       "first": "linear",
       "second": "graphe seul",
       "mean_first": 0.744991485674415,
-      "mean_second": 0.6281174602933216,
-      "mean_difference": 0.11687402538109326,
-      "ci_low": 0.10959197080137256,
-      "ci_high": 0.12426004947712593,
+      "mean_second": 0.6318084726553165,
+      "mean_difference": 0.11318301301909837,
+      "ci_low": 0.10575825813207049,
+      "ci_high": 0.12059126417943741,
       "confidence": 0.95,
       "excludes_zero": true,
       "p_value": 9.999000099990002e-05,
-      "cohens_d": 0.6153040230623464,
-      "cliffs_delta": 0.2893239410933436,
+      "cohens_d": 0.5923506798280787,
+      "cliffs_delta": 0.280764607048686,
       "n_queries": 2563,
       "n_resamples": 10000,
       "n_permutations": 10000,

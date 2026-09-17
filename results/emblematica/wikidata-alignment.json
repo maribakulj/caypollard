@@ -1,0 +1,17 @@
+{
+  "endpoint": "https://query.wikidata.org/sparql",
+  "property": "P1256 (Iconclass notation)",
+  "retrieved_at": "2026-09-17T11:20:30+0200",
+  "elapsed_seconds": 19.9,
+  "wikidata_rows": 4202,
+  "distinct_notations_in_wikidata": 4125,
+  "manifest": "data/derived/emblematica-v0.1/manifest.jsonl",
+  "distinct_notations_in_corpus": 44553,
+  "assignments_in_corpus": 271902,
+  "assignments_covered_exact": 58473,
+  "assignments_covered_after_normalisation": 76753,
+  "coverage_of_assignments": 0.2823,
+  "items_with_at_least_one_mapped_notation": 21131,
+  "coverage_of_items": 0.8299,
+  "mapping_file": "data/derived/iconclass-wikidata.jsonl"
+}

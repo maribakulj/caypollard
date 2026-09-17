@@ -434,17 +434,32 @@ so it is ingested as a second benchmark rather than as an illustration. See
 - [x] Build a manifest from the open API (IIIF is not exposed; the SPINE record is).
 - [x] Construct minimal RDF-style graph: `part_of`, `adjacent_to`, `created_by`,
       `published_at`, `published_in`, `instance_of`.
-- [ ] Map concepts to existing vocabularies when stable mappings exist.
+- [x] Map concepts to existing vocabularies when stable mappings exist. The Iconclass SKOS
+      export carries only notation/broader/narrower, so the alignment comes from Wikidata's
+      P1256: 4 125 distinct notations, covering 37.5% of Iconclass assignments and 68.3% of
+      its images, and 28.2% of Emblematica assignments and 83.0% of its emblems. Enough to
+      name a concept in readable words, not enough to serve as ground truth.
 - [x] Establish whether the emblem's interpretive verse can serve as ground truth for H3: it
       cannot. 455 of 31 041 records carry a transcribed subscriptio and 454 of those carry no
       Iconclass annotation, so verse and ground truth coexist on one record. Expert judgement
       (phase 10) is the only remaining route.
-- [ ] Compare visual, graph, and fused neighbours for emblem queries.
+- [x] Compare visual, graph, and fused neighbours for emblem queries. Mean top-10 overlap:
+      two visual encoders 0.228, graph against visual 0.081-0.100, text against visual 0.042,
+      text against graph 0.042, and the fused ranking against its own visual arm **0.811** --
+      the fusion is four fifths the visual system, which matches the 1.89 items of 10 that
+      the rank-change analysis measures independently.
 - [x] Establish that cross-volume paths exist at all: 272 of 368 emblem books (74%) share a
       creator with another book and 254 (69%) share a place, against 0% reachable in the
       Iconclass sample.
-- [ ] Identify interpretable cross-book or cross-edition relations.
-- [ ] Document cases where retrieval suggests a hypothesis rather than established influence.
+- [x] Identify interpretable cross-book or cross-edition relations. Of 28 040 top-10 slots on
+      the test corpus only 346 point outside the query's volume, and each is classified by
+      the evidence joining the pair.
+- [x] Document cases where retrieval suggests a hypothesis rather than established influence.
+      Of those 346, 87 share a creator and 124 a place or decade -- recovery of a catalogue
+      fact, not discovery -- 118 share nothing at all, and **17** join two volumes with no
+      shared creator, place or decade through an Iconclass notation. Only those 17 can
+      suggest a hypothesis, and they are listed with their mottoes in
+      `results/emblematica/cross-book-retrievals.json`.
 
 ### Planned notebook
 
