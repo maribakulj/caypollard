@@ -113,23 +113,26 @@ against a fully covered one on different query sets would not be a comparison.
 
 | condition | nDCG@10 | against | difference | p | d |
 | --- | ---: | --- | ---: | ---: | ---: |
-| T (mottoes alone) | 0.6281 | — | — | — | — |
+| T (mottoes alone) | 0.6318 | — | — | — | — |
 | G (`pure`) | 0.6829 | — | — | — | — |
 | V (DINOv2) | 0.7178 | — | — | — | — |
-| G+T | 0.7026 | G | +0.0197 | 0.0001 | 0.163 |
-| V+T | 0.7319 | V | +0.0140 | 0.0001 | 0.173 |
+| G+T | 0.7048 | G | +0.0219 | 0.0001 | 0.180 |
+| V+T | 0.7322 | V | +0.0143 | 0.0001 | 0.175 |
 | V+G | 0.7450 | V | +0.0272 | 0.0001 | — |
 | V+G+T | 0.7450 | V+G | **+0.0000** | 1.0000 | 0.000 |
 
-Three readings follow. **Text is a real and independent signal**: mottoes alone rank at 0.628,
+Three readings follow. **Text is a real and independent signal**: mottoes alone rank at 0.632,
 far above the 0.431 random control, and improve both other modalities significantly. **Text is
-weaker than either** visual or graph on its own. And **text is redundant once the graph is
+weaker than either** visual or graph on its own. And **text adds nothing once the graph is
 present**: the validation sweep for V+G+T selects `alpha = 1.0`, giving the text arm zero weight,
-so the condition is V+G exactly. Whatever the mottoes contribute, the bibliographic graph has
-already contributed it — unsurprising once one notices that emblems of one volume share a
-compositor's phrasing as well as a printer.
+so the condition is V+G exactly.
 
-The dissociation matters for the hard cases: this same text modality scores **0.422** on hard
+That last point is easy to state too strongly, and the neighbourhood table below shows why. The
+text modality shares only 0.042 of its top-10 with the graph, so it is plainly *not* seeing the
+same thing. It adds nothing **to this relevance definition**: the different neighbourhood it
+brings is one that graded Iconclass relevance does not reward.
+
+The dissociation matters for the hard cases: this same text modality scores **0.430** on hard
 positives, below chance. A multilingual semantic encoder, which does not need shared words to
 match paraphrases, does not bring together two emblems that share an Iconclass concept.
 
