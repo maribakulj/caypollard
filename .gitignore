@@ -19,6 +19,12 @@ __pycache__/
 # Results that should be explicitly versioned rather than dumped
 /results/tmp/
 
+# Result artifacts too large to version. Every one is attested by size and
+# SHA-256 in results/MANIFEST.sha256 and rebuilt by rerunning its script.
+/results/**/*.npz
+/results/**/per_query.jsonl
+/results/**/fusion-evaluation.json
+
 # OS / IDE
 .DS_Store
 Thumbs.db
