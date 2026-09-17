@@ -50,6 +50,38 @@ the evaluation labels.
 
 Text remains a separate modality (`T`) rather than being smuggled into `G`.
 
+### G1 on the Iconclass AI Test Set
+
+`data.json` carries no context column, which for a long time made `G1` look
+impossible on this corpus. It is not: the filenames encode the digitised volume a
+plate was cut from, and `caypollard.datasets.iconclass_provenance` recovers that
+identifier for **14 645 of 87 744 images (16.7%)** across 1 246 books — of which
+5 159 are emblem-book plates from the UIUC and HAB collections that phase 7 was
+expected to supply.
+
+That yields exactly two context relations here, and it is worth being precise
+about how thin they are:
+
+- `partOf(image, book)`;
+- plate or folio ordering within a book.
+
+No creator, printer, place, or date. So a `G1` fitted on this corpus tests a
+narrow question — whether co-membership of a volume and proximity within it carry
+iconographic signal beyond visual similarity — rather than the full contextual
+hypothesis. A negative result under these two relations would **not** falsify H1;
+it would bound it to the relations actually supplied.
+
+Two further constraints follow from the coverage figure:
+
+- the remaining 83.3% carry flat per-item identifiers (`IIHIM_-859728949` alone
+  covers 63 524 images) and cannot enter a `G1` graph at all, so the `G1`
+  evaluation pool is a sub-corpus and must be reported as one, with a visual
+  baseline recomputed on the same sub-corpus rather than compared against
+  full-corpus numbers;
+- the richer relations remain reachable without a new corpus, by joining UIUC and
+  HAB metadata on shelfmarks **already present** in these filenames. That is the
+  cheapest available route to a genuine `G3`.
+
 ## Projection G2 — Masked-label graph
 
 A complementary experiment may use Iconclass elsewhere in the graph while

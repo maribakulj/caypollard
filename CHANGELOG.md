@@ -1,5 +1,48 @@
 # Changelog
 
+## 0.6.0 — 2026-09-16
+
+### Added
+
+- full-corpus Iconclass AI benchmark: 87 744 images, two-stage perceptual near-duplicate
+  detection, book identifiers recovered from filenames, and a leakage-free 70 304/8 539/8 901
+  partition;
+- inferential statistics (`caypollard.statistics`): percentile bootstrap intervals, paired
+  bootstrap differences, sign-flip permutation tests, Cohen's d and Cliff's delta;
+- a second benchmark from Emblematica Online — 25 463 annotated emblems, 264 volumes, 271 902
+  Iconclass assignments, and 30 402 transcribed mottoes, the project's first text modality;
+- context-only graph projections and the bibliographic enrichment built from Munich IIIF
+  manifests and the Emblematica catalogue;
+- `protocol-v0.5`, `docs/RESULTS.md`, `docs/EMBLEMATICA_DATA_CARD.md`.
+
+### Changed
+
+- **relevance definition.** Bracketed Iconclass text keys are no longer stripped: each observed
+  key is attached as a child of its base notation. Under the old definition notation 86 folded
+  5 972 distinct mottoes onto one node, so any two emblems scored graded relevance 1.0 and the
+  hard-pair benchmark was compromised — 1 of 250 mined hard positives shared an exact notation,
+  against 186 of 250 after the fix. Both definitions remain selectable via `--key-policy`, and
+  protocol v0.5 requires every nDCG claim to be reported under both;
+- phase 7 reframed from an illustrative case study into the corpus that makes H2 testable.
+
+### Fixed
+
+- `--device auto` detected only CUDA and silently fell back to CPU on Apple silicon;
+- `get_image_features` returns an output object rather than a tensor in Transformers 5, which
+  broke the CLIP and SigLIP presets;
+- SigLIP loaded a multimodal processor, requiring SentencePiece for a text branch never used;
+- image extraction wrote nothing until completion and held every vector in memory, so a
+  multi-hour run was indistinguishable from a stalled one and a single crash lost all of it;
+- Emblematica parsing read a commented-out cataloguer's template as a real notation, inflating
+  measured Iconclass coverage from 82.0% to 90.5%.
+
+### Results
+
+H1 holds on both corpora. Transparent late fusion improves test nDCG@10 over visual-only in all
+six encoder-corpus combinations (d = 0.24-0.33, p = 0.0002 throughout). H2 and H3 are refuted on
+both: hard positives are bibliographically unrelated — 243 of 250 share no attribute at all — so
+a context-only graph cannot reach them. See [`docs/RESULTS.md`](docs/RESULTS.md).
+
 ## 0.4.0 — 2026-09-14
 
 ### Added

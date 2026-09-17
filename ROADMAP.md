@@ -59,11 +59,11 @@ Establish a controlled benchmark with expert-assigned semantic structure before 
 - [x] Implement canonical image/concept manifest builder (full-corpus materialisation pending download).
 - [x] Parse the open Iconclass hierarchy and derive parent/ancestor paths from source edges.
 - [x] Implement annotation, co-occurrence, missingness, and hierarchy-depth audit code.
-- [ ] Run and freeze the full-corpus frequency/depth/co-occurrence/imbalance report after archive acquisition.
+- [x] Run and freeze the full-corpus frequency/depth/co-occurrence/imbalance report after archive acquisition.
 - [x] Implement exact SHA-256 duplicate grouping/checks when image bytes are available.
-- [ ] Detect and cluster near-duplicate images at full-corpus scale.
+- [x] Detect and cluster near-duplicate images at full-corpus scale.
 - [x] Implement deterministic diagnostic train/validation/test partitioning.
-- [x] Implement group-aware splitting and leakage checks; trustworthy source groups still need recovery.
+- [x] Implement group-aware splitting and leakage checks; book-level source groups recovered from filenames for 16.7% of the corpus.
 - [x] Implement canonical JSONL serialisation and SHA-256 manifest digests.
 - [x] Define and test transparent hierarchy-distance relevance baseline in `docs/protocol-v0.1.md`.
 - [x] Add non-image official annotation excerpt and documented hierarchy fixture for CI.
@@ -83,6 +83,12 @@ Establish a controlled benchmark with expert-assigned semantic structure before 
 ### Exit criterion
 
 The benchmark must support evaluation that cannot be trivially solved by exact/near duplicate leakage.
+
+**Met.** The frozen v0.1 benchmark covers all 87 744 annotated images with SHA-256 and
+two-stage perceptual hashes, groups them by the union of book identifier, exact bytes, and
+confirmed near duplicate, and reports zero group and zero checksum leakage across the
+70 304 / 8 539 / 8 901 partition. Near-duplicate detection resolves 130 multi-image groups
+covering 269 images, the largest holding 4.
 
 ### Main risks
 
@@ -153,9 +159,9 @@ Determine whether graph proximity captures an interpretable semantic structure t
 - [x] Define graph projections and target-leakage policy explicitly (`G0` taxonomy oracle, `G1` context-only, `G2` masked-label).
 - [x] Separate taxonomy-only oracle/control experiments from richer evidence-bearing relational projections.
 - [x] Implement fixed-seed relation-aware KGE code paths: predicate-aware RDF2Vec-style control plus optional PyKEEN ComplEx/RotatE; full-corpus training remains pending external data/model runs.
-- [ ] Evaluate full-corpus graph neighbourhood quality using hierarchical relevance; the executable fixture pipeline is implemented.
-- [x] Implement degree-vs-neighbour-hubness diagnostics; populate full-corpus correlations once real G1/G2 embeddings are available.
-- [x] Implement graph-neighbour vs visual-neighbour overlap metric; populate full-corpus results after real embeddings are available.
+- [x] Evaluate graph neighbourhood quality using hierarchical relevance on the real `G1` sub-corpus.
+- [x] Implement degree-vs-neighbour-hubness diagnostics; real `G1` embeddings now available for population.
+- [x] Implement graph-neighbour vs visual-neighbour overlap metric; populated on real embeddings (G1 vs visual 0.15-0.18, visual vs visual 0.32-0.37).
 
 ### Planned notebooks
 
@@ -165,6 +171,13 @@ Determine whether graph proximity captures an interpretable semantic structure t
 ### Exit criterion
 
 Graph retrieval must provide measurable information not reducible to the visual nearest-neighbour ranking.
+
+**Met on the `G1` sub-corpus (1 714 test images).** `G1` reaches nDCG@10 0.727 against a
+0.329 random control through the identical ranking and metric path (+0.398, d = 1.40), while
+sharing only 0.15-0.18 of its top-10 neighbours with a visual encoder - against 0.32-0.37
+between two visual encoders. The signal is therefore both real and not a restatement of
+visual proximity. `G1` alone remains slightly below every visual baseline on nDCG
+(-0.015 to -0.041), which is a level, not a redundancy, result.
 
 ### Stop condition
 
@@ -180,6 +193,17 @@ If KG neighbours provide no complementary signal under robust evaluation, do **n
 
 Create an evaluation subset where visual resemblance and iconographic relatedness deliberately diverge.
 
+### Constraint discovered in execution: H3 is not testable under Iconclass
+
+Iconclass is predominantly denotative. Two lions — one for fortitude, one for defeat — both carry
+`25F23`, so the vocabulary scores them semantically *close* and the hard-negative rule
+(similarity ≤ 0.2) can never select them. Division 5, *Abstract Ideas and Concepts*, does supply a
+connotative layer (17.1% of Emblematica assignments), which is why hard **positives** work: they
+meet on shared concepts such as `56F2` Love or `57B1` Praise, 193 of 250 sharing an exact
+notation. Hard **negatives** instead come out as pairs sharing a page layout — 1 of 140 shares any
+notation. H3 as stated needs an annotation separating a motif from its allegorical reading, which
+this ground truth does not provide.
+
 ### Four pair classes
 
 1. visually close + iconographically close;
@@ -192,9 +216,9 @@ Create an evaluation subset where visual resemblance and iconographic relatednes
 - [x] Freeze validation-only visual threshold calibration (95th percentile close, median distant) in protocol v0.3.
 - [x] Freeze semantic thresholds in protocol v0.3 (`>=0.5` close, `<=0.2` distant).
 - [x] Implement deterministic balanced mining from visual top-k, semantic BFS, and random distant candidates; full-corpus artifact pending.
-- [ ] Manually inspect an evaluation subset.
+- [x] Manually inspect an evaluation subset.
 - [x] Persist pair class, visual/semantic scores, labels, calibration metadata, and checksum in canonical JSONL/JSON artifacts.
-- [ ] Freeze the **real full-corpus** hard-pair test artifact before reporting fusion results; the procedure is frozen and fixture-tested.
+- [x] Freeze the real hard-pair test artifact on the `G1` sub-corpus before reporting fusion results.
 
 ### Planned notebook
 
@@ -203,6 +227,53 @@ Create an evaluation subset where visual resemblance and iconographic relatednes
 ### Exit criterion
 
 The benchmark contains enough high-confidence disagreement cases to distinguish genuine semantic improvement from generic retrieval gains.
+
+**Met, and it did that job twice — first against the fusion result, then against the
+benchmark's own relevance definition.**
+
+The first mining exposed a defect rather than a finding: bracketed Iconclass text keys were
+stripped, so notation `86` (proverbs, emblems, mottoes) collapsed 5 972 distinct mottoes onto
+one node and every emblem scored as perfectly relevant to every other. Only 1 of 250 mined
+hard positives shared an exact notation with its partner. Those pairs were not hard positives,
+and the analysis built on them is void. See [`protocol-v0.5.md`](docs/protocol-v0.5.md).
+
+Re-mined under the corrected `keep` policy, 186 of 250 hard positives share an exact notation —
+genuine iconographic matches that look nothing alike. The conclusion below is drawn from those,
+and is unchanged from the void analysis, which is itself worth recording: the defect had
+inflated the pairs without reversing the verdict. The separation is structural:
+
+| pair class | same book (`keep`, DINOv2 mining) |
+| --- | ---: |
+| easy positive | 243 / 250 |
+| hard negative | 174 / 250 |
+| **hard positive** | **14 / 250** |
+| easy negative | 0 / 250 |
+
+A hard positive is visually distant but iconographically close, and such a pair is almost
+never two plates of one volume. `G1` encodes nothing but volume membership and plate order,
+so it holds **no edge at all** between the images H2 is about. Measured as AUC of the graph
+score, restricted to visually distant pairs where only iconography separates them:
+
+- hard positives vs easy negatives: **0.498** — chance;
+- hard positives vs hard negatives: **0.241** — inverted, because hard negatives *are* mostly
+  same-volume pairs and the graph rewards them.
+
+By contrast the graph scores easy positives at 0.981 and easy negatives at 0.416 — it is a
+competent detector of exactly one thing, co-membership of a volume.
+
+**Bibliographic enrichment does not change this.** 505 Munich volumes were ingested from IIIF
+manifests, yielding 209 GND creators, 163 printers, 66 places and 136 works. They reach
+**0 of 250** hard positives, under both relevance policies and both mining encoders, because
+hard positives are emblem-book pairs across St Andrews, UIUC, Wolfenbüttel, Mnemosyne and
+Utrecht while the enriched volumes are Munich incunabula.
+
+**Consequence for the phase-5 result.** The +0.025 to +0.044 nDCG@10 gain is real and
+reproducible, but it is a *generic* retrieval gain: plates of one book usually share
+iconography, and the graph recovers that. It is not evidence for H2 or H3, which concern
+precisely the pairs this graph cannot reach. Publication gate 2 is therefore not supported by
+the current projection, and any hard-case claim needs cross-volume relations — shared creator,
+printer, place, date — which requires the UIUC/HAB catalogue join described in
+`GRAPH_PROJECTIONS.md`.
 
 ---
 
@@ -231,7 +302,7 @@ Evaluate a predeclared alpha grid and tune only on validation data.
 - [x] Implement validation-pair min-max score calibration with no test-derived bounds.
 - [x] Implement preregistered alpha sweep `[0, .25, .5, .75, 1]` with validation nDCG@10 selection and conservative tie-break.
 - [x] Implement fixed visual candidate-pool reranking with validation-calibrated modality scores.
-- [ ] Compare overall and hard-pair performance.
+- [x] Compare overall performance against visual baselines; hard-pair comparison pending the frozen artifact.
 - [ ] Quantify how often graph information changes a top-K result.
 - [ ] Produce explanations for changed rankings.
 
@@ -242,6 +313,19 @@ Evaluate a predeclared alpha grid and tune only on validation data.
 ### Exit criterion
 
 At least one transparent fusion strategy improves a preregistered semantic metric without unacceptable degradation of visual relevance.
+
+**Met for all three encoders.** Preregistered late fusion at the validation-selected
+`alpha = 0.25` improves test nDCG@10 over visual-only by +0.044 (DINOv2), +0.025 (CLIP), and
++0.030 (SigLIP), all with p <= 0.0002 and d = 0.26-0.33 - an order of magnitude above the
+d ~ 0.05 that separates the visual encoders from each other. MRR improves for all three.
+MAP improves for DINOv2 (+0.019) and is inconclusive for CLIP and SigLIP, so the gain is
+concentrated in graded hierarchical relevance rather than exact-label precision.
+
+**Scope of the claim.** This holds on the sub-corpus where `G1` exists - 1 714 of 8 901 test
+images. `G1` carries book membership and plate order only, so the most conservative reading
+is that plates of one volume share iconography, and that this contextual fact is not
+recoverable from pixels. That is a genuine non-target signal, not target leakage, but it is
+narrower than the full contextual hypothesis.
 
 ---
 
@@ -315,13 +399,27 @@ Model only relations needed by the research question, for example:
 - book -> place;
 - book -> date.
 
+### Status: reframed from a case study into the corpus that makes H2 testable
+
+Phase 7 was planned as a historical case study to follow validation on Iconclass AI. The
+hard-pair analysis moved it forward: hard positives are emblem-book pairs, the Iconclass sample
+is drawn from a subscription database whose identifiers do not resolve publicly, and
+bibliographic enrichment there reached 0 of 250 hard positives. Emblematica Online carries
+images, Iconclass notations, emblem texts and resolvable book identifiers in one open corpus,
+so it is ingested as a second benchmark rather than as an illustration. See
+[`EMBLEMATICA_DATA_CARD.md`](docs/EMBLEMATICA_DATA_CARD.md).
+
 ### Tasks
 
-- [ ] Audit UIUC/HAB data access and licences.
-- [ ] Build IIIF-first manifest where possible.
-- [ ] Construct minimal RDF graph.
+- [x] Audit UIUC/HAB data access and licences.
+- [x] Build a manifest from the open API (IIIF is not exposed; the SPINE record is).
+- [x] Construct minimal RDF-style graph: `part_of`, `adjacent_to`, `created_by`,
+      `published_at`, `published_in`, `instance_of`.
 - [ ] Map concepts to existing vocabularies when stable mappings exist.
 - [ ] Compare visual, graph, and fused neighbours for emblem queries.
+- [x] Establish that cross-volume paths exist at all: 272 of 368 emblem books (74%) share a
+      creator with another book and 254 (69%) share a place, against 0% reachable in the
+      Iconclass sample.
 - [ ] Identify interpretable cross-book or cross-edition relations.
 - [ ] Document cases where retrieval suggests a hypothesis rather than established influence.
 
@@ -332,6 +430,45 @@ Model only relations needed by the research question, for example:
 ### Exit criterion
 
 The method produces interpretable retrieval differences that are historically meaningful enough for expert assessment, without presenting vector similarity as proof of influence.
+
+### Result: the fusion gain replicates; H2 does not, and the reason is now precise
+
+On 2 804 Emblematica test queries under protocol v0.5, preregistered late fusion improves
+nDCG@10 over visual-only for all three encoders and both graph variants — +0.031 (DINOv2),
++0.019 (CLIP), +0.020 (SigLIP), every one at p = 0.0002 with d = 0.24-0.29. That is an
+independent replication: a different corpus, a different ingestion pipeline, effect sizes
+matching the 0.24-0.33 measured on Iconclass AI.
+
+H2 fails again, and not for the reasons previously suspected. Both have been eliminated:
+
+- **not the corpus** — this one carries creator, place, date and work for 99.6% of volumes;
+- **not the graph construction** — the `pure` projection separates same-author cross-volume
+  pairs at AUC 0.963, against 0.457 for the volume-membership graph that failed before.
+
+The measurement that settles it is what hard positives actually share. Of 250 mined with
+DINOv2, **243 share no bibliographic attribute at all** and 2 share an author; of 250 mined
+with CLIP, **0 share an author** and the 66 that share anything share only a *decade*. That
+weak, broad attribute is what produces CLIP's apparent H2 AUC of 0.759 against DINOv2's 0.521 —
+chronological coincidence, not iconographic knowledge. Hard *negatives*, meanwhile, do share
+attributes (36 and 20 shared authors), which pushes the score the wrong way.
+
+Mottoes do not bridge the gap either: at most 11 of 250 hard-positive pairs share a single
+content word, and 2 share two.
+
+**This reasoning was confounded and has been corrected.** The pairs it rests on were mined
+without a format control. Holding libraries scan differently — full pages with a ruler and colour
+chart in one, cropped picturae in another — so "visually distant" collapsed into "different
+library": 247 of 250 CLIP-mined hard positives crossed collections against 0 of 250 hard
+negatives, and 243 against 0 on Iconclass AI. Pairs drawn from different libraries are
+necessarily from different books and authors, so their bibliographic unrelatedness followed from
+the sampling, not from motif circulation. That interpretation is withdrawn.
+
+Re-mined within a collection (`--stratum-key collection`) and compared against a control matched
+on visual similarity, the graph reaches AUC 0.449 [0.387, 0.510], 0.633 [0.567, 0.697],
+0.691 [0.646, 0.736] and 0.582 [0.532, 0.633] across the four corpus-encoder conditions — weakly
+above chance in three, inconclusive and below it in the fourth. H3 stays wrong-signed
+(0.10-0.43). Publication gate 2 remains unsupported, on a weaker and better-founded basis. See
+[`docs/RESULTS.md`](docs/RESULTS.md).
 
 ---
 
@@ -427,14 +564,26 @@ The project can distinguish “metric improvement” from “useful scholarly re
 
 ### Outputs
 
-- [ ] frozen benchmark manifests and splits;
-- [ ] reproducible experiment configurations;
-- [ ] executed notebooks with clean outputs;
-- [ ] citable software release;
+- [x] frozen benchmark manifests and splits;
+- [x] reproducible experiment configurations;
+- [x] executed notebooks with clean outputs;
+- [x] citable software release;
 - [ ] DOI for release/data artifacts where possible;
 - [ ] research paper preprint;
-- [ ] model/results cards;
-- [ ] interactive demonstration.
+- [x] model/results cards;
+- [x] interactive demonstration.
+
+### Built
+
+The demonstrator shows eight test emblems chosen for maximum disagreement between the three
+rankings, each result carrying the evidence that produced it — shared Iconclass notations,
+shared volume, shared author, shared place — rather than a bare similarity score. Rankings are
+real, computed on the frozen 2 804-emblem test pool with DINOv2 and the `pure` graph, with
+calibration and `alpha` taken from validation only.
+
+`docs/RESULTS.md` is the results card; `docs/ICONCLASS_DATA_CARD.md` and
+`docs/EMBLEMATICA_DATA_CARD.md` are the data cards. A DOI and a preprint remain outstanding and
+require actions outside this repository.
 
 ### Demonstrator design
 

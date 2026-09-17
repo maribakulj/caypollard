@@ -6,7 +6,13 @@
 
 **Research code and reproducible notebooks for testing whether structured cultural-heritage knowledge changes and improves visual similarity.**
 
-Status: **Phases 1–3 infrastructure implemented; hard-pair, transparent-fusion, and learned-alignment foundations active / v0.4.0**
+Status: **Phases 0–5 and 7 executed on two corpora; results frozen / v0.6.0**
+
+**Headline.** Transparent late fusion of a context graph with a visual encoder improves
+iconographic retrieval on both benchmarks — +0.019 to +0.039 nDCG@10, d = 0.24–0.33, p = 0.0002
+throughout. The preregistered hard-pair hypotheses (H2, H3) are **refuted** on both, for a
+measured reason: hard positives are bibliographically unrelated, so a context-only graph holds
+no edge between them. See [`docs/RESULTS.md`](docs/RESULTS.md).
 
 ## Core research question
 
