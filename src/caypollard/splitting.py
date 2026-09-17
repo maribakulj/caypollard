@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import hashlib
 from collections import defaultdict
-from collections.abc import Iterable
+from collections.abc import Iterable, Sequence
 from typing import Any
 
 
@@ -62,6 +62,62 @@ def split_records(
         copy["split"] = assign_split(split_value, seed=seed, ratios=ratios)
         output.append(copy)
     return output
+
+
+def combine_group_keys(
+    records: Iterable[dict[str, Any]],
+    *,
+    keys: Sequence[str],
+    item_key: str = "id",
+    target_key: str = "group_id",
+) -> list[dict[str, Any]]:
+    """Merge several grouping signals into one transitively closed partition.
+
+    Leakage can enter through more than one door: the same plate rescanned under
+    a different filename, and two plates cut from the same book. Splitting on
+    either signal alone still lets the other leak, so records sharing a non-null
+    value under *any* key are merged into a single group, and membership is
+    transitive — a near-duplicate of a plate joins that plate's whole book.
+
+    Records with no non-null value under any key keep their own item identifier
+    as group, so absent provenance isolates an item rather than pooling it with
+    every other item whose provenance is also missing. Group identifiers are the
+    lexicographically smallest member id, making them stable under reordering.
+    """
+    rows = [dict(record) for record in records]
+    for row in rows:
+        if item_key not in row:
+            raise KeyError(f"Record is missing item key {item_key!r}")
+
+    parent: dict[str, str] = {str(row[item_key]): str(row[item_key]) for row in rows}
+
+    def find(node: str) -> str:
+        while parent[node] != node:
+            parent[node] = parent[parent[node]]
+            node = parent[node]
+        return node
+
+    def union(left: str, right: str) -> None:
+        left_root, right_root = find(left), find(right)
+        if left_root != right_root:
+            low, high = sorted((left_root, right_root))
+            parent[high] = low
+
+    for key in keys:
+        seen: dict[str, str] = {}
+        for row in rows:
+            value = row.get(key)
+            if value is None:
+                continue
+            marker = f"{key}\0{value}"
+            if marker in seen:
+                union(seen[marker], str(row[item_key]))
+            else:
+                seen[marker] = str(row[item_key])
+
+    for row in rows:
+        row[target_key] = find(str(row[item_key]))
+    return rows
 
 
 def find_group_leakage(
