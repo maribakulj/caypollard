@@ -10,7 +10,12 @@ from pathlib import Path
 from caypollard.benchmarks.iconclass_retrieval import evaluate_iconclass_retrieval
 from caypollard.embeddings.store import load_embedding_table, save_embedding_table
 from caypollard.fusion import fit_similarity_bounds, late_fusion_embedding_table
-from caypollard.graphs.iconclass import build_parent_index, child_edges, parse_notations
+from caypollard.graphs.iconclass import (
+    build_parent_index,
+    child_edges,
+    key_augmented_parents,
+    parse_notations,
+)
 from caypollard.provenance import read_jsonl
 
 
@@ -32,6 +37,14 @@ def main() -> None:
     parser.add_argument("--validation-split", default="validation")
     parser.add_argument("--test-split", default="test")
     parser.add_argument("--sample-pairs", type=int, default=20_000)
+    parser.add_argument(
+        "--key-policy",
+        choices=("strip", "keep"),
+        default="strip",
+        help="Relevance treatment of bracketed Iconclass text keys: 'strip' folds "
+             "86(MOTTO) onto 86 (protocol v0.1-v0.4); 'keep' attaches each observed "
+             "key as a child of its base notation (protocol v0.5).",
+    )
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--backend", choices=("numpy", "faiss"), default="numpy")
     args = parser.parse_args()
@@ -40,6 +53,10 @@ def main() -> None:
     graph = load_embedding_table(args.graph_embeddings)
     records = read_jsonl(args.manifest)
     parents = build_parent_index(child_edges(parse_notations(args.notations)))
+    if args.key_policy == "keep":
+        parents = key_augmented_parents(
+            parents, (label for row in records for label in row.get("iconclass", []))
+        )
     common = set(visual.ids).intersection(graph.ids)
     validation_ids = sorted(
         str(record["id"])

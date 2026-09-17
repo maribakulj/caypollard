@@ -10,8 +10,14 @@ from pathlib import Path
 
 from caypollard.benchmarks.iconclass_retrieval import evaluate_iconclass_retrieval
 from caypollard.embeddings.store import load_embedding_table
-from caypollard.graphs.iconclass import build_parent_index, child_edges, parse_notations
+from caypollard.graphs.iconclass import (
+    build_parent_index,
+    child_edges,
+    key_augmented_parents,
+    parse_notations,
+)
 from caypollard.provenance import manifest_digest, read_jsonl, sha256_file
+from caypollard.statistics import bootstrap_mean_ci
 
 
 def main() -> None:
@@ -26,11 +32,26 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=128)
     parser.add_argument("--persist-top-k", type=int, default=10)
     parser.add_argument("--backend", choices=("numpy", "faiss"), default="numpy")
+    parser.add_argument(
+        "--key-policy",
+        choices=("strip", "keep"),
+        default="strip",
+        help="Relevance treatment of bracketed Iconclass text keys: 'strip' folds "
+             "86(MOTTO) onto 86 (protocol v0.1-v0.4); 'keep' attaches each observed "
+             "key as a child of its base notation (protocol v0.5).",
+    )
+    parser.add_argument("--bootstrap-resamples", type=int, default=10_000)
+    parser.add_argument("--bootstrap-confidence", type=float, default=0.95)
+    parser.add_argument("--bootstrap-seed", type=int, default=42)
     args = parser.parse_args()
 
     table = load_embedding_table(args.embeddings)
     records = read_jsonl(args.manifest)
     parents = build_parent_index(child_edges(parse_notations(args.notations)))
+    if args.key_policy == "keep":
+        parents = key_augmented_parents(
+            parents, (label for row in records for label in row.get("iconclass", []))
+        )
     summary, per_query = evaluate_iconclass_retrieval(
         table,
         records,
@@ -43,8 +64,29 @@ def main() -> None:
         backend=args.backend,
     )
 
+    # A headline metric without an interval invites reading a sampling wobble as
+    # a method difference, so every reported mean carries one.
+    intervals: dict[str, dict] = {}
+    for name, values in (
+        ("mean_ndcg_at_10", [row.ndcg_at_10 for row in per_query]),
+        ("mrr", [row.reciprocal_rank for row in per_query]),
+        ("map", [row.average_precision for row in per_query]),
+        ("mean_recall_at_1", [row.recall_at_1 for row in per_query]),
+        ("mean_recall_at_5", [row.recall_at_5 for row in per_query]),
+        ("mean_recall_at_10", [row.recall_at_10 for row in per_query]),
+    ):
+        observed = [value for value in values if value is not None]
+        if observed:
+            intervals[name] = bootstrap_mean_ci(
+                observed,
+                confidence=args.bootstrap_confidence,
+                n_resamples=args.bootstrap_resamples,
+                seed=args.bootstrap_seed,
+            )
+
     summary.update(
         {
+            "bootstrap_intervals": intervals,
             "embedding_file": str(Path(args.embeddings)),
             "embedding_metadata": table.metadata,
             "manifest_file": str(Path(args.manifest)),
