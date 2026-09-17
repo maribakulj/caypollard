@@ -1,0 +1,114 @@
+{
+  "manifest": "data/derived/emblematica-eval/manifest-cropped.jsonl",
+  "split": "test",
+  "k_neighbours": 20,
+  "top": 10,
+  "exclude_same_volume": false,
+  "n_items": 995,
+  "n_items_dropped_for_coverage": 240,
+  "n_items_with_a_notation": 995,
+  "distinct_notations": 4212,
+  "results": {
+    "unindexed": {
+      "visuel": {
+        "n_queries": 995,
+        "hits_at_1": 0.3286,
+        "hits_at_5": 0.5869,
+        "hits_at_10": 0.6653,
+        "mrr": 0.4443,
+        "map_at_10": 0.0782
+      },
+      "silhouette": {
+        "n_queries": 995,
+        "hits_at_1": 0.205,
+        "hits_at_5": 0.4653,
+        "hits_at_10": 0.5497,
+        "mrr": 0.3207,
+        "map_at_10": 0.0465
+      },
+      "débiaisé": {
+        "n_queries": 995,
+        "hits_at_1": 0.3327,
+        "hits_at_5": 0.594,
+        "hits_at_10": 0.6653,
+        "mrr": 0.4472,
+        "map_at_10": 0.0791
+      },
+      "texte": {
+        "n_queries": 995,
+        "hits_at_1": 0.2111,
+        "hits_at_5": 0.4492,
+        "hits_at_10": 0.5266,
+        "mrr": 0.3189,
+        "map_at_10": 0.0439
+      },
+      "graphe": {
+        "n_queries": 995,
+        "hits_at_1": 0.2322,
+        "hits_at_5": 0.4382,
+        "hits_at_10": 0.5116,
+        "mrr": 0.3196,
+        "map_at_10": 0.0424
+      },
+      "prior de fréquence": {
+        "n_queries": 995,
+        "hits_at_1": 0.1859,
+        "hits_at_5": 0.4553,
+        "hits_at_10": 0.5035,
+        "mrr": 0.305,
+        "map_at_10": 0.0366
+      }
+    },
+    "partial": {
+      "visuel": {
+        "n_queries": 903,
+        "hits_at_1": 0.0509,
+        "hits_at_5": 0.124,
+        "hits_at_10": 0.1672,
+        "mrr": 0.0906,
+        "map_at_10": 0.0833
+      },
+      "silhouette": {
+        "n_queries": 903,
+        "hits_at_1": 0.0332,
+        "hits_at_5": 0.0886,
+        "hits_at_10": 0.1207,
+        "mrr": 0.0617,
+        "map_at_10": 0.0572
+      },
+      "débiaisé": {
+        "n_queries": 903,
+        "hits_at_1": 0.0509,
+        "hits_at_5": 0.1262,
+        "hits_at_10": 0.1672,
+        "mrr": 0.0911,
+        "map_at_10": 0.0839
+      },
+      "texte": {
+        "n_queries": 903,
+        "hits_at_1": 0.0244,
+        "hits_at_5": 0.0808,
+        "hits_at_10": 0.113,
+        "mrr": 0.0567,
+        "map_at_10": 0.0488
+      },
+      "graphe": {
+        "n_queries": 903,
+        "hits_at_1": 0.0266,
+        "hits_at_5": 0.0764,
+        "hits_at_10": 0.1185,
+        "mrr": 0.0533,
+        "map_at_10": 0.0485
+      },
+      "prior de fréquence": {
+        "n_queries": 903,
+        "hits_at_1": 0.0244,
+        "hits_at_5": 0.0576,
+        "hits_at_10": 0.072,
+        "mrr": 0.0465,
+        "map_at_10": 0.0374
+      }
+    }
+  },
+  "reading": "The frequency prior is the number to beat: a representation that does not clear it has learned nothing but which labels are common. 'unindexed' hides every notation and is the population that matters -- 5 578 emblems in this corpus carry none at all."
+}

@@ -1,0 +1,81 @@
+{
+  "manifest": "data/derived/emblematica-eval/manifest-cropped.jsonl",
+  "attribute": "book_id",
+  "split": null,
+  "k": 10,
+  "results": {
+    "original": {
+      "n_items": 2723,
+      "majority_baseline": 0.2611,
+      "linear_probe_accuracy": 0.8964,
+      "knn_probe_accuracy": 0.8546,
+      "linear_above_majority": 0.6353,
+      "knn_above_majority": 0.5935,
+      "neighbourhood_share": {
+        "collection": 0.9111,
+        "book_id": 0.78
+      }
+    },
+    "projection latente": {
+      "n_items": 2723,
+      "majority_baseline": 0.2611,
+      "linear_probe_accuracy": 0.8704,
+      "knn_probe_accuracy": 0.8443,
+      "linear_above_majority": 0.6092,
+      "knn_above_majority": 0.5832,
+      "neighbourhood_share": {
+        "collection": 0.8928,
+        "book_id": 0.7669
+      }
+    },
+    "gris+carré": {
+      "n_items": 2723,
+      "majority_baseline": 0.2611,
+      "linear_probe_accuracy": 0.8939,
+      "knn_probe_accuracy": 0.8619,
+      "linear_above_majority": 0.6327,
+      "knn_above_majority": 0.6008,
+      "neighbourhood_share": {
+        "collection": 0.9144,
+        "book_id": 0.8003
+      }
+    },
+    "traits Sobel": {
+      "n_items": 2723,
+      "majority_baseline": 0.2611,
+      "linear_probe_accuracy": 0.8711,
+      "knn_probe_accuracy": 0.8491,
+      "linear_above_majority": 0.61,
+      "knn_above_majority": 0.588,
+      "neighbourhood_share": {
+        "collection": 0.9039,
+        "book_id": 0.7875
+      }
+    },
+    "forme grossière": {
+      "n_items": 2723,
+      "majority_baseline": 0.2611,
+      "linear_probe_accuracy": 0.8663,
+      "knn_probe_accuracy": 0.8281,
+      "linear_above_majority": 0.6052,
+      "knn_above_majority": 0.567,
+      "neighbourhood_share": {
+        "collection": 0.895,
+        "book_id": 0.7787
+      }
+    },
+    "silhouette": {
+      "n_items": 2723,
+      "majority_baseline": 0.2611,
+      "linear_probe_accuracy": 0.7885,
+      "knn_probe_accuracy": 0.791,
+      "linear_above_majority": 0.5274,
+      "knn_above_majority": 0.5299,
+      "neighbourhood_share": {
+        "collection": 0.8812,
+        "book_id": 0.7378
+      }
+    }
+  },
+  "reading": "A rendering has removed the confound only when the kNN probe falls to the majority baseline and the neighbourhood share falls with it. A linear probe dropping alone means the attribute was made unreadable, not absent."
+}

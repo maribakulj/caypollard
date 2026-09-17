@@ -1,0 +1,19 @@
+{
+  "manifest": "data/derived/emblematica-eval/manifest-cropped.jsonl",
+  "before": "data/derived/emblematica-eval/embeddings/dinov2-base.npz",
+  "after": "data/derived/emblematica-eval/embeddings/dinov2-debiased-cropped.npz",
+  "k": 10,
+  "n_items": 1235,
+  "neighbour_overlap_before_after": 0.9581,
+  "neighbourhood_composition": {
+    "before": {
+      "collection": 0.8923,
+      "book_id": 0.7936
+    },
+    "after": {
+      "collection": 0.8742,
+      "book_id": 0.7813
+    }
+  },
+  "reading": "An overlap near 1 means the projection changed almost nothing about which items are close, whatever it did to a linear probe's accuracy. The attribute shares say the same thing from the other side: if neighbours are still drawn from the query's own collection at the same rate, the confound is still shaping the geometry and has only been made unreadable by a linear model."
+}

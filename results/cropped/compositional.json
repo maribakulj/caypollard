@@ -1,0 +1,33 @@
+{
+  "manifest": "data/derived/emblematica-eval/manifest-cropped.jsonl",
+  "k": 20,
+  "hidden_sign": "random",
+  "same_volume_neighbours": "excluded",
+  "results": {
+    "base": {
+      "vocabulary": 2533,
+      "n_queries": 1143,
+      "hits_at_1": 0.126,
+      "hits_at_10": 0.2441,
+      "mrr": 0.1626
+    },
+    "qualified": {
+      "vocabulary": 5229,
+      "n_queries": 1143,
+      "hits_at_1": 0.1251,
+      "hits_at_10": 0.2537,
+      "mrr": 0.166
+    },
+    "pairs": {
+      "vocabulary": 11670,
+      "n_queries": 1143,
+      "hits_at_1": 0.1137,
+      "hits_at_10": 0.2362,
+      "mrr": 0.1509
+    },
+    "prior de fréquence": {
+      "hits_at_10": 0.2817,
+      "n_queries": 1143
+    }
+  }
+}

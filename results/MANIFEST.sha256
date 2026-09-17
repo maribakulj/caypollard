@@ -61,6 +61,12 @@ e09054a014e7c6e09823e721c55201685a03103b04f292d93189a62cbf126055     3182211  re
 c6d3feea3898a5146d23f7f5db4a513ca22c9991182916818cf61aea7466d172      202238  versioned  results/alignment-eval/mlp-seed44/per_query.csv
 c8dd17af2c7cb04be5813227c146c1efa7d3ec14704febc3c279a4fd18d33a8b     3181813  rebuild    results/alignment-eval/mlp-seed44/per_query.jsonl
 0245fb38cafa3d9f511f61cd95111a33faceade52e96313200716e3b9b5a6214        4346  versioned  results/alignment-eval/mlp-seed44/summary.json
+094786c8e52bbca268d06d6e1e6437075f7704c170412bbad176b21d7aaf6fb5         704  versioned  results/cropped/compositional.json
+5e0d6108cf37fb6e7d6ac5d5600d2a485fd8531384c4d606d3a35316e4e0b227         878  versioned  results/cropped/debias-effect.json
+7f8af52414f359db2f1e1996e7944ca67a72fd93e594889d70be183d32658737        1622  versioned  results/cropped/filiations.json
+a05333e4f3d2466f85d1bdde20113b863691171b18c8715dfcb6978352b8f06a        2950  versioned  results/cropped/masked-recovery-crossbook.json
+c7cf061121ad5abf5a72b066e9a6e07d6cb9ef5c57a9580473465991b2a40b24        2952  versioned  results/cropped/masked-recovery.json
+ed33f563453eaf3062e1603ae6964af6160fdcb1697c98882f772ec34a869d5f        2367  versioned  results/cropped/probe-book.json
 b1122b779fb98c07828374d2018c2328109b5fa8b833d7fbc3fa8aae6217a414        1122  versioned  results/cross-medium/detoures-shape.json
 8c852abd7533e4f7c3c116ddbffcd8116e1cabc2404f7ae45a223bba664faf2b        1122  versioned  results/cross-medium/detoures-silhouette.json
 c942a15ac1ae0e8f628e0567ca38716b54609beb14c2bdb365c914dfcb0db935        1120  versioned  results/cross-medium/emblemes-detoures-vs-musee.json

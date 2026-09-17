@@ -1,0 +1,43 @@
+{
+  "manifest": "data/derived/emblematica-eval/manifest-cropped.jsonl",
+  "split": "test",
+  "hub_size": 300,
+  "n_items": 1235,
+  "n_queries_with_a_filiation": 1049,
+  "share_of_queries_with_a_filiation": 0.8494,
+  "pairs_sharing_a_notation": 96360,
+  "uncatalogued_cross_book_pairs": 58208,
+  "reachability": {
+    "visuel": {
+      "median_rank_of_best_filiation": 39,
+      "share_in_top_10": 0.2202,
+      "share_in_top_50": 0.5472
+    },
+    "visuel · même volume exclu": {
+      "median_rank_of_best_filiation": 5,
+      "share_in_top_10": 0.6501,
+      "share_in_top_50": 0.8942
+    },
+    "silhouette": {
+      "median_rank_of_best_filiation": 50,
+      "share_in_top_10": 0.2946,
+      "share_in_top_50": 0.5014
+    },
+    "silhouette · même volume exclu": {
+      "median_rank_of_best_filiation": 10,
+      "share_in_top_10": 0.5186,
+      "share_in_top_50": 0.8246
+    },
+    "fusion": {
+      "median_rank_of_best_filiation": 119,
+      "share_in_top_10": 0.0086,
+      "share_in_top_50": 0.0515
+    },
+    "fusion · même volume exclu": {
+      "median_rank_of_best_filiation": 6,
+      "share_in_top_10": 0.6235,
+      "share_in_top_50": 0.8923
+    }
+  },
+  "reading": "Filiations are abundant, not rare. What is rare is a ranking surfacing them, and the single most effective change is a filter rather than a model: excluding the query's own volume. Note also that the graph, whose whole contribution is volume and bibliographic proximity, scores worse than the visual encoder alone once that exclusion is applied -- it is ranking on exactly the attribute this task requires the pair not to share."
+}
