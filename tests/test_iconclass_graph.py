@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from caypollard.graphs.iconclass import (
     build_parent_index,
     child_edges,
@@ -46,3 +48,60 @@ def test_multilabel_image_similarity_uses_best_supported_relation():
     parents = build_parent_index(child_edges(parse_notations(FIXTURE)))
     assert image_hierarchical_similarity(["unknown", "25G411"], ["25G412"], parents) == 1 / 3
     assert image_hierarchical_similarity([], ["25G412"], parents) == 0.0
+
+
+def test_strip_structural_keys_keeps_text_keys():
+    from caypollard.graphs.iconclass import strip_structural_keys
+
+    # (+N) is a modifier and folds away; the bracketed text names what is depicted.
+    assert strip_structural_keys("25G4(PUMPKIN)(+34)") == "25G4(PUMPKIN)"
+    assert strip_structural_keys("31A24(+1)") == "31A24"
+    assert strip_structural_keys("86(USQUE RECURRIT)") == "86(USQUE RECURRIT)"
+
+
+def test_key_augmentation_makes_two_mottoes_siblings_not_synonyms():
+    from caypollard.graphs.iconclass import hierarchical_similarity, key_augmented_parents
+
+    parents = {"86": set()}
+    labels = ["86(USQUE RECURRIT)", "86(UT CAPIAS CAPIARE PRIUS)"]
+
+    # Default policy: every emblem looks perfectly relevant to every other emblem.
+    assert hierarchical_similarity(labels[0], labels[1], parents) == 1.0
+
+    augmented = key_augmented_parents(parents, labels)
+    assert augmented[labels[0]] == {"86"}
+    assert hierarchical_similarity(labels[0], labels[1], augmented) == pytest.approx(1 / 3)
+    # The same motto repeated is still a perfect match.
+    assert hierarchical_similarity(labels[0], labels[0], augmented) == 1.0
+
+
+def test_key_augmentation_only_adds_keys_present_in_the_data():
+    from caypollard.graphs.iconclass import key_augmented_parents
+
+    parents = {"86": set()}
+    augmented = key_augmented_parents(parents, ["86(ONE)"])
+    assert "86(ONE)" in augmented
+    assert "86(TWO)" not in augmented
+
+
+def test_key_augmentation_leaves_existing_vocabulary_nodes_alone():
+    from caypollard.graphs.iconclass import key_augmented_parents
+
+    parents = {"25G4": set(), "25G41": {"25G4"}, "25G41(DAISY)": {"25G41"}}
+    augmented = key_augmented_parents(parents, ["25G41(DAISY)"])
+    assert augmented["25G41(DAISY)"] == {"25G41"}  # not re-attached to 25G4
+
+
+def test_key_augmentation_ignores_keys_whose_base_is_unknown():
+    from caypollard.graphs.iconclass import key_augmented_parents
+
+    assert "99Z(X)" not in key_augmented_parents({"86": set()}, ["99Z(X)"])
+
+
+def test_resolve_prefers_the_most_specific_available_node():
+    from caypollard.graphs.iconclass import key_augmented_parents, resolve_notation
+
+    augmented = key_augmented_parents({"86": set()}, ["86(A)"])
+    assert resolve_notation("86(A)", augmented) == "86(A)"
+    assert resolve_notation("86(A)(+3)", augmented) == "86(A)"   # plus-key folded
+    assert resolve_notation("86(B)", augmented) == "86"          # unobserved key -> base

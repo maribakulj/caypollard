@@ -95,9 +95,66 @@ def normalize_notation(notation: str) -> str:
         previous = cleaned
 
 
+_PLUS_KEY_RE = re.compile(r"\(\+[^()]*\)")
+_TEXT_KEY_RE = re.compile(r"\([^()+][^()]*\)")
+
+
+def strip_structural_keys(notation: str) -> str:
+    """Remove only ``(+N)`` plus-keys, keeping bracketed text keys intact.
+
+    Iconclass brackets carry two different things. ``(+34)`` is a structural
+    modifier that specialises how a subject is shown, and folding it away is
+    harmless. ``(RHUBARB)``, ``(HERMES TRISMEGISTOS)`` and ``(USQUE RECURRIT)``
+    are text keys naming *what* is depicted, and for notation 86 — proverbs,
+    emblems, mottoes — the text key is the entire content: 5 972 distinct mottoes
+    in this corpus collapse onto the single node ``86`` once it is removed.
+    """
+    previous = notation.strip()
+    while True:
+        cleaned = _PLUS_KEY_RE.sub("", previous)
+        if cleaned == previous:
+            return cleaned.strip()
+        previous = cleaned
+
+
+def key_augmented_parents(
+    parents: dict[str, set[str]], labels: Iterable[str]
+) -> dict[str, set[str]]:
+    """Return a hierarchy extended with observed text-keyed notations as leaves.
+
+    Under the default policy ``86(USQUE RECURRIT)`` and ``86(UT CAPIAS)`` both
+    resolve to ``86`` and score as the *same* concept, which makes any two emblem
+    images look perfectly relevant to each other. Attaching each observed text key
+    as a child of its base notation instead makes them siblings: distance 2 rather
+    than 0, so graded relevance drops from 1.0 to 1/3 while genuine repetitions of
+    one motto still score 1.0.
+
+    Only keys actually present in the corpus are added, so the hierarchy grows by
+    what the data contains rather than by every notation the vocabulary permits.
+    """
+    augmented = {node: set(values) for node, values in parents.items()}
+    for raw in labels:
+        label = strip_structural_keys(raw)
+        if not label or label in augmented or not _TEXT_KEY_RE.search(label):
+            continue
+        base = normalize_notation(label)
+        if base and base in parents:
+            augmented[label] = {base}
+    return augmented
+
+
 def resolve_notation(notation: str, parents: dict[str, set[str]]) -> str | None:
+    """Resolve a raw notation to a node, preferring the most specific match.
+
+    An exact hit wins; then the plus-key-stripped form, which finds a text-keyed
+    node in a hierarchy built by :func:`key_augmented_parents`; then the fully
+    stripped base notation.
+    """
     if notation in parents:
         return notation
+    without_plus = strip_structural_keys(notation)
+    if without_plus in parents:
+        return without_plus
     normalized = normalize_notation(notation)
     return normalized if normalized in parents else None
 
