@@ -1,0 +1,21 @@
+{
+  "question": "Are composite signs more nameable than atomic ones?",
+  "method": "build_shape_groups grouping (margin 0.15, ratio 3) then the coherence test from name_shape_signs: Jaccard over resolved Iconclass ancestors among a sign's top five associated notations, against sets drawn at random from the same pool",
+  "atomic_signs": {
+    "within_sign": 0.0647,
+    "random": 0.0365,
+    "difference": 0.0283,
+    "p_value": 0.0001,
+    "cohens_d": 0.468,
+    "n_signs": 228
+  },
+  "composite_signs": {
+    "within_sign": 0.0636,
+    "random": 0.0537,
+    "difference": 0.0099,
+    "p_value": 0.3024,
+    "cohens_d": 0.138,
+    "n_signs": 59
+  },
+  "reading": "Grouping made the representation dramatically better at crossing the medium and no better at being named. The groups are formed by a geometric criterion -- similar-sized blobs that touch -- and a clump of mid-sized dark patches is drapery in one picture and foliage in another. Geometry joins them; meaning does not. Naming has to come from recognition, and in a discovery system, where no annotation is being held out, that recognition may legitimately be supervised by the existing Iconclass annotation."
+}
