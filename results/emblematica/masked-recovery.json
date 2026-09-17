@@ -1,0 +1,81 @@
+{
+  "manifest": "data/derived/emblematica-eval/manifest.jsonl",
+  "split": "test",
+  "k_neighbours": 20,
+  "top": 10,
+  "exclude_same_volume": false,
+  "n_items": 2804,
+  "n_items_with_a_notation": 2804,
+  "distinct_notations": 9261,
+  "results": {
+    "unindexed": {
+      "visuel DINOv2": {
+        "n_queries": 2804,
+        "hits_at_1": 0.5392,
+        "hits_at_5": 0.719,
+        "hits_at_10": 0.7689,
+        "mrr": 0.6206,
+        "map_at_10": 0.1309
+      },
+      "graphe pure": {
+        "n_queries": 2804,
+        "hits_at_1": 0.5189,
+        "hits_at_5": 0.6683,
+        "hits_at_10": 0.7143,
+        "mrr": 0.5867,
+        "map_at_10": 0.1173
+      },
+      "fusion V+G": {
+        "n_queries": 2804,
+        "hits_at_1": 0.5617,
+        "hits_at_5": 0.7279,
+        "hits_at_10": 0.7803,
+        "mrr": 0.6382,
+        "map_at_10": 0.1361
+      },
+      "prior de fréquence": {
+        "n_queries": 2804,
+        "hits_at_1": 0.2529,
+        "hits_at_5": 0.4843,
+        "hits_at_10": 0.628,
+        "mrr": 0.361,
+        "map_at_10": 0.0484
+      }
+    },
+    "partial": {
+      "visuel DINOv2": {
+        "n_queries": 2712,
+        "hits_at_1": 0.2058,
+        "hits_at_5": 0.2636,
+        "hits_at_10": 0.2968,
+        "mrr": 0.2361,
+        "map_at_10": 0.2318
+      },
+      "graphe pure": {
+        "n_queries": 2712,
+        "hits_at_1": 0.2058,
+        "hits_at_5": 0.2412,
+        "hits_at_10": 0.2681,
+        "mrr": 0.2252,
+        "map_at_10": 0.2215
+      },
+      "fusion V+G": {
+        "n_queries": 2712,
+        "hits_at_1": 0.2194,
+        "hits_at_5": 0.2677,
+        "hits_at_10": 0.3038,
+        "mrr": 0.2461,
+        "map_at_10": 0.2416
+      },
+      "prior de fréquence": {
+        "n_queries": 2712,
+        "hits_at_1": 0.0867,
+        "hits_at_5": 0.1265,
+        "hits_at_10": 0.2246,
+        "mrr": 0.1174,
+        "map_at_10": 0.1109
+      }
+    }
+  },
+  "reading": "The frequency prior is the number to beat: a representation that does not clear it has learned nothing but which labels are common. 'unindexed' hides every notation and is the population that matters -- 5 578 emblems in this corpus carry none at all."
+}
