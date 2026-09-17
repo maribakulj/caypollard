@@ -357,13 +357,16 @@ KG embedding     -> projection --+
 - [x] Implement small linear/MLP projection heads over frozen embeddings.
 - [x] Define positive/negative sampling strategy (same-object positives, in-batch negatives).
 - [x] Implement fixed train/validation partition training with validation-loss checkpoint selection; full-corpus runs remain pending.
-- [ ] Compare real-corpus results against late fusion and reranking.
-- [ ] Run the preregistered >=3-seed sensitivity analysis on real embeddings.
+- [x] Compare real-corpus results against late fusion: the learned space loses nDCG@10 by
+      0.0051 (p = 0.0010, d = -0.081) and wins MAP by 0.0231 (p = 0.0001, d = 0.259).
+- [x] Run the preregistered >=3-seed sensitivity analysis on real embeddings: spread across
+      three seeds is 0.0006 of nDCG@10, so the comparison is not seed noise.
 - [x] Implement representation-collapse diagnostics (off-diagonal cosine + effective rank); combine with existing hubness diagnostics in real runs.
 - [x] Conduct modality ablations on real embeddings: T alone 0.6281, G 0.6829, V 0.7178,
       G+T 0.7026, V+T 0.7319, V+G 0.7450, V+G+T 0.7450 — the validation sweep gives the text
       arm zero weight once the graph is present, so text is redundant with it, not additive.
-- [ ] Conduct capacity ablations (linear vs MLP heads) on real embeddings.
+- [x] Conduct capacity ablations (linear vs MLP heads) on real embeddings: the MLP is worse on
+      both metrics, and effective rank falls from 20.5 of 128 dimensions to 15.3.
 
 ### Model matrix
 
@@ -382,6 +385,14 @@ The learned model must outperform the strongest simple fusion baseline on at lea
 ### Stop condition
 
 If a complex model only matches weighted fusion, prefer the transparent method in the main paper.
+
+**Reached, and applied.** The learned model beats late fusion on MAP (+0.0231, d = 0.259) and
+loses the primary endpoint (-0.0051, d = -0.081), while reproducing rather than escaping the
+`G1` unreachability artifact on hard pairs. Validation loss rises from the first epoch in all six
+runs because the objective amounts to predicting an item's volume from its pixels, and the
+group-aware split places every validation volume outside training. The exit criterion is
+therefore half met, the stop condition applies, and the transparent method stands as the
+project's recommended system. See [`docs/RESULTS.md`](docs/RESULTS.md).
 
 ---
 

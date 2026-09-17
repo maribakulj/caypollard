@@ -1,0 +1,149 @@
+{
+  "bootstrap_intervals": {
+    "map": {
+      "ci_high": 0.2648732340804321,
+      "ci_low": 0.2344934571186814,
+      "confidence": 0.95,
+      "mean": 0.24958447740122355,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_ndcg_at_10": {
+      "ci_high": 0.6024210786760248,
+      "ci_low": 0.5759873286452597,
+      "confidence": 0.95,
+      "mean": 0.5891994108182664,
+      "n_queries": 1706,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_1": {
+      "ci_high": 0.02655465643875507,
+      "ci_low": 0.0182242316122681,
+      "confidence": 0.95,
+      "mean": 0.022134565783064306,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_10": {
+      "ci_high": 0.12039840301530065,
+      "ci_low": 0.10313599936376991,
+      "confidence": 0.95,
+      "mean": 0.11144934467252308,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mean_recall_at_5": {
+      "ci_high": 0.07961048307029267,
+      "ci_low": 0.06483978027088028,
+      "confidence": 0.95,
+      "mean": 0.0719631712814312,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    },
+    "mrr": {
+      "ci_high": 0.5611030207280173,
+      "ci_low": 0.5130757118523634,
+      "confidence": 0.95,
+      "mean": 0.5372529916262068,
+      "n_queries": 1316,
+      "n_resamples": 10000,
+      "seed": 42
+    }
+  },
+  "candidate_split": "test",
+  "embedding_file": "results/alignment/mlp-seed42/joint-mean.npz",
+  "embedding_metadata": {
+    "best_epoch": 1,
+    "best_validation_loss": 8.291322708129883,
+    "config": {
+      "batch_size": 256,
+      "epochs": 100,
+      "hidden_dim": 256,
+      "learning_rate": 0.001,
+      "patience": 15,
+      "projection_dim": 128,
+      "seed": 42,
+      "temperature": 0.07,
+      "weight_decay": 0.0001
+    },
+    "device": "mps",
+    "dimension": 128,
+    "embedding_file": "joint-mean.npz",
+    "epochs_ran": 16,
+    "family": "multimodal",
+    "graph_source": "rdf2vec-style-ppmi-svd",
+    "l2_normalized": false,
+    "method": "frozen-encoder-symmetric-infonce-projection",
+    "n_items": 14645,
+    "negative_sampling": "in-batch negatives",
+    "output_id_count": 14645,
+    "positive_pairing": "same object id across modalities",
+    "protocol": "protocol-v0.4",
+    "representation": "joint_mean",
+    "test_optimisation": false,
+    "train_id_count": 11628,
+    "train_ids_sha256": "b81dbd0033522418ff4ded6854e2a58439b537944c8d7f7c5ebda0a613c07451",
+    "validation_id_count": 1303,
+    "validation_ids_sha256": "881151562d3048e9fe4622e53d3880f99f1529880c198ef9be0ffcdb87988a6e",
+    "visual_source": "facebook/dinov2-base"
+  },
+  "exact_coverage": 0.7677946324387398,
+  "exact_evaluable_queries": 1316,
+  "hierarchical_coverage": 0.9953325554259043,
+  "hierarchical_evaluable_queries": 1706,
+  "manifest_file": "data/derived/iconclass-v0.1/manifest.jsonl",
+  "manifest_sha256": "47cd452f680de6d1bd6b2818be23a61b52bcfb8105a2f787f1dfb1e05e07ab13",
+  "map": 0.24958447740122355,
+  "mean_ndcg_at_10": 0.5891994108182664,
+  "mean_recall_at_1": 0.022134565783064306,
+  "mean_recall_at_10": 0.1114493446725231,
+  "mean_recall_at_5": 0.0719631712814312,
+  "mrr": 0.5372529916262068,
+  "n_candidates": 1714,
+  "n_queries": 1714,
+  "ndcg_k": 10,
+  "notations_file": "data/raw/iconclass/notations.txt",
+  "notations_sha256": "3802b42ed433fc1dafab1cd7a88dc2192b8238f78ae194041c4ff3459212f185",
+  "query_limit": null,
+  "query_split": "test",
+  "ranking_backend": "numpy",
+  "strata": {
+    "hierarchy_depth": {
+      "deep_6_plus": {
+        "mean_ndcg_at_10": 0.45692591461042914,
+        "n_queries": 204
+      },
+      "middle_3_5": {
+        "mean_ndcg_at_10": 0.5815792442977994,
+        "n_queries": 1394
+      },
+      "shallow_0_2": {
+        "mean_ndcg_at_10": 0.9374059418916915,
+        "n_queries": 108
+      }
+    },
+    "label_frequency": {
+      "frequent_gt_100": {
+        "mean_ndcg_at_10": 0.9807445463695353,
+        "n_queries": 101
+      },
+      "medium_11_100": {
+        "mean_ndcg_at_10": 0.8273895413893498,
+        "n_queries": 114
+      },
+      "rare_2_10": {
+        "mean_ndcg_at_10": 0.5262172295183736,
+        "n_queries": 848
+      },
+      "singleton": {
+        "mean_ndcg_at_10": 0.5685293582001133,
+        "n_queries": 643
+      }
+    }
+  }
+}

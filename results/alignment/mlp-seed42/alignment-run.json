@@ -1,0 +1,142 @@
+{
+  "collapse_diagnostics": {
+    "joint_mean": {
+      "dimension": 128,
+      "effective_rank": 15.28562068939209,
+      "max_off_diagonal_cosine": 0.9990634918212891,
+      "mean_off_diagonal_cosine": 0.3404127061367035,
+      "n_items": 14645,
+      "std_off_diagonal_cosine": 0.24430719017982483
+    },
+    "projected_graph": {
+      "dimension": 128,
+      "effective_rank": 17.22329330444336,
+      "max_off_diagonal_cosine": 1.0000005960464478,
+      "mean_off_diagonal_cosine": 0.2868109941482544,
+      "n_items": 14645,
+      "std_off_diagonal_cosine": 0.2686631977558136
+    },
+    "projected_visual": {
+      "dimension": 128,
+      "effective_rank": 10.916814804077148,
+      "max_off_diagonal_cosine": 0.9970885515213013,
+      "mean_off_diagonal_cosine": 0.2985082268714905,
+      "n_items": 14645,
+      "std_off_diagonal_cosine": 0.24758125841617584
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 4.688345199045927,
+      "validation_loss": 8.291322708129883
+    },
+    {
+      "epoch": 2,
+      "train_loss": 3.252705936846526,
+      "validation_loss": 8.512086868286133
+    },
+    {
+      "epoch": 3,
+      "train_loss": 2.7478855640991875,
+      "validation_loss": 8.742111206054688
+    },
+    {
+      "epoch": 4,
+      "train_loss": 2.4898008522780044,
+      "validation_loss": 8.862157821655273
+    },
+    {
+      "epoch": 5,
+      "train_loss": 2.3626456727152285,
+      "validation_loss": 8.772210121154785
+    },
+    {
+      "epoch": 6,
+      "train_loss": 2.232167580853338,
+      "validation_loss": 9.064637184143066
+    },
+    {
+      "epoch": 7,
+      "train_loss": 2.1664632144181626,
+      "validation_loss": 9.05465316772461
+    },
+    {
+      "epoch": 8,
+      "train_loss": 2.1069331402363987,
+      "validation_loss": 8.95307731628418
+    },
+    {
+      "epoch": 9,
+      "train_loss": 2.0542438859524936,
+      "validation_loss": 8.835674285888672
+    },
+    {
+      "epoch": 10,
+      "train_loss": 2.014277398586273,
+      "validation_loss": 8.94493579864502
+    },
+    {
+      "epoch": 11,
+      "train_loss": 1.989878957686217,
+      "validation_loss": 8.924074172973633
+    },
+    {
+      "epoch": 12,
+      "train_loss": 1.948071513486945,
+      "validation_loss": 8.916240692138672
+    },
+    {
+      "epoch": 13,
+      "train_loss": 1.9161020335943804,
+      "validation_loss": 8.853551864624023
+    },
+    {
+      "epoch": 14,
+      "train_loss": 1.9050913245781609,
+      "validation_loss": 8.89561653137207
+    },
+    {
+      "epoch": 15,
+      "train_loss": 1.8740373227907263,
+      "validation_loss": 8.86559772491455
+    },
+    {
+      "epoch": 16,
+      "train_loss": 1.8569959168848784,
+      "validation_loss": 8.843713760375977
+    }
+  ],
+  "metadata": {
+    "best_epoch": 1,
+    "best_validation_loss": 8.291322708129883,
+    "config": {
+      "batch_size": 256,
+      "epochs": 100,
+      "hidden_dim": 256,
+      "learning_rate": 0.001,
+      "patience": 15,
+      "projection_dim": 128,
+      "seed": 42,
+      "temperature": 0.07,
+      "weight_decay": 0.0001
+    },
+    "device": "mps",
+    "epochs_ran": 16,
+    "family": "multimodal",
+    "graph_source": "rdf2vec-style-ppmi-svd",
+    "method": "frozen-encoder-symmetric-infonce-projection",
+    "negative_sampling": "in-batch negatives",
+    "output_id_count": 14645,
+    "positive_pairing": "same object id across modalities",
+    "protocol": "protocol-v0.4",
+    "test_optimisation": false,
+    "train_id_count": 11628,
+    "train_ids_sha256": "b81dbd0033522418ff4ded6854e2a58439b537944c8d7f7c5ebda0a613c07451",
+    "validation_id_count": 1303,
+    "validation_ids_sha256": "881151562d3048e9fe4622e53d3880f99f1529880c198ef9be0ffcdb87988a6e",
+    "visual_source": "facebook/dinov2-base"
+  },
+  "note": "No test labels or test retrieval metrics are used during fitting.",
+  "protocol": "protocol-v0.4"
+}

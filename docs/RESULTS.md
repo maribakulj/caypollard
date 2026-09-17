@@ -288,6 +288,45 @@ the control came out reliably *more* similar to the query than the positive was.
 which the design requires at chance, read 0.395-0.468. Balancing the draw fixes it, and raises
 the Iconclass figures — which is what made the two controls above necessary.
 
+## Phase 6 — the learned model loses to the transparent one
+
+Projection heads over frozen encoders, trained with symmetric InfoNCE and in-batch negatives on
+the 11 628 Iconclass images carrying both modalities, three seeds by two capacities, checkpoint
+selected on validation loss. Test metrics against the transparent baselines, paired over the
+same queries:
+
+| method | nDCG@10 | MAP | vs late fusion, nDCG | vs late fusion, MAP |
+| --- | ---: | ---: | --- | --- |
+| visual only | 0.5639 | 0.2220 | — | — |
+| **late fusion** | **0.6026** | 0.2411 | — | — |
+| learned, linear heads | 0.5975 | **0.2643** | −0.0051, p = 0.0010, d = −0.081 | **+0.0231, p = 0.0001, d = 0.259** |
+| learned, MLP heads | 0.5892 | 0.2496 | −0.0134, p = 0.0001, d = −0.177 | +0.0085, p = 0.0001, d = 0.114 |
+
+The learned space **trades graded relevance for exact-label precision**: it loses the primary
+endpoint by a negligible margin and wins MAP by a small-to-moderate one. Across three seeds the
+spread is 0.0006 of nDCG, so this is not seed noise. The capacity ablation runs the wrong way —
+the MLP is worse than the linear head on both metrics — and the collapse diagnostics say why:
+effective rank falls from 20.5 of 128 dimensions for the linear head to 15.3 for the MLP.
+
+**Training never generalises past the first epoch.** Train loss falls monotonically from 4.57 to
+1.94 while validation loss rises monotonically from 7.79, so early stopping selects epoch 1 in
+all six runs. The objective asks a projection to match an item's visual vector to its own graph
+vector, and that graph vector is essentially the item's *volume identity*. The split is
+group-aware, so no validation volume appears in training, and predicting an unseen volume from
+pixels is exactly the thing that cannot transfer. The model is behaving correctly; the task is
+ill-posed for this graph.
+
+**On hard positives it reproduces the artifact rather than escaping it.** The aligned space
+scores 0.701 against matched controls and 0.653 on cross-volume pairs — but it is a function of
+`G1`, which holds no path between volumes, so the cross-volume figure is the same embedding
+artifact documented above, inherited. There is no interpretable hard-case behaviour to report.
+
+**Verdict against the phase-6 exit criterion.** The criterion asks the learned model to beat the
+strongest simple fusion on at least one central preregistered metric *and* retain interpretable
+behaviour on hard pairs. The first half is met on MAP; the second is not. The roadmap's stop
+condition therefore applies: **the transparent method is preferred**, and the MAP result is
+recorded as a genuine but narrow advantage rather than a reason to build further.
+
 ## Two annotation artifacts found along the way
 
 Both had the same signature — one label shared by thousands of unrelated objects, silently
