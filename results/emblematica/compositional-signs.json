@@ -1,0 +1,33 @@
+{
+  "manifest": "data/derived/emblematica-eval/manifest.jsonl",
+  "k": 20,
+  "hidden_sign": "the rarest notation the item carries",
+  "same_volume_neighbours": "excluded",
+  "results": {
+    "base": {
+      "vocabulary": 3733,
+      "n_queries": 2712,
+      "hits_at_1": 0.0007,
+      "hits_at_10": 0.0291,
+      "mrr": 0.0075
+    },
+    "qualified": {
+      "vocabulary": 9630,
+      "n_queries": 2712,
+      "hits_at_1": 0.0011,
+      "hits_at_10": 0.0354,
+      "mrr": 0.0105
+    },
+    "pairs": {
+      "vocabulary": 15178,
+      "n_queries": 2712,
+      "hits_at_1": 0.0,
+      "hits_at_10": 0.0177,
+      "mrr": 0.0058
+    },
+    "prior de fréquence": {
+      "hits_at_10": 0.0313,
+      "n_queries": 2712
+    }
+  }
+}
