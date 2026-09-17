@@ -167,7 +167,7 @@
         "n_draws": 5
       }
     },
-    "fusion max (a=1.0)": {
+    "fusion max (a=1.0) = visuel seul": {
       "toutes_paires": {
         "auc": 0.5020576131687243,
         "ci_low": 0.43621399176954734,
@@ -319,7 +319,7 @@
             "n_resamples": 2000
           }
         },
-        "fusion max (a=1.0)": {
+        "fusion max (a=1.0) = visuel seul": {
           "toutes_paires": {
             "auc": 0.5020576131687243,
             "ci_low": 0.43621399176954734,
@@ -447,7 +447,7 @@
             "n_resamples": 2000
           }
         },
-        "fusion max (a=1.0)": {
+        "fusion max (a=1.0) = visuel seul": {
           "toutes_paires": {
             "auc": 0.5020576131687243,
             "ci_low": 0.4403292181069959,
@@ -575,7 +575,7 @@
             "n_resamples": 2000
           }
         },
-        "fusion max (a=1.0)": {
+        "fusion max (a=1.0) = visuel seul": {
           "toutes_paires": {
             "auc": 0.5020576131687243,
             "ci_low": 0.43621399176954734,
@@ -703,7 +703,7 @@
             "n_resamples": 2000
           }
         },
-        "fusion max (a=1.0)": {
+        "fusion max (a=1.0) = visuel seul": {
           "toutes_paires": {
             "auc": 0.5020576131687243,
             "ci_low": 0.4403292181069959,
@@ -831,7 +831,7 @@
             "n_resamples": 2000
           }
         },
-        "fusion max (a=1.0)": {
+        "fusion max (a=1.0) = visuel seul": {
           "toutes_paires": {
             "auc": 0.5020576131687243,
             "ci_low": 0.43621399176954734,

@@ -76,9 +76,9 @@ b010e0d671d0b65e03fa932b5d3ef12c3e64c7d4503367fc81ba165f22284a92     3117582  re
 b0263a2fa4d263c65dfd0ff7cd04e29b9a6b795d0f0eb74fecdec73d86d6f40b        1647  versioned  results/hard-pairs/clip-g1.json.metadata.json
 d25c7231310369769fb296671edb9af470665a428d80ef4bafb9fe188da5ec4b      336828  versioned  results/hard-pairs/dinov2-g1.json
 9c04ece932aa721f4272d118fdcf190425577f3856f7162726d0fbc269062596        1654  versioned  results/hard-pairs/dinov2-g1.json.metadata.json
-13112da811e8d8dbbcaf78d52d794261d4a047d9aa59e92dea78eb6feea1ec2d       25049  versioned  results/hard-pairs-fusion/iconclass-clip-vit-b32.json
+b87c0a79bd8ba0dad99d3f3c7686b7bca6715b2ddd0d0ecdae3634933dfcdcb1       25133  versioned  results/hard-pairs-fusion/iconclass-clip-vit-b32.json
 d50ebc91f19309d20a147d9b13a95fbe52eb5b81848fabd36becacead23c4d6d       24960  versioned  results/hard-pairs-fusion/iconclass-dinov2-base.json
-eb98fe639c520dcd7606a60ff69324d70eb2ead72b19f53558fecd1fb21bb37b       24793  versioned  results/hard-pairs-fusion/iconclass-siglip-base-224.json
+9cfa4d7f0d9e532428b820acc6cabe7b2aae5c52ae8fa9561c075a04fae06937       24877  versioned  results/hard-pairs-fusion/iconclass-siglip-base-224.json
 69205dd8d746fefad24c1cbd74b300c043dda793299b0b639358a1c42ca5f978        3047  versioned  results/metrics/iconclass_phase1_smoke.json
 cb40b985c8d1ca524d735716cc939ba969bcbd4e67269a8b77c029877e7d1cb5       26397  versioned  results/rank-changes/emblematica-clip-vit-b32.json
 cb7cd5545a185110b0e4717220f96092e7060a504ec0cb9f93ed1c023f57670d       24255  versioned  results/rank-changes/emblematica-dinov2-base.json

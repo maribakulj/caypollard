@@ -142,7 +142,12 @@ def main() -> None:
         }
         for rule in RULES:
             fused = combine(full_visual, full_graph, rule=rule, alpha=alphas[rule])
-            measurements[f"fusion {rule} (a={alphas[rule]})"] = (
+            # A rule whose validation-selected alpha is 0 or 1 is not a fusion at
+            # all: it reduces to one modality, and printing its identical numbers
+            # under a fusion heading invites reading a combination where none
+            # happened. The label says so.
+            collapse = {1.0: " = visuel seul", 0.0: " = graphe seul"}.get(alphas[rule], "")
+            measurements[f"fusion {rule} (a={alphas[rule]}){collapse}"] = (
                 fused[rows, positive_columns],
                 fused[rows, control_columns],
             )
