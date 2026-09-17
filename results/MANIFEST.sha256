@@ -86,6 +86,8 @@ c408c2a77d374ca4aa5e40833a5ce0ca478c64a3b5d4dd99bd6187b6a3e6ff5a      478079  ve
 03c0f14f191810b8ef1bc81993b12f00dadbd3e7634ce74069ff4b540b682790        1666  versioned  results/emblematica/hardpairs/clip-vit-b32.json.metadata.json
 bd6bec9c3b54a7814b45d212d5c7919436dd7a4a5bdb5b4e2a75f9ae5b098726      498319  versioned  results/emblematica/hardpairs/dinov2-base.json
 b09954b816b7811f1d9e58552bfb87f6dc62abff3d8e59cc6e40b1a7d5aac719        1664  versioned  results/emblematica/hardpairs/dinov2-base.json.metadata.json
+4aee84bd2b59d1a3b0117f3f8b47d50b822d744b93e71674f45f7111ebb7fb54        1375  versioned  results/emblematica/isotype-ceiling.json
+dab204422f9c74460170097c3f8fbbfd6b3e653dfe29ebef1e95475561d71307        1993  versioned  results/emblematica/isotype-vocabulary-size.json
 5b56bd4d4daf6c67d523f8a87b53a3e08d8634eb6e15fd82fb5b7a4d06214511        2590  versioned  results/emblematica/masked-recovery-crossbook.json
 4d422513d372a7ee85bc3fa14e866eae3187560c6d324ad4e2a035167739e13e        1787  versioned  results/emblematica/masked-recovery-debiased.json
 d510fe316da431cded63e3e17794cd84cd0e7ca75828b3bb04ff4fd472c7226d        2168  versioned  results/emblematica/masked-recovery.json

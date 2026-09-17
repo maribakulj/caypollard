@@ -1,0 +1,69 @@
+{
+  "manifest": "data/derived/emblematica-eval/manifest.jsonl",
+  "attribute": "collection",
+  "split": null,
+  "k": 10,
+  "results": {
+    "d1 (10 signes)": {
+      "n_items": 5889,
+      "majority_baseline": 0.5376,
+      "linear_probe_accuracy": 0.6876,
+      "knn_probe_accuracy": 0.6797,
+      "linear_above_majority": 0.15,
+      "knn_above_majority": 0.1421,
+      "neighbourhood_share": {
+        "collection": 0.6782,
+        "book_id": 0.284
+      }
+    },
+    "d2": {
+      "n_items": 5889,
+      "majority_baseline": 0.5376,
+      "linear_probe_accuracy": 0.7168,
+      "knn_probe_accuracy": 0.669,
+      "linear_above_majority": 0.1792,
+      "knn_above_majority": 0.1314,
+      "neighbourhood_share": {
+        "collection": 0.6859,
+        "book_id": 0.3264
+      }
+    },
+    "d3": {
+      "n_items": 5889,
+      "majority_baseline": 0.5376,
+      "linear_probe_accuracy": 0.7409,
+      "knn_probe_accuracy": 0.6607,
+      "linear_above_majority": 0.2033,
+      "knn_above_majority": 0.1231,
+      "neighbourhood_share": {
+        "collection": 0.7226,
+        "book_id": 0.3949
+      }
+    },
+    "d4": {
+      "n_items": 5889,
+      "majority_baseline": 0.5376,
+      "linear_probe_accuracy": 0.7638,
+      "knn_probe_accuracy": 0.6584,
+      "linear_above_majority": 0.2262,
+      "knn_above_majority": 0.1207,
+      "neighbourhood_share": {
+        "collection": 0.7259,
+        "book_id": 0.4054
+      }
+    },
+    "d6": {
+      "n_items": 5889,
+      "majority_baseline": 0.5376,
+      "linear_probe_accuracy": 0.7762,
+      "knn_probe_accuracy": 0.5998,
+      "linear_above_majority": 0.2386,
+      "knn_above_majority": 0.0622,
+      "neighbourhood_share": {
+        "collection": 0.7145,
+        "book_id": 0.4065
+      }
+    }
+  },
+  "reading": "A rendering has removed the confound only when the kNN probe falls to the majority baseline and the neighbourhood share falls with it. A linear probe dropping alone means the attribute was made unreadable, not absent."
+}
