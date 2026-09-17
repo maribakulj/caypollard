@@ -1,0 +1,1065 @@
+{
+  "label": "Emblematica · clip-vit-b32 · pure",
+  "visual": "results/emblematica/single/clip-vit-b32/per_query.jsonl",
+  "fused": "results/emblematica/fusion/clip-vit-b32-g-pure/fusion-evaluation.json",
+  "k": 10,
+  "n_queries": 2804,
+  "n_scorable": 2804,
+  "n_without_relevant_candidate": 0,
+  "movement": {
+    "queries_with_any_top_k_change": 1650,
+    "fraction_with_any_top_k_change": 0.5884450784593438,
+    "queries_reordered_only": 818,
+    "fraction_reordered_at_all": 0.8801711840228246,
+    "mean_items_swapped": 1.1965049928673324,
+    "median_items_swapped": 1.0,
+    "max_items_swapped": 10
+  },
+  "effect": {
+    "mean_delta_ndcg": 0.019010439007386547,
+    "ci95": [
+      0.016181696012787773,
+      0.02199473940757515
+    ],
+    "queries_improved": 808,
+    "queries_degraded": 509,
+    "queries_unchanged": 1487,
+    "mean_delta_where_changed": 0.03190305301092561,
+    "mean_delta_where_unchanged": 0.0005764588463471513,
+    "share_of_total_gain_from_top_decile": 0.45078966996255193
+  },
+  "promotion_quality": {
+    "mean_relevance_of_promoted": 0.7747637972228136,
+    "mean_relevance_of_dropped": 0.6104964517185084
+  },
+  "why_promoted": {
+    "notation et contexte": 2104,
+    "contexte bibliographique seul": 1247,
+    "aucun attribut partagé": 4
+  },
+  "largest_gains": [
+    {
+      "query_id": "emblematica:E028316",
+      "delta_ndcg": 0.7688,
+      "promoted": [
+        {
+          "item_id": "emblematica:E028368",
+          "relevance": 1.0,
+          "shares": [
+            "book_id FMOb",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E028324",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25G(+222), 25G31(BLACKBERRY-BUSH)",
+            "book_id FMOb",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E028335",
+          "relevance": 1.0,
+          "shares": [
+            "book_id FMOb",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E028361",
+          "relevance": 1.0,
+          "shares": [
+            "notation 11M31, 54E42",
+            "book_id FMOb",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E028321",
+          "relevance": 1.0,
+          "shares": [
+            "notation 11M31",
+            "book_id FMOb",
+            "collection Glasgow"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E020753",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E020646",
+          "relevance": 0.25,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E020663",
+          "relevance": 0.3333333333333333,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031337",
+          "relevance": 0.5,
+          "shares": [
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020672",
+          "relevance": 0.5,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020727",
+      "delta_ndcg": 0.6867,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020725",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020710",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020693",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020695",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020733",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031432",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031433",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031347",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E029893",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031508",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E004151",
+      "delta_ndcg": 0.6667,
+      "promoted": [
+        {
+          "item_id": "emblematica:E004105",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004095",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004109",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004146",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1, 86(...)",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004129",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E012192",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E012187",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E012164",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E012169",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E012162",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E004201",
+      "delta_ndcg": 0.6225,
+      "promoted": [
+        {
+          "item_id": "emblematica:E004179",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1, 86(...)",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004189",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1, 86(...)",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004206",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1, 86(...)",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004213",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1, 86(...)",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004204",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46A122(...)1, 86(...)",
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E022522",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E022521",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E022535",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E022511",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E022515",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E001329",
+      "delta_ndcg": 0.6225,
+      "promoted": [
+        {
+          "item_id": "emblematica:E001324",
+          "relevance": 1.0,
+          "shares": [
+            "notation 49L12(O), 49L17",
+            "book_id pyramisodersinnr00grie",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E001331",
+          "relevance": 1.0,
+          "shares": [
+            "notation 49L17",
+            "book_id pyramisodersinnr00grie",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E001327",
+          "relevance": 1.0,
+          "shares": [
+            "notation 49L17",
+            "book_id pyramisodersinnr00grie",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E001334",
+          "relevance": 1.0,
+          "shares": [
+            "notation 49L17",
+            "book_id pyramisodersinnr00grie",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E001328",
+          "relevance": 1.0,
+          "shares": [
+            "notation 49L17",
+            "book_id pyramisodersinnr00grie",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E009509",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E009593",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E009640",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E009400",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E009513",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E001247",
+      "delta_ndcg": 0.6144,
+      "promoted": [
+        {
+          "item_id": "emblematica:E001276",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31B8",
+            "book_id 634881906",
+            "collection HAB"
+          ]
+        },
+        {
+          "item_id": "emblematica:E001269",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31B8",
+            "book_id 634881906",
+            "collection HAB"
+          ]
+        },
+        {
+          "item_id": "emblematica:E001300",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31B8",
+            "book_id 634881906",
+            "collection HAB"
+          ]
+        },
+        {
+          "item_id": "emblematica:E001273",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31B8",
+            "book_id 634881906",
+            "collection HAB"
+          ]
+        },
+        {
+          "item_id": "emblematica:E001265",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31B8",
+            "book_id 634881906",
+            "collection HAB"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E005258",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection HAB"
+          ]
+        },
+        {
+          "item_id": "emblematica:E005250",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection HAB"
+          ]
+        },
+        {
+          "item_id": "emblematica:E005223",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection HAB"
+          ]
+        },
+        {
+          "item_id": "emblematica:E005196",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection HAB"
+          ]
+        },
+        {
+          "item_id": "emblematica:E005262",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection HAB"
+          ]
+        }
+      ]
+    }
+  ],
+  "largest_losses": [
+    {
+      "query_id": "emblematica:E004125",
+      "delta_ndcg": -0.2606,
+      "promoted": [
+        {
+          "item_id": "emblematica:E004182",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004148",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004205",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004140",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004114",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id delartdesdevises00lemoy",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E009586",
+          "relevance": 1.0,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E009287",
+          "relevance": 1.0,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E009604",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E009418",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E009559",
+          "relevance": 1.0,
+          "shares": [
+            "collection Illinois"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E029862",
+      "delta_ndcg": -0.2354,
+      "promoted": [
+        {
+          "item_id": "emblematica:E029963",
+          "relevance": 0.2,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029874",
+          "relevance": 1.0,
+          "shares": [
+            "notation 44B192",
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029964",
+          "relevance": 0.16666666666666666,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029968",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029869",
+          "relevance": 0.25,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031344",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25F32(CROW)(+1), 25F32(CROW)(+441), 25F32(CROW)(+53)",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020659",
+          "relevance": 0.14285714285714285,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031382",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031470",
+          "relevance": 1.0,
+          "shares": [
+            "notation 44B1",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031324",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25F31(+5262)",
+            "collection Glasgow"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E029859",
+      "delta_ndcg": -0.2153,
+      "promoted": [
+        {
+          "item_id": "emblematica:E029954",
+          "relevance": 0.2,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029916",
+          "relevance": 0.2,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029869",
+          "relevance": 0.16666666666666666,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029917",
+          "relevance": 0.2,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029967",
+          "relevance": 0.2,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031477",
+          "relevance": 0.25,
+          "shares": [
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020743",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031436",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031463",
+          "relevance": 1.0,
+          "shares": [
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031346",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31A2536, 31B623591, 41A251",
+            "collection Glasgow"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E029872",
+      "delta_ndcg": -0.1919,
+      "promoted": [
+        {
+          "item_id": "emblematica:E029932",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029945",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31D15(+89)",
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029929",
+          "relevance": 0.5,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029916",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H114",
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029946",
+          "relevance": 1.0,
+          "shares": [
+            "notation 41D27",
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031414",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H23",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031366",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25F(+342):31A2255, 25H114, 25H23",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031502",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25F(+342):31A2255, 25H23, 25H2311",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031357",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H114",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031380",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H114, 25H23, 41D27",
+            "collection Glasgow"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E029889",
+      "delta_ndcg": -0.1792,
+      "promoted": [
+        {
+          "item_id": "emblematica:E029882",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H114, 25H2322",
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029924",
+          "relevance": 0.16666666666666666,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029946",
+          "relevance": 1.0,
+          "shares": [
+            "notation 92C4",
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029920",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029890",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031405",
+          "relevance": 1.0,
+          "shares": [
+            "notation 13B, 13C31, 24A1",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031324",
+          "relevance": 1.0,
+          "shares": [
+            "notation 24A1",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031336",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031502",
+          "relevance": 1.0,
+          "shares": [
+            "notation 24A1",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031350",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Glasgow"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E029890",
+      "delta_ndcg": -0.1761,
+      "promoted": [
+        {
+          "item_id": "emblematica:E029896",
+          "relevance": 1.0,
+          "shares": [
+            "notation 24D",
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029954",
+          "relevance": 0.16666666666666666,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029960",
+          "relevance": 1.0,
+          "shares": [
+            "notation 26A",
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029921",
+          "relevance": 0.25,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029963",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E028288",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H2311, 26A, 26C",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E028360",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031475",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H23, 25H2311, 26A",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031402",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H23, 26A, 46C24(+63)",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031483",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H23, 26A, 46C24(+63)",
+            "collection Glasgow"
+          ]
+        }
+      ]
+    }
+  ]
+}

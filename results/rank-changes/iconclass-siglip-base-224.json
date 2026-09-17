@@ -1,0 +1,892 @@
+{
+  "label": "Iconclass · siglip-base-224 · G1",
+  "visual": "results/sensitivity/keep/sub/siglip-base-224/per_query.jsonl",
+  "fused": "results/sensitivity/keep/fusion/siglip-base-224/fusion-evaluation.json",
+  "k": 10,
+  "n_queries": 1714,
+  "n_scorable": 1706,
+  "n_without_relevant_candidate": 8,
+  "movement": {
+    "queries_with_any_top_k_change": 874,
+    "fraction_with_any_top_k_change": 0.5123094958968347,
+    "queries_reordered_only": 43,
+    "fraction_reordered_at_all": 0.5350058343057176,
+    "mean_items_swapped": 2.313012895662368,
+    "median_items_swapped": 1.0,
+    "max_items_swapped": 10
+  },
+  "effect": {
+    "mean_delta_ndcg": 0.026089374325439733,
+    "ci95": [
+      0.02117867495556297,
+      0.03126906652966606
+    ],
+    "queries_improved": 560,
+    "queries_degraded": 225,
+    "queries_unchanged": 921,
+    "mean_delta_where_changed": 0.05090565883138851,
+    "mean_delta_where_unchanged": 2.0344688181030723e-05,
+    "share_of_total_gain_from_top_decile": 0.3505411092802406
+  },
+  "promotion_quality": {
+    "mean_relevance_of_promoted": 0.4317528504046496,
+    "mean_relevance_of_dropped": 0.3106372558285888
+  },
+  "why_promoted": {
+    "contexte bibliographique seul": 1810,
+    "aucun attribut partagé": 1069,
+    "notation et contexte": 967,
+    "notation partagée seule": 100
+  },
+  "largest_gains": [
+    {
+      "query_id": "iconclass-ai:embstma_1667_pic224a.jpg",
+      "delta_ndcg": 0.7781,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic052a.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 41D211(+81)",
+            "book_id embstma_1667"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic008.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31A2511(+933), 41D211(+81), 41D233(+81)",
+            "book_id embstma_1667"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic050b.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31A244, 41D211(+81), 41D233(+81)",
+            "book_id embstma_1667"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic083.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 41D211(+81)",
+            "book_id embstma_1667"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic032.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31A2421, 31A244, 41D211(+81)",
+            "book_id embstma_1667"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:gri271934_pic079.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:gri271934_pic129.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:gri271934_pic120.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:gri271934_pic189.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:gri271934_pic140.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:hunterian_bn13_pic048.jpg",
+      "delta_ndcg": 0.7074,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:hunterian_bn13_pic075.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 83(OVID, Metamorphoses)",
+            "book_id hunterian_bn13"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:hunterian_bn13_pic180.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 83(OVID, Metamorphoses)",
+            "book_id hunterian_bn13"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:hunterian_bn13_pic127.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 83(OVID, Metamorphoses)",
+            "book_id hunterian_bn13"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:hunterian_bn13_pic086.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 83(OVID, Metamorphoses)",
+            "book_id hunterian_bn13"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:hunterian_bn13_pic211.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 83(OVID, Metamorphoses)",
+            "book_id hunterian_bn13"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:embhab_wa-6382_pic087.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_ma-732_pic038.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_wa-6382_pic273.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_wa-6382_pic021.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_ma-732_pic090.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:bsb00025600_560.jpg",
+      "delta_ndcg": 0.6993,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:bsb00025600_56.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C, 23O13",
+            "book_id bsb00025600"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_69.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C",
+            "book_id bsb00025600"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_561.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C",
+            "book_id bsb00025600"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_576.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C",
+            "book_id bsb00025600"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_585.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C",
+            "book_id bsb00025600"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:bsb00027852_596.jpg",
+          "relevance": 0.1,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027852_562.jpg",
+          "relevance": 0.125,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027852_589.jpg",
+          "relevance": 0.125,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027852_577.jpg",
+          "relevance": 0.125,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027894_54.jpg",
+          "relevance": 0.125,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:hab_xb6550_pic120.jpg",
+      "delta_ndcg": 0.649,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:hab_xb6550_pic080.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 41D221(HAT)",
+            "book_id hab_xb6550"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:hab_xb6550_pic050.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "book_id hab_xb6550"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:hab_xb6550_pic100.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "book_id hab_xb6550"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:hab_xb6550_pic138.jpg",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id hab_xb6550"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:hab_xb6550_pic068.jpg",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id hab_xb6550"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:bsb00031698_370.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00031698_209.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00031698_208.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00031698_336.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_ma-732_pic080.jpg",
+          "relevance": 0.3333333333333333,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:embstma_1667_pic166b.jpg",
+      "delta_ndcg": 0.6381,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic025.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 21C, 41B121, 41B162",
+            "book_id embstma_1667"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic142.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 26A",
+            "book_id embstma_1667"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic063.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 26A",
+            "book_id embstma_1667"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic032.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 26A",
+            "book_id embstma_1667"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic220.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 26A, 31A2763(+0)",
+            "book_id embstma_1667"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:gri271934_pic181.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:gri271934_pic102.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:gri271934_pic190.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:norris90200_pic191.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:gri271934_pic126.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:embhab_uh-103_pic096.jpg",
+      "delta_ndcg": 0.5659,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:embhab_uh-103_pic074.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 56F2, 92D1",
+            "book_id embhab_uh-103"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embhab_uh-103_pic062.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 56F2",
+            "book_id embhab_uh-103"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embhab_uh-103_pic084.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 56F2, 92D1",
+            "book_id embhab_uh-103"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embhab_uh-103_pic024.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 56F2, 92D1",
+            "book_id embhab_uh-103"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embhab_uh-103_pic060.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 56F2, 92D1",
+            "book_id embhab_uh-103"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:norris90200_pic158.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:gri271934_pic072.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_ma-732_pic070.jpg",
+          "relevance": 0.3333333333333333,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:gri271934_pic030.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic156a.jpg",
+          "relevance": 0.5,
+          "shares": []
+        }
+      ]
+    }
+  ],
+  "largest_losses": [
+    {
+      "query_id": "iconclass-ai:bsb00025969_261.jpg",
+      "delta_ndcg": -0.5755,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:bsb00026029_549.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00029709_117.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00026029_562.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027697_86.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00026029_860.jpg",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:embhab_xb-6512_pic145.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 12A4231"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00031698_88.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_61.jpg",
+          "relevance": 0.1111111111111111,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_638.jpg",
+          "relevance": 0.1111111111111111,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00031698_41.jpg",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:bsb00027894_22.jpg",
+      "delta_ndcg": -0.5591,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:bsb00027894_76.jpg",
+          "relevance": 0.1111111111111111,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027894_54.jpg",
+          "relevance": 0.125,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027894_53.jpg",
+          "relevance": 0.125,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027894_58.jpg",
+          "relevance": 0.1,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027894_84.jpg",
+          "relevance": 0.1111111111111111,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:bsb00025600_83.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 23O42"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_578.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 23O42"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_56.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 23O42"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_601.jpg",
+          "relevance": 0.2,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_69.jpg",
+          "relevance": 0.3333333333333333,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:bsb00027894_23.jpg",
+      "delta_ndcg": -0.5034,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:bsb00027894_76.jpg",
+          "relevance": 0.1111111111111111,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027894_53.jpg",
+          "relevance": 0.125,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027894_77.jpg",
+          "relevance": 0.1111111111111111,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027894_59.jpg",
+          "relevance": 0.125,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00027894_58.jpg",
+          "relevance": 0.1,
+          "shares": [
+            "book_id bsb00027894"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:bsb00025600_548.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 23O43"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_585.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 23O43"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_604.jpg",
+          "relevance": 0.2,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_129.jpg",
+          "relevance": 0.1,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00031698_206.jpg",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:bsb00024923_7.jpg",
+      "delta_ndcg": -0.4569,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:bsb00041184_238.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00026697_528.jpg",
+          "relevance": 0.1111111111111111,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00041184_88.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00024923_33.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C",
+            "book_id bsb00024923"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00024923_34.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C",
+            "book_id bsb00024923"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:bsb00025600_61.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C, 49D22"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_638.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C, 49D22"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_238.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C, 49D22"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_561.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00031296_102.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 49D22"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:embstma_add132_pic179.jpg",
+      "delta_ndcg": -0.43,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:embstma_add132_pic087.jpg",
+          "relevance": 0.14285714285714285,
+          "shares": [
+            "book_id embstma_add132"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:embhab_uh-103_pic088.jpg",
+          "relevance": 0.14285714285714285,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:uiuc_27171l979_pic027.jpg",
+          "relevance": 0.14285714285714285,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_uh-103_pic034.jpg",
+          "relevance": 0.14285714285714285,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_41-2-geom-4s_pic151.jpg",
+          "relevance": 0.1111111111111111,
+          "shares": []
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic161.jpg",
+          "relevance": 1.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_li6643-2_pic017.jpg",
+          "relevance": 1.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embstma_1667_pic052a.jpg",
+          "relevance": 0.14285714285714285,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:embhab_li6643-2_pic051.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25F23(LION)"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:uiuc_832w91o_pic08308.jpg",
+          "relevance": 1.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "iconclass-ai:bsb00024923_8.jpg",
+      "delta_ndcg": -0.4188,
+      "promoted": [
+        {
+          "item_id": "iconclass-ai:bsb00026697_528.jpg",
+          "relevance": 0.1111111111111111,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00041184_47.jpg",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00026697_116.jpg",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "iconclass-ai:bsb00024923_33.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C",
+            "book_id bsb00024923"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00041184_238.jpg",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "iconclass-ai:bsb00025600_638.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C, 49D22"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_61.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C, 49D22"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00025600_238.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 14C, 49D22"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00031335_73.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 49D22"
+          ]
+        },
+        {
+          "item_id": "iconclass-ai:bsb00031296_114.jpg",
+          "relevance": 1.0,
+          "shares": [
+            "notation 49D22"
+          ]
+        }
+      ]
+    }
+  ]
+}

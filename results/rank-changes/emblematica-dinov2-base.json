@@ -1,0 +1,968 @@
+{
+  "label": "Emblematica · dinov2-base · pure",
+  "visual": "results/emblematica/single/dinov2-base/per_query.jsonl",
+  "fused": "results/emblematica/fusion/dinov2-base-g-pure/fusion-evaluation.json",
+  "k": 10,
+  "n_queries": 2804,
+  "n_scorable": 2804,
+  "n_without_relevant_candidate": 0,
+  "movement": {
+    "queries_with_any_top_k_change": 1819,
+    "fraction_with_any_top_k_change": 0.6487161198288159,
+    "queries_reordered_only": 705,
+    "fraction_reordered_at_all": 0.9001426533523538,
+    "mean_items_swapped": 1.8890870185449358,
+    "median_items_swapped": 1.0,
+    "max_items_swapped": 10
+  },
+  "effect": {
+    "mean_delta_ndcg": 0.031331254434015604,
+    "ci95": [
+      0.027462908330615196,
+      0.03533897095716082
+    ],
+    "queries_improved": 939,
+    "queries_degraded": 542,
+    "queries_unchanged": 1323,
+    "mean_delta_where_changed": 0.04834433658126651,
+    "mean_delta_where_unchanged": -8.681300339495135e-05,
+    "share_of_total_gain_from_top_decile": 0.39683518491365816
+  },
+  "promotion_quality": {
+    "mean_relevance_of_promoted": 0.7196261136132761,
+    "mean_relevance_of_dropped": 0.5607644977052189
+  },
+  "why_promoted": {
+    "notation et contexte": 2897,
+    "contexte bibliographique seul": 2394,
+    "aucun attribut partagé": 6
+  },
+  "largest_gains": [
+    {
+      "query_id": "emblematica:E020741",
+      "delta_ndcg": 1.0,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020670",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020665",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020740",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020714",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020695",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031330",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031325",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031503",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031386",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031385",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020711",
+      "delta_ndcg": 1.0,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020656",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020725",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020649",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020684",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020713",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E029941",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E029913",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E028325",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031347",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E029949",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020709",
+      "delta_ndcg": 0.8611,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020740",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020739",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020755",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020687",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020676",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031456",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031367",
+          "relevance": 0.3333333333333333,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E029960",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031333",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031509",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020751",
+      "delta_ndcg": 0.8365,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020657",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020757",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020728",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020722",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020675",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031463",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E029954",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031385",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031391",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031436",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020746",
+      "delta_ndcg": 0.7682,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020648",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020706",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020740",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020672",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020643",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E029869",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031357",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E029948",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031504",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E028306",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020756",
+      "delta_ndcg": 0.7281,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020651",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020746",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020729",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020672",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020723",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E029942",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E028339",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031317",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031348",
+          "relevance": 0.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E029924",
+          "relevance": 0.0,
+          "shares": []
+        }
+      ]
+    }
+  ],
+  "largest_losses": [
+    {
+      "query_id": "emblematica:E029877",
+      "delta_ndcg": -0.429,
+      "promoted": [
+        {
+          "item_id": "emblematica:E029888",
+          "relevance": 0.14285714285714285,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029963",
+          "relevance": 0.25,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029857",
+          "relevance": 0.2,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029887",
+          "relevance": 0.16666666666666666,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029864",
+          "relevance": 0.14285714285714285,
+          "shares": [
+            "book_id A39a",
+            "collection Glasgow"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E001328",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46C215(ANCHOR), 54D5(+4)"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031324",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25F27(DOLPHIN)(+1), 25F27(DOLPHIN)(+5253), 44B10",
+            "collection Glasgow"
+          ]
+        },
+        {
+          "item_id": "emblematica:E009618",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46C215(ANCHOR)"
+          ]
+        },
+        {
+          "item_id": "emblematica:E004199",
+          "relevance": 0.08333333333333333,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E009634",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46C215(ANCHOR)"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020676",
+      "delta_ndcg": -0.3512,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020647",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020746",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020699",
+          "relevance": 1.0,
+          "shares": [
+            "notation 31D14",
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020653",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020691",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25I3",
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E029876",
+          "relevance": 1.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E029883",
+          "relevance": 1.0,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031504",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25H114, 25I12"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031363",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25I12"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031341",
+          "relevance": 1.0,
+          "shares": []
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020652",
+      "delta_ndcg": -0.3469,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020653",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25I9",
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020662",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020737",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020730",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020724",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E028310",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25I9"
+          ]
+        },
+        {
+          "item_id": "emblematica:E028346",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46B3311"
+          ]
+        },
+        {
+          "item_id": "emblematica:E028314",
+          "relevance": 1.0,
+          "shares": [
+            "notation 25I9"
+          ]
+        },
+        {
+          "item_id": "emblematica:E011019",
+          "relevance": 0.3333333333333333,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E011020",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46B3311"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020692",
+      "delta_ndcg": -0.3019,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020735",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020721",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020713",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020709",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020645",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031361",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46C131613"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031359",
+          "relevance": 0.25,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E029891",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46C13142"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029907",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46C13142"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029962",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46C131613"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020688",
+      "delta_ndcg": -0.2948,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020709",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020722",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020755",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020647",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020739",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E029962",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46C131"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031361",
+          "relevance": 1.0,
+          "shares": [
+            "notation 46C131"
+          ]
+        },
+        {
+          "item_id": "emblematica:E031333",
+          "relevance": 1.0,
+          "shares": [
+            "notation 45C221"
+          ]
+        },
+        {
+          "item_id": "emblematica:E029925",
+          "relevance": 0.5,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E031389",
+          "relevance": 1.0,
+          "shares": [
+            "notation 45C221"
+          ]
+        }
+      ]
+    },
+    {
+      "query_id": "emblematica:E020673",
+      "delta_ndcg": -0.2879,
+      "promoted": [
+        {
+          "item_id": "emblematica:E020645",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020648",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020757",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020722",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        },
+        {
+          "item_id": "emblematica:E020725",
+          "relevance": 0.3333333333333333,
+          "shares": [
+            "book_id emblemataphysico00taur",
+            "collection Illinois"
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "item_id": "emblematica:E031372",
+          "relevance": 0.16666666666666666,
+          "shares": []
+        },
+        {
+          "item_id": "emblematica:E010925",
+          "relevance": 1.0,
+          "shares": [
+            "notation 41A12"
+          ]
+        },
+        {
+          "item_id": "emblematica:E010926",
+          "relevance": 1.0,
+          "shares": [
+            "notation 41A12"
+          ]
+        },
+        {
+          "item_id": "emblematica:E011129",
+          "relevance": 1.0,
+          "shares": [
+            "notation 41A12"
+          ]
+        },
+        {
+          "item_id": "emblematica:E011130",
+          "relevance": 1.0,
+          "shares": [
+            "notation 41A12"
+          ]
+        }
+      ]
+    }
+  ]
+}
