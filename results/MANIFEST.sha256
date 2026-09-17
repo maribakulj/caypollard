@@ -277,7 +277,13 @@ de4347825eb3ded6994d184352b253f175f9a856a45866f684c43df20e7c9c7a        3486  ve
 c64d8c0008eaedb439847ad38a1e5a0052a1607c5341d4611afea8cc39c11059      196036  versioned  results/sensitivity/strip/sub/siglip-base-224/per_query.csv
 ae9c24f589c0df03335f7ba36a8d13302bd7430d34476d2e7368df1bc39c57ce     3079871  rebuild    results/sensitivity/strip/sub/siglip-base-224/per_query.jsonl
 86dd033f39cad48a0e46215e41294694c008df7a633ab643ab838f4557a6e6c8        4437  versioned  results/sensitivity/strip/sub/siglip-base-224/summary.json
+3f285df152d673d4af60b7b766c48e26513b87248ac840cec74695e13ae87396        1122  versioned  results/shapes/cross-medium-v1024.json
+d265a492fa3f09f8f1f127f7dd26e6f193b8619cde69518ea24ee0cf3f48ed33        1121  versioned  results/shapes/cross-medium-v128.json
 9042262cdb3216b3afa0ed07c25bc53092e16d1658f32e043fe3bb28ba833225        1121  versioned  results/shapes/cross-medium-v256.json
+4ca7ed4595ccb5b6f50cbeff4da2b8f05707dd3443482aae3ede4a14eb04690a        1122  versioned  results/shapes/cross-medium-v512.json
+04d2c2b62a1175b7e73f8e8f74b828ed55d7391e3a78d8718abd5b20748bf10e        1119  versioned  results/shapes/cross-medium-v64-shape-relations.json
+e6dc2c556c674a13a82473acec108c6dc3e67a07c2bce699c9aba8a408875847        1122  versioned  results/shapes/cross-medium-v64-shape-signs.json
+0250b7791bee28c20e7284e44dd3dae1546500821562994f23792f836a7187b0        1121  versioned  results/shapes/cross-medium-v64.json
 64a5925416637d21bf563f19bccf8c4e4ef6452b6e82645da4d99fe75cbca245        1712  versioned  results/stratified/analyse-emblematica-clip-vit-b32.json
 637de2ad232f3dddb98ea0a1c8610a7344837f2ff497d31d27848ea067f07cbd        1762  versioned  results/stratified/analyse-emblematica-dinov2-base.json
 7cc8635d4abd029b0d5f3fda4d0f6c3b103f49f9e92483e77e241c20c6f473b1        1518  versioned  results/stratified/analyse-iconclass-clip-vit-b32.json
