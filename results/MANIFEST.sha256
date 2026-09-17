@@ -284,6 +284,10 @@ d265a492fa3f09f8f1f127f7dd26e6f193b8619cde69518ea24ee0cf3f48ed33        1121  ve
 04d2c2b62a1175b7e73f8e8f74b828ed55d7391e3a78d8718abd5b20748bf10e        1119  versioned  results/shapes/cross-medium-v64-shape-relations.json
 e6dc2c556c674a13a82473acec108c6dc3e67a07c2bce699c9aba8a408875847        1122  versioned  results/shapes/cross-medium-v64-shape-signs.json
 0250b7791bee28c20e7284e44dd3dae1546500821562994f23792f836a7187b0        1121  versioned  results/shapes/cross-medium-v64.json
+679b363752132a4659f3dfbe8b2ba4c33731a554aaf05edd9bb882362745c7f3        1121  versioned  results/shapes/record-forme_+_palette___.json
+4682b53a62bf0c81d04ab298af6c3db113d3f8eea11fb8d094cb2e5d1d24aaf5        1121  versioned  results/shapes/record-forme_+_relations_.json
+3411f68dc6966bc9b97e4e83c058c6dfd8f4400cc4b8e8dd0f442a0391fc9a7d        1122  versioned  results/shapes/record-forme_seule_______.json
+f5c5b8327491e6eaba732c58fe6a98f55dd057eddbf61a4d8d6930ee3da8a2c2        1121  versioned  results/shapes/record-les_trois_canaux__.json
 64a5925416637d21bf563f19bccf8c4e4ef6452b6e82645da4d99fe75cbca245        1712  versioned  results/stratified/analyse-emblematica-clip-vit-b32.json
 637de2ad232f3dddb98ea0a1c8610a7344837f2ff497d31d27848ea067f07cbd        1762  versioned  results/stratified/analyse-emblematica-dinov2-base.json
 7cc8635d4abd029b0d5f3fda4d0f6c3b103f49f9e92483e77e241c20c6f473b1        1518  versioned  results/stratified/analyse-iconclass-clip-vit-b32.json

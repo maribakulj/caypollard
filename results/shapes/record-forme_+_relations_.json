@@ -1,0 +1,31 @@
+{
+  "corpora": {
+    "emblemes": 2723,
+    "musee": 1864
+  },
+  "pooled_items": 4444,
+  "items_with_a_cross_medium_partner": 3092,
+  "shared_motifs": 3620,
+  "majority_baseline": 0.6022,
+  "k": 10,
+  "hub_size": 400,
+  "results": {
+    "pixels (DINOv2)": {
+      "linear_probe_corpus": 0.7759,
+      "knn_probe_corpus": 0.7502,
+      "median_rank_of_best_cross_medium_partner": 180,
+      "share_with_a_partner_in_top_10": 0.0634,
+      "share_with_a_partner_in_top_50": 0.2225,
+      "share_of_top_k_from_the_other_corpus": 0.2843
+    },
+    "isotype (signes)": {
+      "linear_probe_corpus": 0.9136,
+      "knn_probe_corpus": 0.9091,
+      "median_rank_of_best_cross_medium_partner": 84,
+      "share_with_a_partner_in_top_10": 0.1834,
+      "share_with_a_partner_in_top_50": 0.4104,
+      "share_of_top_k_from_the_other_corpus": 0.078
+    }
+  },
+  "reading": "The probe says how strongly the representation encodes the support; the median rank says whether a cross-medium relation is reachable at all. A representation that names the corpus perfectly and buries the partner has learned the material, not the motif."
+}
