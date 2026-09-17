@@ -14,7 +14,12 @@ from caypollard.benchmarks.hard_pairs import (
     write_hard_pairs,
 )
 from caypollard.embeddings.store import load_embedding_table
-from caypollard.graphs.iconclass import build_parent_index, child_edges, parse_notations
+from caypollard.graphs.iconclass import (
+    build_parent_index,
+    child_edges,
+    key_augmented_parents,
+    parse_notations,
+)
 from caypollard.provenance import read_jsonl
 
 
@@ -32,6 +37,20 @@ def main() -> None:
     parser.add_argument("--max-per-class", type=int, default=250)
     parser.add_argument("--semantic-close-min", type=float, default=0.5)
     parser.add_argument("--semantic-distant-max", type=float, default=0.2)
+    parser.add_argument(
+        "--stratum-key",
+        help="Restrict every mined pair to records sharing this manifest field "
+             "(e.g. 'collection'). Without it, 'visually distant' collapses into "
+             "'different holding library', because libraries scan differently.",
+    )
+    parser.add_argument(
+        "--key-policy",
+        choices=("strip", "keep"),
+        default="strip",
+        help="Relevance treatment of bracketed Iconclass text keys: 'strip' folds "
+             "86(MOTTO) onto 86 (protocol v0.1-v0.4); 'keep' attaches each observed "
+             "key as a child of its base notation (protocol v0.5).",
+    )
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--backend", choices=("numpy", "faiss"), default="numpy")
     args = parser.parse_args()
@@ -40,6 +59,10 @@ def main() -> None:
     records = read_jsonl(args.manifest)
     graph_records = parse_notations(args.notations)
     parents = build_parent_index(child_edges(graph_records))
+    if args.key_policy == "keep":
+        parents = key_augmented_parents(
+            parents, (label for row in records for label in row.get("iconclass", []))
+        )
     common = set(table.ids)
     validation_ids = sorted(
         str(record["id"])
@@ -71,6 +94,7 @@ def main() -> None:
         max_per_class=args.max_per_class,
         seed=args.seed,
         backend=args.backend,
+        stratum_key=args.stratum_key,
     )
     digest = write_hard_pairs(pairs, args.output)
     metadata = {

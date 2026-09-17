@@ -194,6 +194,7 @@ def mine_hard_pairs(
     max_per_class: int = 250,
     seed: int = 42,
     backend: str = "numpy",
+    stratum_key: str | None = None,
 ) -> tuple[list[HardPair], dict[str, Any]]:
     """Mine balanced visual/semantic agreement and disagreement pairs.
 
@@ -201,6 +202,15 @@ def mine_hard_pairs(
     candidates come from a local semantic BFS and are retained only when their
     visual score falls below the frozen distant threshold. Random candidates
     supply the easy-negative pool without an O(N²) scan.
+
+    ``stratum_key`` restricts every pair to items sharing that field, and exists
+    because without it the mined pairs measure digitisation format rather than
+    iconography. Holding libraries scan differently — full pages with a colour
+    chart and ruler in one, cropped picturae in another — so "visually distant"
+    silently becomes "different library": measured on the unstratified output,
+    247 of 250 hard positives crossed collections while 0 of 250 hard negatives
+    did. Mining within a stratum holds format constant, at the cost of a smaller
+    candidate pool.
     """
     if visual_top_k <= 0 or random_distant_per_query <= 0 or max_per_class <= 0:
         raise ValueError("candidate counts must be positive")
@@ -249,6 +259,11 @@ def mine_hard_pairs(
 
     def consider(query_id: str, candidate_id: str, score: float) -> None:
         if query_id == candidate_id:
+            return
+        if stratum_key is not None and (
+            by_id[query_id].get(stratum_key) != by_id[candidate_id].get(stratum_key)
+            or by_id[query_id].get(stratum_key) is None
+        ):
             return
         semantic = relevance.hierarchical_relevance(query_id, candidate_id)
         pair_class = classify_pair(score, semantic, thresholds)
@@ -321,6 +336,7 @@ def mine_hard_pairs(
         "method": "pre-fusion-hard-pair-mining",
         "seed": seed,
         "backend": backend,
+        "stratum_key": stratum_key,
         "thresholds": asdict(thresholds),
         "visual_top_k": visual_top_k,
         "random_distant_per_query": random_distant_per_query,
