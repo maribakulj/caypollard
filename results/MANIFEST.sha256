@@ -277,6 +277,8 @@ de4347825eb3ded6994d184352b253f175f9a856a45866f684c43df20e7c9c7a        3486  ve
 c64d8c0008eaedb439847ad38a1e5a0052a1607c5341d4611afea8cc39c11059      196036  versioned  results/sensitivity/strip/sub/siglip-base-224/per_query.csv
 ae9c24f589c0df03335f7ba36a8d13302bd7430d34476d2e7368df1bc39c57ce     3079871  rebuild    results/sensitivity/strip/sub/siglip-base-224/per_query.jsonl
 86dd033f39cad48a0e46215e41294694c008df7a633ab643ab838f4557a6e6c8        4437  versioned  results/sensitivity/strip/sub/siglip-base-224/summary.json
+d07a0984052c943c50a9bf3b94471faa4bf9ab7c049619750392fa1feb7c9787        1119  versioned  results/shapes/cross-medium-groups-r3.json
+a1b0e0d490ef7e02995065df5be7914b55bcaaf3a7f9ff657beda634e14f4526        1120  versioned  results/shapes/cross-medium-groups-r6.json
 3f285df152d673d4af60b7b766c48e26513b87248ac840cec74695e13ae87396        1122  versioned  results/shapes/cross-medium-v1024.json
 d265a492fa3f09f8f1f127f7dd26e6f193b8619cde69518ea24ee0cf3f48ed33        1121  versioned  results/shapes/cross-medium-v128.json
 9042262cdb3216b3afa0ed07c25bc53092e16d1658f32e043fe3bb28ba833225        1121  versioned  results/shapes/cross-medium-v256.json
