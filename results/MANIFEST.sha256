@@ -89,6 +89,7 @@ b09954b816b7811f1d9e58552bfb87f6dc62abff3d8e59cc6e40b1a7d5aac719        1664  ve
 5b56bd4d4daf6c67d523f8a87b53a3e08d8634eb6e15fd82fb5b7a4d06214511        2590  versioned  results/emblematica/masked-recovery-crossbook.json
 4d422513d372a7ee85bc3fa14e866eae3187560c6d324ad4e2a035167739e13e        1787  versioned  results/emblematica/masked-recovery-debiased.json
 d510fe316da431cded63e3e17794cd84cd0e7ca75828b3bb04ff4fd472c7226d        2168  versioned  results/emblematica/masked-recovery.json
+0942a15846c803350e60e9e329f5b131cf77a1a92bcf6f34ae2638f43cd99762        1717  versioned  results/emblematica/medium-probe.json
 5b96d5a0468b177b146351e012c2d46fc4984a5e315f5b434ca7bc956f6d341a         937  versioned  results/emblematica/modality-neighbours.json
 2fd4dc93e08ddbdb38bae88bbcd45e6bc7a07a0ec2d4b5dbebad9bc9c4abe3bf      357606  versioned  results/emblematica/single/clip-vit-b32/per_query.csv
 7aa236939a809cda8a30db2658f0bfc16b64f1040ac6e5516ff5b770724d4e01     4726348  rebuild    results/emblematica/single/clip-vit-b32/per_query.jsonl

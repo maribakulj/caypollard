@@ -1,0 +1,57 @@
+{
+  "manifest": "data/derived/emblematica-eval/manifest.jsonl",
+  "attribute": "collection",
+  "split": null,
+  "k": 10,
+  "results": {
+    "original": {
+      "n_items": 5889,
+      "majority_baseline": 0.5376,
+      "linear_probe_accuracy": 0.9477,
+      "knn_probe_accuracy": 0.901,
+      "linear_above_majority": 0.4101,
+      "knn_above_majority": 0.3634,
+      "neighbourhood_share": {
+        "collection": 0.9414,
+        "book_id": 0.8182
+      }
+    },
+    "projection latente": {
+      "n_items": 5889,
+      "majority_baseline": 0.5376,
+      "linear_probe_accuracy": 0.4377,
+      "knn_probe_accuracy": 0.8042,
+      "linear_above_majority": -0.0999,
+      "knn_above_majority": 0.2666,
+      "neighbourhood_share": {
+        "collection": 0.9009,
+        "book_id": 0.7919
+      }
+    },
+    "gris + carré (témoin)": {
+      "n_items": 5889,
+      "majority_baseline": 0.5376,
+      "linear_probe_accuracy": 0.9501,
+      "knn_probe_accuracy": 0.9249,
+      "linear_above_majority": 0.4125,
+      "knn_above_majority": 0.3873,
+      "neighbourhood_share": {
+        "collection": 0.9553,
+        "book_id": 0.842
+      }
+    },
+    "traits (edges)": {
+      "n_items": 5889,
+      "majority_baseline": 0.5376,
+      "linear_probe_accuracy": 0.9509,
+      "knn_probe_accuracy": 0.9319,
+      "linear_above_majority": 0.4133,
+      "knn_above_majority": 0.3943,
+      "neighbourhood_share": {
+        "collection": 0.9552,
+        "book_id": 0.8724
+      }
+    }
+  },
+  "reading": "A rendering has removed the confound only when the kNN probe falls to the majority baseline and the neighbourhood share falls with it. A linear probe dropping alone means the attribute was made unreadable, not absent."
+}
