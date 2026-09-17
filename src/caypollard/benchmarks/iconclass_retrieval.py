@@ -8,7 +8,7 @@ exact-label relevance judgements.
 from __future__ import annotations
 
 from collections import Counter, defaultdict, deque
-from collections.abc import Iterable, Sequence
+from collections.abc import Callable, Iterable, Sequence
 from dataclasses import asdict, dataclass
 from statistics import mean, median
 from typing import Any
@@ -258,12 +258,19 @@ def evaluate_iconclass_retrieval(
     persist_top_k: int = 10,
     batch_size: int = 128,
     backend: str = "numpy",
+    score_matrix_fn: Callable[[Sequence[str], Sequence[str]], np.ndarray] | None = None,
 ) -> tuple[dict[str, Any], list[QueryEvaluation]]:
     """Evaluate an embedding table against independent Iconclass relevance.
 
     Rankings are exact cosine rankings. Queries and candidates are ordered by
     identifier before matrix operations so ties remain deterministic across
     embedding-file row orders.
+
+    ``score_matrix_fn`` replaces the cosine product for fusion rules that are not
+    expressible as a single cosine space -- reciprocal rank fusion, elementwise
+    maximum -- while leaving relevance, metrics, strata and persistence on the
+    identical path, so a variant is comparable with the frozen baseline. The
+    table still supplies identifier alignment and the candidate ordering.
     """
     if not ks or any(k <= 0 for k in ks):
         raise ValueError("ks must contain positive integers")
@@ -275,6 +282,8 @@ def evaluate_iconclass_retrieval(
         raise ValueError("query_limit must be positive when supplied")
     if backend not in {"numpy", "faiss"}:
         raise ValueError("backend must be either 'numpy' or 'faiss'")
+    if score_matrix_fn is not None and backend != "numpy":
+        raise ValueError("score_matrix_fn requires the numpy backend")
 
     by_id = _validate_id_alignment(table, records)
     query_ids = _select_ids(table, by_id, split=query_split)
@@ -331,7 +340,12 @@ def evaluate_iconclass_retrieval(
         query_rows = np.asarray([row_for_id[item_id] for item_id in batch_ids], dtype=int)
         query_matrix = normalized[query_rows]
         if backend == "numpy":
-            score_matrix = query_matrix @ candidate_matrix.T
+            if score_matrix_fn is None:
+                score_matrix = query_matrix @ candidate_matrix.T
+            else:
+                score_matrix = np.asarray(score_matrix_fn(batch_ids, candidate_ids), dtype=float)
+                if score_matrix.shape != (len(batch_ids), len(candidate_ids)):
+                    raise ValueError("score_matrix_fn returned a matrix of the wrong shape")
             position_matrix = None
         else:
             assert faiss_index is not None

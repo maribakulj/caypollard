@@ -53,6 +53,7 @@ cdaed928f385569bc6717bed6c949eb9ba169b5950ca1abd9f1d99647277c45d    10075598  re
 843f6aa0eec6d815903a7dfacf52a68b9f5fb66fcbf3f03170af684cb16b6a0b     4240814  rebuild    results/fusion/siglip-base-224/fusion-evaluation.json
 f817d045e4ab7517f49ddcc314c7a30ef6d23c1edf53ce56066fc8d601ade146    10084387  rebuild    results/fusion/siglip-base-224/selected-fusion.npz
 88d162acd0db93e221b9e8f8fa76319042a1d8af4cdec349483e258f19194b40         685  versioned  results/fusion/siglip-base-224/selected-fusion.npz.metadata.json
+3d9f83c74562a6468c4c55d43c5aafe46545092a9b24957dbaff9c09391674fc        5854  versioned  results/fusion-variants/iconclass-dinov2.json
 15488425a7339ac4f91909e275bbd61af20f9b3e19712f2d6eeff6f058b5880e      195053  versioned  results/g1-subcorpus/clip-vit-b32/per_query.csv
 f4d887782dd7365f12120c229046a68729f617404a1cc7812fd50512863fdf1a     3082559  rebuild    results/g1-subcorpus/clip-vit-b32/per_query.jsonl
 86b8691fcb4e9989cfae6f0f998caea25d477c0a475b40ebd807a2553b09fb98        4555  versioned  results/g1-subcorpus/clip-vit-b32/summary.json
@@ -72,6 +73,7 @@ b010e0d671d0b65e03fa932b5d3ef12c3e64c7d4503367fc81ba165f22284a92     3117582  re
 b0263a2fa4d263c65dfd0ff7cd04e29b9a6b795d0f0eb74fecdec73d86d6f40b        1647  versioned  results/hard-pairs/clip-g1.json.metadata.json
 d25c7231310369769fb296671edb9af470665a428d80ef4bafb9fe188da5ec4b      336828  versioned  results/hard-pairs/dinov2-g1.json
 9c04ece932aa721f4272d118fdcf190425577f3856f7162726d0fbc269062596        1654  versioned  results/hard-pairs/dinov2-g1.json.metadata.json
+3ac0d89eeddf1100b337fe93e1d356c2a0361c9b44ee9b065717314a569c9ef5        3760  versioned  results/hard-pairs-fusion/iconclass-dinov2.json
 69205dd8d746fefad24c1cbd74b300c043dda793299b0b639358a1c42ca5f978        3047  versioned  results/metrics/iconclass_phase1_smoke.json
 cb40b985c8d1ca524d735716cc939ba969bcbd4e67269a8b77c029877e7d1cb5       26397  versioned  results/rank-changes/emblematica-clip-vit-b32.json
 cb7cd5545a185110b0e4717220f96092e7060a504ec0cb9f93ed1c023f57670d       24255  versioned  results/rank-changes/emblematica-dinov2-base.json
