@@ -20,6 +20,7 @@
     "max": 1.0,
     "product": 0.25
   },
+  "n_control_draws": 5,
   "mechanism": {
     "positive_shares_query_volume": 0.2058,
     "control_shares_query_volume": 0.3333,
@@ -40,6 +41,18 @@
         "ci_high": 0.5894039735099338,
         "n_pairs": 151,
         "n_resamples": 2000
+      },
+      "toutes_paires_across_draws": {
+        "mean": 0.5021,
+        "min": 0.5021,
+        "max": 0.5021,
+        "n_draws": 5
+      },
+      "hors_volume_commun_across_draws": {
+        "mean": 0.5119,
+        "min": 0.487,
+        "max": 0.527,
+        "n_draws": 5
       }
     },
     "graphe seul": {
@@ -56,6 +69,18 @@
         "ci_high": 0.6688741721854304,
         "n_pairs": 151,
         "n_resamples": 2000
+      },
+      "toutes_paires_across_draws": {
+        "mean": 0.4617,
+        "min": 0.4342,
+        "max": 0.4877,
+        "n_draws": 5
+      },
+      "hors_volume_commun_across_draws": {
+        "mean": 0.5439,
+        "min": 0.4968,
+        "max": 0.5927,
+        "n_draws": 5
       }
     },
     "fusion linear (a=0.25)": {
@@ -72,6 +97,18 @@
         "ci_high": 0.6490066225165563,
         "n_pairs": 151,
         "n_resamples": 2000
+      },
+      "toutes_paires_across_draws": {
+        "mean": 0.4716,
+        "min": 0.465,
+        "max": 0.4774,
+        "n_draws": 5
+      },
+      "hors_volume_commun_across_draws": {
+        "mean": 0.5516,
+        "min": 0.519,
+        "max": 0.5762,
+        "n_draws": 5
       }
     },
     "fusion rank_linear (a=0.75)": {
@@ -88,6 +125,18 @@
         "ci_high": 0.6357615894039735,
         "n_pairs": 151,
         "n_resamples": 2000
+      },
+      "toutes_paires_across_draws": {
+        "mean": 0.4609,
+        "min": 0.4403,
+        "max": 0.4774,
+        "n_draws": 5
+      },
+      "hors_volume_commun_across_draws": {
+        "mean": 0.5425,
+        "min": 0.5063,
+        "max": 0.5676,
+        "n_draws": 5
       }
     },
     "fusion rrf (a=0.5)": {
@@ -104,6 +153,18 @@
         "ci_high": 0.5960264900662252,
         "n_pairs": 151,
         "n_resamples": 2000
+      },
+      "toutes_paires_across_draws": {
+        "mean": 0.4395,
+        "min": 0.4156,
+        "max": 0.4568,
+        "n_draws": 5
+      },
+      "hors_volume_commun_across_draws": {
+        "mean": 0.5148,
+        "min": 0.4805,
+        "max": 0.5473,
+        "n_draws": 5
       }
     },
     "fusion max (a=1.0)": {
@@ -120,6 +181,18 @@
         "ci_high": 0.5894039735099338,
         "n_pairs": 151,
         "n_resamples": 2000
+      },
+      "toutes_paires_across_draws": {
+        "mean": 0.5021,
+        "min": 0.5021,
+        "max": 0.5021,
+        "n_draws": 5
+      },
+      "hors_volume_commun_across_draws": {
+        "mean": 0.5119,
+        "min": 0.487,
+        "max": 0.527,
+        "n_draws": 5
       }
     },
     "fusion product (a=0.25)": {
@@ -136,7 +209,661 @@
         "ci_high": 0.6556291390728477,
         "n_pairs": 151,
         "n_resamples": 2000
+      },
+      "toutes_paires_across_draws": {
+        "mean": 0.465,
+        "min": 0.4527,
+        "max": 0.4815,
+        "n_draws": 5
+      },
+      "hors_volume_commun_across_draws": {
+        "mean": 0.541,
+        "min": 0.5127,
+        "max": 0.5828,
+        "n_draws": 5
       }
     }
-  }
+  },
+  "draws": [
+    {
+      "seed": 42,
+      "n_matched": 243,
+      "skipped": {
+        "unknown_item": 0,
+        "empty_stratum": 0,
+        "no_eligible_control": 7
+      },
+      "mechanism": {
+        "positive_shares_query_volume": 0.2058,
+        "control_shares_query_volume": 0.3333,
+        "n_cross_volume_pairs": 151
+      },
+      "auc": {
+        "visuel seul": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.43621399176954734,
+            "ci_high": 0.5638888888888883,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5099337748344371,
+            "ci_low": 0.4304635761589404,
+            "ci_high": 0.5894039735099338,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "graphe seul": {
+          "toutes_paires": {
+            "auc": 0.4876543209876543,
+            "ci_low": 0.4279835390946502,
+            "ci_high": 0.551440329218107,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5927152317880795,
+            "ci_low": 0.5165562913907285,
+            "ci_high": 0.6688741721854304,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion linear (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.4773662551440329,
+            "ci_low": 0.4156378600823045,
+            "ci_high": 0.5432098765432098,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5761589403973509,
+            "ci_low": 0.4966887417218543,
+            "ci_high": 0.6490066225165563,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rank_linear (a=0.75)": {
+          "toutes_paires": {
+            "auc": 0.46502057613168724,
+            "ci_low": 0.40329218106995884,
+            "ci_high": 0.5308641975308642,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5629139072847682,
+            "ci_low": 0.48344370860927155,
+            "ci_high": 0.6357615894039735,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rrf (a=0.5)": {
+          "toutes_paires": {
+            "auc": 0.4403292181069959,
+            "ci_low": 0.38271604938271603,
+            "ci_high": 0.50216049382716,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5231788079470199,
+            "ci_low": 0.44370860927152317,
+            "ci_high": 0.5960264900662252,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion max (a=1.0)": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.43621399176954734,
+            "ci_high": 0.5638888888888883,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5099337748344371,
+            "ci_low": 0.4304635761589404,
+            "ci_high": 0.5894039735099338,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion product (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.48148148148148145,
+            "ci_low": 0.41975308641975306,
+            "ci_high": 0.5473251028806584,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5827814569536424,
+            "ci_low": 0.5033112582781457,
+            "ci_high": 0.6556291390728477,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        }
+      }
+    },
+    {
+      "seed": 43,
+      "n_matched": 243,
+      "skipped": {
+        "unknown_item": 0,
+        "empty_stratum": 0,
+        "no_eligible_control": 7
+      },
+      "mechanism": {
+        "positive_shares_query_volume": 0.2058,
+        "control_shares_query_volume": 0.3045,
+        "n_cross_volume_pairs": 154
+      },
+      "auc": {
+        "visuel seul": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.4403292181069959,
+            "ci_high": 0.5637860082304527,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.487012987012987,
+            "ci_low": 0.4090909090909091,
+            "ci_high": 0.564935064935065,
+            "n_pairs": 154,
+            "n_resamples": 2000
+          }
+        },
+        "graphe seul": {
+          "toutes_paires": {
+            "auc": 0.434156378600823,
+            "ci_low": 0.3723765432098766,
+            "ci_high": 0.4958847736625514,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5097402597402597,
+            "ci_low": 0.43498376623376633,
+            "ci_high": 0.587743506493506,
+            "n_pairs": 154,
+            "n_resamples": 2000
+          }
+        },
+        "fusion linear (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.46502057613168724,
+            "ci_low": 0.40329218106995884,
+            "ci_high": 0.5267489711934157,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.538961038961039,
+            "ci_low": 0.461038961038961,
+            "ci_high": 0.6168831168831169,
+            "n_pairs": 154,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rank_linear (a=0.75)": {
+          "toutes_paires": {
+            "auc": 0.4403292181069959,
+            "ci_low": 0.3786008230452675,
+            "ci_high": 0.5020576131687243,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.512987012987013,
+            "ci_low": 0.43506493506493504,
+            "ci_high": 0.5909090909090909,
+            "n_pairs": 154,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rrf (a=0.5)": {
+          "toutes_paires": {
+            "auc": 0.4156378600823045,
+            "ci_low": 0.35390946502057613,
+            "ci_high": 0.4773662551440329,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.4805194805194805,
+            "ci_low": 0.4025974025974026,
+            "ci_high": 0.551948051948052,
+            "n_pairs": 154,
+            "n_resamples": 2000
+          }
+        },
+        "fusion max (a=1.0)": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.4403292181069959,
+            "ci_high": 0.5637860082304527,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.487012987012987,
+            "ci_low": 0.4090909090909091,
+            "ci_high": 0.564935064935065,
+            "n_pairs": 154,
+            "n_resamples": 2000
+          }
+        },
+        "fusion product (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.45267489711934156,
+            "ci_low": 0.39094650205761317,
+            "ci_high": 0.51440329218107,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5194805194805194,
+            "ci_low": 0.43506493506493504,
+            "ci_high": 0.5974025974025974,
+            "n_pairs": 154,
+            "n_resamples": 2000
+          }
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "n_matched": 243,
+      "skipped": {
+        "unknown_item": 0,
+        "empty_stratum": 0,
+        "no_eligible_control": 7
+      },
+      "mechanism": {
+        "positive_shares_query_volume": 0.2058,
+        "control_shares_query_volume": 0.3416,
+        "n_cross_volume_pairs": 148
+      },
+      "auc": {
+        "visuel seul": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.43621399176954734,
+            "ci_high": 0.5679012345679012,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.527027027027027,
+            "ci_low": 0.44594594594594594,
+            "ci_high": 0.6013513513513513,
+            "n_pairs": 148,
+            "n_resamples": 2000
+          }
+        },
+        "graphe seul": {
+          "toutes_paires": {
+            "auc": 0.46502057613168724,
+            "ci_low": 0.40329218106995884,
+            "ci_high": 0.5308641975308642,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5472972972972973,
+            "ci_low": 0.46621621621621623,
+            "ci_high": 0.6283783783783784,
+            "n_pairs": 148,
+            "n_resamples": 2000
+          }
+        },
+        "fusion linear (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.4732510288065844,
+            "ci_low": 0.411522633744856,
+            "ci_high": 0.5349794238683128,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5743243243243243,
+            "ci_low": 0.49324324324324326,
+            "ci_high": 0.6486486486486487,
+            "n_pairs": 148,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rank_linear (a=0.75)": {
+          "toutes_paires": {
+            "auc": 0.4691358024691358,
+            "ci_low": 0.4074074074074074,
+            "ci_high": 0.5308641975308642,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5675675675675675,
+            "ci_low": 0.4864864864864865,
+            "ci_high": 0.6420608108108099,
+            "n_pairs": 148,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rrf (a=0.5)": {
+          "toutes_paires": {
+            "auc": 0.4567901234567901,
+            "ci_low": 0.3950617283950617,
+            "ci_high": 0.522633744855967,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5472972972972973,
+            "ci_low": 0.46621621621621623,
+            "ci_high": 0.6217905405405396,
+            "n_pairs": 148,
+            "n_resamples": 2000
+          }
+        },
+        "fusion max (a=1.0)": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.43621399176954734,
+            "ci_high": 0.5679012345679012,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.527027027027027,
+            "ci_low": 0.44594594594594594,
+            "ci_high": 0.6013513513513513,
+            "n_pairs": 148,
+            "n_resamples": 2000
+          }
+        },
+        "fusion product (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.45267489711934156,
+            "ci_low": 0.39094650205761317,
+            "ci_high": 0.51440329218107,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5405405405405406,
+            "ci_low": 0.4527027027027027,
+            "ci_high": 0.6150337837837829,
+            "n_pairs": 148,
+            "n_resamples": 2000
+          }
+        }
+      }
+    },
+    {
+      "seed": 45,
+      "n_matched": 243,
+      "skipped": {
+        "unknown_item": 0,
+        "empty_stratum": 0,
+        "no_eligible_control": 7
+      },
+      "mechanism": {
+        "positive_shares_query_volume": 0.2058,
+        "control_shares_query_volume": 0.284,
+        "n_cross_volume_pairs": 158
+      },
+      "auc": {
+        "visuel seul": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.4403292181069959,
+            "ci_high": 0.5637860082304527,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5189873417721519,
+            "ci_low": 0.4430379746835443,
+            "ci_high": 0.5949367088607594,
+            "n_pairs": 158,
+            "n_resamples": 2000
+          }
+        },
+        "graphe seul": {
+          "toutes_paires": {
+            "auc": 0.4465020576131687,
+            "ci_low": 0.3868312757201646,
+            "ci_high": 0.5082304526748972,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.4968354430379747,
+            "ci_low": 0.4177215189873418,
+            "ci_high": 0.5696993670886072,
+            "n_pairs": 158,
+            "n_resamples": 2000
+          }
+        },
+        "fusion linear (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.46502057613168724,
+            "ci_low": 0.40329218106995884,
+            "ci_high": 0.5267489711934157,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5189873417721519,
+            "ci_low": 0.43670886075949367,
+            "ci_high": 0.5949367088607594,
+            "n_pairs": 158,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rank_linear (a=0.75)": {
+          "toutes_paires": {
+            "auc": 0.45267489711934156,
+            "ci_low": 0.3950617283950617,
+            "ci_high": 0.5102880658436214,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5063291139240507,
+            "ci_low": 0.43037974683544306,
+            "ci_high": 0.5822784810126582,
+            "n_pairs": 158,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rrf (a=0.5)": {
+          "toutes_paires": {
+            "auc": 0.448559670781893,
+            "ci_low": 0.3868312757201646,
+            "ci_high": 0.5102880658436214,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5063291139240507,
+            "ci_low": 0.43037974683544306,
+            "ci_high": 0.5822784810126582,
+            "n_pairs": 158,
+            "n_resamples": 2000
+          }
+        },
+        "fusion max (a=1.0)": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.4403292181069959,
+            "ci_high": 0.5637860082304527,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5189873417721519,
+            "ci_low": 0.4430379746835443,
+            "ci_high": 0.5949367088607594,
+            "n_pairs": 158,
+            "n_resamples": 2000
+          }
+        },
+        "fusion product (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.4609053497942387,
+            "ci_low": 0.3991769547325103,
+            "ci_high": 0.522633744855967,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5126582278481012,
+            "ci_low": 0.43037974683544306,
+            "ci_high": 0.5886075949367089,
+            "n_pairs": 158,
+            "n_resamples": 2000
+          }
+        }
+      }
+    },
+    {
+      "seed": 46,
+      "n_matched": 243,
+      "skipped": {
+        "unknown_item": 0,
+        "empty_stratum": 0,
+        "no_eligible_control": 7
+      },
+      "mechanism": {
+        "positive_shares_query_volume": 0.2058,
+        "control_shares_query_volume": 0.3128,
+        "n_cross_volume_pairs": 151
+      },
+      "auc": {
+        "visuel seul": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.43621399176954734,
+            "ci_high": 0.5637860082304527,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5165562913907285,
+            "ci_low": 0.44354304635761616,
+            "ci_high": 0.5960264900662252,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "graphe seul": {
+          "toutes_paires": {
+            "auc": 0.47530864197530864,
+            "ci_low": 0.40946502057613166,
+            "ci_high": 0.5390946502057613,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5728476821192053,
+            "ci_low": 0.49337748344370863,
+            "ci_high": 0.6456953642384106,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion linear (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.4773662551440329,
+            "ci_low": 0.411522633744856,
+            "ci_high": 0.5390946502057613,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5496688741721855,
+            "ci_low": 0.47019867549668876,
+            "ci_high": 0.6291390728476821,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rank_linear (a=0.75)": {
+          "toutes_paires": {
+            "auc": 0.4773662551440329,
+            "ci_low": 0.41975308641975306,
+            "ci_high": 0.5390946502057613,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5629139072847682,
+            "ci_low": 0.48344370860927155,
+            "ci_high": 0.6423841059602649,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion rrf (a=0.5)": {
+          "toutes_paires": {
+            "auc": 0.43621399176954734,
+            "ci_low": 0.37448559670781895,
+            "ci_high": 0.49794238683127573,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5165562913907285,
+            "ci_low": 0.4370860927152318,
+            "ci_high": 0.5960264900662252,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion max (a=1.0)": {
+          "toutes_paires": {
+            "auc": 0.5020576131687243,
+            "ci_low": 0.43621399176954734,
+            "ci_high": 0.5637860082304527,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5165562913907285,
+            "ci_low": 0.44354304635761616,
+            "ci_high": 0.5960264900662252,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        },
+        "fusion product (a=0.25)": {
+          "toutes_paires": {
+            "auc": 0.4773662551440329,
+            "ci_low": 0.4156378600823045,
+            "ci_high": 0.5390946502057613,
+            "n_pairs": 243,
+            "n_resamples": 2000
+          },
+          "hors_volume_commun": {
+            "auc": 0.5496688741721855,
+            "ci_low": 0.47019867549668876,
+            "ci_high": 0.6291390728476821,
+            "n_pairs": 151,
+            "n_resamples": 2000
+          }
+        }
+      }
+    }
+  ]
 }
