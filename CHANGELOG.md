@@ -1,5 +1,62 @@
 # Changelog
 
+## 0.7.0 — 2026-09-17
+
+Three phases close and one central claim is overturned. The release is dominated by controls
+that were missing rather than by new capability.
+
+### Added
+
+- **a third corpus.** 1 864 Rijksmuseum works ingested from Wikidata and Wikimedia Commons with
+  no API key, subject terms joined to Iconclass through Wikidata's P1256, zero group and checksum
+  leakage. See [`RIJKSMUSEUM_DATA_CARD.md`](docs/RIJKSMUSEUM_DATA_CARD.md);
+- **the text modality** the model matrix has declared since phase 0 with nothing behind it:
+  multilingual sentence encoders with mean pooling over the attention mask, filling T, V+T, G+T
+  and V+G+T for the first time;
+- **four fusion rules beside the weighted sum** — rank-linear, reciprocal rank, elementwise
+  maximum and geometric mean — each run through the identical calibration and evaluation path;
+- **visually matched controls** (`benchmarks.matched_controls`) with a balanced caliper draw,
+  repeated across seeds;
+- **the expert evaluation, built and tested end to end**: Krippendorff's alpha with an ordinal
+  difference function, Kendall's tau-b, item-level disagreement analysis, a blinded package
+  builder and its sealed key. See
+  [`EXPERT_EVALUATION_PROTOCOL.md`](docs/EXPERT_EVALUATION_PROTOCOL.md);
+- [`POSITIONING.md`](docs/POSITIONING.md), stating how retrieval differs from KG completion;
+- the Wikidata concept alignment: 4 125 Iconclass notations, reaching 37.5% of Iconclass
+  assignments and 28.2% of Emblematica's.
+
+### Changed
+
+- **H2 is not supported, and the reason is structural rather than empirical.** Two controls
+  overturned the previous reading. Volume size alone reaches AUC 0.578 on hard positives, a real
+  confound in the aggregate figures. And `G1` is a disjoint union of 1 246 components, one per
+  volume, with no path between items of different volumes — so the 0.649 it scores on such pairs
+  cannot be information. Emblematica's `pure` projection, where volumes genuinely are connected,
+  gives 0.505. Where the graph can carry cross-volume information it carries none; where it
+  appears to, it structurally cannot;
+- **the fusion gain does not transfer.** Of six encoder-by-graph conditions on the Rijksmuseum,
+  one gains, one loses significantly, three select `alpha = 1.0` — no fusion at all — and one is
+  inconclusive, against 9 of 9 gains on the two development corpora. Carrying the source `alpha`
+  across costs 0.095 to 0.143 of nDCG@10 at p = 0.0001;
+- **phase 6's stop condition applied.** The learned alignment beats late fusion on MAP (+0.0231,
+  d = 0.259) and loses the primary endpoint (-0.0051), while reproducing rather than escaping the
+  reachability artifact. Validation loss rises from the first epoch in all six runs. The
+  transparent method stands as the recommended system;
+- the phase-9 comparison is **declined**, with both reasons measured: the published dataset is
+  not linked from the paper, and Joconde's `Sujet_Represente` is a faceted free-text phrase with
+  58.3% of its terms occurring once, on which graded hierarchical relevance is undefined.
+
+### Fixed
+
+- **the matched-control draw was biased.** Hard positives sit in the low tail of the similarity
+  distribution, so a symmetric caliper offered more candidates above the target than below, and
+  controls came out reliably more similar to the query than the positives were. The visual arm,
+  which the design requires at chance, read 0.395-0.468; a balanced draw puts it at 0.500-0.502;
+- a quarter of the frozen Emblematica mottoes still carried undecoded character references, so a
+  text encoder read five literal characters where a letter belonged;
+- five `OPTIONAL` clauses in one Wikidata SPARQL query return 502; attributes are fetched one
+  property at a time.
+
 ## 0.6.0 — 2026-09-16
 
 ### Added
