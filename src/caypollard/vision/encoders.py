@@ -30,13 +30,32 @@ DEFAULT_MODELS: dict[str, VisionModelSpec] = {
 }
 
 
+def _projected_image_features(result: Any) -> Any:
+    """Return the projected image-feature tensor from ``get_image_features``.
+
+    Transformers 4.x returned the projected tensor directly. Transformers 5.x
+    returns the full vision output object with ``pooler_output`` replaced by the
+    projection, so the tensor has to be unwrapped. Both shapes are accepted
+    rather than pinning one major version, since the recorded library version in
+    the embedding metadata is what makes a run reproducible.
+    """
+    if hasattr(result, "detach"):
+        return result
+    pooled = getattr(result, "pooler_output", None)
+    if pooled is None:
+        raise TypeError(
+            f"get_image_features returned {type(result).__name__} without a pooler_output tensor"
+        )
+    return pooled
+
+
 class HuggingFaceVisionEncoder:
     """Thin adapter exposing a uniform ``encode`` method for baseline models."""
 
     def __init__(self, spec: VisionModelSpec, *, device: str = "auto") -> None:
         try:
             import torch
-            from transformers import AutoImageProcessor, AutoModel, AutoProcessor
+            from transformers import AutoImageProcessor, AutoModel
         except ImportError as exc:  # pragma: no cover - depends on optional extra
             raise RuntimeError(
                 "Install the vision dependencies with `uv sync --extra vision`"
@@ -45,19 +64,25 @@ class HuggingFaceVisionEncoder:
         self._torch = torch
         self.spec = spec
         if device == "auto":
-            device = "cuda" if torch.cuda.is_available() else "cpu"
+            if torch.cuda.is_available():
+                device = "cuda"
+            elif torch.backends.mps.is_available():
+                device = "mps"
+            else:
+                device = "cpu"
         self.device = device
 
         kwargs: dict[str, Any] = {}
         if spec.revision:
             kwargs["revision"] = spec.revision
 
-        if spec.family == "dinov2":
-            self.processor = AutoImageProcessor.from_pretrained(spec.model_id, **kwargs)
-        elif spec.family in {"clip", "siglip"}:
-            self.processor = AutoProcessor.from_pretrained(spec.model_id, **kwargs)
-        else:
+        if spec.family not in {"dinov2", "clip", "siglip"}:
             raise ValueError(f"Unsupported vision family: {spec.family}")
+        # Only images are ever encoded here, so the image processor is loaded
+        # directly rather than the multimodal wrapper. For CLIP and SigLIP the
+        # wrapper additionally pulls in a text tokenizer, which for SigLIP means
+        # a hard SentencePiece dependency for a branch that is never executed.
+        self.processor = AutoImageProcessor.from_pretrained(spec.model_id, **kwargs)
 
         self.model = AutoModel.from_pretrained(spec.model_id, **kwargs).to(device)
         self.model.eval()
@@ -96,7 +121,7 @@ class HuggingFaceVisionEncoder:
         inputs = {key: value.to(self.device) for key, value in inputs.items()}
         with torch.inference_mode():
             if self.spec.family in {"clip", "siglip"}:
-                features = self.model.get_image_features(**inputs)
+                features = _projected_image_features(self.model.get_image_features(**inputs))
             else:
                 output = self.model(**inputs)
                 features = output.last_hidden_state[:, 0]
