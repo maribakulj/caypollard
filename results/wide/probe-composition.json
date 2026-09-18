@@ -1,0 +1,33 @@
+{
+  "manifest": "data/derived/museums-v0.1/manifest.jsonl",
+  "attribute": "collection",
+  "split": null,
+  "k": 10,
+  "results": {
+    "composition": {
+      "n_items": 9756,
+      "majority_baseline": 0.4716,
+      "linear_probe_accuracy": 0.495,
+      "knn_probe_accuracy": 0.4858,
+      "linear_above_majority": 0.0234,
+      "knn_above_majority": 0.0141,
+      "neighbourhood_share": {
+        "collection": 0.4167,
+        "book_id": 0.0
+      }
+    },
+    "formes": {
+      "n_items": 8433,
+      "majority_baseline": 0.4459,
+      "linear_probe_accuracy": 0.4323,
+      "knn_probe_accuracy": 0.4016,
+      "linear_above_majority": -0.0135,
+      "knn_above_majority": -0.0442,
+      "neighbourhood_share": {
+        "collection": 0.3242,
+        "book_id": 0.0
+      }
+    }
+  },
+  "reading": "A rendering has removed the confound only when the kNN probe falls to the majority baseline and the neighbourhood share falls with it. A linear probe dropping alone means the attribute was made unreadable, not absent."
+}
