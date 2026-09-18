@@ -321,3 +321,7 @@ ebfee98f884f605525188fcd724125456fc065a04c448337ba5010e100534429        4476  ve
 a6b384d46cd92bcb4ec4291abf52da20b9efc54ea292b0e4e942fb841df23c87     1204813  versioned  results/visual-baseline/siglip-base-224/per_query.csv
 86b055bc55f36b53fd4a104dffb2bb164fe814dc20e59430fb9dea0c930487ca    16221266  rebuild    results/visual-baseline/siglip-base-224/per_query.jsonl
 3511748b70c8e36bbfb8e5aaf55b795ba44c0011e15a986b03a436c0c2af7fbd        4413  versioned  results/visual-baseline/siglip-base-224/summary.json
+7028d684d12caeb2bb8778db92eeea350c2b5ec32242d2e5f80d04ffc4986708        1123  versioned  results/wide/cross-medium-dinov2.json
+eaaf8dd12795ed1f2288a2c571ea20a98d498730838b567f302895e542d00946        1121  versioned  results/wide/cross-medium-formes.json
+6de390135a1a2659babf62c56262cc9407e64490a31fe64aa794febb8acb31bd        1059  versioned  results/wide/labels-dinov2.json
+d872e5d8d5f5177d5f36ee7c81c9435d3e079e0f20476b040bcdbeb1bf21613d        1087  versioned  results/wide/labels-formes.json

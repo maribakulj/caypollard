@@ -1,0 +1,43 @@
+{
+  "table": "data/derived/shapes/wide-groups/composite-signs.npz",
+  "k": 1,
+  "vocabulary": 30,
+  "min_support": 25,
+  "items_per_corpus": {
+    "emblemes": 1599,
+    "musees": 5016
+  },
+  "results": {
+    "emblemes → emblemes": {
+      "hits_at_k": 0.2508,
+      "mrr": 0.4539,
+      "n": 1599
+    },
+    "emblemes → musees": {
+      "hits_at_k": 0.0381,
+      "mrr": 0.1692,
+      "n": 5016
+    },
+    "musees → emblemes": {
+      "hits_at_k": 0.04,
+      "mrr": 0.1702,
+      "n": 1599
+    },
+    "musees → musees": {
+      "hits_at_k": 0.116,
+      "mrr": 0.2741,
+      "n": 5016
+    },
+    "prior → emblemes": {
+      "hits_at_k": 0.1088,
+      "mrr": 0.3182,
+      "n": 1599
+    },
+    "prior → musees": {
+      "hits_at_k": 0.3359,
+      "mrr": 0.5021,
+      "n": 5016
+    }
+  },
+  "reading": "The diagonal is learning within a corpus; the off-diagonal is whether the label crosses the medium. A model that transfers has learned the motif, one that does not has learned the workshop. The prior is what a model knowing only which notations are common would score."
+}

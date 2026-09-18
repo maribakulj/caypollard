@@ -1,0 +1,43 @@
+{
+  "table": "/tmp/dinov2-wide.npz",
+  "k": 1,
+  "vocabulary": 34,
+  "min_support": 25,
+  "items_per_corpus": {
+    "emblemes": 1685,
+    "musees": 5906
+  },
+  "results": {
+    "emblemes → emblemes": {
+      "hits_at_k": 0.7323,
+      "mrr": 0.8334,
+      "n": 1685
+    },
+    "emblemes → musees": {
+      "hits_at_k": 0.2486,
+      "mrr": 0.4075,
+      "n": 5906
+    },
+    "musees → emblemes": {
+      "hits_at_k": 0.3407,
+      "mrr": 0.4854,
+      "n": 1685
+    },
+    "musees → musees": {
+      "hits_at_k": 0.7183,
+      "mrr": 0.8266,
+      "n": 5906
+    },
+    "prior → emblemes": {
+      "hits_at_k": 0.1122,
+      "mrr": 0.3185,
+      "n": 1685
+    },
+    "prior → musees": {
+      "hits_at_k": 0.3425,
+      "mrr": 0.4997,
+      "n": 5906
+    }
+  },
+  "reading": "The diagonal is learning within a corpus; the off-diagonal is whether the label crosses the medium. A model that transfers has learned the motif, one that does not has learned the workshop. The prior is what a model knowing only which notations are common would score."
+}
