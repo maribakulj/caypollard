@@ -1,0 +1,58 @@
+{
+  "question": "Is medium-blindness antagonistic to naming, or were the two extremes badly placed?",
+  "method": "weighted concatenation of the composite shape record and a pooled DINOv2 embedding, judged by both referees at each weight: the kNN medium probe on the pooled corpora, and within-corpus supervised naming at hits@1, averaged over the two corpora",
+  "naming_prior": 0.377,
+  "majority_baseline_probe": 0.594,
+  "curve": [
+    {
+      "visual_weight": 0.0,
+      "probe": 0.609,
+      "rank": 156,
+      "cross_neighbours": 0.426,
+      "naming": 0.346
+    },
+    {
+      "visual_weight": 0.1,
+      "probe": 0.827,
+      "rank": 234,
+      "cross_neighbours": 0.194,
+      "naming": 0.43
+    },
+    {
+      "visual_weight": 0.25,
+      "probe": 0.827,
+      "rank": 234,
+      "cross_neighbours": 0.194,
+      "naming": 0.651
+    },
+    {
+      "visual_weight": 0.5,
+      "probe": 0.831,
+      "rank": 237,
+      "cross_neighbours": 0.19,
+      "naming": 0.79
+    },
+    {
+      "visual_weight": 1.0,
+      "probe": 0.89,
+      "rank": 309,
+      "cross_neighbours": 0.13,
+      "naming": 0.842
+    },
+    {
+      "visual_weight": 2.0,
+      "probe": 0.963,
+      "rank": 735,
+      "cross_neighbours": 0.047,
+      "naming": 0.843
+    },
+    {
+      "visual_weight": 4.0,
+      "probe": 0.973,
+      "rank": 829,
+      "cross_neighbours": 0.027,
+      "naming": 0.824
+    }
+  ],
+  "reading": "A real trade-off, and a steeply asymmetric one. Going from no visual weight to 0.1 costs 22 points of medium-blindness and buys 0.08 of naming, the worst exchange on the curve; going from 0.25 to 0.5 buys 0.14 of naming for 0.4 points of probe. Naming saturates near 0.84 from weight 1.0 while the probe keeps climbing to 97%. The efficient operating point sits near 0.5: 94% of the attainable naming at a probe of 83% rather than 97%, with seven times the cross-medium neighbours of a purely visual record. Neither extreme is on the frontier."
+}
