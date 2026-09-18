@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import collections
 import json
+import os
 import time
 import urllib.parse
 import urllib.request
@@ -115,7 +116,11 @@ def download(url: str, destination: Path, *, timeout: int, attempts: int = 4) ->
             return f"error {type(exc).__name__}"
         if not payload:
             return "empty"
-        staging = destination.with_suffix(destination.suffix + ".part")
+        # The staging name carries the process id. Two runs over the same
+        # directory -- which happens whenever a resume is launched before the
+        # previous one has finished -- otherwise write the same .part file, and
+        # the loser of the race fails renaming a path the winner already moved.
+        staging = destination.with_suffix(f"{destination.suffix}.{os.getpid()}.part")
         staging.write_bytes(payload)
         staging.replace(destination)
         return "downloaded"
