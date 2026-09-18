@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a Rijksmuseum transfer set from Wikidata and Commons, with no API key.
+"""Build a transfer set from any Wikidata collection and Commons, with no API key.
 
 Phase 8 asks whether the gains survive outside the cataloguing environment the
 method was developed in. The Rijksmuseum API needs a registered key, which would
@@ -30,7 +30,10 @@ from pathlib import Path
 from typing import Any
 
 SPARQL = "https://query.wikidata.org/sparql"
-RIJKSMUSEUM = "wd:Q190804"
+# The Rijksmuseum was the first collection ingested and remains the default, but
+# nothing in the pipeline is specific to it: any collection whose works carry a
+# Commons image and a depicts statement reaches Iconclass the same way.
+DEFAULT_COLLECTION = "wd:Q190804"
 USER_AGENT = "caypollard-research/0.6 (https://github.com/maribakulj/caypollard) python-urllib"
 
 WORKS_QUERY = """
@@ -79,32 +82,74 @@ def thumbnail_url(image: str, width: int) -> str:
     return f"https://commons.wikimedia.org/wiki/Special:FilePath/{quoted}?width={width}"
 
 
-def download(url: str, destination: Path, *, timeout: int) -> str:
+def download(url: str, destination: Path, *, timeout: int, attempts: int = 4) -> str:
+    """Fetch one image, reporting the status code and backing off when throttled.
+
+    Two lessons are encoded here, both learned the hard way. A failure must name
+    its HTTP status: a run that reports only "HTTPError" was once diagnosed as a
+    timeout, then as contention, and was actually a 404. And a burst of a couple
+    of thousand requests draws a 429 from Wikimedia that clears by itself, so the
+    right response is to wait and retry rather than to record two thousand
+    failures and move on.
+    """
     if destination.is_file() and destination.stat().st_size > 0:
         return "cached"
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            payload = response.read()
-    except Exception as exc:
-        return f"error {type(exc).__name__}"
-    if not payload:
-        return "empty"
-    staging = destination.with_suffix(destination.suffix + ".part")
-    staging.write_bytes(payload)
-    staging.replace(destination)
-    return "downloaded"
+    delay = 5.0
+    for attempt in range(1, attempts + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                payload = response.read()
+        except urllib.error.HTTPError as exc:
+            if exc.code in {429, 503} and attempt < attempts:
+                wait = float(exc.headers.get("Retry-After") or delay)
+                time.sleep(min(wait, 120.0))
+                delay *= 2
+                continue
+            return f"http {exc.code}"
+        except Exception as exc:
+            if attempt < attempts:
+                time.sleep(delay)
+                delay *= 2
+                continue
+            return f"error {type(exc).__name__}"
+        if not payload:
+            return "empty"
+        staging = destination.with_suffix(destination.suffix + ".part")
+        staging.write_bytes(payload)
+        staging.replace(destination)
+        return "downloaded"
+    return "exhausted"
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--collection",
+        default="Q190804",
+        help="Wikidata QID of the holding collection (P195)",
+    )
     parser.add_argument("--mapping", default="data/derived/iconclass-wikidata.jsonl")
     parser.add_argument("--output-dir", default="data/raw/rijksmuseum")
     parser.add_argument("--width", type=int, default=800)
-    parser.add_argument("--workers", type=int, default=3)
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=2,
+        help="Concurrent downloads. Three sustained over a couple of thousand "
+             "files drew a 429; two with backoff does not.",
+    )
     parser.add_argument("--timeout", type=int, default=60)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--skip-images", action="store_true")
+    parser.add_argument(
+        "--from-records",
+        action="store_true",
+        help="Download the images listed in an existing records.jsonl and query "
+             "nothing. Metadata and images are separate concerns and separating "
+             "them keeps a download from re-running a query that has already "
+             "succeeded -- and keeps a failed query from discarding a good file.",
+    )
     args = parser.parse_args()
 
     mapping: dict[str, set[str]] = collections.defaultdict(set)
@@ -115,9 +160,47 @@ def main() -> None:
         for entry in row["wikidata"]:
             mapping[entry["wikidata"]].add(row["notation"])
 
+    collection = args.collection
+    if not collection.startswith("wd:"):
+        collection = f"wd:{collection}"
     started = time.monotonic()
+
+    if args.from_records:
+        existing = Path(args.output_dir) / "records.jsonl"
+        records = [
+            json.loads(line)
+            for line in existing.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        images = Path(args.output_dir) / "images"
+        images.mkdir(parents=True, exist_ok=True)
+        statuses: collections.Counter[str] = collections.Counter()
+
+        def fetch_one(record: dict[str, Any]) -> str:
+            return download(
+                record["image_url"], images / record["filename"], timeout=args.timeout
+            )
+
+        with ThreadPoolExecutor(max_workers=args.workers) as pool:
+            for index, status in enumerate(pool.map(fetch_one, records), start=1):
+                statuses[status] += 1
+                if index % 500 == 0:
+                    print(f"{index}/{len(records)} — {dict(statuses)}", flush=True)
+        print(
+            json.dumps(
+                {
+                    "from_records": str(existing),
+                    "records": len(records),
+                    "image_download": dict(statuses),
+                    "elapsed_seconds": round(time.monotonic() - started, 1),
+                },
+                ensure_ascii=False,
+            )
+        )
+        return
+
     works: dict[str, dict[str, Any]] = {}
-    for row in sparql(WORKS_QUERY % RIJKSMUSEUM):
+    for row in sparql(WORKS_QUERY % collection):
         item = qid(row["work"]["value"])
         record = works.setdefault(
             item,
@@ -128,7 +211,7 @@ def main() -> None:
         record["iconclass"] |= mapping.get(subject, set())
 
     for field, prop in ATTRIBUTE_PROPERTIES.items():
-        for row in sparql(ATTRIBUTE_QUERY % (RIJKSMUSEUM, prop)):
+        for row in sparql(ATTRIBUTE_QUERY % (collection, prop)):
             item = qid(row["work"]["value"])
             if item not in works:
                 continue
@@ -199,6 +282,7 @@ def main() -> None:
         "mean_notations_per_record": round(
             sum(len(row["iconclass"]) for row in records) / max(len(records), 1), 3
         ),
+        "collection": args.collection,
         "thumbnail_width": args.width,
     }
     (output / "fetch-report.json").write_text(
