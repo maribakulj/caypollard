@@ -164,7 +164,9 @@ def main() -> None:
     counts: list[int] = []
     with output.open("w", encoding="utf-8") as handle:
         for record in records:
-            path = source / str(record["filename"])
+                # As in embed_images: a merged manifest knows where its images are.
+            recorded = record.get("image_path")
+            path = Path(recorded) if recorded else source / str(record["filename"])
             if not path.is_file():
                 skipped += 1
                 continue

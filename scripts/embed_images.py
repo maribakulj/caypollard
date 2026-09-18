@@ -141,7 +141,11 @@ def main() -> None:
                 raise ValueError("manifest rows require id and filename fields")
             if str(item_id) in encoded:
                 continue
-            image_path = args.image_dir / str(filename)
+            # A merged manifest spans several source directories and records
+            # where each image actually is; a single-corpus one does not, and
+            # falls back to the directory given on the command line.
+            recorded = record.get('image_path')
+            image_path = Path(recorded) if recorded else args.image_dir / str(filename)
             if not image_path.is_file():
                 missing.append(str(filename))
                 continue
