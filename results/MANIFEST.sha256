@@ -325,4 +325,5 @@ a6b384d46cd92bcb4ec4291abf52da20b9efc54ea292b0e4e942fb841df23c87     1204813  ve
 eaaf8dd12795ed1f2288a2c571ea20a98d498730838b567f302895e542d00946        1121  versioned  results/wide/cross-medium-formes.json
 6de390135a1a2659babf62c56262cc9407e64490a31fe64aa794febb8acb31bd        1059  versioned  results/wide/labels-dinov2.json
 d872e5d8d5f5177d5f36ee7c81c9435d3e079e0f20476b040bcdbeb1bf21613d        1087  versioned  results/wide/labels-formes.json
+9343eddc809fdfdb67db87297c4fb7aff9845c4f056c398ad514ad158c1878b3      329307  versioned  results/wide/sign-names.json
 7d35190fde3dc4cbf337ab57770753f9e2dd8e707896acaaab644092a3da20c7        1968  versioned  results/wide/tradeoff-curve.json
