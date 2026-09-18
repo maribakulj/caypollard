@@ -1,0 +1,57 @@
+{
+  "pool": "2 723 cropped emblem prints and 9 756 works from eight museums, 12 479 items",
+  "majority_baseline_probe": 0.782,
+  "naming_prior_on_emblems": 0.109,
+  "transfer_direction": "trained on museums, tested on emblems -- the direction that works; the reverse fails because the emblem side is two collections of prints and does not generalise",
+  "curve": [
+    {
+      "visual_weight": 0.0,
+      "probe": 0.728,
+      "rank": 500,
+      "cross_neighbours": 0.32,
+      "transfer": 0.04,
+      "within": 0.116
+    },
+    {
+      "visual_weight": 0.25,
+      "probe": 0.885,
+      "rank": 409,
+      "cross_neighbours": 0.151,
+      "transfer": 0.201,
+      "within": 0.598
+    },
+    {
+      "visual_weight": 0.5,
+      "probe": 0.889,
+      "rank": 409,
+      "cross_neighbours": 0.144,
+      "transfer": 0.289,
+      "within": 0.692
+    },
+    {
+      "visual_weight": 1.0,
+      "probe": 0.926,
+      "rank": 451,
+      "cross_neighbours": 0.095,
+      "transfer": 0.328,
+      "within": 0.742
+    },
+    {
+      "visual_weight": 2.0,
+      "probe": 0.962,
+      "rank": 974,
+      "cross_neighbours": 0.038,
+      "transfer": 0.346,
+      "within": 0.757
+    },
+    {
+      "visual_weight": 4.0,
+      "probe": 0.97,
+      "rank": 1143,
+      "cross_neighbours": 0.022,
+      "transfer": 0.356,
+      "within": 0.751
+    }
+  ],
+  "reading": "The mixture beats both pure representations at finding a cross-medium iconographic partner: median rank 409 at weights 0.25 to 0.5, against 500 for shapes alone and 1 143 for the visual encoder alone. On the narrow corpus the extremes bracketed the mixture; on the widened one the mixture dominates them, which is complementarity rather than trade-off and is the measurement that justifies separate channels. Weight 0.5 gives the best rank, 81% of the attainable transfer and a probe of 88.9% rather than 97.0%; weight 1.0 gives 92% of the transfer. Beyond that the probe and the rank both worsen for nothing."
+}
