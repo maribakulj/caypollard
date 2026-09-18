@@ -1,0 +1,55 @@
+{
+  "records_kept": 9756,
+  "dropped": {
+    "image absente": 9525,
+    "doublon (déjà dans met)": 40,
+    "doublon (déjà dans rijksmuseum)": 54
+  },
+  "per_collection": {
+    "met": 4601,
+    "rijksmuseum": 1846,
+    "prado": 1067,
+    "ermitage": 807,
+    "khm": 708,
+    "stadel": 263,
+    "mauritshuis": 261,
+    "getty": 203
+  },
+  "splits": {
+    "train": 6962,
+    "validation": 1370,
+    "test": 1424
+  },
+  "distinct_notations": 1006,
+  "assignments": 18324,
+  "mean_notations_per_item": 1.878,
+  "notations_on_at_least_25_items": 122,
+  "distinct_creator_groups": 6288,
+  "near_duplicates": {
+    "n_hashed_images": 9756,
+    "n_images_without_hash": 0,
+    "n_groups": 9478,
+    "n_multi_image_groups": 75,
+    "n_images_in_multi_image_groups": 353,
+    "largest_group_size": 46,
+    "multi_image_group_size_histogram": {
+      "2": 47,
+      "3": 10,
+      "4": 2,
+      "5": 3,
+      "6": 2,
+      "7": 1,
+      "9": 2,
+      "10": 2,
+      "12": 1,
+      "13": 1,
+      "14": 1,
+      "28": 1,
+      "36": 1,
+      "46": 1
+    }
+  },
+  "group_leakage": {},
+  "checksum_leakage": {},
+  "manifest_sha256": "8decfd9d4cae81ec04bc2fbd673dc3aa8ce11a86a12957da0978f4783371f35f"
+}
