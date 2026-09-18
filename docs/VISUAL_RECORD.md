@@ -107,22 +107,75 @@ vector could not keep the information without also suffering it.
 
 ## What the record does and does not do
 
-It **crosses the medium**. 28.5% of a shape record's ten nearest neighbours come from the other
-corpus, against 2.6% for a visual encoder, where the other corpus is 41% of the pool. The
-representation is approaching not seeing the difference between a print and a painting.
+All figures below are on the widened pool: 2 723 cropped emblem prints and 9 756 works from
+eight museums, 12 479 items, where the majority baseline for the medium probe is 78.2% and the
+naming prior on emblems is 0.109. Earlier figures on a two-corpus pool of 4 587 are superseded
+and are recorded in the commit history, because three of the conclusions drawn from them were
+wrong and the error was always the same: a base too narrow to support the claim.
 
-It finds **formal similarity, not iconographic identity**. Median rank 176 against the human
-transcription's 92 says the record reaches many cross-medium neighbours and does not yet know
-which is right. That is what a shape channel with no grounding in meaning should do, and it marks
-where the work continues: the signs are found by clustering and named by number. Attaching them
-to a vocabulary a historian uses — Iconclass primitives, or a reduced set of them — is the step
-that would turn formal recurrence into iconographic evidence.
+**It crosses the medium.** The shape record sits at a 72.8% medium probe, *below* the 78.2%
+majority baseline — the holding institution has become unpredictable from it — and draws 32.0%
+of its ten nearest neighbours from the other corpus where that corpus is 21.8% of the pool. A
+visual encoder on the same pool sits at 97.4% and 1.9%.
 
-And it will not interpret. Impett and Süsstrunk, clustering Warburg's Bilderatlas on relative
-limb angles, recovered pose clusters corresponding to Pathosformeln *and* found that
+**It carries some iconography, which an earlier version of this document denied.** Trained to
+predict a notation from the shape record alone, on emblems it reaches hits@1 0.251 against a
+prior of 0.109, 2.3 times the baseline. The flat claim that it carried none was measured on the
+twelve notations a two-corpus pool could support; on thirty it is false. It still fails on the
+museums, 0.116 against 0.336, where a far more heterogeneous holding makes shape statistics less
+predictive.
+
+**Combining the channels beats either alone, which is the measurement that justifies the
+design.** Median rank of the best cross-medium iconographic partner:
+
+| record | medium probe | median rank | neighbours from the other corpus |
+| --- | ---: | ---: | ---: |
+| shape record alone | 72.8% | 500 | 32.0% |
+| **shape + visual at weight 0.5** | 88.9% | **409** | 14.4% |
+| shape + visual at weight 1.0 | 92.6% | 451 | 9.5% |
+| visual encoder alone | 97.4% | 1 143 | 2.2% |
+
+On a narrow corpus the two extremes bracketed the mixture and the curve read as a pure
+trade-off. On the widened one the mixture dominates both, which is complementarity: the channels
+see different things and their sum finds the right partner better than either. Weight 0.5 buys
+the best rank and 81% of the attainable transfer at a probe of 88.9%; weight 1.0 buys 92% of the
+transfer. Past that the probe and the rank both worsen for nothing.
+
+**A label crosses the medium in one direction only.** A model trained on the museums and tested
+on the emblems reaches hits@1 0.341 against a prior of 0.112; trained on the emblems and tested
+on the museums it reaches 0.249 against 0.343 and fails. The asymmetry is in the data, not the
+method: eight institutions and many object types generalise, two collections of emblem
+engravings do not. For a discovery system this is usable as it stands — **learn on the wide
+holding and apply to the narrow one** — but it is not the symmetry one would want, and testing
+that would need a second wide and varied holding.
+
+**What it will not do is interpret.** Impett and Süsstrunk, clustering Warburg's Bilderatlas on
+relative limb angles, recovered pose clusters corresponding to Pathosformeln *and* found that
 morphologically similar poses can represent wildly different emotions. A transcription language
-that captures form will find form recurring. What the recurrence means is not in the record, and
-should not be claimed from it.
+that captures form will find form recurring. What the recurrence means is not in the record.
+
+## Three routes to a name, and what each cost
+
+Naming the signs was attempted three ways and the record of the failures is more useful than any
+of them would have been.
+
+**Clustering the patches.** A sign's associated notations sit at 0.065 of shared resolved
+ancestry against 0.037 for random sets from the same pool — significant at p = 0.0001 with
+d = 0.468, and in absolute terms a sixteenth of their ancestry. A sign is a tendency, not a name.
+
+**Grouping the patches.** Grouping took the medium probe from 75.3% to 61.4% on the narrow pool
+and left nameability exactly where it was: composites sit at 0.064 against 0.054, p = 0.30. The
+groups are geometric — similar-sized blobs that touch — and a clump of mid-sized dark patches is
+drapery in one picture and foliage in another.
+
+**Supervising from the annotation.** This is the one that works, at 2.3 times the prior on
+emblems, and only once the vocabulary is wide enough to measure. It was declared a failure on
+twelve notations.
+
+A fourth route was tried and falsified: enriching the region descriptor with a twenty-four bin
+contour signature, on the hypothesis that four moment invariants conflate shapes a contour
+profile separates. It moved the probe 61.4% to 60.9% and within-corpus naming 0.334 to 0.350.
+The descriptor was not the bottleneck and the hypothesis is withdrawn.
 
 ## Reproducing
 
@@ -131,6 +184,10 @@ scripts/segment_shapes.py            regions from images
 scripts/build_shape_vocabulary.py    signs by clustering, with the corpus-skew check
 scripts/build_shape_relations.py     the seven relations over sign pairs
 scripts/build_visual_record.py       weighted concatenation of channels
+scripts/build_museum_benchmark.py    merge several collections into one frozen benchmark
+scripts/build_shape_groups.py        clumps of touching regions as composite signs
+scripts/name_shape_signs.py          a sign's form, its associations, and their coherence
+scripts/learn_shape_labels.py        supervised naming, and whether it crosses the medium
 scripts/test_cross_medium.py         the referee
 scripts/probe_confound.py            the probe, linear and kNN
 ```
