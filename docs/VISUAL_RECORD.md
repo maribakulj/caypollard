@@ -208,6 +208,7 @@ record, shows that the failure has nothing to do with regions.
 | *constant predictor (prior)* | *0.257* | — | — |
 | record, Sobel edges | 0.211 | [0.183, 0.240] | +0.116 [+0.082, +0.151] |
 | record, coarse-grid shape | 0.161 | [0.135, 0.186] | +0.066 [+0.034, +0.098] |
+| record, ink mass | 0.121 | — | +0.027 [−0.003, +0.057] |
 | record, silhouette | 0.101 | [0.080, 0.123] | **+0.006 [−0.023, +0.036]** |
 | *holding collection alone, one-hot* | *0.089* | — | *−0.005 [−0.033, +0.023]* |
 | *same classifier on random vectors* | *0.095* | *[0.073, 0.116]* | — |
@@ -226,7 +227,7 @@ collection alone, given to the same classifier as a one-hot, is also at the floo
 this table is provenance.
 
 That looked like an answer about shape. It is not, and the museums corpus is what says so. The
-same four renderings, the same classifier, the same two floors, on 869 paintings, sculptures,
+same renderings, the same classifier, the same two floors, on 869 paintings, sculptures,
 vessels and garments:
 
 | museums, 30 notations, 869 objects | hits@1 | paired gain over random |
@@ -236,6 +237,7 @@ vessels and garments:
 | record, Sobel edges | 0.443 | +0.410 [+0.374, +0.445] |
 | record, coarse-grid shape | 0.367 | +0.334 [+0.299, +0.367] |
 | **record, silhouette** | **0.298** | **+0.265 [+0.232, +0.297]** |
+| **record, ink mass** | **0.251** | **+0.217 [+0.186, +0.249]** |
 | *holding collection alone, one-hot* | *0.182* | *+0.148 [+0.121, +0.177]* |
 | *constant predictor (prior)* | *0.135* | — |
 | regions, pooled | 0.102 | — |
@@ -248,36 +250,52 @@ the holding collection by +0.116 [+0.078, +0.154], so it is not provenance eithe
 white shape, with every trace of tone, texture and support thrown away, recovers half of what the
 plain record recovers over noise.
 
-Looking at the two renderings explains the discrepancy and disqualifies the emblems row. The
-silhouette mode is a median threshold of a coarse-gridded greyscale, not a figure-ground cut. On
-a museum photograph, whose ground is a uniform grey, that threshold approximates the object's
-outline and the garment is plainly a garment. On an engraving it thresholds hatching, and a
-Glasgow test pictura comes out as noise in which a human figure is barely discernible. The same
-code produces a representation on one corpus and static on the other. **The emblems silhouette row
-measures a rendering that failed, not a property of shape**, and the claim built on it — that
-these two rows reach the floor by two independent routes — is withdrawn: on the museums they do
-not converge, they diverge by twenty points.
+Looking at the two renderings suggested the emblems row was disqualified. The silhouette mode is
+a median threshold of a coarse-gridded greyscale, not a figure-ground cut: on a museum photograph,
+whose ground is a uniform grey, it approximates the object's outline and the garment is plainly a
+garment; on an engraving it thresholds hatching, and a Glasgow test pictura comes out as noise.
+The same code produces a representation on one corpus and static on the other.
 
-What survives both corpora is narrower and more interesting. The regions fail everywhere: 0.087
-on the emblems, 0.102 pooled on the museums, both under their priors, on the very corpus where
-the silhouette succeeds. The two representations are built from the same picture and keep the same
-kind of information — no colour, no texture, no support — and one works while the other does not.
-The difference between them is not shape. It is that the silhouette stays a continuous raster and
-the region bag is **discretised into typed parts**: watershed boundaries, then per-part area,
-elongation, solidity, tone, Hu moments, a radial signature, holes, scale ratios and context
-counts.
+So a rendering was built to do the job properly on engravings. `mass` reverses the order of
+operations: Otsu on the full-resolution greyscale, since ink against paper is genuinely bimodal
+before any averaging; then the binary mask is downsampled so each cell holds a local ink fraction;
+then the fraction is thresholded. On the pictura that had come out as noise, a standing figure is
+legible.
+
+**It changes nothing.** On the emblems it reaches 0.121, a gain of +0.027 [−0.003, +0.057] over
+random whose interval still contains zero, and it is not distinguishable from the silhouette it
+replaced (+0.020 [−0.009, +0.050]). On the museums it reaches 0.251, clearing the prior and the
+collection control (+0.069 [+0.033, +0.105]) like the silhouette before it. Two renderings built
+on different principles agree with each other on each corpus and disagree across corpora.
+
+**The difference is the corpus, not the rendering.** A binary shape carries iconography on museum
+objects and does not carry it on emblem picturae. The likely reason is visible in what the two
+corpora index: a museum notation largely tracks object type, and an outline that says *garment*
+is most of the way to it, while an emblem notation describes a narrative scene assembled from
+small line-drawn figures, of which a 48×48 binary reduction keeps nothing that tells one scene
+from another. That also makes the two tables less alike than they look — the emblems task has a
+dominant label (prior 0.257, random floor 0.095) and the museums task does not (0.135 and 0.033),
+so the columns should be read down, never across.
+
+What is robust across both corpora is the region result. The regions fail everywhere: 0.087 on the
+emblems, 0.102 pooled on the museums, both under their priors — including on the corpus where a
+binary shape reaches 0.298. The two representations are built from the same picture and keep the
+same kind of information — no colour, no texture, no support — and on the museums one works while
+the other does not, by twenty points. The difference between them is not shape. It is that the
+silhouette stays a continuous raster and the region bag is **discretised into typed parts**:
+watershed boundaries, then per-part area, elongation, solidity, tone, Hu moments, a radial
+signature, holes, scale ratios and context counts.
 
 **So the loss is in the discretisation, not in the reduction to shape.** That is a direct answer to
 the question this record was built to ask. An intermediate visual language made of discrete named
-signs — an isotype — throws away what a plain black-and-white outline keeps. The idea of
-transcribing a picture into shape is not what fails; carving that shape into a vocabulary of parts
-is.
+signs — an isotype — throws away what a plain black-and-white outline keeps, on the one corpus
+where a plain outline is worth keeping.
 
-Two limits on how far this may be read. The museums notations track object type closely, so an
-outline that says *garment* is most of the way to the notation; the same row would not be expected
-on a corpus of narrative scenes, which is precisely what the emblems are and precisely where the
-rendering could not be tested. And the emblems silhouette row cannot be repaired by argument: it
-needs a figure-ground rendering that works on engravings before anything can be concluded from it.
+One limit on how far this may be read. The discretisation finding rests on a single contrast — the
+museums corpus, where raster shape beats the region bag by twenty points — because the emblems
+corpus gives both representations the floor and a contrast between two floors is not a contrast. A
+third corpus of narrative scenes with a shape rendering that works on it would decide whether the
+discretisation loses scenes as well as objects.
 
 One row must not be added to either ladder. The corpora carry `isotype-*` channels that look like
 the obvious candidates for "the proposed visual language", but their method field reads *iconclass
