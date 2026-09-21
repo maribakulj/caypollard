@@ -171,17 +171,40 @@ drapery in one picture and foliage in another. Geometry joins them; meaning does
 the shared vocabulary is wide enough to measure it. It was declared a failure on twelve
 notations.
 
-**Supervising at region level.** Fails under six framings: multiple-instance narrowing reaches
-hits@1 0.087 on emblems and 0.053 on museums against priors of 0.257 and 0.263, and a pooled
-control reaches 0.061 and 0.096. The pooled control is what makes the failure interpretable — it
-beats the narrowing on museums, so a picture's notation is better predicted by all its regions
-together than by the one a narrowing procedure elects. **Iconographic identity is not localised
-in a single shape**; it lives in the distribution of shapes across a picture.
+**Supervising at region level.** Fails under eight framings. The pooled control is what makes
+the failure interpretable — it beats the narrowing on museums, so a picture's notation is better
+predicted by all its regions together than by the one a narrowing procedure elects.
+**Iconographic identity is not localised in a single shape**; it lives in the distribution of
+shapes across a picture.
 
-Two faults in that experiment were found and fixed without rescuing it: ranking notations by raw
+That reading suggested a repair: describe each region by its neighbourhood — how many parts sit
+above, below, beside it, whether anything encloses it or it encloses anything — which moves the
+relation channel down from the picture to the region. It was run both ways so the contribution of
+context would be measured rather than assumed, which is the mistake this project has made more
+than once by crediting a gain to whatever was added last.
+
+| 30 notations, hits@1 | narrowing | pooled | + context | prior | record |
+|---|---|---|---|---|---|
+| emblems (783 pictures) | 0.087 | 0.061 | 0.078 | 0.257 | **0.324** |
+| museums (1 464 pictures) | 0.066 | 0.093 | 0.103 | 0.147 | **0.531** |
+
+Context is worth about a point to the pooled model (+1.7 on emblems, +1.0 on museums) and costs
+the narrowing about one; neither approaches the prior. The repair fails.
+
+The last column is what turns a failure into a result. It is the same notations, the same
+pictures, the same split and the same classifier, with the picture described by its whole-image
+record instead of by its regions — and it clears the prior on both corpora, by 6.8 points on the
+emblems and by a factor of four on the museums. So the protocol is not asking an unanswerable
+question, and the region result is not an artefact of the evaluation. **The shapes are the part
+that fails.** A transcription that crosses the medium (probe 97.4% → 61.4%, cross-medium
+neighbours 2.6% → 43.1%) does not thereby carry iconography, at region level or pooled.
+
+Four faults in that experiment were found and fixed without rescuing it: ranking notations by raw
 margins across independently fitted classifiers was wrong, and switching to probabilities changed
-nothing because the sigmoid is monotone; and taking the most frequent notations made the prior
-unbeatable by construction, since on the emblems one label covered three quarters of the test set.
+nothing because the sigmoid is monotone; taking the most frequent notations made the prior
+unbeatable by construction, since on the emblems one label covered three quarters of the test set;
+and the museums ceiling covers 869 of the 1 464 test pictures, so its prior is recomputed on
+exactly those, which is why it reads 0.135 rather than 0.147.
 
 ## What this will not do
 
@@ -204,7 +227,8 @@ scripts/build_repetition_channel.py    multiplicity as a typed quantity
 scripts/build_pose_channel.py          relative limb angles, after Impett
 scripts/build_visual_record.py         weighted concatenation of channels
 scripts/name_shape_signs.py            a sign's form, associations, and their coherence
-scripts/learn_region_labels.py         multiple-instance naming of regions
+scripts/learn_region_labels.py         multiple-instance naming of regions, with the
+                                       context and whole-image-record controls
 scripts/test_cross_medium.py           the corpus referee
 scripts/test_cross_object_type.py      the object-kind referee
 scripts/test_by_subject_kind.py        the breakdown by Iconclass division

@@ -47,6 +47,37 @@ from caypollard.provenance import read_jsonl
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from build_shape_vocabulary import descriptor
 
+CONTEXT = (
+    "ctx_above",
+    "ctx_below",
+    "ctx_left",
+    "ctx_right",
+    "ctx_inside",
+    "ctx_contains",
+    "ctx_touching",
+    "ctx_count",
+)
+
+
+def with_context(region: dict, *, use_context: bool) -> np.ndarray:
+    """A region described by itself, and optionally by what surrounds it.
+
+    The first attempt at naming a region described it alone and failed; the
+    pooled control showed that a picture's notation is better predicted by all
+    its regions together than by any one. So the region now carries its
+    neighbourhood -- how many parts sit above it, below it, beside it, whether
+    anything encloses it or it encloses anything -- which is the relation
+    channel moved down from the picture to the region.
+    """
+    base = descriptor(region)
+    if not use_context:
+        return base
+    counts = np.asarray([float(region.get(key, 0)) for key in CONTEXT], dtype=np.float32)
+    total = max(counts[-1], 1.0)
+    # Proportions, not counts: a region flanked by three of twelve parts is in a
+    # different situation from one flanked by three of four.
+    return np.concatenate([base, np.log1p(counts), counts[:-1] / total])
+
 BASE = re.compile(r"[(\[]")
 
 
@@ -70,6 +101,19 @@ def main() -> None:
              "naming task.",
     )
     parser.add_argument("--iterations", type=int, default=3)
+    parser.add_argument(
+        "--no-context",
+        action="store_true",
+        help="Describe each region alone, as the first attempt did, so the contribution "
+             "of context is measured rather than assumed.",
+    )
+    parser.add_argument(
+        "--record",
+        help="An .npz of whole-image vectors (ids, vectors) used as a ceiling control: "
+             "the same notations, the same split, the same classifier, but the picture "
+             "described as a whole. Without it a failure at region level cannot be told "
+             "apart from a task no representation wins.",
+    )
     parser.add_argument("--examples", type=int, default=6)
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
@@ -91,7 +135,12 @@ def main() -> None:
             row = json.loads(line)
             item = str(row["id"])
             if item in labels and row["regions"]:
-                bags[item] = np.stack([descriptor(region) for region in row["regions"]])
+                bags[item] = np.stack(
+                    [
+                        with_context(region, use_context=not args.no_context)
+                        for region in row["regions"]
+                    ]
+                )
 
     train = [item for item in bags if split.get(item) == args.train_split]
     test = [item for item in bags if split.get(item) == args.test_split]
@@ -231,11 +280,72 @@ def main() -> None:
         pooled_hits1 += int(bool(ranked) and ranked[0] in truth)
         pooled_hits5 += int(bool(set(ranked[:5]) & truth))
 
+    # The ceiling. The pooled control says whether localising is the mistake;
+    # this says whether the shapes are. Same notations, same pictures, same
+    # classifier, but the picture described by the record instead of by its
+    # regions. If the record clears the prior where the shapes do not, the
+    # failure belongs to the descriptor. If it does not clear it either, the
+    # protocol is asking a question no representation answers and the region
+    # result says nothing about regions.
+    record_report = None
+    if args.record:
+        loaded = np.load(args.record, allow_pickle=True)
+        vectors = {
+            str(key): row for key, row in zip(loaded["ids"], loaded["vectors"], strict=True)
+        }
+        record_train = [item for item in train if item in vectors]
+        record_test = [
+            item for item in test if item in vectors and (labels[item] & set(models))
+        ]
+        if len(record_train) >= 50 and record_test:
+            block = np.stack([vectors[item] for item in record_train])
+            record_centre = block.mean(axis=0)
+            record_scale = block.std(axis=0)
+            record_scale[record_scale == 0] = 1.0
+            block = (block - record_centre) / record_scale
+            record_models = {}
+            for notation in models:
+                target = np.array([notation in labels[item] for item in record_train])
+                if target.sum() >= 10 and (~target).sum() >= 10:
+                    record_models[notation] = LogisticRegression(
+                        max_iter=800, class_weight="balanced"
+                    ).fit(block, target)
+            record_hits1 = record_hits5 = 0
+            subset_prior1 = subset_prior5 = 0
+            for item in record_test:
+                truth = labels[item] & set(record_models)
+                row = ((vectors[item] - record_centre) / record_scale).reshape(1, -1)
+                ranked = [
+                    notation
+                    for _score, notation in sorted(
+                        (
+                            (float(model.decision_function(row)[0]), notation)
+                            for notation, model in record_models.items()
+                        ),
+                        reverse=True,
+                    )
+                ]
+                record_hits1 += int(bool(ranked) and ranked[0] in truth)
+                record_hits5 += int(bool(set(ranked[:5]) & truth))
+                subset_prior1 += int(prior_order[0] in labels[item])
+                subset_prior5 += int(bool(set(prior_order[:5]) & labels[item]))
+            total = len(record_test)
+            record_report = {
+                "pictures": total,
+                "hits_at_1": round(record_hits1 / total, 4),
+                "hits_at_5": round(record_hits5 / total, 4),
+                # The prior recomputed on exactly these pictures, since the
+                # record covers a subset of the test bags.
+                "prior_at_1": round(subset_prior1 / total, 4),
+                "prior_at_5": round(subset_prior5 / total, 4),
+            }
+
     report = {
         "notations_modelled": len(models),
         "train_bags": len(train),
         "test_bags_evaluated": evaluated,
         "iterations": args.iterations,
+        "context": not args.no_context,
         "bag_level": {
             "hits_at_1": round(hits1 / max(evaluated, 1), 4),
             "hits_at_5": round(hits5 / max(evaluated, 1), 4),
@@ -248,6 +358,7 @@ def main() -> None:
             "hits_at_1": round(prior_hits1 / max(evaluated, 1), 4),
             "hits_at_5": round(prior_hits5 / max(evaluated, 1), 4),
         },
+        "record_ceiling": record_report,
         "witnesses": witnesses,
         "reading": (
             "Beating the prior at bag level means the regions carry the signal, since nothing "

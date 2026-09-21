@@ -159,6 +159,53 @@ def segment(path: Path, *, side: int, min_area: float, max_regions: int) -> list
     regions.sort(key=lambda region: -region["area"])
     regions = regions[:max_regions]
 
+    # Context: what a region sits beside, above, inside. Region-level naming
+    # failed on a region described alone, and the pooled control showed why --
+    # a picture's notation is better predicted by all its regions together than
+    # by any one of them. So a region is now described by its neighbourhood as
+    # well as by itself: how crowded it is, what sits above and below it, whether
+    # something encloses it. That is the relation channel moved from the picture
+    # down to the region, which is the one route to naming still open.
+    if regions:
+        for region in regions:
+            x0 = region["centroid_x"] - region["extent_x"] / 2
+            x1 = region["centroid_x"] + region["extent_x"] / 2
+            y0 = region["centroid_y"] - region["extent_y"] / 2
+            y1 = region["centroid_y"] + region["extent_y"] / 2
+            above = below = left = right = inside = contains = touching = 0
+            for other in regions:
+                if other is region:
+                    continue
+                ox0 = other["centroid_x"] - other["extent_x"] / 2
+                ox1 = other["centroid_x"] + other["extent_x"] / 2
+                oy0 = other["centroid_y"] - other["extent_y"] / 2
+                oy1 = other["centroid_y"] + other["extent_y"] / 2
+                if ox0 <= x0 and oy0 <= y0 and ox1 >= x1 and oy1 >= y1:
+                    inside += 1
+                elif x0 <= ox0 and y0 <= oy0 and x1 >= ox1 and y1 >= oy1:
+                    contains += 1
+                elif not (x1 < ox0 or ox1 < x0 or y1 < oy0 or oy1 < y0):
+                    touching += 1
+                dx = other["centroid_x"] - region["centroid_x"]
+                dy = other["centroid_y"] - region["centroid_y"]
+                if abs(dy) >= abs(dx):
+                    if dy > 0:
+                        below += 1
+                    else:
+                        above += 1
+                elif dx > 0:
+                    right += 1
+                else:
+                    left += 1
+            region["ctx_above"] = above
+            region["ctx_below"] = below
+            region["ctx_left"] = left
+            region["ctx_right"] = right
+            region["ctx_inside"] = inside
+            region["ctx_contains"] = contains
+            region["ctx_touching"] = touching
+            region["ctx_count"] = len(regions) - 1
+
     # Scale is only meaningful against the picture's own other parts. A figure
     # twice the size of every other figure is the hierarchy of importance of
     # medieval art, and it reads identically whether the picture is a miniature

@@ -1,9 +1,9 @@
 {
   "corpus": "musees",
   "images_processed": 300,
-  "images_with_a_usable_figure": 96,
-  "detection_rate": 0.32,
-  "figures_found": 211,
+  "images_with_a_usable_figure": 129,
+  "detection_rate": 0.43,
+  "figures_found": 0,
   "score_threshold": 0.75,
   "keypoint_threshold": 3.0,
   "max_side": 640
