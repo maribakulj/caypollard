@@ -95,6 +95,22 @@ def main() -> None:
     parser.add_argument("--score-threshold", type=float, default=0.75)
     parser.add_argument("--keypoint-threshold", type=float, default=3.0)
     parser.add_argument("--max-figures", type=int, default=6)
+    parser.add_argument(
+        "--max-side",
+        type=int,
+        default=640,
+        help="Longest side fed to the detector. A 960x1280 tensor costs several times "
+             "what the detector needs -- it resizes internally anyway -- and on MPS the "
+             "allocations accumulate until the run is killed. Keypoints are read in "
+             "relative angles, so the scale is irrelevant to the features.",
+    )
+    parser.add_argument(
+        "--checkpoint-every",
+        type=int,
+        default=500,
+        help="Persist partial results every N images so a kill costs minutes, not hours.",
+    )
+    parser.add_argument("--resume", action="store_true")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--output", required=True)
     parser.add_argument("--report", required=True)
@@ -120,7 +136,27 @@ def main() -> None:
     with_figure = 0
     processed = 0
     figures_total = 0
+    checkpoint = Path(str(args.output) + ".partial.npz")
+    done: set[str] = set()
+    if args.resume and checkpoint.is_file():
+        saved = np.load(checkpoint, allow_pickle=False)
+        ids = [str(value) for value in saved["ids"]]
+        vectors = list(saved["vectors"])
+        done = set(ids)
+        with_figure = len(ids)
+        print(f"reprise : {len(ids)} images déjà posées", flush=True)
+
+    def write_checkpoint() -> None:
+        if not vectors:
+            return
+        staging = checkpoint.with_suffix(".tmp.npz")
+        with staging.open("wb") as handle:
+            np.savez(handle, ids=np.array(ids, dtype=np.str_), vectors=np.stack(vectors))
+        staging.replace(checkpoint)
+
     for record in records:
+        if str(record["id"]) in done:
+            continue
         recorded = record.get("image_path")
         path = Path(recorded) if recorded else Path(args.image_dir) / str(record["filename"])
         if not path.is_file():
@@ -128,18 +164,38 @@ def main() -> None:
         processed += 1
         try:
             image = Image.open(path).convert("RGB")
+            if max(image.size) > args.max_side:
+                scale = args.max_side / max(image.size)
+                image = image.resize(
+                    (max(int(image.width * scale), 1), max(int(image.height * scale), 1)),
+                    Image.LANCZOS,
+                )
             tensor = functional.to_tensor(image).to(args.device)
             with torch.inference_mode():
                 output = model([tensor])[0]
+            detections = [
+                (
+                    float(output["scores"][i]),
+                    output["keypoints"][i].detach().cpu().numpy()[:, :2],
+                    output["keypoints_scores"][i].detach().cpu().numpy(),
+                )
+                for i in range(len(output["scores"]))
+            ]
+            del output, tensor
         except Exception:
             continue
 
+        if processed % 50 == 0 and args.device == "mps":
+            # MPS does not return allocations on its own across many small graphs,
+            # and a run of ten thousand images is killed long before it finishes.
+            torch.mps.empty_cache()
+        if args.checkpoint_every and processed % args.checkpoint_every == 0:
+            write_checkpoint()
+
         kept = []
-        for index in range(len(output["scores"])):
-            if float(output["scores"][index]) < args.score_threshold:
+        for score, keypoints, confidence in detections:
+            if score < args.score_threshold:
                 continue
-            keypoints = output["keypoints"][index].detach().cpu().numpy()[:, :2]
-            confidence = output["keypoints_scores"][index].detach().cpu().numpy()
             features = pose_features(
                 keypoints, confidence, threshold=args.keypoint_threshold
             )
@@ -169,6 +225,7 @@ def main() -> None:
         "figures_found": figures_total,
         "score_threshold": args.score_threshold,
         "keypoint_threshold": args.keypoint_threshold,
+        "max_side": args.max_side,
     }
     Path(args.report).parent.mkdir(parents=True, exist_ok=True)
     Path(args.report).write_text(
