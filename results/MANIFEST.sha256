@@ -324,10 +324,14 @@ a6b384d46cd92bcb4ec4291abf52da20b9efc54ea292b0e4e942fb841df23c87     1204813  ve
 c52d3844b1230637030bac7f16c258578772fa37b6e03d7506870f4d27c95d04        1833  versioned  results/wide/by-subject-composition.json
 3195d7fc58dbc9455f1a616fd2ff1b5a948cc169f8d96af51a23662fffd8209c        1827  versioned  results/wide/by-subject-formes-compo.json
 00e8a116b7adeb7b555700644b1ce5db32d049f1e6ad8a7cdcd82bbc305ce975        3379  versioned  results/wide/by-subject-kind.json
+5dcd11a34833e8c1949e496dda6646b2bc8b6faef89e9ab014a53fe2adf204f9        1822  versioned  results/wide/by-subject-scr.json
+d2720c4a075cbaeaa520872bad42604a22d12d0bb445272d9cba7b34c9f23f6d        3370  versioned  results/wide/by-subject-v2.json
+af81ab1336dd65a01aa4c19695e44212d17a3bfe9650a8aa629f0eff319e4999        1962  versioned  results/wide/channel-weights.json
 d7e3c27678f3e8d861b55c99684978fa23fc6e81759fd8578f21eb29cd0b9aed        1122  versioned  results/wide/cross-medium-composition.json
 7028d684d12caeb2bb8778db92eeea350c2b5ec32242d2e5f80d04ffc4986708        1123  versioned  results/wide/cross-medium-dinov2.json
 8ca336d04c5aa5574e884b6f517420fdf37244e61da7f5e9f8622b04df65ce44        1125  versioned  results/wide/cross-medium-formes-compo.json
 eaaf8dd12795ed1f2288a2c571ea20a98d498730838b567f302895e542d00946        1121  versioned  results/wide/cross-medium-formes.json
+00240ffadffed4a4927d8c89c493e6f16f5f587480eac45af12f017998112f1a        1121  versioned  results/wide/cross-medium-record-v2.json
 6de390135a1a2659babf62c56262cc9407e64490a31fe64aa794febb8acb31bd        1059  versioned  results/wide/labels-dinov2.json
 d872e5d8d5f5177d5f36ee7c81c9435d3e079e0f20476b040bcdbeb1bf21613d        1087  versioned  results/wide/labels-formes.json
 42f3fbd567371d67bd28e3f9c0748854307318a93c5e684c8799005fa44b98dc        1023  versioned  results/wide/probe-composition.json

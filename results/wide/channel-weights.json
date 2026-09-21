@@ -1,0 +1,74 @@
+{
+  "channels": {
+    "formes": "v2, with topology and relative scale",
+    "compo": "global layout",
+    "repet": "typed multiplicity"
+  },
+  "sweep_median_rank_by_division": [
+    {
+      "weights": "F=1 C=2 R=0.5",
+      "div1": 1740,
+      "div2": 418,
+      "div3": 744,
+      "div4": 653,
+      "div9": 699
+    },
+    {
+      "weights": "F=1 C=2 R=1",
+      "div1": 2111,
+      "div2": 426,
+      "div3": 749,
+      "div4": 668,
+      "div9": 706
+    },
+    {
+      "weights": "F=0.5 C=2 R=1",
+      "div1": 2090,
+      "div2": 475,
+      "div3": 801,
+      "div4": 715,
+      "div9": 817
+    },
+    {
+      "weights": "F=1 C=3 R=1",
+      "div1": 1858,
+      "div2": 442,
+      "div3": 751,
+      "div4": 668,
+      "div9": 716
+    },
+    {
+      "weights": "F=1 C=1 R=0.5",
+      "div1": 2119,
+      "div2": 396,
+      "div3": 701,
+      "div4": 650,
+      "div9": 719
+    },
+    {
+      "weights": "F=0.5 C=3 R=1",
+      "div1": 1783,
+      "div2": 483,
+      "div3": 787,
+      "div4": 725,
+      "div9": 834
+    },
+    {
+      "weights": "F=1 C=1 R=0 (no repetition)",
+      "div1": 1432,
+      "div2": 429,
+      "div3": 699,
+      "div4": 754,
+      "div9": 863
+    }
+  ],
+  "selected": "F=1 C=2 R=0.5",
+  "selected_overall": {
+    "medium_probe": 0.776,
+    "majority_floor": 0.782,
+    "median_rank": 359,
+    "share_in_top_10": 0.042,
+    "cross_medium_neighbours": 0.286
+  },
+  "reading": "Repetition helps every division except religious scenes, at every weight tried. Division 1 is best without it at 1432 and degrades to 1740 at the kindest weight. The likely reason is that the same episode is staged with different numbers of figures -- an Annunciation with two figures and one with angels and architecture share a subject and not a multiplicity profile -- so counting actively misleads where the subject does not fix the count. Topology and relative scale give only marginal gains: division 2 moves 458 to 450, division 9 1943 to 1727."
+}
