@@ -17,11 +17,55 @@
     "hits_at_5": 0.5313
   },
   "record_ceiling": {
-    "pictures": 783,
-    "hits_at_1": 0.3244,
-    "hits_at_5": 0.6577,
-    "prior_at_1": 0.2567,
-    "prior_at_5": 0.5313
+    "dinov2-base": {
+      "pictures": 783,
+      "hits_at_1": 0.3244,
+      "hits_at_5": 0.6577,
+      "prior_at_1": 0.2567,
+      "prior_at_5": 0.5313
+    },
+    "dinov2-gray": {
+      "pictures": 783,
+      "hits_at_1": 0.3206,
+      "hits_at_5": 0.6526,
+      "prior_at_1": 0.2567,
+      "prior_at_5": 0.5313
+    },
+    "dinov2-edges": {
+      "pictures": 783,
+      "hits_at_1": 0.2107,
+      "hits_at_5": 0.5428,
+      "prior_at_1": 0.2567,
+      "prior_at_5": 0.5313
+    },
+    "dinov2-shape": {
+      "pictures": 783,
+      "hits_at_1": 0.1609,
+      "hits_at_5": 0.4866,
+      "prior_at_1": 0.2567,
+      "prior_at_5": 0.5313
+    },
+    "dinov2-silhouette": {
+      "pictures": 783,
+      "hits_at_1": 0.1009,
+      "hits_at_5": 0.4176,
+      "prior_at_1": 0.2567,
+      "prior_at_5": 0.5313
+    },
+    "dinov2-debiased-cropped": {
+      "pictures": 783,
+      "hits_at_1": 0.2925,
+      "hits_at_5": 0.6335,
+      "prior_at_1": 0.2567,
+      "prior_at_5": 0.5313
+    },
+    "random": {
+      "pictures": 783,
+      "hits_at_1": 0.0945,
+      "hits_at_5": 0.3563,
+      "prior_at_1": 0.2567,
+      "prior_at_5": 0.5313
+    }
   },
   "witnesses": {
     "25G3": [

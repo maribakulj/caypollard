@@ -109,7 +109,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--record",
-        help="An .npz of whole-image vectors (ids, vectors) used as a ceiling control: "
+        action="append",
+        help="An .npz of whole-image vectors (ids, vectors) used as a ceiling control; "
+             "repeatable, which turns the control into a ladder across renderings: "
              "the same notations, the same split, the same classifier, but the picture "
              "described as a whole. Without it a failure at region level cannot be told "
              "apart from a task no representation wins.",
@@ -287,9 +289,9 @@ def main() -> None:
     # failure belongs to the descriptor. If it does not clear it either, the
     # protocol is asking a question no representation answers and the region
     # result says nothing about regions.
-    record_report = None
-    if args.record:
-        loaded = np.load(args.record, allow_pickle=True)
+    record_report = {}
+    for record_path in args.record or []:
+        loaded = np.load(record_path, allow_pickle=True)
         vectors = {
             str(key): row for key, row in zip(loaded["ids"], loaded["vectors"], strict=True)
         }
@@ -330,7 +332,7 @@ def main() -> None:
                 subset_prior1 += int(prior_order[0] in labels[item])
                 subset_prior5 += int(bool(set(prior_order[:5]) & labels[item]))
             total = len(record_test)
-            record_report = {
+            record_report[Path(record_path).stem] = {
                 "pictures": total,
                 "hits_at_1": round(record_hits1 / total, 4),
                 "hits_at_5": round(record_hits5 / total, 4),
@@ -358,7 +360,7 @@ def main() -> None:
             "hits_at_1": round(prior_hits1 / max(evaluated, 1), 4),
             "hits_at_5": round(prior_hits5 / max(evaluated, 1), 4),
         },
-        "record_ceiling": record_report,
+        "record_ceiling": record_report or None,
         "witnesses": witnesses,
         "reading": (
             "Beating the prior at bag level means the regions carry the signal, since nothing "
