@@ -111,6 +111,14 @@ def main() -> None:
         help="Persist partial results every N images so a kill costs minutes, not hours.",
     )
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument(
+        "--max-new",
+        type=int,
+        help="Stop after this many newly processed images and exit cleanly. A long "
+             "run was killed three times for memory even with cache clearing; a short "
+             "process returns everything to the system when it exits, so a shell loop "
+             "of bounded runs finishes where one unbounded run does not.",
+    )
     parser.add_argument("--limit", type=int)
     parser.add_argument("--output", required=True)
     parser.add_argument("--report", required=True)
@@ -161,6 +169,8 @@ def main() -> None:
         path = Path(recorded) if recorded else Path(args.image_dir) / str(record["filename"])
         if not path.is_file():
             continue
+        if args.max_new and processed >= args.max_new:
+            break
         processed += 1
         try:
             image = Image.open(path).convert("RGB")
