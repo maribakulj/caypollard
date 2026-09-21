@@ -1,265 +1,212 @@
 # The visual record: an intermediate language for cross-medium iconography
 
-A structured, inspectable description of a picture, designed so that a printed emblem and a
-painted panel that share a motif can be compared, and so that the support they arrived on cannot
-be written down.
+A structured, inspectable description of a picture, designed so that objects made and
+photographed in different ways can be compared iconographically, and so that the support they
+arrived on cannot be written down.
 
-Every design choice below is a measurement, not a preference. The referee throughout is the
-cross-medium test: 2 723 cropped emblem prints pooled with 1 864 museum objects, 4 587 items
-joined by shared Iconclass concepts, asking two things of a representation — can a probe still
-name which corpus an object came from, and where does an object's best cross-medium
-iconographic partner rank.
+Every design choice here is a measurement. The corpus is **21 128 objects** — 2 723 cropped
+emblem prints and 18 405 museum works from eight institutions, reached through Wikidata and
+Wikimedia Commons without an API key — with zero group and zero checksum leakage and a retrieval
+pool of 18 840. Figures from earlier, narrower corpora are superseded and live in the commit
+history; several of the conclusions drawn from them were wrong, and the error was always the
+same shape: a base too narrow for the claim made on it.
+
+## The finding that organises everything else
+
+**There is no single best record.** Each question wants a different channel, and mixing the
+channels is right for some questions and actively wrong for others.
+
+| question | best configuration | median rank | pool |
+| --- | --- | ---: | ---: |
+| cross-corpus partner (prints ↔ museum works) | shapes + 2× composition + ½ repetition | 820 | 18 840 |
+| cross-object-kind partner (flat ↔ volume ↔ vessel) | **shapes alone** | 1 008 | 12 944 |
+| a gesture (division 3) | **pose alone** | 65 | 1 729 |
+| a scene (division 1) | **composition** | 1 429 | 12 479 |
+| an object (division 2) | shapes, with or without the rest | 655 | 18 840 |
+
+Two of these were surprises that reversed an earlier design. Adding pose to the record degrades
+nearly every division, and adding composition to cross-object-kind retrieval nearly doubles the
+rank. The channels are **a set to select from, not a sum to compute**, and a system built on this
+record should choose its configuration from the question rather than carry one vector.
 
 ## Why pixels will not do
 
-| representation | medium probe | median rank of partner | neighbours from the other corpus |
-| --- | ---: | ---: | ---: |
-| DINOv2 on the image | 97.4% | 821 of 4 587 | 2.6% |
-| DINOv2 on a Sobel rendering | 95.1% | — | — |
-| DINOv2 on a coarse shape map | 93.9% | 656 | 6.5% |
-| DINOv2 on a binarised silhouette | 87.5% | 419 | 13.5% |
-| **shape vocabulary, 512 signs** | **74.4%** | **176** | **28.5%** |
-| human Iconclass transcription | 91.3% | 92 | 7.6% |
-| *majority baseline* | *59.4%* | | |
+A DINOv2 embedding names which corpus an object came from 97.4% of the time and places an
+object's best cross-medium partner in the middle of the pool. It has learned the material, not
+the motif. Re-rendering does not fix it and can make it worse: a Sobel map preserves stroke
+structure, and stroke structure *is* the support — an engraving is made of lines and a painting
+is not. What helps is destroying line structure and then naming what survives.
 
-A visual encoder names the corpus 97.4% of the time and places the partner at the middle of the
-pool. It has learned the material, not the motif. Re-rendering does not fix it and can make it
-worse: a Sobel map preserves stroke structure, and stroke structure *is* the support — an
-engraving is made of lines and a painting is not. What helps is destroying line structure
-(silhouette) and then naming what survives.
+| representation | medium probe | cross-corpus neighbours |
+| --- | ---: | ---: |
+| DINOv2 on the image | 97.4% | 2.6% |
+| DINOv2 on a Sobel rendering | 95.1% | — |
+| DINOv2 on a binarised silhouette | 87.5% | 13.5% |
+| **the record, final corpus** | **85.2%** | **21.8%** |
+| *majority baseline, final corpus* | *86.1%* | *14.5% proportional* |
 
-The last row matters as a target. Driving the probe to 59.4% would mean having destroyed real
-iconographic differences between holdings, because Wolfenbüttel's German devotional emblems and
-the Rijksmuseum's paintings genuinely depict different things. The floor is content, not chance,
-and the shape vocabulary already sits below the human transcription on this measure.
+The probe target is the majority baseline, not chance. Driving it to chance would mean having
+destroyed real iconographic differences between holdings, which are content and not support.
 
-## The three channels
+## The channels
 
-### 1. Shape — the lexicon
+### Shape — the lexicon
 
 Regions are segmented by a watershed over a smoothed gradient, classical rather than learned: a
 learned segmenter is trained on photographs and inherits their statistics, which is the confound
-being escaped. 41 804 regions over 4 587 images, median 10 per emblem and 6 per museum object.
+being escaped. Each region is described only by properties that survive a change of support —
+area, elongation, solidity, enclosed holes, scale against the picture's own median part, four log
+moment invariants, a twenty-four bin radial contour signature, and tone reduced to *darker or
+lighter than the page*, the only photometric fact a monochrome scan preserves. No colour, no
+texture, no resolution.
 
-Each region is described only by properties that survive a change of support — area, elongation,
-solidity, four log moment invariants, and tone reduced to *darker or lighter than the page*,
-which is the only photometric fact a monochrome scan preserves. No colour, no texture, no
-resolution. Signs are then **found by clustering** those descriptors on a sample balanced across
-corpora, so that the larger corpus cannot define the vocabulary and leave the smaller one
-described in a foreign language.
+Signs are found by clustering those descriptors on the same number of regions drawn from each
+corpus, so the larger one cannot define the vocabulary. Regions are then grouped into composite
+signs by transitive closure of a proximity test that is relative rather than absolute — absolute
+box overlap is useless, since a picture's dark and light regions interpenetrate and the closure
+swallows the whole plate.
 
-Vocabulary size is a free parameter with respect to the confound and not with respect to the
-motif:
+**This is the object channel.** It reaches division 2 at rank 655 and religious scenes at 10 370,
+which is chance.
 
-| signs | medium probe | median rank | neighbours from the other corpus |
-| ---: | ---: | ---: | ---: |
-| 64 | 74.7% | 248 | 27.9% |
-| 128 | 74.1% | 237 | 28.8% |
-| 256 | 75.3% | 196 | 28.1% |
-| 512 | 74.4% | **176** | 28.5% |
-| 1 024 | 74.5% | 175 | 28.4% |
+### Composition — the scene channel
 
-Enlarging the lexicon costs nothing in leakage and buys precision until about 512, where it
-saturates.
+A coarse grid of ink density taken as departure from the page median in either direction, so a
+light figure on a dark ground and a dark one on light paper read alike; left-right and top-bottom
+mirror agreement; the vertical and horizontal mass profiles; and the spread, elongation and count
+of the region centroid cloud. Nothing local.
 
-**18 of 256 signs are used more than 90% by one corpus.** Those are signs for a support rather
-than a motif, and the count is the vocabulary's honesty check; it should be reported whenever the
-vocabulary is rebuilt.
+**This is the scene channel**, and it reverses the shape channel exactly: division 1 from 6 403
+to 1 429, Bible scenes from 3 532 to 835, mythology from 1 943 to 863. A cat has a distinctive
+silhouette; an Annunciation and a Nativity share figures and architecture whose local shape
+statistics are generic, and what two pictures of one episode share is where things are.
 
-### 2. Relations — the grammar
+It is also the channel that **fails on vessels**, at 2 036 against the shape channel's 1 008,
+because a vessel's form dictates its own layout: the decoration of a vase is arranged by the vase
+and not by the subject.
 
-Seven coarse relations between regions, computed from geometry the segmenter already records:
-*above, below, left, right, contains, inside, touches*. Each feature is an ordered pair of signs
-plus the relation. A print and a painting of one subject will not agree on exact positions; they
-will agree that one element sits above another.
+### Repetition — multiplicity as a typed quantity
 
-At 64 signs, adding relations improves every column — probe 74.7% to 73.4%, median rank 248 to
-222, top-10 share 5.3% to 6.2%, cross-medium neighbours 27.9% to 29.8%.
+An Isotype says three by drawing the sign three times, and a histogram records that as a
+magnitude, so one figure and five become nearby points on one axis instead of two arrangements.
+The channel types it twice: a profile of how many signs occur once, twice, a few times or many,
+and a per-sign multiplicity, because three columns and three lions are different pictures.
 
-**A grammar needs a small lexicon.** At 256 signs the pair space holds 459 000 features, only 86
-of which occur thirty times or more, and 3 975 of 4 587 images end up with no surviving feature.
-At 64 signs, 4 014 features survive and 143 images are emptied. This is Neurath's reduction
-argument arriving from the other direction: signs must repeat before their combinations can.
+It is the strongest single channel on objects and **hurts religious scenes at every weight
+tried**. An episode does not fix its count, so counting misleads exactly where the subject leaves
+the number free.
 
-### 3. Palette — recorded, never matched on
+### Pose — relative limb angles, after Impett
 
-Eleven basic colour terms assigned in a perceptual space after grey-world balancing.
+Angles taken against the figure's own torso axis, so a leaning figure is described by what its
+limbs do relative to its body rather than to the picture's edge, with a presence flag for each
+absent limb rather than a zero angle that would read as a direction.
 
-This channel exists to be consulted and must carry **weight zero in matching across media**,
-which is a measurement rather than a caution. Within one collection, one format and seventeen
-books — so that only the scanning session and the artwork vary — a raw colour histogram names the
-volume 61.3% of the time against a 31.0% baseline. Canonical terms bring that to 53.2% and
-grey-world balancing to 39.7%: 71% of the excess removed, and a third of it still there. Seven
-per cent of digitisations in both corpora are effectively monochrome, so any weighting of colour
-must also degrade gracefully to its absence.
+The stop condition was measured before the channel was trusted: a keypoint detector trained on
+photographs would make this a medium detector if it read paintings and not engravings. It finds
+a usable figure in 28.2% of engravings and 29.3% of museum works — evenhanded, and merely
+conservative on art. **Coverage of 28% is the real limit**: the channel speaks for a minority of
+queries however good it is on them.
 
-Giving it weight confirms the prediction directly:
+On the 1 729 items carrying both a pose and a record, it reaches division 3 at rank 65 against
+the record's 114, with a *lower* medium probe, 60.6% against 62.9%. It wins wherever there are
+human figures and loses on religious scenes.
 
-| record | medium probe | median rank | neighbours from the other corpus |
-| --- | ---: | ---: | ---: |
-| shape alone | 74.4% | 176 | 28.5% |
-| shape + relations | 75.0% | 180 | 28.4% |
-| **shape + palette** | **80.0%** | **235** | **22.3%** |
-| all three | 80.1% | 230 | 22.5% |
+### Palette — recorded, never matched on
 
-Colour degrades every column. Separate channels are what make that expressible: a single fused
-vector could not keep the information without also suffering it.
+Eleven basic colour terms assigned in a perceptual space after grey-world balancing. This channel
+must carry **weight zero in matching**, which is a measurement and not a caution. Within one
+collection, one format and seventeen books — so that only the scanning session and the artwork
+vary — a raw colour histogram names the volume 61.3% of the time against a 31.0% baseline;
+canonical terms bring that to 53.2% and grey-world balancing to 39.7%. Seven per cent of
+digitisations are effectively monochrome, so any use of colour must degrade gracefully to its
+absence.
 
-## What the record does and does not do
+Giving it weight degrades every column: the medium probe rises from 74.4% to 80.0%, the partner's
+rank worsens from 176 to 235, and cross-medium neighbours fall from 28.5% to 22.3%.
 
-All figures below are on the widened pool: 2 723 cropped emblem prints and 9 756 works from
-eight museums, 12 479 items, where the majority baseline for the medium probe is 78.2% and the
-naming prior on emblems is 0.109. Earlier figures on a two-corpus pool of 4 587 are superseded
-and are recorded in the commit history, because three of the conclusions drawn from them were
-wrong and the error was always the same: a base too narrow to support the claim.
+## Does a vase find an engraving?
 
-**It crosses the medium.** The shape record sits at a 72.8% medium probe, *below* the 78.2%
-majority baseline — the holding institution has become unpredictable from it — and draws 32.0%
-of its ten nearest neighbours from the other corpus where that corpus is 21.8% of the pool. A
-visual encoder on the same pool sits at 97.4% and 1.9%.
+Yes, and weakly. Object kinds are grouped into families that share a viewing condition rather
+than a technique — a flat surface seen frontally, a thing in the round lit and shadowed, a curved
+vessel whose own form hides part of its decoration — and a pair counts when two objects share a
+non-hub notation across families.
 
-**It carries some iconography, which an earlier version of this document denied.** Trained to
-predict a notation from the shape record alone, on emblems it reaches hits@1 0.251 against a
-prior of 0.109, 2.3 times the baseline. The flat claim that it carried none was measured on the
-twelve notations a two-corpus pool could support; on thirty it is false. It still fails on the
-museums, 0.116 against 0.336, where a far more heterogeneous holding makes shape statistics less
-predictive.
+The shape channel places such a partner at **median rank 1 008 of 12 944 against a chance of
+6 472**, with 8.6% of queries reaching one in their top hundred and 14.1% of neighbours drawn
+from another family. Six times better than chance and far out of reach.
 
-**Combining the channels beats either alone, which is the measurement that justifies the
-design.** Median rank of the best cross-medium iconographic partner:
-
-| record | medium probe | median rank | neighbours from the other corpus |
-| --- | ---: | ---: | ---: |
-| shape record alone | 72.8% | 500 | 32.0% |
-| **shape + visual at weight 0.5** | 88.9% | **409** | 14.4% |
-| shape + visual at weight 1.0 | 92.6% | 451 | 9.5% |
-| visual encoder alone | 97.4% | 1 143 | 2.2% |
-
-On a narrow corpus the two extremes bracketed the mixture and the curve read as a pure
-trade-off. On the widened one the mixture dominates both, which is complementarity: the channels
-see different things and their sum finds the right partner better than either. Weight 0.5 buys
-the best rank and 81% of the attainable transfer at a probe of 88.9%; weight 1.0 buys 92% of the
-transfer. Past that the probe and the rank both worsen for nothing.
-
-**A label crosses the medium in one direction only.** A model trained on the museums and tested
-on the emblems reaches hits@1 0.341 against a prior of 0.112; trained on the emblems and tested
-on the museums it reaches 0.249 against 0.343 and fails. The asymmetry is in the data, not the
-method: eight institutions and many object types generalise, two collections of emblem
-engravings do not. For a discovery system this is usable as it stands — **learn on the wide
-holding and apply to the narrow one** — but it is not the symmetry one would want, and testing
-that would need a second wide and varied holding.
-
-**What it will not do is interpret.** Impett and Süsstrunk, clustering Warburg's Bilderatlas on
-relative limb angles, recovered pose clusters corresponding to Pathosformeln *and* found that
-morphologically similar poses can represent wildly different emotions. A transcription language
-that captures form will find form recurring. What the recurrence means is not in the record.
-
-## What each channel is for, measured by subject
-
-The aggregate figures above hide two opposite behaviours, and the breakdown is the
-most useful thing in this document. Iconclass's first digit separates the kinds:
-division 2 names a thing -- an animal, a plant -- while divisions 1, 7 and 9 name
-an episode with several actors. Median rank of the best cross-medium partner,
-pool of 12 479 where chance is about 6 240:
-
-| division | shape record | composition | repetition | all three |
-| --- | ---: | ---: | ---: | ---: |
-| 2 · nature, objects | 458 | 537 | **425** | **409** |
-| 3 · human body, action | 1 835 | 948 | 799 | **698** |
-| 4 · society | 1 550 | 721 | 727 | **663** |
-| 9 · classical mythology | 1 943 | 1 034 | 882 | **714** |
-| 7 · Bible scenes | 3 532 | 858 | 1 141 | **906** |
-| 1 · religion, scenes | **6 403** | **1 429** | 2 758 | 2 295 |
-| 5 · abstract ideas | 8 961 | 5 394 | 5 967 | 4 190 |
-
-**The shape record is the object channel and composition is the scene channel.**
-Shapes place a cat beside a cat at rank 458 and leave a religious scene at 6 403,
-which is chance: a cat has a distinctive silhouette, while an Annunciation and a
-Nativity share figures and architecture whose local shape statistics are generic.
-Composition reverses it, because what two pictures of one episode share is where
-things are.
-
-**Repetition is the strongest single channel on objects** and four times better
-than shapes on scenes, but it hurts division 1 at every weight tried: 1 432 with
-shapes and composition alone, 1 740 at the kindest weighting. An episode does not
-fix its count -- an Annunciation with two figures and one with angels and
-architecture share a subject and not a multiplicity profile -- so counting
-misleads exactly where the subject leaves the number free.
-
-The selected record is shapes, composition at twice the weight, repetition at
-half: median rank 359 overall, a medium probe of 77.6% against a 78.2% majority
-floor, and 28.6% of neighbours from the other corpus.
+For scale, crossing corpora reaches 820. **Crossing a viewing condition is harder than crossing a
+workshop**, which is what this benchmark called cross-medium throughout.
 
 ## Division 5 is a cataloguing asymmetry, not a limit of the method
 
-Abstract ideas sit at 4 190 across corpora, near chance, and no channel touches
-them. That looked like the H3 result repeating -- a question the data cannot
-express -- and it is not.
+The emblems carry 3 986 abstract assignments over 614 distinct notations. The 18 405 museum works
+carry **one distinct notation**, `56DD1`, fear. There is nothing to match against, and a figure
+that appears to improve as the corpus grows is that one concept and not abstraction.
 
-The emblems carry 3 986 division-5 assignments over 614 distinct notations. The
-9 756 museum works carry **one**, and the two corpora share exactly one abstract
-notation. There was never anything to match against. The Wikidata bridge is not
-the blocker, which had to be checked before blaming cataloguing practice: the
-P1256 alignment carries 166 abstract notations including existence, similarity
-and ambivalence. Wikidata editors record what a picture literally shows -- a
-painting of a woman is tagged woman, never Patience -- while Iconclass
-specialists annotating emblems record what it means, because that is what an
-emblem is.
+The Wikidata bridge is not the blocker, which had to be checked before blaming cataloguing
+practice: the P1256 alignment carries 166 abstract notations including existence, similarity and
+ambivalence. Wikidata editors record what a picture literally shows — a painting of a woman is
+tagged woman, never Patience — while Iconclass specialists annotating emblems record what it
+means, because that is what an emblem is.
 
-Measured inside the emblem corpus alone, with partners required to come from a
-different book so that binding cannot supply the answer:
+Inside the emblem corpus alone, with partners required from a different book so that binding
+cannot supply the answer, an abstract-concept partner sits at **median rank 117 of 2 629 against
+a chance of 1 314** — eleven times better than chance, and better than religious scenes at 226.
+The record finds two pictures sharing an abstract idea perfectly well where the annotation
+exists.
 
-| division | queries | median rank of 2 629 | top-10 |
-| --- | ---: | ---: | ---: |
-| 2 · objects | 1 895 | 28 | 26.6% |
-| 3 · body | 1 376 | 34 | 29.3% |
-| **5 · abstract ideas** | 1 687 | **117** | 8.7% |
-| 1 · religion | 492 | 226 | 4.9% |
+## Four routes to a name, and what each cost
 
-Chance is 1 314. The record finds a picture sharing an abstract concept eleven
-times better than chance, and better than it finds religious scenes. The
-cross-corpus number was a statement about one corpus having no abstraction to
-offer.
+**Clustering the patches.** A sign's associated notations share 0.075 of their resolved ancestry
+against 0.037 for random sets from the same pool, p = 0.0001, d = 0.61. Significantly related,
+and a thirteenth of an ancestry apart. A sign is a tendency, not a name.
 
-## Three routes to a name, and what each cost
+**Grouping the patches.** Grouping took the medium probe from 75.3% to 61.4% and left nameability
+untouched: composites sit at 0.064 against 0.054, p = 0.30. A clump of mid-sized dark patches is
+drapery in one picture and foliage in another. Geometry joins them; meaning does not.
 
-Naming the signs was attempted three ways and the record of the failures is more useful than any
-of them would have been.
+**Supervising at picture level.** This works, at 2.3 times the prior on emblems, and only once
+the shared vocabulary is wide enough to measure it. It was declared a failure on twelve
+notations.
 
-**Clustering the patches.** A sign's associated notations sit at 0.065 of shared resolved
-ancestry against 0.037 for random sets from the same pool — significant at p = 0.0001 with
-d = 0.468, and in absolute terms a sixteenth of their ancestry. A sign is a tendency, not a name.
+**Supervising at region level.** Fails under six framings: multiple-instance narrowing reaches
+hits@1 0.087 on emblems and 0.053 on museums against priors of 0.257 and 0.263, and a pooled
+control reaches 0.061 and 0.096. The pooled control is what makes the failure interpretable — it
+beats the narrowing on museums, so a picture's notation is better predicted by all its regions
+together than by the one a narrowing procedure elects. **Iconographic identity is not localised
+in a single shape**; it lives in the distribution of shapes across a picture.
 
-**Grouping the patches.** Grouping took the medium probe from 75.3% to 61.4% on the narrow pool
-and left nameability exactly where it was: composites sit at 0.064 against 0.054, p = 0.30. The
-groups are geometric — similar-sized blobs that touch — and a clump of mid-sized dark patches is
-drapery in one picture and foliage in another.
+Two faults in that experiment were found and fixed without rescuing it: ranking notations by raw
+margins across independently fitted classifiers was wrong, and switching to probabilities changed
+nothing because the sigmoid is monotone; and taking the most frequent notations made the prior
+unbeatable by construction, since on the emblems one label covered three quarters of the test set.
 
-**Supervising from the annotation.** This is the one that works, at 2.3 times the prior on
-emblems, and only once the vocabulary is wide enough to measure. It was declared a failure on
-twelve notations.
+## What this will not do
 
-A fourth route was tried and falsified: enriching the region descriptor with a twenty-four bin
-contour signature, on the hypothesis that four moment invariants conflate shapes a contour
-profile separates. It moved the probe 61.4% to 60.9% and within-corpus naming 0.334 to 0.350.
-The descriptor was not the bottleneck and the hypothesis is withdrawn.
+Impett and Süsstrunk, clustering Warburg's Bilderatlas on relative limb angles, recovered pose
+groups corresponding to Pathosformeln *and* found that morphologically similar poses can
+represent wildly different emotions. A transcription language that captures form will find form
+recurring. What the recurrence means is not in the record, and should not be claimed from it.
 
 ## Reproducing
 
 ```
-scripts/segment_shapes.py            regions from images
-scripts/build_shape_vocabulary.py    signs by clustering, with the corpus-skew check
-scripts/build_shape_relations.py     the seven relations over sign pairs
-scripts/build_composition_channel.py global layout: mass grid, symmetry, profiles
-scripts/build_repetition_channel.py  multiplicity as a typed quantity
-scripts/build_pose_channel.py        relative limb angles, after Impett
-scripts/learn_region_labels.py       multiple-instance naming of regions
-scripts/test_by_subject_kind.py      the breakdown by Iconclass division
-scripts/build_visual_record.py       weighted concatenation of channels
-scripts/build_museum_benchmark.py    merge several collections into one frozen benchmark
-scripts/build_shape_groups.py        clumps of touching regions as composite signs
-scripts/name_shape_signs.py          a sign's form, its associations, and their coherence
-scripts/learn_shape_labels.py        supervised naming, and whether it crosses the medium
-scripts/test_cross_medium.py         the referee
-scripts/probe_confound.py            the probe, linear and kNN
+scripts/fetch_wikidata_collection.py   any collection, from Wikidata and Commons
+scripts/build_museum_benchmark.py      merge collections into one frozen benchmark
+scripts/segment_shapes.py              regions from images
+scripts/build_shape_vocabulary.py      signs by clustering, balanced across corpora
+scripts/build_shape_groups.py          clumps of touching regions as composite signs
+scripts/build_shape_relations.py       seven coarse spatial relations over sign pairs
+scripts/build_composition_channel.py   global layout: mass grid, symmetry, profiles
+scripts/build_repetition_channel.py    multiplicity as a typed quantity
+scripts/build_pose_channel.py          relative limb angles, after Impett
+scripts/build_visual_record.py         weighted concatenation of channels
+scripts/name_shape_signs.py            a sign's form, associations, and their coherence
+scripts/learn_region_labels.py         multiple-instance naming of regions
+scripts/test_cross_medium.py           the corpus referee
+scripts/test_cross_object_type.py      the object-kind referee
+scripts/test_by_subject_kind.py        the breakdown by Iconclass division
+scripts/probe_confound.py              the probe, linear and kNN
 ```
