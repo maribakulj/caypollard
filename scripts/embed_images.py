@@ -130,6 +130,7 @@ def main() -> None:
     started = time.monotonic()
     last_report = 0
     last_checkpoint = 0
+    last_release = 0
     for start in range(0, len(records), args.batch_size):
         rows = records[start : start + args.batch_size]
         images = []
@@ -158,6 +159,13 @@ def main() -> None:
             vectors.append(batch_vectors)
 
         done = start + len(rows)
+        # The MPS allocator keeps freed blocks cached, and over thousands of
+        # images that cache is what the system runs out of, not the model. A
+        # run of this corpus was killed at 2 000 images without it.
+        if done - last_release >= 400:
+            last_release = done
+            encoder.release_cache()
+
         if args.progress_every and done - last_report >= args.progress_every:
             last_report = done
             elapsed = time.monotonic() - started

@@ -111,6 +111,18 @@ class HuggingFaceVisionEncoder:
             "transformers_version": version("transformers"),
         }
 
+    def release_cache(self) -> None:
+        """Hand freed device memory back to the system.
+
+        On MPS the allocator keeps freed blocks in a cache that grows across a
+        long extraction, and it is that cache, not the model, that the machine
+        runs out of: a 9 756-image run was killed at 2 000. Callers that loop
+        over thousands of images should call this periodically. A no-op
+        anywhere else.
+        """
+        if str(self.device) == "mps":
+            self._torch.mps.empty_cache()
+
     def encode(self, images: Iterable[Any], *, normalize: bool = True) -> np.ndarray:
         """Encode PIL-compatible images into a float32 matrix."""
         batch = list(images)

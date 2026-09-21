@@ -5,7 +5,11 @@ from typing import Any
 
 import pytest
 
-from caypollard.vision.encoders import DEFAULT_MODELS, _projected_image_features
+from caypollard.vision.encoders import (
+    DEFAULT_MODELS,
+    HuggingFaceVisionEncoder,
+    _projected_image_features,
+)
 
 
 @dataclass
@@ -50,3 +54,32 @@ def test_presets_cover_three_distinct_representation_families():
     families = {spec.family for spec in DEFAULT_MODELS.values()}
     assert families == {"dinov2", "clip", "siglip"}
     assert len({spec.model_id for spec in DEFAULT_MODELS.values()}) == len(DEFAULT_MODELS)
+
+
+class _Mps:
+    def __init__(self) -> None:
+        self.emptied = 0
+
+    def empty_cache(self) -> None:
+        self.emptied += 1
+
+
+class _Torch:
+    def __init__(self) -> None:
+        self.mps = _Mps()
+
+
+def test_release_cache_only_touches_the_allocator_on_mps():
+    # A long extraction calls this every few hundred images; on any other
+    # device it must cost nothing, and on MPS it must actually reach the
+    # allocator, since that cache is what killed a 9 756-image run at 2 000.
+    encoder = HuggingFaceVisionEncoder.__new__(HuggingFaceVisionEncoder)
+    encoder._torch = _Torch()
+
+    encoder.device = "cpu"
+    encoder.release_cache()
+    assert encoder._torch.mps.emptied == 0
+
+    encoder.device = "mps"
+    encoder.release_cache()
+    assert encoder._torch.mps.emptied == 1
