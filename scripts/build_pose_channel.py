@@ -145,6 +145,7 @@ def main() -> None:
     processed = 0
     figures_total = 0
     checkpoint = Path(str(args.output) + ".partial.npz")
+    stopped_early = False
     done: set[str] = set()
     if args.resume and checkpoint.is_file():
         saved = np.load(checkpoint, allow_pickle=False)
@@ -170,6 +171,7 @@ def main() -> None:
         if not path.is_file():
             continue
         if args.max_new and processed >= args.max_new:
+            stopped_early = True
             break
         processed += 1
         try:
@@ -242,6 +244,14 @@ def main() -> None:
         json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
     print(json.dumps(report, ensure_ascii=False))
+
+    if stopped_early:
+        # A bounded run has not finished the corpus, and writing the final table
+        # would tell a caller it had. Only the checkpoint is updated, so the next
+        # invocation resumes and the shell loop keeps going.
+        write_checkpoint()
+        print("interrompu par --max-new ; point de contrôle écrit", flush=True)
+        return
 
     if ids:
         save_embedding_table(
