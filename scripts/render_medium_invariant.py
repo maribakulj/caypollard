@@ -28,7 +28,17 @@ attributable rather than assumed:
     deliberately cannot.
 ``silhouette``
     The above, then thresholded at its own median into black and white
-    regions. The closest cheap approximation to an abstract vector drawing.
+    regions. A cheap approximation to an abstract drawing, and one that only
+    works where the ground is uniform: on a museum photograph it recovers the
+    object's outline, on an engraving it thresholds a coarse average of
+    hatching and returns noise.
+``mass``
+    Figure and ground separated *before* anything is averaged. The full-
+    resolution greyscale is split into ink and paper at its Otsu threshold,
+    that binary mask is downsampled so each cell holds a local ink fraction,
+    and the fraction is thresholded in turn. The order is the whole point: a
+    line drawing has no mass until its lines are counted, and averaging grey
+    levels first destroys the lines that were going to be counted.
 
 The referee is a linear probe on the resulting embeddings: if it can still name
 the holding library, the rendering has not done its job, whatever it looks like.
@@ -50,6 +60,34 @@ from caypollard.provenance import read_jsonl
 def render(path: Path, *, mode: str, side: int, sigma: float, coarse: int = 48) -> Image.Image:
     image = Image.open(path).convert("L").resize((side, side), Image.LANCZOS)
     array = np.asarray(image, dtype=np.float32) / 255.0
+    if mode == "mass":
+        # Otsu on the full-resolution greyscale: an engraving is ink on paper,
+        # and that is a genuinely bimodal quantity before any averaging.
+        counts, edges = np.histogram(array, bins=256, range=(0.0, 1.0))
+        weight = counts.cumsum()
+        total = weight[-1]
+        centres = (edges[:-1] + edges[1:]) / 2.0
+        mean = (counts * centres).cumsum()
+        with np.errstate(invalid="ignore", divide="ignore"):
+            between = (mean[-1] * weight / total - mean) ** 2 / (
+                weight * (total - weight) / total**2
+            )
+        threshold = centres[int(np.nanargmax(between))]
+        ink = (array < threshold).astype(np.float32)
+        # Local ink fraction, which is where the mass of a line drawing lives.
+        # A resize averages the mask, and unlike a reshape it does not require
+        # the grid to divide the side.
+        fraction = np.asarray(
+            Image.fromarray((ink * 255).astype(np.uint8)).resize(
+                (coarse, coarse), Image.BILINEAR
+            ),
+            dtype=np.float32,
+        ) / 255.0
+        array = (fraction > max(fraction.mean(), 0.15)).astype(np.float32)
+        array = np.asarray(
+            Image.fromarray((array * 255).astype(np.uint8)).resize((side, side), Image.BILINEAR),
+            dtype=np.float32,
+        ) / 255.0
     if mode in {"shape", "silhouette"}:
         small = Image.fromarray((array * 255).astype(np.uint8)).resize(
             (coarse, coarse), Image.LANCZOS
@@ -84,7 +122,7 @@ def main() -> None:
     parser.add_argument("image_dir")
     parser.add_argument("output_dir")
     parser.add_argument(
-        "--mode", choices=("gray", "edges", "shape", "silhouette"), required=True
+        "--mode", choices=("gray", "edges", "shape", "silhouette", "mass"), required=True
     )
     parser.add_argument(
         "--coarse",
