@@ -48,12 +48,20 @@ def descriptor(region: dict) -> np.ndarray:
     # sign and brings them onto a scale a Euclidean metric can use.
     hu = [float(np.sign(v) * np.log1p(abs(v) * 1e4)) for v in hu]
     radial = [float(v) for v in region.get("radial", ())]
+    # Holes and relative scale are recorded when the segmenter supplies them.
+    # Topology separates a ring from a disc, which every metric feature above
+    # confuses; scale against the picture's own parts is what makes a figure
+    # "the large one" independently of how big the picture is.
+    holes = float(region.get("holes", 0))
+    scale = float(region.get("scale_vs_median", 1.0))
     return np.asarray(
         [
             np.log1p(float(region["area"]) * 100.0),
             np.log1p(float(region["elongation"])),
             float(region["solidity"]),
             1.0 if region.get("tone") == "sombre" else 0.0,
+            np.log1p(min(holes, 8.0)),
+            np.log1p(scale),
             *hu,
             *radial,
         ],

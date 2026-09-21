@@ -12,7 +12,8 @@ gradient asks only "where does one region end", which is a question a print and 
 painting answer the same way. Each region is then described by properties that
 survive a change of support:
 
-* **shape** -- area, elongation, solidity, the first Hu moments, and a
+* **shape** -- area, elongation, solidity, hole count, scale relative to the
+  picture's own parts, the first Hu moments, and a
   twenty-four bin radial signature of the contour, all scale- and
   rotation-normalised. The signature is there because the moments alone were
   measured not to carry iconography: a representation built on them ranks a
@@ -41,6 +42,22 @@ from PIL import Image
 from scipy import ndimage
 
 from caypollard.provenance import read_jsonl
+
+
+def holes(mask: np.ndarray) -> int:
+    """How many enclosed holes the region has.
+
+    Topology separates shapes that every metric descriptor confuses: a ring and a
+    disc have the same area, elongation and solidity, and differ only in whether
+    the middle is inside or outside. A wreath, an arch, a chain link and a letter
+    O are all holed, and nothing in the descriptor said so until now.
+    """
+    filled = ndimage.binary_fill_holes(mask)
+    difference = filled & ~mask
+    if not difference.any():
+        return 0
+    _labelled, count = ndimage.label(difference)
+    return int(count)
 
 
 def radial_signature(mask: np.ndarray, *, bins: int = 24) -> list[float]:
@@ -136,10 +153,24 @@ def segment(path: Path, *, side: int, min_area: float, max_regions: int) -> list
                     "extent_y": round(height, 4),
                     "hu": [round(v, 6) if math.isfinite(v) else 0.0 for v in hu_moments(mask)],
                     "radial": radial_signature(mask),
+                    "holes": holes(mask),
                 }
             )
     regions.sort(key=lambda region: -region["area"])
-    return regions[:max_regions]
+    regions = regions[:max_regions]
+
+    # Scale is only meaningful against the picture's own other parts. A figure
+    # twice the size of every other figure is the hierarchy of importance of
+    # medieval art, and it reads identically whether the picture is a miniature
+    # or a mural; an absolute area does not.
+    if regions:
+        areas = sorted(region["area"] for region in regions)
+        median = areas[len(areas) // 2]
+        largest = areas[-1]
+        for region in regions:
+            region["scale_vs_median"] = round(region["area"] / max(median, 1e-9), 3)
+            region["scale_vs_largest"] = round(region["area"] / max(largest, 1e-9), 4)
+    return regions
 
 
 def main() -> None:
