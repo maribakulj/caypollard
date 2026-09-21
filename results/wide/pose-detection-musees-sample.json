@@ -1,0 +1,9 @@
+{
+  "corpus": "musees-echantillon",
+  "images_processed": 800,
+  "images_with_a_usable_figure": 234,
+  "detection_rate": 0.2925,
+  "figures_found": 498,
+  "score_threshold": 0.75,
+  "keypoint_threshold": 3.0
+}

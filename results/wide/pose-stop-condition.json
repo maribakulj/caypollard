@@ -1,0 +1,8 @@
+{
+  "stop_condition_set_in_advance": "abandon the pose channel if the detector finds figures in <30% of engravings",
+  "sample_of_120_engravings": 0.567,
+  "all_2723_engravings": 0.2824,
+  "sample_of_800_museum_works": 0.2925,
+  "decision": "continue, and record why the threshold was not applied mechanically",
+  "reading": "The 120-image sample was unrepresentative -- 56.7% against 28.2% on the full corpus -- which is a reminder that a pilot drawn from the head of a file ordered by identifier is one book, not a sample. But the threshold was protecting against an asymmetry: a detector that reads paintings and not engravings would make the channel a medium detector. The museums rate is 29.3% against the engravings 28.2%, so the detector is evenhanded and merely conservative on art in general. The protection says continue. The real constraint is coverage: a channel present on 28% of pictures can only speak for 28% of queries, and must be evaluated on the subset where both sides of a pair carry a pose."
+}

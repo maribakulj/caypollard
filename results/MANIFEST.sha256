@@ -335,6 +335,9 @@ eaaf8dd12795ed1f2288a2c571ea20a98d498730838b567f302895e542d00946        1121  ve
 6b53aac07b7dbe1120a7a8eac85aca5f90199b84d489ad74bac88bc83ec33924        1864  versioned  results/wide/division5-verdict.json
 6de390135a1a2659babf62c56262cc9407e64490a31fe64aa794febb8acb31bd        1059  versioned  results/wide/labels-dinov2.json
 d872e5d8d5f5177d5f36ee7c81c9435d3e079e0f20476b040bcdbeb1bf21613d        1087  versioned  results/wide/labels-formes.json
+d3d266b270dacf2a554632fdbd87518b2b3abde6a5fb5f6bb2f4b99469245c47         202  versioned  results/wide/pose-detection-emblemes.json
+ce7841656acc58253e53e38df87a8b81d51386120b1cd9766fdd8b2437044a58         210  versioned  results/wide/pose-detection-musees-sample.json
+1ecfcc4ad7243ef66c0f30d9a3196f78cab97aed190b6dc999c01246b4ef7c70        1017  versioned  results/wide/pose-stop-condition.json
 42f3fbd567371d67bd28e3f9c0748854307318a93c5e684c8799005fa44b98dc        1023  versioned  results/wide/probe-composition.json
 9343eddc809fdfdb67db87297c4fb7aff9845c4f056c398ad514ad158c1878b3      329307  versioned  results/wide/sign-names.json
 7d35190fde3dc4cbf337ab57770753f9e2dd8e707896acaaab644092a3da20c7        1968  versioned  results/wide/tradeoff-curve.json

@@ -1,0 +1,9 @@
+{
+  "corpus": "emblemes",
+  "images_processed": 2723,
+  "images_with_a_usable_figure": 769,
+  "detection_rate": 0.2824,
+  "figures_found": 1146,
+  "score_threshold": 0.75,
+  "keypoint_threshold": 3.0
+}
