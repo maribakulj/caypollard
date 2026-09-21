@@ -1,0 +1,20 @@
+{
+  "corpus": {
+    "total": 21128,
+    "museums": 18405,
+    "institutions": 8,
+    "pool_for_retrieval": 18840
+  },
+  "division_5_apparent_improvement_is_an_artifact": {
+    "percentile_v2": 0.336,
+    "percentile_v3": 0.038,
+    "cause": "the Metropolitan added 18 more instances of the same single notation, 56DD1 (fear). The museum side still carries exactly one distinct abstract notation, so the measurement is now entirely about that one concept and says nothing about abstraction in general. The earlier verdict stands unchanged."
+  },
+  "division_3_degraded": {
+    "percentile_v2": 0.056,
+    "percentile_v3": 0.136,
+    "cause": "the Met more than doubled division-3 assignments, 3 557 to 8 584, and brought figures on vases and in sculpture where the composition channel describes the object rather than the picture."
+  },
+  "a_prediction_that_failed": "Shapes alone were predicted to beat the full record on division 3 in the widened corpus, by analogy with the cross-object-type result. They do not: 10 219 against 2 563, which is chance. The two tasks differ -- crossing object families and crossing corpora -- and the analogy does not carry.",
+  "a_bug_found_and_fixed_that_changes_nothing": "build_shape_vocabulary claimed to fit on a sample balanced across corpora. It capped each corpus at 120 000 regions instead, and with 28 770 emblem regions against 119 125 museum ones the fit was four to one on the museums. Truly balancing it reproduces every figure to the digit, so the documentation was wrong and the result was not."
+}

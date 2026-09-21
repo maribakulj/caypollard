@@ -91,15 +91,24 @@ def main() -> None:
         ]
 
     generator = np.random.default_rng(args.seed)
-    training = []
-    for rows in per_corpus.values():
+    pools = {}
+    for name, rows in per_corpus.items():
         pool = [descriptor(region) for row in rows for region in row["regions"]]
-        if not pool:
-            continue
-        stacked = np.stack(pool)
-        take = min(args.sample_per_corpus, stacked.shape[0])
-        index = generator.choice(stacked.shape[0], size=take, replace=False)
-        training.append(stacked[index])
+        if pool:
+            pools[name] = np.stack(pool)
+    if not pools:
+        raise SystemExit("no corpus supplied any region")
+    # Balanced means the *same* number from each corpus, not a cap each happens
+    # to sit under. With 28 770 emblem regions against 119 125 museum ones, a
+    # 120 000 cap fitted the vocabulary four to one on the museums while the
+    # docstring claimed otherwise, and a vocabulary fitted on one corpus
+    # describes the other in a foreign language.
+    take = min(args.sample_per_corpus, min(matrix.shape[0] for matrix in pools.values()))
+    training = [
+        matrix[generator.choice(matrix.shape[0], size=take, replace=False)]
+        for matrix in pools.values()
+    ]
+    sampled_per_corpus = dict.fromkeys(pools, take)
     matrix = np.concatenate(training, axis=0)
     centre = matrix.mean(axis=0)
     scale = matrix.std(axis=0)
@@ -159,6 +168,7 @@ def main() -> None:
         "signs": args.signs,
         "items": len(ids),
         "regions_clustered": int(matrix.shape[0]),
+        "sampled_per_corpus": sampled_per_corpus,
         "signs_used": len(usage),
         "median_corpus_skew": round(float(np.median(skew)), 4) if skew else None,
         "signs_over_90_percent_one_corpus": sum(1 for value in skew if value > 0.9),

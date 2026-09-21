@@ -328,6 +328,9 @@ c52d3844b1230637030bac7f16c258578772fa37b6e03d7506870f4d27c95d04        1833  ve
 51dc62972a1daa4f37e3379471f48ee50aaac86dc0a1a53f8d1cdfa2b6d141d0        2989  versioned  results/wide/by-subject-pose-fair.json
 5dcd11a34833e8c1949e496dda6646b2bc8b6faef89e9ab014a53fe2adf204f9        1822  versioned  results/wide/by-subject-scr.json
 d2720c4a075cbaeaa520872bad42604a22d12d0bb445272d9cba7b34c9f23f6d        3370  versioned  results/wide/by-subject-v2.json
+beb41d7b0cde0379d68705525ee69693c954f92c3a24a080fa209bb1cec517bf        3401  versioned  results/wide/by-subject-v3-channels.json
+22fb856c28029cc47f3366b0f16d35f50cc1a2075ef1db483d3218b7d6e24d72        1840  versioned  results/wide/by-subject-v3.json
+859716dbc426416193afbedc6543703879733b581c0ad15f5d252d14f3ebcc8e        1843  versioned  results/wide/by-subject-v4.json
 af81ab1336dd65a01aa4c19695e44212d17a3bfe9650a8aa629f0eff319e4999        1962  versioned  results/wide/channel-weights.json
 d7e3c27678f3e8d861b55c99684978fa23fc6e81759fd8578f21eb29cd0b9aed        1122  versioned  results/wide/cross-medium-composition.json
 7028d684d12caeb2bb8778db92eeea350c2b5ec32242d2e5f80d04ffc4986708        1123  versioned  results/wide/cross-medium-dinov2.json
@@ -337,6 +340,7 @@ b804c158c4f99c721ebc8ecfe95d7fb980b6507378c2b10e2f3a7fc8c225cb56        1122  ve
 d373978205fed991567d9147ac43d3ec32f5566d90584d77112607354f22c62a        1122  versioned  results/wide/cross-medium-rec-sub.json
 00240ffadffed4a4927d8c89c493e6f16f5f587480eac45af12f017998112f1a        1121  versioned  results/wide/cross-medium-record-v2.json
 f9fed76003232f2e0dc86ff66355171adfe079417252fd2ba0e265b909851e4b        1224  versioned  results/wide/cross-object-type-channels.json
+93f20c0e7c54c10605e7df3bd0226657b0d2e9882483487f8417d51704e17938         838  versioned  results/wide/cross-object-type-v4.json
 a153416a1208159e891a8e811c4045610f4d6d3cf9583f0602f165796c206d40        1948  versioned  results/wide/cross-object-type-verdict.json
 bfdba73e4e648e611c1f38f920880e377d79ee107f7300a6474970734e581de3         842  versioned  results/wide/cross-object-type.json
 6b53aac07b7dbe1120a7a8eac85aca5f90199b84d489ad74bac88bc83ec33924        1864  versioned  results/wide/division5-verdict.json
@@ -353,3 +357,4 @@ f8dc2c0263d5fc6894310068d371e23c6c5423562f34859b2b983596948a28ff        2412  ve
 4a8001fc7e764704a23eff9e920064397d636e8915aac165c5a8ddafb24e4315       21211  versioned  results/wide/region-naming.json
 9343eddc809fdfdb67db87297c4fb7aff9845c4f056c398ad514ad158c1878b3      329307  versioned  results/wide/sign-names.json
 7d35190fde3dc4cbf337ab57770753f9e2dd8e707896acaaab644092a3da20c7        1968  versioned  results/wide/tradeoff-curve.json
+6435f7b2e7971420065a37954f27b175b12aa202d9d5157b60ceac8b36796812        1549  versioned  results/wide/widened-corpus-review.json
