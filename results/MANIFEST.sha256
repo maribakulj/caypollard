@@ -178,6 +178,7 @@ e6d7f7a0e94766313f6772d7d903cf9b6fb98316b0e3e67556cef1178b47422c       28880  ve
 3ad5d7896a3e28dfbe97c12324da01233181f8a4a4fd3895f6f2ad8acd4b9c61        2313  versioned  results/joconde/schema-audit.json
 69205dd8d746fefad24c1cbd74b300c043dda793299b0b639358a1c42ca5f978        3047  versioned  results/metrics/iconclass_phase1_smoke.json
 3202a81b7eddeb2365a0d3e626b63eabfe7deceb6ee8b15730f078b72546fa3d         645  versioned  results/metrics/wikidata-alignment-iconclass.json
+197e9e7d871628a1021ef5dfd575db28e1c5be43a415d62b07c44ab483fb3c33        1196  versioned  results/museums/benchmark-audit-v2.json
 5f0a21346ed609e1a4ad3e43b00f8262100487637424c773a594435a51c48c48        1191  versioned  results/museums/benchmark-audit.json
 cb40b985c8d1ca524d735716cc939ba969bcbd4e67269a8b77c029877e7d1cb5       26397  versioned  results/rank-changes/emblematica-clip-vit-b32.json
 cb7cd5545a185110b0e4717220f96092e7060a504ec0cb9f93ed1c023f57670d       24255  versioned  results/rank-changes/emblematica-dinov2-base.json
@@ -335,6 +336,9 @@ eaaf8dd12795ed1f2288a2c571ea20a98d498730838b567f302895e542d00946        1121  ve
 b804c158c4f99c721ebc8ecfe95d7fb980b6507378c2b10e2f3a7fc8c225cb56        1122  versioned  results/wide/cross-medium-pose.json
 d373978205fed991567d9147ac43d3ec32f5566d90584d77112607354f22c62a        1122  versioned  results/wide/cross-medium-rec-sub.json
 00240ffadffed4a4927d8c89c493e6f16f5f587480eac45af12f017998112f1a        1121  versioned  results/wide/cross-medium-record-v2.json
+f9fed76003232f2e0dc86ff66355171adfe079417252fd2ba0e265b909851e4b        1224  versioned  results/wide/cross-object-type-channels.json
+a153416a1208159e891a8e811c4045610f4d6d3cf9583f0602f165796c206d40        1948  versioned  results/wide/cross-object-type-verdict.json
+bfdba73e4e648e611c1f38f920880e377d79ee107f7300a6474970734e581de3         842  versioned  results/wide/cross-object-type.json
 6b53aac07b7dbe1120a7a8eac85aca5f90199b84d489ad74bac88bc83ec33924        1864  versioned  results/wide/division5-verdict.json
 6de390135a1a2659babf62c56262cc9407e64490a31fe64aa794febb8acb31bd        1059  versioned  results/wide/labels-dinov2.json
 d872e5d8d5f5177d5f36ee7c81c9435d3e079e0f20476b040bcdbeb1bf21613d        1087  versioned  results/wide/labels-formes.json

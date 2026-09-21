@@ -1,0 +1,66 @@
+{
+  "question": "Does a vase find an engraving of the same subject? Crossing object kinds, not corpora.",
+  "pool": 12944,
+  "chance_rank": 6472,
+  "families": {
+    "plat": 12146,
+    "volume": 420,
+    "recipient": 378
+  },
+  "queries_with_a_cross_family_partner": 5361,
+  "by_channel": {
+    "formes seules": {
+      "median_rank": 1008,
+      "top_100": 0.086,
+      "other_family_neighbours": 0.141
+    },
+    "repetition": {
+      "median_rank": 1374,
+      "top_100": 0.102,
+      "other_family_neighbours": 0.136
+    },
+    "composition": {
+      "median_rank": 2036,
+      "top_100": 0.074,
+      "other_family_neighbours": 0.098
+    },
+    "record F=1 C=2 R=0.5": {
+      "median_rank": 2008,
+      "top_100": 0.079,
+      "other_family_neighbours": 0.107
+    }
+  },
+  "weight_sweep": [
+    {
+      "F": 1,
+      "C": 0,
+      "R": 0.5,
+      "rank": 1421
+    },
+    {
+      "F": 1,
+      "C": 0.25,
+      "R": 0.5,
+      "rank": 1512
+    },
+    {
+      "F": 1,
+      "C": 0,
+      "R": 1,
+      "rank": 1420
+    },
+    {
+      "F": 1,
+      "C": 0.5,
+      "R": 0.5,
+      "rank": 1676
+    },
+    {
+      "F": 1,
+      "C": 2,
+      "R": 0.5,
+      "rank": 2008
+    }
+  ],
+  "reading": "Yes, and weakly. A vase and an engraving sharing a motif sit at median rank 1 008 of 12 944 under the shape channel against a chance of 6 472 -- six times better than chance and far from reach, where crossing corpora reached 359. Crossing a viewing condition is about three times harder than crossing a workshop, which is what this benchmark had been calling cross-medium.\n\nThe reversal is the finding. Composition rescued scenes when crossing corpora and is the worst channel here, because a vessel form dictates its own layout: the decoration of a vase is arranged by the vase, not by the subject. Shapes alone beat every mixture -- 1 008 against 1 420 with repetition and 2 008 with composition -- so for this task adding channels subtracts."
+}
