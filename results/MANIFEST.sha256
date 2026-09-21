@@ -343,5 +343,9 @@ ce7841656acc58253e53e38df87a8b81d51386120b1cd9766fdd8b2437044a58         210  ve
 1ecfcc4ad7243ef66c0f30d9a3196f78cab97aed190b6dc999c01246b4ef7c70        1017  versioned  results/wide/pose-stop-condition.json
 4cdc19f270b695c8fb86c0a1d6bcc7b01c27279b9b8acb03fde95318112cfcfd        1883  versioned  results/wide/pose-verdict.json
 42f3fbd567371d67bd28e3f9c0748854307318a93c5e684c8799005fa44b98dc        1023  versioned  results/wide/probe-composition.json
+1061421b515dfb331e12a891eaebd6ac87adf4486230037e4b07b8be96f72194       20874  versioned  results/wide/region-naming-emblemes.json
+70b0e7e867bdcaaf4218128d4eae272743a2186d9a9901fe78f74be072d81a43       21286  versioned  results/wide/region-naming-musees.json
+f8dc2c0263d5fc6894310068d371e23c6c5423562f34859b2b983596948a28ff        2412  versioned  results/wide/region-naming-verdict.json
+4a8001fc7e764704a23eff9e920064397d636e8915aac165c5a8ddafb24e4315       21211  versioned  results/wide/region-naming.json
 9343eddc809fdfdb67db87297c4fb7aff9845c4f056c398ad514ad158c1878b3      329307  versioned  results/wide/sign-names.json
 7d35190fde3dc4cbf337ab57770753f9e2dd8e707896acaaab644092a3da20c7        1968  versioned  results/wide/tradeoff-curve.json

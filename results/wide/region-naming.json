@@ -1,0 +1,977 @@
+{
+  "notations_modelled": 30,
+  "train_bags": 6962,
+  "test_bags_evaluated": 1848,
+  "iterations": 3,
+  "bag_level": {
+    "hits_at_1": 0.0476,
+    "hits_at_5": 0.2446
+  },
+  "frequency_prior": {
+    "hits_at_1": 0.2165,
+    "hits_at_5": 0.5422
+  },
+  "witnesses": {
+    "31D15": [
+      {
+        "picture": "rijksmuseum:Q116288064",
+        "region_index": 0,
+        "score": 8.12
+      },
+      {
+        "picture": "rijksmuseum:Q27979307",
+        "region_index": 0,
+        "score": 7.765
+      },
+      {
+        "picture": "rijksmuseum:Q116292017",
+        "region_index": 1,
+        "score": 7.038
+      },
+      {
+        "picture": "rijksmuseum:Q116290307",
+        "region_index": 0,
+        "score": 6.62
+      },
+      {
+        "picture": "rijksmuseum:Q19905263",
+        "region_index": 0,
+        "score": 6.057
+      },
+      {
+        "picture": "rijksmuseum:Q116373826",
+        "region_index": 1,
+        "score": 6.008
+      }
+    ],
+    "25G41": [
+      {
+        "picture": "rijksmuseum:Q28113594",
+        "region_index": 0,
+        "score": 10.603
+      },
+      {
+        "picture": "rijksmuseum:Q28113600",
+        "region_index": 0,
+        "score": 9.527
+      },
+      {
+        "picture": "rijksmuseum:Q116242685",
+        "region_index": 0,
+        "score": 8.689
+      },
+      {
+        "picture": "rijksmuseum:Q116240640",
+        "region_index": 0,
+        "score": 8.624
+      },
+      {
+        "picture": "rijksmuseum:Q116242781",
+        "region_index": 0,
+        "score": 8.256
+      },
+      {
+        "picture": "rijksmuseum:Q1057817",
+        "region_index": 3,
+        "score": 8.124
+      }
+    ],
+    "11H": [
+      {
+        "picture": "rijksmuseum:Q17276072",
+        "region_index": 3,
+        "score": 10.567
+      },
+      {
+        "picture": "rijksmuseum:Q26997797",
+        "region_index": 6,
+        "score": 8.164
+      },
+      {
+        "picture": "rijksmuseum:Q27697227",
+        "region_index": 3,
+        "score": 6.588
+      },
+      {
+        "picture": "rijksmuseum:Q27698540",
+        "region_index": 8,
+        "score": 6.519
+      },
+      {
+        "picture": "rijksmuseum:Q100798419",
+        "region_index": 2,
+        "score": 6.109
+      },
+      {
+        "picture": "rijksmuseum:Q27980876",
+        "region_index": 1,
+        "score": 6.03
+      }
+    ],
+    "25G3": [
+      {
+        "picture": "rijksmuseum:Q17327385",
+        "region_index": 0,
+        "score": 6.008
+      },
+      {
+        "picture": "rijksmuseum:Q17324366",
+        "region_index": 0,
+        "score": 5.83
+      },
+      {
+        "picture": "rijksmuseum:Q17324906",
+        "region_index": 1,
+        "score": 5.749
+      },
+      {
+        "picture": "rijksmuseum:Q17331633",
+        "region_index": 0,
+        "score": 5.732
+      },
+      {
+        "picture": "rijksmuseum:Q17340573",
+        "region_index": 0,
+        "score": 5.732
+      },
+      {
+        "picture": "rijksmuseum:Q17319744",
+        "region_index": 0,
+        "score": 5.727
+      }
+    ],
+    "11F": [
+      {
+        "picture": "rijksmuseum:Q19905032",
+        "region_index": 13,
+        "score": 6.67
+      },
+      {
+        "picture": "rijksmuseum:Q2631335",
+        "region_index": 4,
+        "score": 6.349
+      },
+      {
+        "picture": "rijksmuseum:Q474409",
+        "region_index": 0,
+        "score": 5.815
+      },
+      {
+        "picture": "rijksmuseum:Q27697261",
+        "region_index": 0,
+        "score": 5.739
+      },
+      {
+        "picture": "rijksmuseum:Q64787448",
+        "region_index": 3,
+        "score": 5.413
+      },
+      {
+        "picture": "rijksmuseum:Q19905390",
+        "region_index": 0,
+        "score": 5.292
+      }
+    ],
+    "25F3": [
+      {
+        "picture": "rijksmuseum:Q116346444",
+        "region_index": 1,
+        "score": 5.875
+      },
+      {
+        "picture": "rijksmuseum:Q116242531",
+        "region_index": 2,
+        "score": 5.817
+      },
+      {
+        "picture": "rijksmuseum:Q116253083",
+        "region_index": 0,
+        "score": 5.776
+      },
+      {
+        "picture": "rijksmuseum:Q116297177",
+        "region_index": 0,
+        "score": 5.486
+      },
+      {
+        "picture": "rijksmuseum:Q116297348",
+        "region_index": 1,
+        "score": 5.479
+      },
+      {
+        "picture": "rijksmuseum:Q116373450",
+        "region_index": 0,
+        "score": 5.459
+      }
+    ],
+    "11D2": [
+      {
+        "picture": "rijksmuseum:Q27697081",
+        "region_index": 5,
+        "score": 6.733
+      },
+      {
+        "picture": "rijksmuseum:Q17276205",
+        "region_index": 4,
+        "score": 6.395
+      },
+      {
+        "picture": "rijksmuseum:Q3842504",
+        "region_index": 6,
+        "score": 6.361
+      },
+      {
+        "picture": "rijksmuseum:Q17334374",
+        "region_index": 3,
+        "score": 6.167
+      },
+      {
+        "picture": "rijksmuseum:Q64790977",
+        "region_index": 8,
+        "score": 5.819
+      },
+      {
+        "picture": "rijksmuseum:Q27980407",
+        "region_index": 1,
+        "score": 5.652
+      }
+    ],
+    "11D": [
+      {
+        "picture": "rijksmuseum:Q121620196",
+        "region_index": 2,
+        "score": 7.656
+      },
+      {
+        "picture": "rijksmuseum:Q27698885",
+        "region_index": 3,
+        "score": 7.265
+      },
+      {
+        "picture": "rijksmuseum:Q4411819",
+        "region_index": 0,
+        "score": 6.404
+      },
+      {
+        "picture": "rijksmuseum:Q18338556",
+        "region_index": 0,
+        "score": 6.31
+      },
+      {
+        "picture": "rijksmuseum:Q19905266",
+        "region_index": 0,
+        "score": 6.036
+      },
+      {
+        "picture": "rijksmuseum:Q27697245",
+        "region_index": 0,
+        "score": 5.757
+      }
+    ],
+    "44B194": [
+      {
+        "picture": "rijksmuseum:Q116310384",
+        "region_index": 1,
+        "score": 5.761
+      },
+      {
+        "picture": "rijksmuseum:Q116280463",
+        "region_index": 1,
+        "score": 5.349
+      },
+      {
+        "picture": "rijksmuseum:Q116310595",
+        "region_index": 0,
+        "score": 5.199
+      },
+      {
+        "picture": "rijksmuseum:Q116372855",
+        "region_index": 1,
+        "score": 4.827
+      },
+      {
+        "picture": "rijksmuseum:Q116372853",
+        "region_index": 1,
+        "score": 4.827
+      },
+      {
+        "picture": "rijksmuseum:Q116372852",
+        "region_index": 1,
+        "score": 4.827
+      }
+    ],
+    "46A122": [
+      {
+        "picture": "rijksmuseum:Q116310384",
+        "region_index": 1,
+        "score": 5.761
+      },
+      {
+        "picture": "rijksmuseum:Q116280463",
+        "region_index": 1,
+        "score": 5.349
+      },
+      {
+        "picture": "rijksmuseum:Q116310595",
+        "region_index": 0,
+        "score": 5.199
+      },
+      {
+        "picture": "rijksmuseum:Q116372855",
+        "region_index": 1,
+        "score": 4.827
+      },
+      {
+        "picture": "rijksmuseum:Q116372853",
+        "region_index": 1,
+        "score": 4.827
+      },
+      {
+        "picture": "rijksmuseum:Q116372852",
+        "region_index": 1,
+        "score": 4.827
+      }
+    ],
+    "44A1": [
+      {
+        "picture": "rijksmuseum:Q116310384",
+        "region_index": 1,
+        "score": 5.761
+      },
+      {
+        "picture": "rijksmuseum:Q116280463",
+        "region_index": 1,
+        "score": 5.349
+      },
+      {
+        "picture": "rijksmuseum:Q116310595",
+        "region_index": 0,
+        "score": 5.199
+      },
+      {
+        "picture": "rijksmuseum:Q116372855",
+        "region_index": 1,
+        "score": 4.827
+      },
+      {
+        "picture": "rijksmuseum:Q116372853",
+        "region_index": 1,
+        "score": 4.827
+      },
+      {
+        "picture": "rijksmuseum:Q116372852",
+        "region_index": 1,
+        "score": 4.827
+      }
+    ],
+    "34B11": [
+      {
+        "picture": "rijksmuseum:Q116286996",
+        "region_index": 3,
+        "score": 8.943
+      },
+      {
+        "picture": "rijksmuseum:Q19905150",
+        "region_index": 5,
+        "score": 5.399
+      },
+      {
+        "picture": "rijksmuseum:Q28094677",
+        "region_index": 9,
+        "score": 4.995
+      },
+      {
+        "picture": "rijksmuseum:Q116290244",
+        "region_index": 3,
+        "score": 4.812
+      },
+      {
+        "picture": "rijksmuseum:Q19905340",
+        "region_index": 7,
+        "score": 4.551
+      },
+      {
+        "picture": "rijksmuseum:Q59489962",
+        "region_index": 1,
+        "score": 4.495
+      }
+    ],
+    "31D112": [
+      {
+        "picture": "rijksmuseum:Q116241072",
+        "region_index": 4,
+        "score": 9.256
+      },
+      {
+        "picture": "rijksmuseum:Q104413243",
+        "region_index": 3,
+        "score": 8.756
+      },
+      {
+        "picture": "rijksmuseum:Q116241086",
+        "region_index": 3,
+        "score": 7.219
+      },
+      {
+        "picture": "rijksmuseum:Q15973749",
+        "region_index": 0,
+        "score": 7.189
+      },
+      {
+        "picture": "rijksmuseum:Q116310760",
+        "region_index": 2,
+        "score": 7.008
+      },
+      {
+        "picture": "rijksmuseum:Q24275910",
+        "region_index": 0,
+        "score": 6.569
+      }
+    ],
+    "11HH": [
+      {
+        "picture": "rijksmuseum:Q27981782",
+        "region_index": 6,
+        "score": 7.972
+      },
+      {
+        "picture": "rijksmuseum:Q27981604",
+        "region_index": 0,
+        "score": 6.575
+      },
+      {
+        "picture": "rijksmuseum:Q27982706",
+        "region_index": 0,
+        "score": 6.447
+      },
+      {
+        "picture": "rijksmuseum:Q17330140",
+        "region_index": 0,
+        "score": 6.358
+      },
+      {
+        "picture": "rijksmuseum:Q1905679",
+        "region_index": 1,
+        "score": 6.063
+      },
+      {
+        "picture": "rijksmuseum:Q26741600",
+        "region_index": 0,
+        "score": 5.819
+      }
+    ],
+    "49M32": [
+      {
+        "picture": "rijksmuseum:Q2479220",
+        "region_index": 1,
+        "score": 7.175
+      },
+      {
+        "picture": "rijksmuseum:Q27697570",
+        "region_index": 2,
+        "score": 6.018
+      },
+      {
+        "picture": "rijksmuseum:Q3842302",
+        "region_index": 3,
+        "score": 5.675
+      },
+      {
+        "picture": "rijksmuseum:Q59262538",
+        "region_index": 10,
+        "score": 5.355
+      },
+      {
+        "picture": "rijksmuseum:Q28001609",
+        "region_index": 2,
+        "score": 5.239
+      },
+      {
+        "picture": "rijksmuseum:Q27690180",
+        "region_index": 10,
+        "score": 5.173
+      }
+    ],
+    "25F23": [
+      {
+        "picture": "rijksmuseum:Q116276886",
+        "region_index": 1,
+        "score": 6.647
+      },
+      {
+        "picture": "rijksmuseum:Q116305138",
+        "region_index": 0,
+        "score": 5.568
+      },
+      {
+        "picture": "rijksmuseum:Q116298479",
+        "region_index": 1,
+        "score": 5.54
+      },
+      {
+        "picture": "rijksmuseum:Q116289797",
+        "region_index": 0,
+        "score": 5.445
+      },
+      {
+        "picture": "rijksmuseum:Q116297450",
+        "region_index": 0,
+        "score": 4.908
+      },
+      {
+        "picture": "rijksmuseum:Q116297448",
+        "region_index": 0,
+        "score": 4.908
+      }
+    ],
+    "31D11221": [
+      {
+        "picture": "rijksmuseum:Q17334352",
+        "region_index": 1,
+        "score": 7.439
+      },
+      {
+        "picture": "rijksmuseum:Q21741540",
+        "region_index": 3,
+        "score": 6.84
+      },
+      {
+        "picture": "rijksmuseum:Q61984771",
+        "region_index": 1,
+        "score": 5.678
+      },
+      {
+        "picture": "rijksmuseum:Q116290033",
+        "region_index": 1,
+        "score": 5.669
+      },
+      {
+        "picture": "rijksmuseum:Q17330003",
+        "region_index": 1,
+        "score": 5.449
+      },
+      {
+        "picture": "rijksmuseum:Q19547185",
+        "region_index": 2,
+        "score": 5.383
+      }
+    ],
+    "11G": [
+      {
+        "picture": "rijksmuseum:Q27701579",
+        "region_index": 2,
+        "score": 8.451
+      },
+      {
+        "picture": "rijksmuseum:Q18339749",
+        "region_index": 11,
+        "score": 6.979
+      },
+      {
+        "picture": "rijksmuseum:Q19905099",
+        "region_index": 2,
+        "score": 6.63
+      },
+      {
+        "picture": "rijksmuseum:Q116253320",
+        "region_index": 3,
+        "score": 6.524
+      },
+      {
+        "picture": "rijksmuseum:Q19904860",
+        "region_index": 0,
+        "score": 6.302
+      },
+      {
+        "picture": "rijksmuseum:Q28020551",
+        "region_index": 2,
+        "score": 6.212
+      }
+    ],
+    "26A": [
+      {
+        "picture": "rijksmuseum:Q17329784",
+        "region_index": 0,
+        "score": 9.02
+      },
+      {
+        "picture": "rijksmuseum:Q17276199",
+        "region_index": 1,
+        "score": 8.079
+      },
+      {
+        "picture": "rijksmuseum:Q17331307",
+        "region_index": 0,
+        "score": 6.461
+      },
+      {
+        "picture": "rijksmuseum:Q17329576",
+        "region_index": 0,
+        "score": 6.393
+      },
+      {
+        "picture": "rijksmuseum:Q523974",
+        "region_index": 1,
+        "score": 5.474
+      },
+      {
+        "picture": "rijksmuseum:Q28007987",
+        "region_index": 1,
+        "score": 5.129
+      }
+    ],
+    "41D221": [
+      {
+        "picture": "rijksmuseum:Q20658191",
+        "region_index": 4,
+        "score": 10.302
+      },
+      {
+        "picture": "rijksmuseum:Q19905715",
+        "region_index": 1,
+        "score": 7.017
+      },
+      {
+        "picture": "rijksmuseum:Q5689364",
+        "region_index": 2,
+        "score": 6.023
+      },
+      {
+        "picture": "rijksmuseum:Q19836182",
+        "region_index": 4,
+        "score": 5.365
+      },
+      {
+        "picture": "rijksmuseum:Q57392420",
+        "region_index": 5,
+        "score": 5.28
+      },
+      {
+        "picture": "rijksmuseum:Q21481261",
+        "region_index": 0,
+        "score": 4.919
+      }
+    ],
+    "45C13": [
+      {
+        "picture": "rijksmuseum:Q27697074",
+        "region_index": 7,
+        "score": 6.17
+      },
+      {
+        "picture": "rijksmuseum:Q27753204",
+        "region_index": 0,
+        "score": 5.652
+      },
+      {
+        "picture": "rijksmuseum:Q27697136",
+        "region_index": 1,
+        "score": 5.332
+      },
+      {
+        "picture": "rijksmuseum:Q27749601",
+        "region_index": 0,
+        "score": 5.053
+      },
+      {
+        "picture": "rijksmuseum:Q116310237",
+        "region_index": 1,
+        "score": 4.862
+      },
+      {
+        "picture": "rijksmuseum:Q21730617",
+        "region_index": 0,
+        "score": 4.387
+      }
+    ],
+    "25F33": [
+      {
+        "picture": "rijksmuseum:Q116349609",
+        "region_index": 1,
+        "score": 6.839
+      },
+      {
+        "picture": "rijksmuseum:Q116274717",
+        "region_index": 0,
+        "score": 5.732
+      },
+      {
+        "picture": "rijksmuseum:Q116326502",
+        "region_index": 0,
+        "score": 5.587
+      },
+      {
+        "picture": "rijksmuseum:Q116371232",
+        "region_index": 0,
+        "score": 5.395
+      },
+      {
+        "picture": "rijksmuseum:Q116370194",
+        "region_index": 1,
+        "score": 5.304
+      },
+      {
+        "picture": "rijksmuseum:Q116371342",
+        "region_index": 0,
+        "score": 5.295
+      }
+    ],
+    "47I4223": [
+      {
+        "picture": "rijksmuseum:Q116330089",
+        "region_index": 5,
+        "score": 8.746
+      },
+      {
+        "picture": "rijksmuseum:Q116348633",
+        "region_index": 0,
+        "score": 6.762
+      },
+      {
+        "picture": "rijksmuseum:Q116372560",
+        "region_index": 3,
+        "score": 6.267
+      },
+      {
+        "picture": "rijksmuseum:Q116241918",
+        "region_index": 0,
+        "score": 5.599
+      },
+      {
+        "picture": "rijksmuseum:Q116337140",
+        "region_index": 1,
+        "score": 5.17
+      },
+      {
+        "picture": "rijksmuseum:Q116361219",
+        "region_index": 2,
+        "score": 5.156
+      }
+    ],
+    "45C22": [
+      {
+        "picture": "rijksmuseum:Q1115403",
+        "region_index": 4,
+        "score": 13.216
+      },
+      {
+        "picture": "rijksmuseum:Q27976559",
+        "region_index": 0,
+        "score": 8.852
+      },
+      {
+        "picture": "rijksmuseum:Q1114361",
+        "region_index": 4,
+        "score": 8.158
+      },
+      {
+        "picture": "rijksmuseum:Q28113383",
+        "region_index": 11,
+        "score": 7.234
+      },
+      {
+        "picture": "rijksmuseum:Q27756149",
+        "region_index": 6,
+        "score": 7.038
+      },
+      {
+        "picture": "rijksmuseum:Q27781230",
+        "region_index": 6,
+        "score": 6.811
+      }
+    ],
+    "31D11222": [
+      {
+        "picture": "rijksmuseum:Q3937558",
+        "region_index": 4,
+        "score": 6.955
+      },
+      {
+        "picture": "rijksmuseum:Q17328456",
+        "region_index": 0,
+        "score": 6.759
+      },
+      {
+        "picture": "rijksmuseum:Q17276021",
+        "region_index": 1,
+        "score": 6.618
+      },
+      {
+        "picture": "rijksmuseum:Q17331260",
+        "region_index": 4,
+        "score": 5.758
+      },
+      {
+        "picture": "rijksmuseum:Q21890525",
+        "region_index": 2,
+        "score": 5.393
+      },
+      {
+        "picture": "rijksmuseum:Q116355762",
+        "region_index": 0,
+        "score": 5.306
+      }
+    ],
+    "41A711": [
+      {
+        "picture": "rijksmuseum:Q64789679",
+        "region_index": 3,
+        "score": 11.254
+      },
+      {
+        "picture": "rijksmuseum:Q27701003",
+        "region_index": 11,
+        "score": 9.177
+      },
+      {
+        "picture": "rijksmuseum:Q19318473",
+        "region_index": 0,
+        "score": 6.066
+      },
+      {
+        "picture": "rijksmuseum:Q17324154",
+        "region_index": 3,
+        "score": 5.767
+      },
+      {
+        "picture": "rijksmuseum:Q27700037",
+        "region_index": 1,
+        "score": 5.582
+      },
+      {
+        "picture": "rijksmuseum:Q17334749",
+        "region_index": 1,
+        "score": 5.372
+      }
+    ],
+    "92C4": [
+      {
+        "picture": "rijksmuseum:Q27978888",
+        "region_index": 19,
+        "score": 7.173
+      },
+      {
+        "picture": "rijksmuseum:Q17320338",
+        "region_index": 5,
+        "score": 7.003
+      },
+      {
+        "picture": "rijksmuseum:Q19828291",
+        "region_index": 5,
+        "score": 6.544
+      },
+      {
+        "picture": "rijksmuseum:Q116374102",
+        "region_index": 1,
+        "score": 6.489
+      },
+      {
+        "picture": "rijksmuseum:Q116309280",
+        "region_index": 2,
+        "score": 6.133
+      },
+      {
+        "picture": "rijksmuseum:Q22976674",
+        "region_index": 1,
+        "score": 4.98
+      }
+    ],
+    "45B": [
+      {
+        "picture": "rijksmuseum:Q17330418",
+        "region_index": 11,
+        "score": 5.142
+      },
+      {
+        "picture": "rijksmuseum:Q12141828",
+        "region_index": 0,
+        "score": 5.059
+      },
+      {
+        "picture": "rijksmuseum:Q104412997",
+        "region_index": 1,
+        "score": 4.949
+      },
+      {
+        "picture": "rijksmuseum:Q97580153",
+        "region_index": 0,
+        "score": 4.832
+      },
+      {
+        "picture": "rijksmuseum:Q17324759",
+        "region_index": 1,
+        "score": 4.773
+      },
+      {
+        "picture": "rijksmuseum:Q116295819",
+        "region_index": 3,
+        "score": 4.767
+      }
+    ],
+    "25F36": [
+      {
+        "picture": "rijksmuseum:Q9372002",
+        "region_index": 4,
+        "score": 9.186
+      },
+      {
+        "picture": "rijksmuseum:Q116251941",
+        "region_index": 0,
+        "score": 6.617
+      },
+      {
+        "picture": "rijksmuseum:Q116314346",
+        "region_index": 0,
+        "score": 6.198
+      },
+      {
+        "picture": "rijksmuseum:Q116240654",
+        "region_index": 2,
+        "score": 5.938
+      },
+      {
+        "picture": "rijksmuseum:Q116373759",
+        "region_index": 0,
+        "score": 5.361
+      },
+      {
+        "picture": "rijksmuseum:Q116287380",
+        "region_index": 0,
+        "score": 4.743
+      }
+    ],
+    "47I2111": [
+      {
+        "picture": "rijksmuseum:Q116276361",
+        "region_index": 0,
+        "score": 10.844
+      },
+      {
+        "picture": "rijksmuseum:Q116293012",
+        "region_index": 0,
+        "score": 8.904
+      },
+      {
+        "picture": "rijksmuseum:Q17334753",
+        "region_index": 1,
+        "score": 6.824
+      },
+      {
+        "picture": "rijksmuseum:Q116292997",
+        "region_index": 0,
+        "score": 6.756
+      },
+      {
+        "picture": "rijksmuseum:Q49800345",
+        "region_index": 1,
+        "score": 6.526
+      },
+      {
+        "picture": "rijksmuseum:Q116297682",
+        "region_index": 0,
+        "score": 6.521
+      }
+    ]
+  },
+  "reading": "Beating the prior at bag level means the regions carry the signal, since nothing but regions was given. The witnesses are the contestable part: each names a picture and the index of the region the model holds responsible, so a historian can look and say no."
+}

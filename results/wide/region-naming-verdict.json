@@ -1,0 +1,42 @@
+{
+  "objective": "name a region rather than a picture; success = beat the frequency prior at region level",
+  "verdict": "not met, robustly",
+  "framings_tried": [
+    {
+      "setup": "MIL across both corpora, 30 most frequent notations",
+      "hits_at_1": 0.0476,
+      "prior": 0.2165
+    },
+    {
+      "setup": "MIL within museums",
+      "hits_at_1": 0.0528,
+      "prior": 0.263
+    },
+    {
+      "setup": "MIL within emblems, hub notations included",
+      "hits_at_1": 0.3163,
+      "prior": 0.7488
+    },
+    {
+      "setup": "MIL within emblems, hubs excluded",
+      "hits_at_1": 0.0868,
+      "prior": 0.2567
+    },
+    {
+      "setup": "pooled control within emblems, hubs excluded",
+      "hits_at_1": 0.0613,
+      "prior": 0.2567
+    },
+    {
+      "setup": "pooled control within museums",
+      "hits_at_1": 0.0963,
+      "prior": 0.263
+    }
+  ],
+  "two_methodological_faults_found_and_fixed": [
+    "Ranking notations by raw decision margins across independently fitted classifiers was wrong, and switching to probabilities changed nothing because the sigmoid is monotone and applied identically to every model. Proper cross-model calibration was not attempted, since the localised hypothesis did not survive the pooled control.",
+    "Taking the most frequent notations made the prior unbeatable by construction: on the emblems one label covered three quarters of the test set. A task with one dominant answer is not a naming task, and notations carried by more than a quarter of pictures are now excluded."
+  ],
+  "reading": "Iconographic identity is not localised in a single region, and is not recoverable from the mean and max of a picture regions descriptors either. It was recoverable earlier at picture level from a quantised histogram over 128 composite signs -- 0.251 against a prior of 0.109 on emblems -- so the information is in the distribution of shapes across a picture rather than in any shape or in their average. Narrowing to one region throws away exactly what carries the signal, which is why the pooled control beats the narrowing on museums and why neither clears the prior.",
+  "what_would_be_needed": "A representation of a region in its context rather than alone -- what it sits beside, above, inside -- which is the relation channel applied at region level rather than at picture level. That is a larger piece of work than this one and is not attempted here."
+}

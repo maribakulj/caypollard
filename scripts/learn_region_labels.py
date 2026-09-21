@@ -59,6 +59,16 @@ def main() -> None:
     parser.add_argument("--test-split", default="test")
     parser.add_argument("--min-support", type=int, default=60)
     parser.add_argument("--max-notations", type=int, default=40)
+    parser.add_argument(
+        "--max-prevalence",
+        type=float,
+        default=0.25,
+        help="Drop notations carried by more than this fraction of training pictures. "
+             "Taking simply the most frequent notations makes the frequency prior "
+             "unbeatable by construction -- on the emblems one label covered three "
+             "quarters of the test set -- and a task with one dominant answer is not a "
+             "naming task.",
+    )
     parser.add_argument("--iterations", type=int, default=3)
     parser.add_argument("--examples", type=int, default=6)
     parser.add_argument("--output", required=True)
@@ -96,11 +106,12 @@ def main() -> None:
     counts = collections.Counter(
         notation for item in train for notation in labels[item]
     )
+    ceiling = args.max_prevalence * len(train)
     vocabulary = [
         notation
-        for notation, count in counts.most_common(args.max_notations)
-        if count >= args.min_support
-    ]
+        for notation, count in counts.most_common()
+        if args.min_support <= count <= ceiling
+    ][: args.max_notations]
     if not vocabulary:
         raise SystemExit("no notation has enough support in the training split")
 
@@ -167,6 +178,11 @@ def main() -> None:
         if not truth:
             continue
         evaluated += 1
+        # Margins, not probabilities: for logistic regression the sigmoid is a
+        # monotone map applied identically to every model, so it reorders
+        # nothing. Cross-model calibration would need held-out fitting per
+        # notation, which is only worth doing if the localised hypothesis
+        # survives the pooled control below.
         scored = sorted(
             (
                 (float(models[notation].decision_function(normalised[item]).max()), notation)
@@ -180,6 +196,41 @@ def main() -> None:
         prior_hits1 += int(prior_order[0] in truth)
         prior_hits5 += int(bool(set(prior_order[:5]) & truth))
 
+    # The control that decides what the failure means. The same features and
+    # split, but each picture represented by the mean and max of its regions
+    # rather than by one region: if pooling works where narrowing does not, the
+    # notation is carried by the configuration and localising it is the mistake.
+    def pooled(item: str) -> np.ndarray:
+        block = normalised[item]
+        return np.concatenate([block.mean(axis=0), block.max(axis=0)])
+
+    pooled_train = np.stack([pooled(item) for item in train])
+    pooled_models = {}
+    for notation in models:
+        target = np.array([notation in labels[item] for item in train])
+        if target.sum() >= 10 and (~target).sum() >= 10:
+            pooled_models[notation] = LogisticRegression(
+                max_iter=800, class_weight="balanced"
+            ).fit(pooled_train, target)
+    pooled_hits1 = pooled_hits5 = 0
+    for item in test:
+        truth = labels[item] & set(pooled_models)
+        if not (labels[item] & set(models)):
+            continue
+        block = pooled(item).reshape(1, -1)
+        ranked = [
+            notation
+            for _score, notation in sorted(
+                (
+                    (float(model.decision_function(block)[0]), notation)
+                    for notation, model in pooled_models.items()
+                ),
+                reverse=True,
+            )
+        ]
+        pooled_hits1 += int(bool(ranked) and ranked[0] in truth)
+        pooled_hits5 += int(bool(set(ranked[:5]) & truth))
+
     report = {
         "notations_modelled": len(models),
         "train_bags": len(train),
@@ -188,6 +239,10 @@ def main() -> None:
         "bag_level": {
             "hits_at_1": round(hits1 / max(evaluated, 1), 4),
             "hits_at_5": round(hits5 / max(evaluated, 1), 4),
+        },
+        "pooled_control": {
+            "hits_at_1": round(pooled_hits1 / max(evaluated, 1), 4),
+            "hits_at_5": round(pooled_hits5 / max(evaluated, 1), 4),
         },
         "frequency_prior": {
             "hits_at_1": round(prior_hits1 / max(evaluated, 1), 4),
