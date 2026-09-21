@@ -154,6 +154,73 @@ relative limb angles, recovered pose clusters corresponding to Pathosformeln *an
 morphologically similar poses can represent wildly different emotions. A transcription language
 that captures form will find form recurring. What the recurrence means is not in the record.
 
+## What each channel is for, measured by subject
+
+The aggregate figures above hide two opposite behaviours, and the breakdown is the
+most useful thing in this document. Iconclass's first digit separates the kinds:
+division 2 names a thing -- an animal, a plant -- while divisions 1, 7 and 9 name
+an episode with several actors. Median rank of the best cross-medium partner,
+pool of 12 479 where chance is about 6 240:
+
+| division | shape record | composition | repetition | all three |
+| --- | ---: | ---: | ---: | ---: |
+| 2 · nature, objects | 458 | 537 | **425** | **409** |
+| 3 · human body, action | 1 835 | 948 | 799 | **698** |
+| 4 · society | 1 550 | 721 | 727 | **663** |
+| 9 · classical mythology | 1 943 | 1 034 | 882 | **714** |
+| 7 · Bible scenes | 3 532 | 858 | 1 141 | **906** |
+| 1 · religion, scenes | **6 403** | **1 429** | 2 758 | 2 295 |
+| 5 · abstract ideas | 8 961 | 5 394 | 5 967 | 4 190 |
+
+**The shape record is the object channel and composition is the scene channel.**
+Shapes place a cat beside a cat at rank 458 and leave a religious scene at 6 403,
+which is chance: a cat has a distinctive silhouette, while an Annunciation and a
+Nativity share figures and architecture whose local shape statistics are generic.
+Composition reverses it, because what two pictures of one episode share is where
+things are.
+
+**Repetition is the strongest single channel on objects** and four times better
+than shapes on scenes, but it hurts division 1 at every weight tried: 1 432 with
+shapes and composition alone, 1 740 at the kindest weighting. An episode does not
+fix its count -- an Annunciation with two figures and one with angels and
+architecture share a subject and not a multiplicity profile -- so counting
+misleads exactly where the subject leaves the number free.
+
+The selected record is shapes, composition at twice the weight, repetition at
+half: median rank 359 overall, a medium probe of 77.6% against a 78.2% majority
+floor, and 28.6% of neighbours from the other corpus.
+
+## Division 5 is a cataloguing asymmetry, not a limit of the method
+
+Abstract ideas sit at 4 190 across corpora, near chance, and no channel touches
+them. That looked like the H3 result repeating -- a question the data cannot
+express -- and it is not.
+
+The emblems carry 3 986 division-5 assignments over 614 distinct notations. The
+9 756 museum works carry **one**, and the two corpora share exactly one abstract
+notation. There was never anything to match against. The Wikidata bridge is not
+the blocker, which had to be checked before blaming cataloguing practice: the
+P1256 alignment carries 166 abstract notations including existence, similarity
+and ambivalence. Wikidata editors record what a picture literally shows -- a
+painting of a woman is tagged woman, never Patience -- while Iconclass
+specialists annotating emblems record what it means, because that is what an
+emblem is.
+
+Measured inside the emblem corpus alone, with partners required to come from a
+different book so that binding cannot supply the answer:
+
+| division | queries | median rank of 2 629 | top-10 |
+| --- | ---: | ---: | ---: |
+| 2 · objects | 1 895 | 28 | 26.6% |
+| 3 · body | 1 376 | 34 | 29.3% |
+| **5 · abstract ideas** | 1 687 | **117** | 8.7% |
+| 1 · religion | 492 | 226 | 4.9% |
+
+Chance is 1 314. The record finds a picture sharing an abstract concept eleven
+times better than chance, and better than it finds religious scenes. The
+cross-corpus number was a statement about one corpus having no abstraction to
+offer.
+
 ## Three routes to a name, and what each cost
 
 Naming the signs was attempted three ways and the record of the failures is more useful than any
@@ -183,6 +250,11 @@ The descriptor was not the bottleneck and the hypothesis is withdrawn.
 scripts/segment_shapes.py            regions from images
 scripts/build_shape_vocabulary.py    signs by clustering, with the corpus-skew check
 scripts/build_shape_relations.py     the seven relations over sign pairs
+scripts/build_composition_channel.py global layout: mass grid, symmetry, profiles
+scripts/build_repetition_channel.py  multiplicity as a typed quantity
+scripts/build_pose_channel.py        relative limb angles, after Impett
+scripts/learn_region_labels.py       multiple-instance naming of regions
+scripts/test_by_subject_kind.py      the breakdown by Iconclass division
 scripts/build_visual_record.py       weighted concatenation of channels
 scripts/build_museum_benchmark.py    merge several collections into one frozen benchmark
 scripts/build_shape_groups.py        clumps of touching regions as composite signs
