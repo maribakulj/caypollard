@@ -221,9 +221,17 @@ the comparison that matters when two rows are scored on the same pictures.
 The ladder then reads in one line: **the more of the support a rendering destroys, the less
 iconography survives, and the silhouette — the abstract black-and-white drawing this record was
 asked for — is the one row whose gain over random vectors straddles zero.** Every other
-rendering, down to the coarse grid, is significantly above the floor; the silhouette is not
-distinguishable from noise. Segmenting into regions is not what lost the information. Keeping the
-picture whole and merely reducing it to its silhouette loses the same information.
+rendering, down to the coarse grid, is significantly above the floor; the silhouette is not.
+
+That row should not carry the conclusion by itself, and it does not have to. The silhouette
+rendering is a median threshold of a coarse-gridded greyscale, not a figure-ground cut: look at a
+test picture and a human figure is barely discernible in the noise. A crude rendering landing at
+the floor is weak evidence about shape. What makes the reading hold is that the last two rows
+reach the floor by **two independent routes** — a raster silhouette produced by thresholding, and
+a symbolic decomposition into watershed regions each described by area, elongation, solidity,
+tone, Hu moments, a radial contour signature, holes, two scale ratios and eight context counts.
+Nothing in the second route resembles the first. Both land on random. Segmenting into regions is
+not what lost the information, and neither is the crudeness of the threshold.
 
 One row must not be added to this ladder. The corpus carries `isotype-*` channels that look like
 the obvious candidates for "the proposed visual language", but their method field reads *iconclass
