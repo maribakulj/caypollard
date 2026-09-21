@@ -314,6 +314,10 @@ def main() -> None:
                     ).fit(block, target)
             record_hits1 = record_hits5 = 0
             subset_prior1 = subset_prior5 = 0
+            # Kept per picture, not just summed: two rows of this ladder differ
+            # by five pictures out of 783, and a difference that small is a
+            # claim only if it comes with an interval.
+            per_picture = []
             for item in record_test:
                 truth = labels[item] & set(record_models)
                 row = ((vectors[item] - record_centre) / record_scale).reshape(1, -1)
@@ -327,14 +331,22 @@ def main() -> None:
                         reverse=True,
                     )
                 ]
-                record_hits1 += int(bool(ranked) and ranked[0] in truth)
+                hit = int(bool(ranked) and ranked[0] in truth)
+                per_picture.append(hit)
+                record_hits1 += hit
                 record_hits5 += int(bool(set(ranked[:5]) & truth))
                 subset_prior1 += int(prior_order[0] in labels[item])
                 subset_prior5 += int(bool(set(prior_order[:5]) & labels[item]))
             total = len(record_test)
+            draws = np.asarray(per_picture, dtype=np.float64)
+            rng = np.random.default_rng(0)
+            resampled = draws[rng.integers(0, total, size=(2000, total))].mean(axis=1)
+            low, high = np.percentile(resampled, [2.5, 97.5])
             record_report[Path(record_path).stem] = {
                 "pictures": total,
                 "hits_at_1": round(record_hits1 / total, 4),
+                "hits_at_1_ci95": [round(float(low), 4), round(float(high), 4)],
+                "hits_at_1_per_picture": per_picture,
                 "hits_at_5": round(record_hits5 / total, 4),
                 # The prior recomputed on exactly these pictures, since the
                 # record covers a subset of the test bags.

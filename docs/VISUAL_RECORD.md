@@ -200,25 +200,35 @@ question, and the region result is not an artefact of the evaluation.
 Running that control across the medium-invariant renderings, rather than only on the plain
 record, shows that the failure has nothing to do with regions.
 
-| emblems, 30 notations, 783 pictures | hits@1 | hits@5 |
-|---|---|---|
-| record, plain | 0.324 | 0.658 |
-| record, greyscale and squared | 0.321 | 0.653 |
-| record, library direction projected out | 0.292 | 0.633 |
-| *constant predictor (prior)* | *0.257* | *0.531* |
-| record, Sobel edges | 0.211 | 0.543 |
-| record, coarse-grid shape | 0.161 | 0.487 |
-| record, silhouette | 0.101 | 0.418 |
-| *same classifier on random vectors* | *0.095* | *0.356* |
-| regions, best of eight framings | 0.087 | 0.363 |
+| emblems, 30 notations, 783 pictures | hits@1 | 95% interval | paired gain over random |
+|---|---|---|---|
+| record, plain | 0.324 | [0.292, 0.356] | +0.230 [+0.193, +0.268] |
+| record, greyscale and squared | 0.321 | [0.287, 0.354] | +0.226 [+0.189, +0.262] |
+| record, library direction projected out | 0.292 | [0.261, 0.324] | +0.198 [+0.161, +0.235] |
+| *constant predictor (prior)* | *0.257* | — | — |
+| record, Sobel edges | 0.211 | [0.183, 0.240] | +0.116 [+0.082, +0.151] |
+| record, coarse-grid shape | 0.161 | [0.135, 0.186] | +0.066 [+0.034, +0.098] |
+| record, silhouette | 0.101 | [0.080, 0.123] | **+0.006 [−0.023, +0.036]** |
+| *same classifier on random vectors* | *0.095* | *[0.073, 0.116]* | — |
+| regions, best of eight framings | 0.087 | — | — |
 
 Two floors are needed to read this, and they are not the same floor. The constant predictor is
 what a representation must beat to be *useful*; random vectors under the identical one-vs-rest
-fit are what it must beat to contain *anything*. The ladder then reads in one line: **the more of
-the support a rendering destroys, the less iconography survives, and the silhouette — the
-abstract black-and-white drawing this record was asked for — sits five pictures above random.**
-Segmenting into regions is not what lost the information. Keeping the picture whole and merely
-reducing it to its silhouette loses the same information.
+fit are what it must beat to contain *anything*. Intervals are 2 000 bootstrap resamples of the
+783 test pictures, and the last column resamples the *paired* per-picture difference, which is
+the comparison that matters when two rows are scored on the same pictures.
+
+The ladder then reads in one line: **the more of the support a rendering destroys, the less
+iconography survives, and the silhouette — the abstract black-and-white drawing this record was
+asked for — is the one row whose gain over random vectors straddles zero.** Every other
+rendering, down to the coarse grid, is significantly above the floor; the silhouette is not
+distinguishable from noise. Segmenting into regions is not what lost the information. Keeping the
+picture whole and merely reducing it to its silhouette loses the same information.
+
+One row must not be added to this ladder. The corpus carries `isotype-*` channels that look like
+the obvious candidates for "the proposed visual language", but their method field reads *iconclass
+truncated to n characters*: they are built from the target. Scoring them here would measure
+nothing but leakage.
 
 The one encouraging row is the third. Projecting the holding-library direction out of the record
 costs three points and still clears the prior, so the record's naming advantage is not mostly the
