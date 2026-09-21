@@ -107,7 +107,11 @@ def main() -> None:
     written = skipped = 0
     for record in records:
         name = str(record["filename"])
-        origin = source / name
+        # A merged manifest spreads its images across one directory per
+        # collection, so the record carries the path and image_dir is only the
+        # fallback for a single-collection corpus.
+        recorded = record.get("image_path")
+        origin = Path(recorded) if recorded else source / name
         target = destination / name
         if target.is_file():
             written += 1
