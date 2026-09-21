@@ -324,6 +324,7 @@ a6b384d46cd92bcb4ec4291abf52da20b9efc54ea292b0e4e942fb841df23c87     1204813  ve
 c52d3844b1230637030bac7f16c258578772fa37b6e03d7506870f4d27c95d04        1833  versioned  results/wide/by-subject-composition.json
 3195d7fc58dbc9455f1a616fd2ff1b5a948cc169f8d96af51a23662fffd8209c        1827  versioned  results/wide/by-subject-formes-compo.json
 00e8a116b7adeb7b555700644b1ce5db32d049f1e6ad8a7cdcd82bbc305ce975        3379  versioned  results/wide/by-subject-kind.json
+51dc62972a1daa4f37e3379471f48ee50aaac86dc0a1a53f8d1cdfa2b6d141d0        2989  versioned  results/wide/by-subject-pose-fair.json
 5dcd11a34833e8c1949e496dda6646b2bc8b6faef89e9ab014a53fe2adf204f9        1822  versioned  results/wide/by-subject-scr.json
 d2720c4a075cbaeaa520872bad42604a22d12d0bb445272d9cba7b34c9f23f6d        3370  versioned  results/wide/by-subject-v2.json
 af81ab1336dd65a01aa4c19695e44212d17a3bfe9650a8aa629f0eff319e4999        1962  versioned  results/wide/channel-weights.json
@@ -331,6 +332,8 @@ d7e3c27678f3e8d861b55c99684978fa23fc6e81759fd8578f21eb29cd0b9aed        1122  ve
 7028d684d12caeb2bb8778db92eeea350c2b5ec32242d2e5f80d04ffc4986708        1123  versioned  results/wide/cross-medium-dinov2.json
 8ca336d04c5aa5574e884b6f517420fdf37244e61da7f5e9f8622b04df65ce44        1125  versioned  results/wide/cross-medium-formes-compo.json
 eaaf8dd12795ed1f2288a2c571ea20a98d498730838b567f302895e542d00946        1121  versioned  results/wide/cross-medium-formes.json
+b804c158c4f99c721ebc8ecfe95d7fb980b6507378c2b10e2f3a7fc8c225cb56        1122  versioned  results/wide/cross-medium-pose.json
+d373978205fed991567d9147ac43d3ec32f5566d90584d77112607354f22c62a        1122  versioned  results/wide/cross-medium-rec-sub.json
 00240ffadffed4a4927d8c89c493e6f16f5f587480eac45af12f017998112f1a        1121  versioned  results/wide/cross-medium-record-v2.json
 6b53aac07b7dbe1120a7a8eac85aca5f90199b84d489ad74bac88bc83ec33924        1864  versioned  results/wide/division5-verdict.json
 6de390135a1a2659babf62c56262cc9407e64490a31fe64aa794febb8acb31bd        1059  versioned  results/wide/labels-dinov2.json
@@ -338,6 +341,7 @@ d872e5d8d5f5177d5f36ee7c81c9435d3e079e0f20476b040bcdbeb1bf21613d        1087  ve
 d3d266b270dacf2a554632fdbd87518b2b3abde6a5fb5f6bb2f4b99469245c47         202  versioned  results/wide/pose-detection-emblemes.json
 ce7841656acc58253e53e38df87a8b81d51386120b1cd9766fdd8b2437044a58         210  versioned  results/wide/pose-detection-musees-sample.json
 1ecfcc4ad7243ef66c0f30d9a3196f78cab97aed190b6dc999c01246b4ef7c70        1017  versioned  results/wide/pose-stop-condition.json
+4cdc19f270b695c8fb86c0a1d6bcc7b01c27279b9b8acb03fde95318112cfcfd        1883  versioned  results/wide/pose-verdict.json
 42f3fbd567371d67bd28e3f9c0748854307318a93c5e684c8799005fa44b98dc        1023  versioned  results/wide/probe-composition.json
 9343eddc809fdfdb67db87297c4fb7aff9845c4f056c398ad514ad158c1878b3      329307  versioned  results/wide/sign-names.json
 7d35190fde3dc4cbf337ab57770753f9e2dd8e707896acaaab644092a3da20c7        1968  versioned  results/wide/tradeoff-curve.json

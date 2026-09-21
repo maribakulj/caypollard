@@ -1,0 +1,54 @@
+{
+  "objective": "pose channel after Impett: division 3 under rank 500 without the medium probe rising",
+  "verdict": "achieved on both counts",
+  "coverage": {
+    "emblems": 0.2824,
+    "museums_sample": 0.2925,
+    "note": "evenhanded across corpora, so the detector is conservative on art rather than biased to a medium"
+  },
+  "evaluated_on": {
+    "items": 1729,
+    "chance_rank": 864,
+    "note": "the subset carrying both a pose and a full record; 769 emblem and 1134 museum poses, the museum extraction stopped after four memory kills"
+  },
+  "median_rank_by_division": {
+    "3 body and action": {
+      "pose": 65,
+      "record": 114,
+      "both": 89
+    },
+    "2 nature objects": {
+      "pose": 88,
+      "record": 97,
+      "both": 100
+    },
+    "4 society": {
+      "pose": 272,
+      "record": 362,
+      "both": 282
+    },
+    "9 classical mythology": {
+      "pose": 435,
+      "record": 609,
+      "both": 531
+    },
+    "1 religion scenes": {
+      "pose": 330,
+      "record": 255,
+      "both": 367
+    }
+  },
+  "cross_medium": {
+    "pose": {
+      "probe": 0.606,
+      "median_rank": 96,
+      "cross_neighbours": 0.427
+    },
+    "record": {
+      "probe": 0.629,
+      "median_rank": 108,
+      "cross_neighbours": 0.397
+    }
+  },
+  "reading": "Pose beats the whole shape record on the divisions full of human figures -- body and action 65 against 114, society 272 against 362, mythology 435 against 609 -- and is simultaneously more medium-blind, 60.6% against 62.9%, with more of its neighbours crossing the corpora. It loses on religious scenes, 330 against 255, where the arrangement matters more than the gestures. Combining pose with the record degrades nearly every division, so the two are alternatives to select between rather than channels to sum: a query about a gesture should be answered by pose and one about a scene by composition."
+}
