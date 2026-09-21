@@ -1,0 +1,50 @@
+{
+  "question": "Is division 5 -- abstract ideas -- structurally untestable, as H3 was?",
+  "verdict": "No. It works where the annotation exists. The cross-corpus failure is a cataloguing asymmetry.",
+  "assignments_by_corpus": {
+    "emblems": 3986,
+    "museums": 1
+  },
+  "distinct_notations_by_corpus": {
+    "emblems": 614,
+    "museums": 1
+  },
+  "shared_notations": [
+    "56DD1"
+  ],
+  "bridge_is_not_the_blocker": {
+    "p1256_alignment_carries_division_5": 166,
+    "examples": [
+      "51A1 existence",
+      "51B2 similarity",
+      "51B7 normality",
+      "51BB51 ambivalence"
+    ],
+    "reading": "The Wikidata bridge does carry abstract notations, so the alignment does not explain the absence. Wikidata editors record what a picture literally shows: a painting of a woman is tagged woman, never Patience."
+  },
+  "within_emblems_cross_book": {
+    "items": 2629,
+    "chance_rank": 1314,
+    "division_2_objects": {
+      "queries": 1895,
+      "median_rank": 28,
+      "top_10": 0.266
+    },
+    "division_3_body": {
+      "queries": 1376,
+      "median_rank": 34,
+      "top_10": 0.293
+    },
+    "division_5_abstract": {
+      "queries": 1687,
+      "median_rank": 117,
+      "top_10": 0.087
+    },
+    "division_1_religion": {
+      "queries": 492,
+      "median_rank": 226,
+      "top_10": 0.049
+    }
+  },
+  "reading": "Inside the corpus that carries connotative annotation, the shape record places a cross-book partner sharing an abstract concept at median rank 117 of 2 629, eleven times better than chance and better than religious scenes. The 5 394 of 12 479 measured across corpora was never a statement about abstraction; it was a statement about one corpus having no abstract annotation to match against. This is the denotative/connotative split of the H3 finding, seen from the other side and on a different annotation community."
+}
