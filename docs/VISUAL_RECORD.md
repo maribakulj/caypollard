@@ -324,10 +324,45 @@ orientation — +0.021 [−0.012, +0.053], an interval containing zero — and r
 [0.096, 0.166] below the silhouette and below even the holding collection. On the emblems the two
 are identical to the third decimal. **The language is not missing a field; it is too coarse.**
 
-Where the coarseness sits is measurable and worth stating plainly: the cap is 24 signs per
-picture, but the median picture yields **four**, because a region must cover four thousandths of
-the frame to be kept at all. A vocabulary of four parts per picture is being asked to carry what a
-48×48 binary raster carries, which is 2 304 cells.
+Where the coarseness sits is measurable, and the first place it was looked for was the wrong one.
+The cap is 24 signs per picture and the median picture yields four, but lowering the area floor
+from four thousandths to one moved that median only from four to five: `min_area` was never the
+constraint. The constraint is the blur — seven pixels wide on a 448 side — and the single global
+threshold around the page tone, neither of which was reachable from the command line. Both are now
+arguments, and with them the vocabulary widens on demand.
+
+That turns the question into a curve. Same corpus, same 869 objects, same classifier, with the
+picture redrawn from vocabularies of increasing size:
+
+| museums, redrawn from signs | signs per picture | hits@1 | paired gain over random | share of the raster's gain |
+|---|---|---|---|---|
+| *random vectors* | — | *0.033* | — | — |
+| redrawn | 4 | 0.146 | +0.113 [+0.087, +0.139] | 43% |
+| redrawn, oriented | 4 | 0.167 | +0.133 [+0.106, +0.161] | 50% |
+| redrawn | 13 | 0.198 | +0.165 [+0.137, +0.193] | 62% |
+| redrawn | 32 | 0.214 | +0.181 [+0.152, +0.212] | 68% |
+| *holding collection alone* | — | *0.182* | *+0.148 [+0.121, +0.177]* | *56%* |
+| **silhouette, 48×48 raster** | **2 304 cells** | **0.298** | **+0.265 [+0.232, +0.297]** | **100%** |
+
+**The curve rises and then stops rising.** Going from four signs to thirteen is worth +0.052
+[+0.022, +0.083]; going from thirteen to thirty-two is worth +0.016 [−0.014, +0.047], an interval
+containing zero. Two and a half times the vocabulary buys nothing measurable, while the raster
+keeps a gap of +0.084 [+0.051, +0.117] that is not in doubt. So the shortfall is not a capacity
+problem that more parts would close: within the range tested the discrete language saturates at
+about two thirds of what the raster of the same picture carries.
+
+The sharper verdict is in the provenance column. At **no** vocabulary size does the redrawn
+picture beat simply knowing which museum holds the object: +0.016 [−0.018, +0.052] at thirteen
+signs, +0.032 [−0.005, +0.070] at thirty-two, both straddling zero. The raster silhouette beats it
+by +0.116 [+0.078, +0.154]. **An isotype-style record, as built here, is not yet worth more than a
+provenance field**, and the continuous shape it transcribes is.
+
+One methodological result deserves separating from that, because it cost a wrong conclusion
+earlier tonight and would cost others later. The reconstructions improve *visibly* as orientation
+is restored and as the vocabulary widens — at thirty-two signs the *robe à la française* has its
+conical skirt, its train and the break of its bodice — and the score follows only part of the way,
+not at all in the case of orientation. **A redrawing that looks more like the picture is not
+evidence that it carries more of it.**
 
 One limit on how far this may be read. The discretisation finding rests on a single contrast — the
 museums corpus, where raster shape beats the region bag by twenty points — because the emblems
