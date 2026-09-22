@@ -302,9 +302,18 @@ size, place, tone — and the reconstruction is put on the same ladder as the re
 It lands at 0.146 on the museums: significantly above noise, significantly *below* the silhouette
 it is meant to reproduce (−0.152 [−0.186, −0.117]), and below even the holding collection
 (−0.036 [−0.071, −0.001]). That is the same place the region bag reaches on its own (0.102
-pooled), by a route with no drawing in it at all. **The two agree, so the vocabulary is where the
-picture is lost.** Summarising the bag was never the problem; the descriptors were already empty
-of what the silhouette had.
+pooled), by a route with no drawing in it at all. At this vocabulary size the two agree, and the
+vocabulary bounds them both.
+
+They stop agreeing once the vocabulary widens, which is worth stating because the obvious reading
+of the paragraph above is wrong. Run on the thirty-two-sign segmentation — same 1 075 pictures,
+same notations, same classifier — the redrawn picture reaches 0.194 while the bag of those very
+same signs reaches 0.087 pooled and 0.101 narrowed, against a random floor of 0.022. **Drawing the
+signs and looking at the drawing extracts about twice what a linear model over their pooled
+descriptors does.** So summarising a bag by a mean and a max is not free after all: it costs
+nothing when there are four parts and roughly half when there are thirty-two. The redrawing is the
+better readout of a symbolic record, not merely an illustration of it — and the verdicts below are
+therefore stated on the redrawing, which is the generous reading.
 
 The reconstruction is a lower bound, since the drawing adds losses of its own — a contour profile
 is fitted to its bounding box, tone is two values, an overlapping part is painted opaque — and it
