@@ -117,10 +117,21 @@ def hu_moments(mask: np.ndarray) -> list[float]:
     ]
 
 
-def segment(path: Path, *, side: int, min_area: float, max_regions: int) -> list[dict[str, Any]]:
+def segment(
+    path: Path,
+    *,
+    side: int,
+    min_area: float,
+    max_regions: int,
+    smoothing: float = 64.0,
+    threshold: float = 0.12,
+) -> list[dict[str, Any]]:
     image = Image.open(path).convert("L").resize((side, side), Image.LANCZOS)
     array = np.asarray(image, dtype=np.float32) / 255.0
-    smoothed = ndimage.gaussian_filter(array, sigma=side / 64.0)
+    # How many parts a picture is cut into is set here, not by min_area:
+    # at the default the blur is seven pixels wide on a 448 side and a picture
+    # comes out as four parts whatever the area floor is.
+    smoothed = ndimage.gaussian_filter(array, sigma=side / smoothing)
     low, high = np.percentile(smoothed, 2.0), np.percentile(smoothed, 98.0)
     smoothed = np.clip((smoothed - low) / (high - low), 0.0, 1.0) if high > low else smoothed
 
@@ -129,7 +140,7 @@ def segment(path: Path, *, side: int, min_area: float, max_regions: int) -> list
     page_tone = float(np.median(smoothed))
     regions: list[dict[str, Any]] = []
     for polarity, name in ((-1.0, "sombre"), (1.0, "clair")):
-        binary = (polarity * (smoothed - page_tone)) > 0.12
+        binary = (polarity * (smoothed - page_tone)) > threshold
         binary = ndimage.binary_opening(binary, np.ones((3, 3)))
         labelled, count = ndimage.label(binary)
         if count == 0:
@@ -231,6 +242,19 @@ def main() -> None:
     parser.add_argument("image_dir")
     parser.add_argument("--side", type=int, default=256)
     parser.add_argument("--min-area", type=float, default=0.004)
+    parser.add_argument(
+        "--smoothing",
+        type=float,
+        default=64.0,
+        help="Blur radius as a divisor of the side: larger divides less, so a larger "
+             "value cuts the picture into more parts. This is the capacity knob.",
+    )
+    parser.add_argument(
+        "--threshold",
+        type=float,
+        default=0.12,
+        help="How far from the page tone a pixel must sit to join a region.",
+    )
     parser.add_argument("--max-regions", type=int, default=24)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--output", required=True)
@@ -258,6 +282,8 @@ def main() -> None:
                     path,
                     side=args.side,
                     min_area=args.min_area,
+                    smoothing=args.smoothing,
+                    threshold=args.threshold,
                     max_regions=args.max_regions,
                 )
             except Exception:
