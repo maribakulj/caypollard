@@ -313,11 +313,21 @@ it is the first artefact here a historian can contest by looking rather than by 
 The *robe à la française* comes back as three abstract masses; the Glasgow pictura as four. One
 look says the vocabulary does not see a garment.
 
-One suspect in that vocabulary is nameable and fixable: the radial signature is rotated to start
+One suspect in that vocabulary was nameable and fixable: the radial signature is rotated to start
 at its longest radius, so **orientation was discarded on purpose** — a tilted anchor being an
-anchor — and a scene is not orientation-free the way a single motif is. Whether restoring it
-recovers the gap is the difference between a language that needs a field and a language that is
-too coarse to carry a picture.
+anchor — and a scene is not orientation-free the way a single motif is. The bin each profile
+started from is now kept, and the reconstruction rolls it back. Drawn that way the *robe à la
+française* visibly improves: its conical mass and its train land roughly where they belong.
+
+It buys nothing. The oriented reconstruction reaches 0.167 on the museums against 0.146 without
+orientation — +0.021 [−0.012, +0.053], an interval containing zero — and remains 0.131
+[0.096, 0.166] below the silhouette and below even the holding collection. On the emblems the two
+are identical to the third decimal. **The language is not missing a field; it is too coarse.**
+
+Where the coarseness sits is measurable and worth stating plainly: the cap is 24 signs per
+picture, but the median picture yields **four**, because a region must cover four thousandths of
+the frame to be kept at all. A vocabulary of four parts per picture is being asked to carry what a
+48×48 binary raster carries, which is 2 304 cells.
 
 One limit on how far this may be read. The discretisation finding rests on a single contrast — the
 museums corpus, where raster shape beats the region bag by twenty points — because the emblems
