@@ -208,6 +208,7 @@ record, shows that the failure has nothing to do with regions.
 | *constant predictor (prior)* | *0.257* | — | — |
 | record, Sobel edges | 0.211 | [0.183, 0.240] | +0.116 [+0.082, +0.151] |
 | record, coarse-grid shape | 0.161 | [0.135, 0.186] | +0.066 [+0.034, +0.098] |
+| picture redrawn from its signs | 0.130 | — | +0.036 [+0.005, +0.065] |
 | record, ink mass | 0.121 | — | +0.027 [−0.003, +0.057] |
 | record, silhouette | 0.101 | [0.080, 0.123] | **+0.006 [−0.023, +0.036]** |
 | *holding collection alone, one-hot* | *0.089* | — | *−0.005 [−0.033, +0.023]* |
@@ -239,6 +240,7 @@ vessels and garments:
 | **record, silhouette** | **0.298** | **+0.265 [+0.232, +0.297]** |
 | **record, ink mass** | **0.251** | **+0.217 [+0.186, +0.249]** |
 | *holding collection alone, one-hot* | *0.182* | *+0.148 [+0.121, +0.177]* |
+| **picture redrawn from its signs** | **0.146** | **+0.113 [+0.086, +0.139]** |
 | *constant predictor (prior)* | *0.135* | — |
 | regions, pooled | 0.102 | — |
 | regions, narrowing | 0.057 | — |
@@ -290,6 +292,32 @@ signature, holes, scale ratios and context counts.
 the question this record was built to ask. An intermediate visual language made of discrete named
 signs — an isotype — throws away what a plain black-and-white outline keeps, on the one corpus
 where a plain outline is worth keeping.
+
+Two diagnoses still fit that, and they call for opposite repairs: either the vocabulary throws the
+picture away, or it keeps it and the loss happens afterwards, when a bag of parts is summarised by
+a mean and a max and the layout goes with it. Deciding between them needs no new classifier, only
+a pencil. Each region is **drawn back into an image from its description alone** — contour profile,
+size, place, tone — and the reconstruction is put on the same ladder as the renderings it imitates.
+
+It lands at 0.146 on the museums: significantly above noise, significantly *below* the silhouette
+it is meant to reproduce (−0.152 [−0.186, −0.117]), and below even the holding collection
+(−0.036 [−0.071, −0.001]). That is the same place the region bag reaches on its own (0.102
+pooled), by a route with no drawing in it at all. **The two agree, so the vocabulary is where the
+picture is lost.** Summarising the bag was never the problem; the descriptors were already empty
+of what the silhouette had.
+
+The reconstruction is a lower bound, since the drawing adds losses of its own — a contour profile
+is fitted to its bounding box, tone is two values, an overlapping part is painted opaque — and it
+should be read together with the region bag, not alone. What makes it worth having anyway is that
+it is the first artefact here a historian can contest by looking rather than by reading a table.
+The *robe à la française* comes back as three abstract masses; the Glasgow pictura as four. One
+look says the vocabulary does not see a garment.
+
+One suspect in that vocabulary is nameable and fixable: the radial signature is rotated to start
+at its longest radius, so **orientation was discarded on purpose** — a tilted anchor being an
+anchor — and a scene is not orientation-free the way a single motif is. Whether restoring it
+recovers the gap is the difference between a language that needs a field and a language that is
+too coarse to carry a picture.
 
 One limit on how far this may be read. The discretisation finding rests on a single contrast — the
 museums corpus, where raster shape beats the region bag by twenty points — because the emblems
