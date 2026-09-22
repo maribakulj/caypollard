@@ -19,10 +19,12 @@ lost.
 
 The reconstruction is also the only artefact in this project a historian can
 argue with directly: it is the picture as the sign vocabulary sees it, and one
-look says whether that is a cat or a smear. What it cannot show is orientation,
-because the radial signature is rotated to start at its longest radius on
-purpose -- a tilted anchor being an anchor. That deliberate loss is part of what
-is on trial here.
+look says whether that is a cat or a smear. Orientation is the one part of the
+vocabulary that was discarded on purpose -- the radial signature is rotated to
+start at its longest radius, a tilted anchor being an anchor -- so the bin it
+started from is now kept and rolled back here, with ``--no-orientation`` to
+score the reconstruction both ways. A single motif is orientation-free in a way
+a scene is not.
 """
 
 from __future__ import annotations
@@ -39,11 +41,17 @@ GROUND = 128
 TONES = {"clair": 235, "sombre": 20}
 
 
-def polygon(region: dict, side: int) -> list[tuple[float, float]]:
+def polygon(region: dict, side: int, *, oriented: bool) -> list[tuple[float, float]]:
     """The region's contour, placed and scaled inside the frame."""
     profile = np.asarray(region.get("radial") or [], dtype=np.float64)
     if profile.size < 3 or not np.isfinite(profile).all() or profile.max() <= 0:
         return []
+    # The stored profile begins at the region's longest radius, so drawing it
+    # from angle zero puts every part at an orientation it never had. Rolling
+    # it back by the bin it started from is the only way the reconstruction can
+    # be about the vocabulary rather than about that normalisation.
+    if oriented:
+        profile = np.roll(profile, int(region.get("radial_start", 0)))
     angles = np.arange(profile.size) * (2 * math.pi / profile.size)
     xs, ys = profile * np.cos(angles), profile * np.sin(angles)
     span_x = max(xs.max() - xs.min(), 1e-6)
@@ -60,12 +68,12 @@ def polygon(region: dict, side: int) -> list[tuple[float, float]]:
     ]
 
 
-def reconstruct(regions: list[dict], side: int) -> Image.Image:
+def reconstruct(regions: list[dict], side: int, *, oriented: bool = True) -> Image.Image:
     canvas = Image.new("L", (side, side), GROUND)
     draw = ImageDraw.Draw(canvas)
     # Largest first, so a part that sits inside another is not buried by it.
     for region in sorted(regions, key=lambda r: -float(r.get("area", 0.0))):
-        points = polygon(region, side)
+        points = polygon(region, side, oriented=oriented)
         if len(points) >= 3:
             draw.polygon(points, fill=TONES.get(str(region.get("tone")), GROUND))
     return canvas.convert("RGB")
@@ -76,6 +84,12 @@ def main() -> None:
     parser.add_argument("regions")
     parser.add_argument("output_dir")
     parser.add_argument("--manifest", help="Restrict to the ids this manifest carries")
+    parser.add_argument(
+        "--no-orientation",
+        action="store_true",
+        help="Draw every contour from angle zero, as the stored profile does. "
+             "The contribution of orientation is then measured rather than assumed.",
+    )
     parser.add_argument("--side", type=int, default=448)
     parser.add_argument("--limit", type=int)
     args = parser.parse_args()
@@ -108,7 +122,9 @@ def main() -> None:
         if not row.get("regions"):
             skipped += 1
             continue
-        reconstruct(row["regions"], args.side).save(target, format="JPEG", quality=92)
+        reconstruct(
+            row["regions"], args.side, oriented=not args.no_orientation
+        ).save(target, format="JPEG", quality=92)
         written += 1
     print(json.dumps({"written": written, "skipped": skipped}, ensure_ascii=False))
 

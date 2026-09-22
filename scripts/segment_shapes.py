@@ -60,7 +60,7 @@ def holes(mask: np.ndarray) -> int:
     return int(count)
 
 
-def radial_signature(mask: np.ndarray, *, bins: int = 24) -> list[float]:
+def radial_signature(mask: np.ndarray, *, bins: int = 24) -> tuple[list[float], int]:
     """Distance from the centroid to the region's edge, by angle.
 
     Moment invariants summarise a shape in four numbers and are known to
@@ -71,7 +71,7 @@ def radial_signature(mask: np.ndarray, *, bins: int = 24) -> list[float]:
     """
     ys, xs = np.nonzero(mask)
     if xs.size < 12:
-        return [0.0] * bins
+        return [0.0] * bins, 0
     cx, cy = xs.mean(), ys.mean()
     dx, dy = xs - cx, ys - cy
     radius = np.hypot(dx, dy)
@@ -83,12 +83,15 @@ def radial_signature(mask: np.ndarray, *, bins: int = 24) -> list[float]:
         profile[slot] = float(selected.max()) if selected.size else 0.0
     mean = profile.mean()
     if mean <= 0:
-        return [0.0] * bins
+        return [0.0] * bins, 0
     profile = profile / mean
     # Rotation is a nuisance here, not a signal: a tilted anchor is an anchor.
-    # Starting the profile at its longest radius removes it.
+    # Starting the profile at its longest radius removes it -- and the bin it
+    # started from is returned rather than thrown away, because a single motif
+    # is orientation-free in a way a scene is not, and the two uses of this
+    # signature should not have to share one choice.
     shift = int(np.argmax(profile))
-    return [round(float(v), 4) for v in np.roll(profile, -shift)]
+    return [round(float(v), 4) for v in np.roll(profile, -shift)], shift
 
 
 def hu_moments(mask: np.ndarray) -> list[float]:
@@ -141,6 +144,7 @@ def segment(path: Path, *, side: int, min_area: float, max_regions: int) -> list
             width = (xs.max() - xs.min() + 1) / side
             box = (ys.max() - ys.min() + 1) * (xs.max() - xs.min() + 1)
             filled = float(mask.sum()) / max(box, 1)
+            signature, start = radial_signature(mask)
             regions.append(
                 {
                     "area": round(area, 5),
@@ -152,7 +156,8 @@ def segment(path: Path, *, side: int, min_area: float, max_regions: int) -> list
                     "extent_x": round(width, 4),
                     "extent_y": round(height, 4),
                     "hu": [round(v, 6) if math.isfinite(v) else 0.0 for v in hu_moments(mask)],
-                    "radial": radial_signature(mask),
+                    "radial": signature,
+                    "radial_start": start,
                     "holes": holes(mask),
                 }
             )
