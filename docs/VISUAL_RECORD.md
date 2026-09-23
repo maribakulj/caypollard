@@ -18,7 +18,7 @@ channels is right for some questions and actively wrong for others.
 
 | question | best configuration | result | floor | pool |
 | --- | --- | ---: | ---: | ---: |
-| cross-corpus partner (prints ↔ museum works) | shapes + 2× composition + ½ repetition | rank 180 | 9 420 | 18 840 |
+| cross-corpus partner (prints ↔ museum works) | shapes + 2× composition + ½ repetition | rank 820 | 9 420 | 18 840 |
 | cross-object-kind partner (flat ↔ volume ↔ vessel) | **shapes alone** | rank 1 008 | 6 472 | 12 944 |
 | a gesture (division 3) | **pose alone** | rank 65 | 865 | 1 729 |
 | a scene (division 1) | **composition** | rank 1 429 | 6 240 | 12 479 |
@@ -27,12 +27,18 @@ channels is right for some questions and actively wrong for others.
 | what an emblem is catalogued as | *nothing here works* | hits@1 0.104 | 0.095 | 783 |
 
 The floor column was missing until it was noticed that this table breaks the rule the rest of the
-record keeps — a rank means nothing without the chance it beats — and adding it turned up an error
-in the first row. **It read 820, which is the pixel baseline on that benchmark and not the
-record**; the record reaches 180 there, so the table had been publishing a figure four and a half
-times worse than the result, in the row that matters most. The two hits@1 rows were also sitting
-in a column headed *median rank*, where a reader scanning down would have compared 0.342 with 820.
-Both are corrected above.
+record keeps — a rank means nothing without the chance it beats. The two hits@1 rows were also
+sitting in a column headed *median rank*, where a reader scanning down would have compared 0.342
+with 820; the column now names its unit per row.
+
+Adding the floors also produced a false alarm worth recording, because the trap is still in the
+code. `test_cross_medium.py` reports two rows, and it calls them **"pixels (DINOv2)"** and
+**"isotype (signes)"**. The first is not pixels: it is whatever table was passed on the command
+line — the record under test. The second is not a record at all: it is a one-hot of the Iconclass
+notations themselves, the ground truth, which is why it reads 0.91–0.98 unchanged across files
+evaluating completely different records. Read literally, those labels say the record probes worse
+than pixels everywhere, and this document was briefly "corrected" to match them before the script
+was read. The labels are fixed at the source; the figures here were right.
 
 A sixth channel was added late and belongs in the same table rather than above it. **Named nodes**
 — each part given a word from a closed list of 116 ordinary nouns, by a model that can only emit
@@ -152,11 +158,8 @@ The shape channel places such a partner at **median rank 1 008 of 12 944 against
 6 472**, with 8.6% of queries reaching one in their top hundred and 14.1% of neighbours drawn
 from another family. Six times better than chance and far out of reach.
 
-For scale, the same record crossing corpora reaches rank 180 of 18 840 against a chance of 9 420 —
-fifty-two times better than chance, where this is six. **Crossing a viewing condition is eight
-times harder than crossing a workshop**, which is what this benchmark called cross-medium
-throughout. (That comparison was published against 820 until the summary table was audited; 820 is
-what *pixels* score on the cross-corpus benchmark, not what the record scores.)
+For scale, crossing corpora reaches 820. **Crossing a viewing condition is harder than crossing a
+workshop**, which is what this benchmark called cross-medium throughout.
 
 ## Division 5 is a cataloguing asymmetry, not a limit of the method
 

@@ -128,7 +128,17 @@ def main() -> None:
     majority = collections.Counter(labels).most_common(1)[0][1] / len(labels)
 
     results = {}
-    for name, matrix in (("pixels (DINOv2)", pixels), ("isotype (signes)", symbolic)):
+    # Neither row is what its old name said. The first is whatever table was
+    # passed on the command line -- the representation under test, which is only
+    # a pixel embedding when a pixel embedding is what was passed. The second is
+    # a one-hot of the notations themselves, so it is the ground truth and not a
+    # record, which is why it reads the same across files testing quite different
+    # representations. Those names cost an afternoon and a wrong correction to
+    # the record before the code was read.
+    for name, matrix in (
+        ("la représentation testée", pixels),
+        ("l'annotation elle-même (plafond)", symbolic),
+    ):
         probe = LogisticRegression(max_iter=1500)
         linear = float(cross_val_score(probe, matrix, labels, cv=4, n_jobs=2).mean())
         knn = float(
