@@ -23,6 +23,14 @@ channels is right for some questions and actively wrong for others.
 | a gesture (division 3) | **pose alone** | 65 | 1 729 |
 | a scene (division 1) | **composition** | 1 429 | 12 479 |
 | an object (division 2) | shapes, with or without the rest | 655 | 18 840 |
+| what a museum object is catalogued as | **named nodes, a bag** | hits@1 0.342 | 1 075 |
+| what an emblem is catalogued as | *nothing here works* | hits@1 0.104 | 783 |
+
+A sixth channel was added late and belongs in the same table rather than above it. **Named nodes**
+— each part given a word from a closed list of 116 ordinary nouns, by a model that can only emit
+members of that list — beat every mute representation at saying what a museum object is catalogued
+as, and tie the mute shapes at finding a partner across object kinds, and do nothing at all on
+emblems. One more channel, chosen by one more question.
 
 Two of these were surprises that reversed an earlier design. Adding pose to the record degrades
 nearly every division, and adding composition to cross-object-kind retrieval nearly doubles the
@@ -666,6 +674,41 @@ So naming is a channel and not a replacement. It wins where the question is *wha
 here* — +0.073 over the silhouette at notation prediction, +0.197 over provenance — and ties where
 the question is *find me this motif on a different kind of object*. That is the finding that
 organises this whole record, arrived at a third time by a third route.
+
+### Where naming stops
+
+The named record was measured on museum objects. The emblems are the corpus where mute shape
+failed outright — silhouette at its floor, region bag under its prior — so they are the only place
+naming could do better than tie. It does not.
+
+| emblems, 30 notations, 780 pictures | hits@1 |
+|---|---:|
+| *pixels* | *0.324* |
+| *constant predictor (prior)* | *0.257* |
+| named nodes, a bag | 0.104 |
+| *continuous silhouette* | *0.101* |
+| *random vectors* | *0.095* |
+| *holding collection alone* | *0.089* |
+| *the same names shuffled* | *0.061* |
+
+Against the silhouette, +0.004 [−0.026, +0.033]: nothing. It clears only its own shuffled control,
++0.042 [+0.017, +0.069], so the names carry *something* and not enough to leave the floor. **Naming
+does not rescue the emblems, and the whole named result is bounded to museum objects.**
+
+The reason is in the transcription and is countable rather than a story. On the emblems the five
+commonest words cover **50%** of all assignments — *man* alone 21%, *horse* 12% — against 38% on
+the museums. An emblem pictura is very often a man, a horse and a tree, so a vocabulary of object
+nouns describes them all alike; and an emblem's notation records what the scene *means*, which is
+the layer a list of things cannot reach. The same vocabulary that discriminates a garment from a
+vase cannot discriminate one allegory from another.
+
+One earlier tension resolves here too. Across corpora the named record named the corpus 96.9%
+against a 78.1% baseline, which looked like the support coming back. Probed *within* the museum
+corpus, across its eight institutions, it reads 55.2% against a 47.3% baseline — +7.8 points where
+the silhouette is at +6.7 and pixels at +14.5 — and its neighbourhoods do not cluster by
+institution at all, 47.25% against a 47.3% floor. So the cross-corpus figure was **content aligned
+with the split**, not support: what emblems and museum objects depict genuinely differs, and a
+namer that works has to say so.
 
 ## The grammar, twice asked and twice refused
 
