@@ -1,0 +1,229 @@
+{
+  "training_pictures": 6921,
+  "kept": 81,
+  "dropped": 35,
+  "kept_words": [
+    {
+      "word": "clock",
+      "lift": 49.33,
+      "proposed_first": 76,
+      "proposed_second": 24
+    },
+    {
+      "word": "ship",
+      "lift": 37.41,
+      "proposed_first": 55,
+      "proposed_second": 111
+    },
+    {
+      "word": "tower",
+      "lift": 24.03,
+      "proposed_first": 24,
+      "proposed_second": 84
+    },
+    {
+      "word": "fruit",
+      "lift": 19.72,
+      "proposed_first": 148,
+      "proposed_second": 166
+    },
+    {
+      "word": "ruin",
+      "lift": 15.5,
+      "proposed_first": 115,
+      "proposed_second": 66
+    },
+    {
+      "word": "wheel",
+      "lift": 15.36,
+      "proposed_first": 83,
+      "proposed_second": 38
+    },
+    {
+      "word": "sea",
+      "lift": 14.77,
+      "proposed_first": 197,
+      "proposed_second": 69
+    },
+    {
+      "word": "frame",
+      "lift": 13.95,
+      "proposed_first": 62,
+      "proposed_second": 32
+    },
+    {
+      "word": "castle",
+      "lift": 13.6,
+      "proposed_first": 92,
+      "proposed_second": 166
+    },
+    {
+      "word": "bird",
+      "lift": 13.21,
+      "proposed_first": 227,
+      "proposed_second": 90
+    },
+    {
+      "word": "statue",
+      "lift": 13.21,
+      "proposed_first": 211,
+      "proposed_second": 77
+    },
+    {
+      "word": "house",
+      "lift": 12.62,
+      "proposed_first": 67,
+      "proposed_second": 262
+    },
+    {
+      "word": "river",
+      "lift": 12.11,
+      "proposed_first": 211,
+      "proposed_second": 84
+    },
+    {
+      "word": "city",
+      "lift": 11.88,
+      "proposed_first": 63,
+      "proposed_second": 37
+    },
+    {
+      "word": "coin",
+      "lift": 11.31,
+      "proposed_first": 376,
+      "proposed_second": 70
+    },
+    {
+      "word": "candle",
+      "lift": 11.06,
+      "proposed_first": 72,
+      "proposed_second": 113
+    },
+    {
+      "word": "door",
+      "lift": 10.96,
+      "proposed_first": 224,
+      "proposed_second": 31
+    },
+    {
+      "word": "arch",
+      "lift": 10.34,
+      "proposed_first": 125,
+      "proposed_second": 91
+    },
+    {
+      "word": "bust",
+      "lift": 9.72,
+      "proposed_first": 453,
+      "proposed_second": 44
+    },
+    {
+      "word": "bottle",
+      "lift": 9.66,
+      "proposed_first": 112,
+      "proposed_second": 32
+    }
+  ],
+  "dropped_words": [
+    {
+      "word": "cat",
+      "why": "support 18",
+      "lift": 5.09
+    },
+    {
+      "word": "sun",
+      "why": "confirmé au hasard",
+      "lift": 0.0
+    },
+    {
+      "word": "moon",
+      "why": "support 10",
+      "lift": 4.85
+    },
+    {
+      "word": "star",
+      "why": "support 5",
+      "lift": 23.87
+    },
+    {
+      "word": "fire",
+      "why": "support 15",
+      "lift": 13.44
+    },
+    {
+      "word": "stair",
+      "why": "support 3",
+      "lift": 59.15
+    },
+    {
+      "word": "bridge",
+      "why": "support 19",
+      "lift": 48.57
+    },
+    {
+      "word": "street",
+      "why": "support 9",
+      "lift": 52.43
+    },
+    {
+      "word": "bed",
+      "why": "support 13",
+      "lift": 17.38
+    },
+    {
+      "word": "scroll",
+      "why": "confirmé au hasard",
+      "lift": 1.51
+    },
+    {
+      "word": "letter",
+      "why": "support 11",
+      "lift": 11.17
+    },
+    {
+      "word": "map",
+      "why": "proposé par un seul nommeur",
+      "lift": 0.0
+    },
+    {
+      "word": "sword",
+      "why": "confirmé au hasard",
+      "lift": 1.85
+    },
+    {
+      "word": "anchor",
+      "why": "proposé par un seul nommeur",
+      "lift": 0.0
+    },
+    {
+      "word": "key",
+      "why": "confirmé au hasard",
+      "lift": 0.0
+    },
+    {
+      "word": "chain",
+      "why": "support 3",
+      "lift": 0.0
+    },
+    {
+      "word": "rope",
+      "why": "support 5",
+      "lift": 0.0
+    },
+    {
+      "word": "net",
+      "why": "support 16",
+      "lift": 0.0
+    },
+    {
+      "word": "grape",
+      "why": "support 19",
+      "lift": 22.49
+    },
+    {
+      "word": "glove",
+      "why": "proposé par un seul nommeur",
+      "lift": 0.0
+    }
+  ]
+}

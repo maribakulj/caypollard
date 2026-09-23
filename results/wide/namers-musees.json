@@ -1,0 +1,13 @@
+{
+  "pictures_compared": 9708,
+  "names_per_picture": {
+    "par régions": 5.85,
+    "par lecture": 3.06
+  },
+  "jaccard": 0.1097,
+  "jaccard_floor_against_another_picture": 0.0251,
+  "share_with_any_name_in_common": 0.5814,
+  "median_names_in_common": 1.0,
+  "reading": "Agreement above the floor means the two namers are seeing the same pictures rather than the same corpus. Agreement far below one means a name is a reading and not a fact, whatever the record built on it then achieves.",
+  "agreed_output": "data/derived/shapes/nodes-musees-accord.jsonl"
+}

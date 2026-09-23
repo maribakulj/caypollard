@@ -33,6 +33,13 @@ def main() -> None:
     parser.add_argument("--labels", default="data/vocabularies/everyday-nouns.txt")
     parser.add_argument("--grid", type=int, default=3)
     parser.add_argument("--weight", choices=("area", "count"), default="count")
+    parser.add_argument(
+        "--max-nodes",
+        type=int,
+        help="Keep only the largest N nodes of each picture. The namers differ in "
+             "how many they return, and whether that is what separates their records "
+             "is a measurement rather than a guess.",
+    )
     parser.add_argument("--namer", default="", help="Recorded in the metadata")
     parser.add_argument("--output", required=True)
     parser.add_argument("--shuffled-output",
@@ -62,9 +69,17 @@ def main() -> None:
         row = json.loads(line)
         vector = np.zeros(width, dtype=np.float32)
         noise = np.zeros(width, dtype=np.float32)
-        for node in row.get("nodes") or []:
+        nodes = row.get("nodes") or []
+        if args.max_nodes:
+            nodes = sorted(nodes, key=lambda n: -float(n.get("area", 0.0)))[: args.max_nodes]
+        for node in nodes:
             name = node.get("name")
-            cell = int(node.get("cell", 0))
+            # A node's cell is expressed in the grid its namer used. Asking for a
+            # single cell means "forget where it was", so the node moves to the
+            # only cell there is -- dropping it instead would keep just the
+            # nodes that happened to sit in the first cell, which is a biased
+            # subset and not a record without position.
+            cell = 0 if cells == 1 else int(node.get("cell", 0))
             if name not in index or not 0 <= cell < cells:
                 continue
             weight = (
@@ -88,6 +103,7 @@ def main() -> None:
         "vocabulary": len(vocabulary),
         "grid": args.grid,
         "weight": args.weight,
+        "max_nodes": args.max_nodes,
         "pictures_without_nodes": empty,
     }
     save_embedding_table(

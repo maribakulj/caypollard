@@ -554,6 +554,74 @@ Disjoint intervals, 46% apart. **Agreement does mark reliability.** So an inters
 worth building, against a cost that is now a number rather than a worry: it keeps 8.6% of the
 assignments, and whether that trade is good is the measurement that follows.
 
+### Five things that should have helped and did not, and the one that did
+
+The named record was built on a chain of reasonable beliefs, and taking them apart one at a time
+changed the design more than adding anything to it. Each row below is the same 1 075 museum
+pictures, the same classifier, the same floors.
+
+**A better namer makes a worse record.** The second namer enumerates distinct things where the
+first repeats itself, and its names are the ones a person would give — man, woman, angel, crown.
+Its record reaches 0.264 against the first namer's 0.318, −0.054 [−0.087, −0.021]. Per-name
+quality and record quality are not the same quantity.
+
+**Agreement marks reliability and the intersection still loses.** Names both namers gave lift 46%
+more on the catalogue, which is why the intersection was worth building; it keeps 8.6% of the
+assignments and scores 0.253, −0.044 [−0.088, −0.003] against the first namer alone. The
+sparseness eats the reliability, exactly the trade that was called a measurement rather than an
+intuition.
+
+**Cutting the unreliable third of the vocabulary changes nothing.** Reliability measured on the
+training split alone — never on the pictures the result is read from — keeps 81 words of 116 and
+drops the ones one namer proposes in the hundreds and the other confirms never. The record moves
+by −0.005 [−0.028, +0.019]. The vocabulary can be cut by 30% for free, and buying anything with
+the cut is not on offer.
+
+**More nodes is slightly worse.** Three nodes a picture 0.330, six 0.327, twelve 0.318. And a
+namer's advantage is not its node count: the first namer at three nodes beats the second at 3.1
+by 0.066.
+
+**Position adds nothing once the nodes are named.** This is the one that revises the architecture.
+
+| | with position | without | what position adds |
+|---|---:|---:|---:|
+| first namer, 3 nodes | 0.330 | **0.342** | −0.012 [−0.038, +0.014] |
+| second namer | 0.264 | 0.225 | +0.039 [+0.009, +0.069] |
+
+The record is *better* as a bag. Position helps the second namer only because it returns so few
+names that a cell is the only further thing it has to say. With position removed from both, the
+gap between the namers is +0.116 [+0.083, +0.149] — **it was the names all along**.
+
+Set beside the mute signs, where pooling on a grid *doubled* the score from 0.088 to 0.173, that
+is a single sentence: **position was standing in for identity.** A vocabulary that cannot say what
+a part is needs to say where it is; once the parts have names, where they are stops carrying
+anything. The "nodes by place" design was right for signs and wrong for names, and the measurement
+rather than the design decides which.
+
+So the record that survives all five is the simplest one on the list — **a bag of named nodes, no
+position, three nodes a picture, 116 ordinary words**:
+
+| museums, 30 notations, 1 075 pictures | hits@1 |
+|---|---:|
+| *pixels, the ceiling* | *0.567* |
+| **named nodes, a bag** | **0.342** |
+| named nodes, by place | 0.318 |
+| *continuous 48×48 silhouette* | *0.270* |
+| *constant predictor (prior)* | *0.261* |
+| *holding collection alone* | *0.145* |
+| *random vectors* | *0.022* |
+
+Paired: **+0.073 [+0.039, +0.107] over the silhouette it transcribes**, **+0.197 [+0.166, +0.231]
+over provenance**, and −0.225 [−0.261, −0.189] against the pixels it will not reach. It recovers
+59% of what a photographic embedding recovers over noise, out of 116 readable words, no texture
+and no support.
+
+One bug is recorded because catching it was luck rather than method. Collapsing the grid to a
+single cell first *dropped* every node whose cell was not zero instead of moving it there, so
+"without position" was silently "only the parts in the top-left corner". The numbers looked
+plausible; what gave it away was that the paired comparisons ran on 58 to 484 pictures where the
+others ran on 1 075. **Check the n before reading the effect.**
+
 ## The grammar, twice asked and twice refused
 
 An isotype is a closed vocabulary *and* a grammar — a lion beneath a crown is not a lion wearing
