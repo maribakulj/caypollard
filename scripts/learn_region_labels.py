@@ -336,6 +336,13 @@ def main() -> None:
         return np.concatenate(parts)
 
     pooled_train = np.stack([pooled(item) for item in train])
+    # The structured readouts mix descriptor means with occupancy counts, whose
+    # scales differ by orders of magnitude, and an unscaled fit stops before it
+    # converges -- which would understate exactly the readouts being tested.
+    pooled_centre = pooled_train.mean(axis=0)
+    pooled_scale = pooled_train.std(axis=0)
+    pooled_scale[pooled_scale == 0] = 1.0
+    pooled_train = (pooled_train - pooled_centre) / pooled_scale
     pooled_models = {}
     for notation in models:
         target = np.array([notation in labels[item] for item in train])
@@ -344,11 +351,16 @@ def main() -> None:
                 max_iter=800, class_weight="balanced"
             ).fit(pooled_train, target)
     pooled_hits1 = pooled_hits5 = 0
+    # Kept per picture like the ceiling rows, so a readout can be compared
+    # against the provenance control on the same pictures rather than by two
+    # intervals that happen to overlap.
+    pooled_per_picture: list[int] = []
+    pooled_pictures: list[str] = []
     for item in test:
         truth = labels[item] & set(pooled_models)
         if not (labels[item] & set(models)):
             continue
-        block = pooled(item).reshape(1, -1)
+        block = ((pooled(item) - pooled_centre) / pooled_scale).reshape(1, -1)
         ranked = [
             notation
             for _score, notation in sorted(
@@ -359,7 +371,10 @@ def main() -> None:
                 reverse=True,
             )
         ]
-        pooled_hits1 += int(bool(ranked) and ranked[0] in truth)
+        hit = int(bool(ranked) and ranked[0] in truth)
+        pooled_per_picture.append(hit)
+        pooled_pictures.append(item)
+        pooled_hits1 += hit
         pooled_hits5 += int(bool(set(ranked[:5]) & truth))
 
     # The ceiling. The pooled control says whether localising is the mistake;
@@ -424,6 +439,7 @@ def main() -> None:
             low, high = np.percentile(resampled, [2.5, 97.5])
             record_report[Path(record_path).stem] = {
                 "pictures": total,
+                "picture_ids": record_test,
                 "hits_at_1": round(record_hits1 / total, 4),
                 "hits_at_1_ci95": [round(float(low), 4), round(float(high), 4)],
                 "hits_at_1_per_picture": per_picture,
@@ -448,6 +464,8 @@ def main() -> None:
         "pooled_control": {
             "hits_at_1": round(pooled_hits1 / max(evaluated, 1), 4),
             "hits_at_5": round(pooled_hits5 / max(evaluated, 1), 4),
+            "hits_at_1_per_picture": pooled_per_picture,
+            "pictures": pooled_pictures,
         },
         "frequency_prior": {
             "hits_at_1": round(prior_hits1 / max(evaluated, 1), 4),

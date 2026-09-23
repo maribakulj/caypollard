@@ -4,14 +4,14 @@
   "test_bags_evaluated": 1075,
   "iterations": 1,
   "context": true,
-  "pooling": "global",
+  "pooling": "relational",
   "bag_level": {
     "hits_at_1": 0.0977,
     "hits_at_5": 0.2595
   },
   "pooled_control": {
-    "hits_at_1": 0.0884,
-    "hits_at_5": 0.4112
+    "hits_at_1": 0.1005,
+    "hits_at_5": 0.5098
   },
   "frequency_prior": {
     "hits_at_1": 0.2614,

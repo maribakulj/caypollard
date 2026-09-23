@@ -288,10 +288,11 @@ silhouette stays a continuous raster and the region bag is **discretised into ty
 watershed boundaries, then per-part area, elongation, solidity, tone, Hu moments, a radial
 signature, holes, scale ratios and context counts.
 
-**So the loss is in the discretisation, not in the reduction to shape.** That is a direct answer to
-the question this record was built to ask. An intermediate visual language made of discrete named
-signs — an isotype — throws away what a plain black-and-white outline keeps, on the one corpus
-where a plain outline is worth keeping.
+**So the loss is in the discretisation, not in the reduction to shape** — but only half of what
+first looked like discretisation was, the other half being the way the parts were summarised. An
+intermediate visual language made of discrete signs, read structurally, recovers three fifths of
+what a plain black-and-white outline carries; the missing two fifths are the discretisation
+itself, and they do not close with a wider vocabulary.
 
 Two diagnoses still fit that, and they call for opposite repairs: either the vocabulary throws the
 picture away, or it keeps it and the loss happens afterwards, when a bag of parts is summarised by
@@ -308,12 +309,42 @@ vocabulary bounds them both.
 They stop agreeing once the vocabulary widens, which is worth stating because the obvious reading
 of the paragraph above is wrong. Run on the thirty-two-sign segmentation — same 1 075 pictures,
 same notations, same classifier — the redrawn picture reaches 0.194 while the bag of those very
-same signs reaches 0.087 pooled and 0.101 narrowed, against a random floor of 0.022. **Drawing the
-signs and looking at the drawing extracts about twice what a linear model over their pooled
-descriptors does.** So summarising a bag by a mean and a max is not free after all: it costs
-nothing when there are four parts and roughly half when there are thirty-two. The redrawing is the
-better readout of a symbolic record, not merely an illustration of it — and the verdicts below are
-therefore stated on the redrawing, which is the generous reading.
+same signs reaches 0.088 pooled. Drawing the signs and looking at the drawing extracts twice what
+a mean and a max over their descriptors does, so summarising a bag that way is not free: it costs
+nothing at four parts and half at thirty-two.
+
+That was worth chasing, because a summary is cheap to change and a vocabulary is not. **A mean
+and a max answer *what is in the picture* and discard *where*.** Replacing them with the same
+descriptors pooled per cell of a coarse grid, plus an occupancy count, costs one pass and nothing
+else:
+
+| how the bag of thirty-two signs is read | hits@1 | share of the raster's gain |
+|---|---:|---:|
+| mean and max, as used throughout | 0.088 | 27% |
+| relation-conditioned means (the grammar) | 0.101 | 32% |
+| **pooled on a 3×3 grid (where the parts are)** | **0.173** | **61%** |
+| both | 0.168 | 59% |
+| *the same signs drawn, and the drawing encoded* | *0.194* | *69%* |
+| *continuous 48×48 silhouette of the same pictures* | *0.270* | *100%* |
+| *holding collection alone* | *0.145* | *50%* |
+| *random vectors* | *0.022* | *0%* |
+
+**The readout was half the problem.** Reading the same signs structurally more than doubles them,
+takes them from a quarter of the raster's gain to three fifths, and lands
+−0.021 [−0.050, +0.007] from the drawing — that is, the grid *is* the generous reading, obtained
+symbolically and without a rendering step. So the earlier sentence putting the whole loss in the
+vocabulary was too strong, and is corrected here rather than left standing.
+
+Two things the grid does not do, both measured paired on the same 1 075 pictures. It stays
+**0.097 [0.067, 0.126] below the continuous silhouette**, which is where the remaining loss
+genuinely is discretisation. And it still does **not** beat knowing which museum holds the object:
++0.028 [−0.003, +0.058], an interval containing zero. The verdicts below therefore stand, at a
+readout that no longer understates the record.
+
+The grammar is the part that does not survive. Relation-conditioned means read 0.158 unscaled and
+0.101 once the features are standardised, so that gain was an accident of feature scale rather
+than a finding; adding them to the grid costs it five points. *Where* the parts are pays; *how
+they stand to each other* does not, by this route or by the picture-level channel.
 
 The reconstruction is a lower bound, since the drawing adds losses of its own — a contour profile
 is fitted to its bounding box, tone is two values, an overlapping part is painted opaque — and it
