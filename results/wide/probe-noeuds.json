@@ -1,0 +1,57 @@
+{
+  "manifest": "data/derived/museums-v0.2/manifest-recorded.jsonl",
+  "attribute": "collection",
+  "split": null,
+  "k": 10,
+  "results": {
+    "noeuds nommés": {
+      "n_items": 9756,
+      "majority_baseline": 0.4731,
+      "linear_probe_accuracy": 0.5423,
+      "knn_probe_accuracy": 0.5136,
+      "linear_above_majority": 0.0692,
+      "knn_above_majority": 0.0405,
+      "neighbourhood_share": {
+        "collection": 0.4742,
+        "book_id": 0.0
+      }
+    },
+    "noms au hasard": {
+      "n_items": 9756,
+      "majority_baseline": 0.4731,
+      "linear_probe_accuracy": 0.4548,
+      "knn_probe_accuracy": 0.4394,
+      "linear_above_majority": -0.0183,
+      "knn_above_majority": -0.0337,
+      "neighbourhood_share": {
+        "collection": 0.2993,
+        "book_id": 0.0
+      }
+    },
+    "silhouette": {
+      "n_items": 9756,
+      "majority_baseline": 0.4731,
+      "linear_probe_accuracy": 0.5403,
+      "knn_probe_accuracy": 0.5123,
+      "linear_above_majority": 0.0671,
+      "knn_above_majority": 0.0392,
+      "neighbourhood_share": {
+        "collection": 0.4645,
+        "book_id": 0.0
+      }
+    },
+    "pixels": {
+      "n_items": 9756,
+      "majority_baseline": 0.4731,
+      "linear_probe_accuracy": 0.6184,
+      "knn_probe_accuracy": 0.5773,
+      "linear_above_majority": 0.1452,
+      "knn_above_majority": 0.1041,
+      "neighbourhood_share": {
+        "collection": 0.5605,
+        "book_id": 0.0
+      }
+    }
+  },
+  "reading": "A rendering has removed the confound only when the kNN probe falls to the majority baseline and the neighbourhood share falls with it. A linear probe dropping alone means the attribute was made unreadable, not absent."
+}
