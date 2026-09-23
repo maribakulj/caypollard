@@ -66,7 +66,7 @@ def encoded(path: Path, side: int) -> str:
     return base64.b64encode(buffer.getvalue()).decode()
 
 
-def ask(url: str, headers: dict, body: dict, *, timeout: int, attempts: int = 5) -> dict:
+def ask(url: str, headers: dict, body: dict, *, timeout: int, attempts: int = 9) -> dict:
     """One request, with backoff on the codes that mean *later*, not *no*."""
     for attempt in range(attempts):
         request = urllib.request.Request(
@@ -81,11 +81,11 @@ def ask(url: str, headers: dict, body: dict, *, timeout: int, attempts: int = 5)
                 raise
             # Reporting the code matters: a transient 429 has been taken for a
             # block three times in this project.
-            time.sleep(min(2**attempt, 30) + random.random())
+            time.sleep(min(2**attempt, 60) + random.random())
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, KeyError):
             if attempt == attempts - 1:
                 raise
-            time.sleep(min(2**attempt, 30) + random.random())
+            time.sleep(min(2**attempt, 60) + random.random())
     return {}
 
 
@@ -99,7 +99,14 @@ def main() -> None:
     parser.add_argument("--sample", type=int, help="Transcribe this many, drawn at random")
     parser.add_argument("--max-nodes", type=int, default=6)
     parser.add_argument("--side", type=int, default=512)
-    parser.add_argument("--workers", type=int, default=6)
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=3,
+        help="Six workers put nine per cent of the corpus past the retry budget "
+             "on a rate-limited key, and the throughput is set by the limit rather "
+             "than by the pool, so a smaller pool loses nothing and drops nothing.",
+    )
     parser.add_argument("--timeout", type=int, default=120)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--resume", action="store_true")
