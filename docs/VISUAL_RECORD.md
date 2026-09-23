@@ -622,6 +622,51 @@ single cell first *dropped* every node whose cell was not zero instead of moving
 plausible; what gave it away was that the paired comparisons ran on 58 to 484 pictures where the
 others ran on 1 075. **Check the n before reading the effect.**
 
+### Does naming help the question the record was built for?
+
+Predicting what a picture is catalogued as is one question. Finding the same motif on an object
+made and seen differently is the other, and it is the one this record exists for. Naming answers
+them differently, which is the same lesson the channels taught and is worth having twice.
+
+**Across corpora — prints against museum objects — the named record retrieves five times better
+and gives the game away.** On 12 424 objects, 7 037 of which have a partner in the other corpus:
+
+| | pixels | named nodes |
+|---|---:|---:|
+| median rank of the best partner | 501 | **104** |
+| partner in the top 10 | 5.2% | **14.1%** |
+| partner in the top 50 | 16.8% | **33.5%** |
+| *names the corpus, linear probe* | *82.6%* | *96.9%* |
+| *neighbours drawn from the other corpus* | *22.6%* | *5.9%* |
+
+Against a majority baseline of 78.1%, pixels sit 4.5 points above and the named record 18.8. The
+mute record sat *at* its floor — 85.2% against 86.1% — so **on the criterion this whole record was
+built for, naming is by far the worst representation measured.** The likely reason is not support
+but content that happens to align with the split: emblems hold swords, crowns and banners, museums
+hold vases, textiles and frames, and a namer that works must separate them. The probe cannot tell
+that apart from support, which is a limit of the probe.
+
+**The benchmark that removes the confound removes the advantage too.** Crossing object families
+inside the museum corpus alone — a flat surface, a thing in the round, a curved vessel — there is
+no corpus to read off. Same pool of 6 384, chance at 3 192, 2 983 queries:
+
+| | median rank | partner in top 100 | neighbours from another family |
+|---|---:|---:|---:|
+| named nodes | 749 | **24.7%** | 14.3% |
+| mute shapes | **743** | 19.6% | **21.1%** |
+| continuous silhouette | 1 820 | 15.0% | 11.3% |
+| pixels | 3 609 | 9.0% | 2.5% |
+
+**A tie**, inside one per cent. Naming ranks the true partner higher when the list is read deep;
+the mute vocabulary volunteers more cross-family neighbours without being asked. Both are four
+times better than chance and four to five times better than pixels, which on this benchmark is
+*worse than chance*.
+
+So naming is a channel and not a replacement. It wins where the question is *what is catalogued
+here* — +0.073 over the silhouette at notation prediction, +0.197 over provenance — and ties where
+the question is *find me this motif on a different kind of object*. That is the finding that
+organises this whole record, arrived at a third time by a third route.
+
 ## The grammar, twice asked and twice refused
 
 An isotype is a closed vocabulary *and* a grammar — a lion beneath a crown is not a lion wearing
