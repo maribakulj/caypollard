@@ -1,0 +1,322 @@
+{
+  "pictures_compared": 5583,
+  "names_per_picture": {
+    "par régions": 5.39,
+    "par lecture": 2.69
+  },
+  "agreement": {
+    "hard_jaccard": 0.1043,
+    "hard_jaccard_floor": 0.0218,
+    "soft_matched": 0.7722,
+    "soft_matched_floor": 0.7129,
+    "soft_interval": [
+      0.7699,
+      0.7746
+    ],
+    "soft_floor_interval": [
+      0.7113,
+      0.7146
+    ],
+    "encoder": "labse"
+  },
+  "reliability_per_name": [
+    {
+      "name": "star",
+      "proposed": 34,
+      "confirmed": 0.029,
+      "base_rate": 0.001,
+      "lift": 54.74
+    },
+    {
+      "name": "bridge",
+      "proposed": 54,
+      "confirmed": 0.13,
+      "base_rate": 0.003,
+      "lift": 45.23
+    },
+    {
+      "name": "clock",
+      "proposed": 61,
+      "confirmed": 0.213,
+      "base_rate": 0.005,
+      "lift": 44.07
+    },
+    {
+      "name": "ship",
+      "proposed": 47,
+      "confirmed": 0.532,
+      "base_rate": 0.016,
+      "lift": 34.13
+    },
+    {
+      "name": "bed",
+      "proposed": 130,
+      "confirmed": 0.054,
+      "base_rate": 0.002,
+      "lift": 33.4
+    },
+    {
+      "name": "mask",
+      "proposed": 141,
+      "confirmed": 0.071,
+      "base_rate": 0.002,
+      "lift": 33.0
+    },
+    {
+      "name": "cart",
+      "proposed": 37,
+      "confirmed": 0.108,
+      "base_rate": 0.005,
+      "lift": 22.35
+    },
+    {
+      "name": "fruit",
+      "proposed": 82,
+      "confirmed": 0.415,
+      "base_rate": 0.02,
+      "lift": 21.24
+    },
+    {
+      "name": "chair",
+      "proposed": 77,
+      "confirmed": 0.39,
+      "base_rate": 0.021,
+      "lift": 18.13
+    },
+    {
+      "name": "ruin",
+      "proposed": 77,
+      "confirmed": 0.169,
+      "base_rate": 0.009,
+      "lift": 17.78
+    },
+    {
+      "name": "sea",
+      "proposed": 127,
+      "confirmed": 0.157,
+      "base_rate": 0.009,
+      "lift": 17.58
+    },
+    {
+      "name": "house",
+      "proposed": 46,
+      "confirmed": 0.565,
+      "base_rate": 0.033,
+      "lift": 17.06
+    },
+    {
+      "name": "lamp",
+      "proposed": 94,
+      "confirmed": 0.032,
+      "base_rate": 0.002,
+      "lift": 16.2
+    },
+    {
+      "name": "river",
+      "proposed": 127,
+      "confirmed": 0.165,
+      "base_rate": 0.011,
+      "lift": 14.42
+    },
+    {
+      "name": "tomb",
+      "proposed": 249,
+      "confirmed": 0.012,
+      "base_rate": 0.001,
+      "lift": 13.45
+    }
+  ],
+  "reliability_worst": [
+    {
+      "name": "banner",
+      "proposed": 4495,
+      "confirmed": 0.002,
+      "base_rate": 0.002,
+      "lift": 1.1
+    },
+    {
+      "name": "flute",
+      "proposed": 630,
+      "confirmed": 0.0,
+      "base_rate": 0.0,
+      "lift": 0.0
+    },
+    {
+      "name": "rope",
+      "proposed": 131,
+      "confirmed": 0.0,
+      "base_rate": 0.001,
+      "lift": 0.0
+    },
+    {
+      "name": "cat",
+      "proposed": 92,
+      "confirmed": 0.0,
+      "base_rate": 0.002,
+      "lift": 0.0
+    },
+    {
+      "name": "trumpet",
+      "proposed": 68,
+      "confirmed": 0.0,
+      "base_rate": 0.0,
+      "lift": null
+    },
+    {
+      "name": "drum",
+      "proposed": 246,
+      "confirmed": 0.0,
+      "base_rate": 0.0,
+      "lift": null
+    },
+    {
+      "name": "glove",
+      "proposed": 127,
+      "confirmed": 0.0,
+      "base_rate": 0.0,
+      "lift": 0.0
+    },
+    {
+      "name": "chain",
+      "proposed": 209,
+      "confirmed": 0.0,
+      "base_rate": 0.001,
+      "lift": 0.0
+    },
+    {
+      "name": "anchor",
+      "proposed": 50,
+      "confirmed": 0.0,
+      "base_rate": 0.0,
+      "lift": 0.0
+    },
+    {
+      "name": "fire",
+      "proposed": 40,
+      "confirmed": 0.0,
+      "base_rate": 0.001,
+      "lift": 0.0
+    }
+  ],
+  "catalogue_lift": {
+    "par régions": {
+      "ship": [
+        38.1,
+        47
+      ],
+      "hat": [
+        16.27,
+        132
+      ],
+      "mask": [
+        14.4,
+        141
+      ],
+      "boat": [
+        14.26,
+        133
+      ],
+      "fish": [
+        13.27,
+        99
+      ],
+      "soldier": [
+        13.21,
+        62
+      ],
+      "book": [
+        13.16,
+        134
+      ],
+      "sky": [
+        11.83,
+        59
+      ],
+      "city": [
+        11.54,
+        43
+      ],
+      "child": [
+        10.76,
+        344
+      ],
+      "castle": [
+        10.34,
+        60
+      ],
+      "crucifix": [
+        10.14,
+        196
+      ]
+    },
+    "par lecture": {
+      "ship": [
+        32.69,
+        87
+      ],
+      "key": [
+        24.16,
+        31
+      ],
+      "mountain": [
+        23.53,
+        58
+      ],
+      "sea": [
+        23.17,
+        50
+      ],
+      "eye": [
+        21.15,
+        36
+      ],
+      "book": [
+        20.41,
+        108
+      ],
+      "sky": [
+        15.1,
+        115
+      ],
+      "chair": [
+        13.47,
+        120
+      ],
+      "hat": [
+        12.94,
+        177
+      ],
+      "cloak": [
+        11.93,
+        96
+      ],
+      "river": [
+        11.63,
+        64
+      ],
+      "landscape": [
+        11.46,
+        314
+      ]
+    }
+  },
+  "does_agreement_mark_reliability": {
+    "names_both_namers_gave": {
+      "n": 4807,
+      "mean_lift": 2.551,
+      "interval": [
+        2.4863,
+        2.6184
+      ]
+    },
+    "names_only_one_gave": {
+      "n": 51014,
+      "mean_lift": 1.747,
+      "interval": [
+        1.7349,
+        1.7606
+      ]
+    }
+  },
+  "reading": "A lift of 1.0 is a name that says nothing about the catalogue. Agreement above its floor means the namers see the same pictures; agreement far below one means a name is a reading. The last block decides whether the intersection is worth building: if agreed names do not lift more, agreement is a property of the namers and not of the pictures."
+}

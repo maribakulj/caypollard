@@ -504,6 +504,56 @@ symbolic and probes clean, but its *production* is not medium-blind, and a corpu
 could behave differently. And the vocabulary is a designed artefact, written for these corpora;
 it is closed and inspectable, which is the point, but it is not neutral.
 
+### What a name is worth, and to whom
+
+The names come from one instrument, so a second one was given the identical closed vocabulary —
+every segmented part scored against it in one case, the picture read whole in the other — and the
+two compared on 5 583 museum pictures. Set overlap was the first thing computed and the wrong
+thing to report: it counts *man* against *woman* as the same failure as *man* against *vase*, it
+punishes the namer that returns more names, and it credits agreement that comes from both namers
+saying whatever the corpus says most often.
+
+| | agreement | floor |
+|---|---:|---:|
+| set overlap | 0.104 | 0.022 |
+| one-to-one semantic matching | 0.772 [0.770, 0.775] | 0.713 [0.711, 0.715] |
+
+The second row's *absolute* value is a trap and is recorded here so that nobody reads it as
+agreement: in a sentence encoder every ordinary noun sits near every other, so the floor is 0.713
+and only the excess of 0.059 is information. Read that way the two measures agree, and set
+overlap was overstating the disagreement rather than discovering it.
+
+Reliability is not a property of the namers but of **each word**, and the spread is the finding.
+Confirmed by the other namer against how often that namer says the word at all:
+
+| word | proposed | confirmed | base rate | lift |
+|---|---:|---:|---:|---:|
+| ship | 47 | 0.53 | 0.016 | 34 |
+| fruit | 82 | 0.42 | 0.020 | 21 |
+| clock | 61 | 0.21 | 0.005 | 44 |
+| … | | | | |
+| chain | 209 | **0.00** | 0.001 | 0 |
+| drum | 246 | **0.00** | 0.000 | — |
+| glove | 127 | **0.00** | 0.000 | 0 |
+
+A quarter of the vocabulary is trustworthy and part of it is noise a namer emits in the hundreds
+and the other never confirms once. **The vocabulary can be pruned by measurement rather than by
+taste**, which is the practical consequence.
+
+A single name carries a great deal about the catalogue — a picture called *ship* is 38 times more
+likely to carry its notation than a picture at large, *key* 24, *mountain* 23. And the question
+the agreement measurement existed to answer, asked directly rather than by proxy: **do names both
+namers gave lift more than names only one gave?**
+
+| | mean lift on the catalogue |
+|---|---:|
+| names both namers gave (n = 4 807) | **2.551 [2.486, 2.618]** |
+| names only one gave (n = 51 014) | 1.747 [1.735, 1.761] |
+
+Disjoint intervals, 46% apart. **Agreement does mark reliability.** So an intersection record is
+worth building, against a cost that is now a number rather than a worry: it keeps 8.6% of the
+assignments, and whether that trade is good is the measurement that follows.
+
 ## The grammar, twice asked and twice refused
 
 An isotype is a closed vocabulary *and* a grammar — a lion beneath a crown is not a lion wearing
