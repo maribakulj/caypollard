@@ -350,15 +350,19 @@ picture redrawn from vocabularies of increasing size:
 | redrawn, oriented | 4 | 0.167 | +0.133 [+0.106, +0.161] | 50% |
 | redrawn | 13 | 0.198 | +0.165 [+0.137, +0.193] | 62% |
 | redrawn | 32 | 0.214 | +0.181 [+0.152, +0.212] | 68% |
+| redrawn | 75 | 0.189 | +0.155 [+0.125, +0.184] | 59% |
 | *holding collection alone* | — | *0.182* | *+0.148 [+0.121, +0.177]* | *56%* |
 | **silhouette, 48×48 raster** | **2 304 cells** | **0.298** | **+0.265 [+0.232, +0.297]** | **100%** |
 
-**The curve rises and then stops rising.** Going from four signs to thirteen is worth +0.052
-[+0.022, +0.083]; going from thirteen to thirty-two is worth +0.016 [−0.014, +0.047], an interval
-containing zero. Two and a half times the vocabulary buys nothing measurable, while the raster
-keeps a gap of +0.084 [+0.051, +0.117] that is not in doubt. So the shortfall is not a capacity
-problem that more parts would close: within the range tested the discrete language saturates at
-about two thirds of what the raster of the same picture carries.
+**The curve rises, stops rising, and then turns down.** Four signs to thirteen is worth +0.052
+[+0.022, +0.083]; thirteen to thirty-two is worth +0.016 [−0.014, +0.047], an interval containing
+zero; and seventy-five signs score −0.025 [−0.058, +0.007] *below* thirty-two. The peak sits near
+thirty-two parts, and the raster keeps a gap of +0.109 [+0.072, +0.146] over the largest
+vocabulary tried. So the shortfall is not a capacity problem that more parts would close: the
+discrete language saturates at about two thirds of what the raster of the same picture carries,
+and pouring more parts into it makes it slightly worse — past a point the extra signs are
+fragments of one object rather than objects, and a picture described by seventy-five splinters is
+harder to recognise than one described by thirty-two parts.
 
 The sharper verdict is in the provenance column. At **no** vocabulary size does the redrawn
 picture beat simply knowing which museum holds the object: +0.016 [−0.018, +0.052] at thirteen
