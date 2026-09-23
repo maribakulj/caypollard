@@ -433,6 +433,77 @@ exactly those, which is why it reads 0.135 rather than 0.147. The museums corpus
 variants, so the ladder is emblems-only; its cropped subset is Illinois and Glasgow, HAB being
 the full-page collection excluded throughout.
 
+## Naming the nodes, which is what the mute vocabulary was missing
+
+Every measurement above is of a vocabulary whose signs are **numbers**. A cluster is "sign 312",
+and the saturation those signs hit — three fifths of the raster's gain, no further with more of
+them — is a fact about mute signs. It says nothing about signs that carry a name, because until
+now none did: every naming route had failed, and a sign remained a tendency.
+
+So the names were fetched from outside instead of learned from inside. Each part is scored
+against a **closed vocabulary** and takes the best member of it; there is no free text to
+generate, so no author's style and no page's format can re-enter, and no output can fall outside
+the vocabulary. The record is then nodes by place — a coarse grid, and in each cell the names of
+the parts centred there — which is the form the pooling comparison selected.
+
+Two vocabularies were tried, and which one wins is the finding.
+
+*Iconclass's own labels*, every notation of at most four characters that Wikidata names: 472
+terms. *Ordinary nouns*, a closed list of 116 words for what pictures in these corpora contain —
+dress, tree, column, angel — carrying **no notation at all**.
+
+| museums, 30 notations, 1 075 pictures | hits@1 |
+|---|---:|
+| **named nodes, ordinary nouns, by place** | **0.318** |
+| named nodes, Iconclass labels, by place | 0.285 |
+| *continuous 48×48 silhouette* | *0.270* |
+| *constant predictor (prior)* | *0.261* |
+| mute 32-sign grid | 0.173 |
+| *holding collection alone* | *0.145* |
+| *the same places, names shuffled* | *0.101* |
+| *random vectors* | *0.022* |
+
+Paired on those pictures, the ordinary-noun record sits **+0.218 [+0.185, +0.248] over shuffled
+names**, so it is the names and not the arrangement; **+0.173 [+0.140, +0.207] over provenance**,
+which nothing symbolic in this record had managed; and **+0.048 [+0.017, +0.080] over the
+continuous silhouette**, which it therefore beats rather than reaches. **The saturation was a
+property of mute signs.**
+
+The obvious objection is vocabulary alignment: 11 of the 30 target notations sit literally in the
+Iconclass node vocabulary and 27 of 30 have a prefix there, so for many targets that namer can
+emit the answer's own code, and shuffling does not control for it — shuffling destroys naming and
+alignment together. The ordinary nouns are the control that separates them, since not one of the
+116 is a notation. They **win** (+0.033 [−0.001, +0.066] over the aligned vocabulary), so the gain
+is naming and not alignment. The same measurement makes a second point for anyone building one of
+these: **the discipline's own labels are the wrong prompt**. Given `fable`, `domesticated animal`
+and `mandrake` as its only choices, a 3B vision-language model answers `mandrake` five times for a
+photograph of a dress — at 32 terms, at 134 and at 465, so the failure is the kind of word and not
+the number of them. Given ordinary nouns it answers `dress`. The catalogue term is the right name
+for a finding and the wrong name for a prompt; the mapping to Iconclass belongs after the
+transcription, not inside it.
+
+It does not win by smuggling the support back in, which was the real risk, since the namer knows
+perfectly well what a photograph is. Probed for the holding institution against a 47.3% floor:
+
+| representation | institution named |
+|---|---:|
+| pixels (DINOv2) | 61.8% |
+| named nodes, ordinary nouns | 54.4% |
+| named nodes, Iconclass labels | 54.2% |
+| continuous silhouette | 54.0% |
+| *the same places, names shuffled* | *45.5%* |
+
+**The named record gives away exactly as much provenance as the silhouette and carries more
+iconography.** That is the property this whole record was built for, and it is the first
+representation here to hold both ends of it at once.
+
+Three limits, none of them small. This is measured on **museum objects only**, whose notations
+track object type closely — the corpus where a plain outline already worked, and not the one where
+it failed. The transcription is produced by a model trained on photographs: the *product* is
+symbolic and probes clean, but its *production* is not medium-blind, and a corpus of engravings
+could behave differently. And the vocabulary is a designed artefact, written for these corpora;
+it is closed and inspectable, which is the point, but it is not neutral.
+
 ## The grammar, twice asked and twice refused
 
 An isotype is a closed vocabulary *and* a grammar — a lion beneath a crown is not a lion wearing

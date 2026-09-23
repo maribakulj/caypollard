@@ -4,7 +4,19 @@
   "split": null,
   "k": 10,
   "results": {
-    "noeuds nommés": {
+    "noms ordinaires": {
+      "n_items": 9756,
+      "majority_baseline": 0.4731,
+      "linear_probe_accuracy": 0.5445,
+      "knn_probe_accuracy": 0.5226,
+      "linear_above_majority": 0.0713,
+      "knn_above_majority": 0.0494,
+      "neighbourhood_share": {
+        "collection": 0.4688,
+        "book_id": 0.0
+      }
+    },
+    "noms Iconclass": {
       "n_items": 9756,
       "majority_baseline": 0.4731,
       "linear_probe_accuracy": 0.5423,
@@ -13,18 +25,6 @@
       "knn_above_majority": 0.0405,
       "neighbourhood_share": {
         "collection": 0.4742,
-        "book_id": 0.0
-      }
-    },
-    "noms au hasard": {
-      "n_items": 9756,
-      "majority_baseline": 0.4731,
-      "linear_probe_accuracy": 0.4548,
-      "knn_probe_accuracy": 0.4394,
-      "linear_above_majority": -0.0183,
-      "knn_above_majority": -0.0337,
-      "neighbourhood_share": {
-        "collection": 0.2993,
         "book_id": 0.0
       }
     },
