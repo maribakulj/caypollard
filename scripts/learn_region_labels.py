@@ -45,7 +45,20 @@ from sklearn.linear_model import LogisticRegression
 from caypollard.provenance import read_jsonl
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_shape_relations import relation as spatial_relation
 from build_shape_vocabulary import descriptor
+
+# The same closed set the picture-level relation channel uses, in a fixed order
+# so a feature keeps its column between runs.
+RELATIONS = (
+    "au-dessus",
+    "en-dessous",
+    "gauche",
+    "droite",
+    "contient",
+    "dans",
+    "touche",
+)
 
 CONTEXT = (
     "ctx_above",
@@ -116,6 +129,15 @@ def main() -> None:
              "described as a whole. Without it a failure at region level cannot be told "
              "apart from a task no representation wins.",
     )
+    parser.add_argument(
+        "--pooling",
+        choices=("global", "spatial", "relational", "all"),
+        default="global",
+        help="How a bag of parts is read. 'global' is the mean and max this "
+             "project has used throughout; the others add where the parts are and "
+             "how they stand to each other, and exist so that the contribution of "
+             "structure is measured rather than assumed.",
+    )
     parser.add_argument("--examples", type=int, default=6)
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
@@ -129,6 +151,7 @@ def main() -> None:
             split[item] = str(row.get(args.split_field, "test"))
 
     bags: dict[str, np.ndarray] = {}
+    raw_regions: dict[str, list[dict]] = {}
     for spec in args.regions:
         _name, _, path = spec.partition("=")
         for line in Path(path).read_text(encoding="utf-8").splitlines():
@@ -143,6 +166,7 @@ def main() -> None:
                         for region in row["regions"]
                     ]
                 )
+                raw_regions[item] = list(row["regions"])
 
     train = [item for item in bags if split.get(item) == args.train_split]
     test = [item for item in bags if split.get(item) == args.test_split]
@@ -251,9 +275,65 @@ def main() -> None:
     # split, but each picture represented by the mean and max of its regions
     # rather than by one region: if pooling works where narrowing does not, the
     # notation is carried by the configuration and localising it is the mistake.
+    def grid_cell(region: dict, side: int) -> int:
+        """Which cell of a coarse grid the region's centre falls in."""
+        x = min(int(float(region.get("centroid_x", 0.5)) * side), side - 1)
+        y = min(int(float(region.get("centroid_y", 0.5)) * side), side - 1)
+        return y * side + x
+
+    def spatial(item: str, side: int = 3) -> np.ndarray:
+        """Where the parts are, not just which parts there are.
+
+        A mean and a max over every region of a picture answer *what is in it*
+        and discard *where*, which is the half of a scene a bag cannot hold. The
+        same descriptors are pooled per cell of a coarse grid instead, with an
+        occupancy count, so two pictures made of the same parts in different
+        arrangements stop being the same vector.
+        """
+        block = normalised[item]
+        parts = raw_regions[item]
+        width = block.shape[1]
+        cells = np.zeros((side * side, width + 1), dtype=np.float32)
+        for row, region in zip(block, parts, strict=True):
+            cell = grid_cell(region, side)
+            cells[cell, :width] += row
+            cells[cell, width] += 1.0
+        counts = np.maximum(cells[:, width : width + 1], 1.0)
+        cells[:, :width] /= counts
+        return cells.reshape(-1)
+
+    def relational(item: str) -> np.ndarray:
+        """The grammar: how each pair of parts stands to the other.
+
+        Seven coarse relations, each carrying the mean difference between the two
+        descriptors it holds together. A bag of signs cannot tell a lion beneath a
+        crown from a lion wearing one; a relation-conditioned mean can, and it
+        costs one pass over the pairs.
+        """
+        block = normalised[item]
+        parts = raw_regions[item]
+        width = block.shape[1]
+        sums = np.zeros((len(RELATIONS), width + 1), dtype=np.float32)
+        for i, first in enumerate(parts):
+            for j, second in enumerate(parts):
+                if i == j:
+                    continue
+                slot = RELATIONS.index(spatial_relation(first, second))
+                sums[slot, :width] += block[i] - block[j]
+                sums[slot, width] += 1.0
+        counts = np.maximum(sums[:, width : width + 1], 1.0)
+        sums[:, :width] /= counts
+        sums[:, width] = np.log1p(sums[:, width])
+        return sums.reshape(-1)
+
     def pooled(item: str) -> np.ndarray:
         block = normalised[item]
-        return np.concatenate([block.mean(axis=0), block.max(axis=0)])
+        parts = [np.concatenate([block.mean(axis=0), block.max(axis=0)])]
+        if args.pooling in {"spatial", "all"}:
+            parts.append(spatial(item))
+        if args.pooling in {"relational", "all"}:
+            parts.append(relational(item))
+        return np.concatenate(parts)
 
     pooled_train = np.stack([pooled(item) for item in train])
     pooled_models = {}
@@ -360,6 +440,7 @@ def main() -> None:
         "test_bags_evaluated": evaluated,
         "iterations": args.iterations,
         "context": not args.no_context,
+        "pooling": args.pooling,
         "bag_level": {
             "hits_at_1": round(hits1 / max(evaluated, 1), 4),
             "hits_at_5": round(hits5 / max(evaluated, 1), 4),

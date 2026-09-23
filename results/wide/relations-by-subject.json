@@ -1,0 +1,119 @@
+{
+  "pool": 20146,
+  "hub_size": 400,
+  "results": {
+    "formes": {
+      "1 · religion, magie (scènes)": {
+        "n_queries": 1174,
+        "median_rank": 2589,
+        "share_in_top_10": 0.0009,
+        "share_in_top_100": 0.0358
+      },
+      "2 · nature (objets : animaux, plantes)": {
+        "n_queries": 2954,
+        "median_rank": 920,
+        "share_in_top_10": 0.0118,
+        "share_in_top_100": 0.1144
+      },
+      "3 · corps humain, action": {
+        "n_queries": 1782,
+        "median_rank": 3679,
+        "share_in_top_10": 0.0045,
+        "share_in_top_100": 0.0426
+      },
+      "4 · société, civilisation": {
+        "n_queries": 9957,
+        "median_rank": 1280,
+        "share_in_top_10": 0.0109,
+        "share_in_top_100": 0.1028
+      },
+      "5 · idées abstraites": {
+        "n_queries": 55,
+        "median_rank": 815,
+        "share_in_top_10": 0.0182,
+        "share_in_top_100": 0.1273
+      },
+      "6 · histoire": {
+        "n_queries": 182,
+        "median_rank": 676,
+        "share_in_top_10": 0.011,
+        "share_in_top_100": 0.0879
+      },
+      "7 · Bible (scènes)": {
+        "n_queries": 104,
+        "median_rank": 2093,
+        "share_in_top_10": 0.0096,
+        "share_in_top_100": 0.0577
+      },
+      "8 · littérature": {
+        "n_queries": 51,
+        "median_rank": 3993,
+        "share_in_top_10": 0.0,
+        "share_in_top_100": 0.0
+      },
+      "9 · mythologie classique (scènes)": {
+        "n_queries": 664,
+        "median_rank": 1225,
+        "share_in_top_10": 0.0105,
+        "share_in_top_100": 0.1054
+      }
+    },
+    "formes+relations": {
+      "1 · religion, magie (scènes)": {
+        "n_queries": 1174,
+        "median_rank": 2613,
+        "share_in_top_10": 0.0017,
+        "share_in_top_100": 0.0358
+      },
+      "2 · nature (objets : animaux, plantes)": {
+        "n_queries": 2954,
+        "median_rank": 924,
+        "share_in_top_10": 0.0122,
+        "share_in_top_100": 0.1165
+      },
+      "3 · corps humain, action": {
+        "n_queries": 1782,
+        "median_rank": 3650,
+        "share_in_top_10": 0.0056,
+        "share_in_top_100": 0.0382
+      },
+      "4 · société, civilisation": {
+        "n_queries": 9957,
+        "median_rank": 1279,
+        "share_in_top_10": 0.0111,
+        "share_in_top_100": 0.1021
+      },
+      "5 · idées abstraites": {
+        "n_queries": 55,
+        "median_rank": 778,
+        "share_in_top_10": 0.0,
+        "share_in_top_100": 0.1455
+      },
+      "6 · histoire": {
+        "n_queries": 182,
+        "median_rank": 789,
+        "share_in_top_10": 0.0,
+        "share_in_top_100": 0.033
+      },
+      "7 · Bible (scènes)": {
+        "n_queries": 104,
+        "median_rank": 2192,
+        "share_in_top_10": 0.0096,
+        "share_in_top_100": 0.0577
+      },
+      "8 · littérature": {
+        "n_queries": 51,
+        "median_rank": 4188,
+        "share_in_top_10": 0.0,
+        "share_in_top_100": 0.0
+      },
+      "9 · mythologie classique (scènes)": {
+        "n_queries": 664,
+        "median_rank": 1206,
+        "share_in_top_10": 0.0105,
+        "share_in_top_100": 0.0919
+      }
+    }
+  },
+  "reading": "Divisions 2 and 4 name things; 1, 7 and 9 name episodes. A record that matches objects and not scenes separates them, and the aggregate figure reported elsewhere is then an average over two different behaviours."
+}

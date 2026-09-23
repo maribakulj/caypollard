@@ -1,0 +1,984 @@
+{
+  "notations_modelled": 30,
+  "train_bags": 1488,
+  "test_bags_evaluated": 783,
+  "iterations": 1,
+  "context": true,
+  "pooling": "spatial",
+  "bag_level": {
+    "hits_at_1": 0.0473,
+    "hits_at_5": 0.3142
+  },
+  "pooled_control": {
+    "hits_at_1": 0.1149,
+    "hits_at_5": 0.424
+  },
+  "frequency_prior": {
+    "hits_at_1": 0.2567,
+    "hits_at_5": 0.5313
+  },
+  "record_ceiling": null,
+  "witnesses": {
+    "25G3": [
+      {
+        "picture": "emblematica:E016123",
+        "region_index": 1,
+        "score": 1.585
+      },
+      {
+        "picture": "emblematica:E016543",
+        "region_index": 1,
+        "score": 1.326
+      },
+      {
+        "picture": "emblematica:E016385",
+        "region_index": 1,
+        "score": 1.298
+      },
+      {
+        "picture": "emblematica:E016553",
+        "region_index": 1,
+        "score": 1.295
+      },
+      {
+        "picture": "emblematica:E004009",
+        "region_index": 0,
+        "score": 1.252
+      },
+      {
+        "picture": "emblematica:E016090",
+        "region_index": 1,
+        "score": 1.184
+      }
+    ],
+    "56F2": [
+      {
+        "picture": "emblematica:E013239",
+        "region_index": 1,
+        "score": 1.792
+      },
+      {
+        "picture": "emblematica:E013222",
+        "region_index": 1,
+        "score": 1.433
+      },
+      {
+        "picture": "emblematica:E016703",
+        "region_index": 5,
+        "score": 1.374
+      },
+      {
+        "picture": "emblematica:E016689",
+        "region_index": 5,
+        "score": 1.344
+      },
+      {
+        "picture": "emblematica:E016707",
+        "region_index": 6,
+        "score": 1.303
+      },
+      {
+        "picture": "emblematica:E016549",
+        "region_index": 4,
+        "score": 1.285
+      }
+    ],
+    "31F26": [
+      {
+        "picture": "emblematica:E010326",
+        "region_index": 0,
+        "score": 2.384
+      },
+      {
+        "picture": "emblematica:E014809",
+        "region_index": 2,
+        "score": 2.262
+      },
+      {
+        "picture": "emblematica:E010290",
+        "region_index": 7,
+        "score": 2.159
+      },
+      {
+        "picture": "emblematica:E014807",
+        "region_index": 0,
+        "score": 2.144
+      },
+      {
+        "picture": "emblematica:E010300",
+        "region_index": 2,
+        "score": 2.119
+      },
+      {
+        "picture": "emblematica:E014812",
+        "region_index": 1,
+        "score": 2.109
+      }
+    ],
+    "45C15": [
+      {
+        "picture": "emblematica:E016383",
+        "region_index": 1,
+        "score": 1.482
+      },
+      {
+        "picture": "emblematica:E027443",
+        "region_index": 9,
+        "score": 1.255
+      },
+      {
+        "picture": "emblematica:E016689",
+        "region_index": 5,
+        "score": 1.214
+      },
+      {
+        "picture": "emblematica:E016123",
+        "region_index": 1,
+        "score": 1.134
+      },
+      {
+        "picture": "emblematica:E016467",
+        "region_index": 1,
+        "score": 1.075
+      },
+      {
+        "picture": "emblematica:E016346",
+        "region_index": 0,
+        "score": 1.023
+      }
+    ],
+    "25H114": [
+      {
+        "picture": "emblematica:E000832",
+        "region_index": 7,
+        "score": 1.105
+      },
+      {
+        "picture": "emblematica:E000844",
+        "region_index": 8,
+        "score": 1.056
+      },
+      {
+        "picture": "emblematica:E021447",
+        "region_index": 4,
+        "score": 1.032
+      },
+      {
+        "picture": "emblematica:E012876",
+        "region_index": 6,
+        "score": 0.986
+      },
+      {
+        "picture": "emblematica:E021364",
+        "region_index": 9,
+        "score": 0.979
+      },
+      {
+        "picture": "emblematica:E016065",
+        "region_index": 1,
+        "score": 0.939
+      }
+    ],
+    "92D18": [
+      {
+        "picture": "emblematica:E013214",
+        "region_index": 1,
+        "score": 2.133
+      },
+      {
+        "picture": "emblematica:E013222",
+        "region_index": 0,
+        "score": 1.715
+      },
+      {
+        "picture": "emblematica:E016123",
+        "region_index": 0,
+        "score": 1.57
+      },
+      {
+        "picture": "emblematica:E013239",
+        "region_index": 1,
+        "score": 1.523
+      },
+      {
+        "picture": "emblematica:E013212",
+        "region_index": 1,
+        "score": 1.491
+      },
+      {
+        "picture": "emblematica:E013238",
+        "region_index": 4,
+        "score": 1.467
+      }
+    ],
+    "26A": [
+      {
+        "picture": "emblematica:E016259",
+        "region_index": 1,
+        "score": 1.534
+      },
+      {
+        "picture": "emblematica:E020475",
+        "region_index": 1,
+        "score": 1.221
+      },
+      {
+        "picture": "emblematica:E021415",
+        "region_index": 5,
+        "score": 1.117
+      },
+      {
+        "picture": "emblematica:E027444",
+        "region_index": 0,
+        "score": 1.105
+      },
+      {
+        "picture": "emblematica:E016293",
+        "region_index": 2,
+        "score": 1.041
+      },
+      {
+        "picture": "emblematica:E027426",
+        "region_index": 12,
+        "score": 1.029
+      }
+    ],
+    "45C23": [
+      {
+        "picture": "emblematica:E012896",
+        "region_index": 2,
+        "score": 1.994
+      },
+      {
+        "picture": "emblematica:E013214",
+        "region_index": 1,
+        "score": 1.536
+      },
+      {
+        "picture": "emblematica:E013211",
+        "region_index": 0,
+        "score": 1.492
+      },
+      {
+        "picture": "emblematica:E000845",
+        "region_index": 6,
+        "score": 1.468
+      },
+      {
+        "picture": "emblematica:E013222",
+        "region_index": 0,
+        "score": 1.453
+      },
+      {
+        "picture": "emblematica:E013239",
+        "region_index": 3,
+        "score": 1.427
+      }
+    ],
+    "92D156": [
+      {
+        "picture": "emblematica:E013214",
+        "region_index": 1,
+        "score": 2.203
+      },
+      {
+        "picture": "emblematica:E013219",
+        "region_index": 1,
+        "score": 2.029
+      },
+      {
+        "picture": "emblematica:E016697",
+        "region_index": 3,
+        "score": 2.007
+      },
+      {
+        "picture": "emblematica:E016702",
+        "region_index": 2,
+        "score": 1.578
+      },
+      {
+        "picture": "emblematica:E013203",
+        "region_index": 0,
+        "score": 1.56
+      },
+      {
+        "picture": "emblematica:E016496",
+        "region_index": 3,
+        "score": 1.452
+      }
+    ],
+    "31D14": [
+      {
+        "picture": "emblematica:E014826",
+        "region_index": 7,
+        "score": 1.906
+      },
+      {
+        "picture": "emblematica:E027439",
+        "region_index": 2,
+        "score": 1.861
+      },
+      {
+        "picture": "emblematica:E021477",
+        "region_index": 2,
+        "score": 1.595
+      },
+      {
+        "picture": "emblematica:E027409",
+        "region_index": 1,
+        "score": 1.555
+      },
+      {
+        "picture": "emblematica:E021410",
+        "region_index": 7,
+        "score": 1.533
+      },
+      {
+        "picture": "emblematica:E027446",
+        "region_index": 1,
+        "score": 1.425
+      }
+    ],
+    "45C13": [
+      {
+        "picture": "emblematica:E012896",
+        "region_index": 2,
+        "score": 1.455
+      },
+      {
+        "picture": "emblematica:E014807",
+        "region_index": 1,
+        "score": 1.282
+      },
+      {
+        "picture": "emblematica:E021365",
+        "region_index": 5,
+        "score": 1.249
+      },
+      {
+        "picture": "emblematica:E027436",
+        "region_index": 17,
+        "score": 1.133
+      },
+      {
+        "picture": "emblematica:E021471",
+        "region_index": 0,
+        "score": 1.107
+      },
+      {
+        "picture": "emblematica:E027404",
+        "region_index": 6,
+        "score": 1.087
+      }
+    ],
+    "25F23": [
+      {
+        "picture": "emblematica:E004009",
+        "region_index": 2,
+        "score": 2.943
+      },
+      {
+        "picture": "emblematica:E020473",
+        "region_index": 3,
+        "score": 2.299
+      },
+      {
+        "picture": "emblematica:E021370",
+        "region_index": 8,
+        "score": 1.416
+      },
+      {
+        "picture": "emblematica:E021372",
+        "region_index": 7,
+        "score": 1.331
+      },
+      {
+        "picture": "emblematica:E012897",
+        "region_index": 0,
+        "score": 1.3
+      },
+      {
+        "picture": "emblematica:E016442",
+        "region_index": 0,
+        "score": 1.25
+      }
+    ],
+    "31D15": [
+      {
+        "picture": "emblematica:E027417",
+        "region_index": 9,
+        "score": 1.722
+      },
+      {
+        "picture": "emblematica:E027436",
+        "region_index": 20,
+        "score": 1.667
+      },
+      {
+        "picture": "emblematica:E021355",
+        "region_index": 5,
+        "score": 1.531
+      },
+      {
+        "picture": "emblematica:E027398",
+        "region_index": 5,
+        "score": 1.478
+      },
+      {
+        "picture": "emblematica:E027421",
+        "region_index": 7,
+        "score": 1.349
+      },
+      {
+        "picture": "emblematica:E027415",
+        "region_index": 2,
+        "score": 1.288
+      }
+    ],
+    "49L8": [
+      {
+        "picture": "emblematica:E020473",
+        "region_index": 3,
+        "score": 4.178
+      },
+      {
+        "picture": "emblematica:E021462",
+        "region_index": 4,
+        "score": 3.961
+      },
+      {
+        "picture": "emblematica:E020489",
+        "region_index": 2,
+        "score": 2.918
+      },
+      {
+        "picture": "emblematica:E020464",
+        "region_index": 3,
+        "score": 2.6
+      },
+      {
+        "picture": "emblematica:E020453",
+        "region_index": 4,
+        "score": 2.495
+      },
+      {
+        "picture": "emblematica:E020460",
+        "region_index": 4,
+        "score": 2.36
+      }
+    ],
+    "44B191": [
+      {
+        "picture": "emblematica:E010364",
+        "region_index": 0,
+        "score": 2.108
+      },
+      {
+        "picture": "emblematica:E021424",
+        "region_index": 0,
+        "score": 1.593
+      },
+      {
+        "picture": "emblematica:E020471",
+        "region_index": 1,
+        "score": 1.543
+      },
+      {
+        "picture": "emblematica:E021519",
+        "region_index": 4,
+        "score": 1.436
+      },
+      {
+        "picture": "emblematica:E021359",
+        "region_index": 1,
+        "score": 1.424
+      },
+      {
+        "picture": "emblematica:E010323",
+        "region_index": 1,
+        "score": 1.422
+      }
+    ],
+    "25G41": [
+      {
+        "picture": "emblematica:E016548",
+        "region_index": 0,
+        "score": 0.87
+      },
+      {
+        "picture": "emblematica:E021428",
+        "region_index": 6,
+        "score": 0.842
+      },
+      {
+        "picture": "emblematica:E016216",
+        "region_index": 1,
+        "score": 0.826
+      },
+      {
+        "picture": "emblematica:E016531",
+        "region_index": 1,
+        "score": 0.812
+      },
+      {
+        "picture": "emblematica:E016317",
+        "region_index": 5,
+        "score": 0.804
+      },
+      {
+        "picture": "emblematica:E016376",
+        "region_index": 7,
+        "score": 0.762
+      }
+    ],
+    "25H113": [
+      {
+        "picture": "emblematica:E016119",
+        "region_index": 6,
+        "score": 1.781
+      },
+      {
+        "picture": "emblematica:E020482",
+        "region_index": 0,
+        "score": 1.531
+      },
+      {
+        "picture": "emblematica:E016072",
+        "region_index": 6,
+        "score": 1.482
+      },
+      {
+        "picture": "emblematica:E016618",
+        "region_index": 1,
+        "score": 1.438
+      },
+      {
+        "picture": "emblematica:E016050",
+        "region_index": 7,
+        "score": 1.416
+      },
+      {
+        "picture": "emblematica:E016537",
+        "region_index": 4,
+        "score": 1.363
+      }
+    ],
+    "23U22": [
+      {
+        "picture": "emblematica:E014802",
+        "region_index": 2,
+        "score": 2.666
+      },
+      {
+        "picture": "emblematica:E010288",
+        "region_index": 0,
+        "score": 2.462
+      },
+      {
+        "picture": "emblematica:E014780",
+        "region_index": 10,
+        "score": 2.459
+      },
+      {
+        "picture": "emblematica:E010326",
+        "region_index": 0,
+        "score": 2.432
+      },
+      {
+        "picture": "emblematica:E014786",
+        "region_index": 6,
+        "score": 2.339
+      },
+      {
+        "picture": "emblematica:E010290",
+        "region_index": 1,
+        "score": 2.249
+      }
+    ],
+    "24A6": [
+      {
+        "picture": "emblematica:E021428",
+        "region_index": 4,
+        "score": 1.53
+      },
+      {
+        "picture": "emblematica:E016052",
+        "region_index": 1,
+        "score": 1.524
+      },
+      {
+        "picture": "emblematica:E016073",
+        "region_index": 7,
+        "score": 1.41
+      },
+      {
+        "picture": "emblematica:E016665",
+        "region_index": 7,
+        "score": 1.399
+      },
+      {
+        "picture": "emblematica:E016481",
+        "region_index": 1,
+        "score": 1.359
+      },
+      {
+        "picture": "emblematica:E016487",
+        "region_index": 9,
+        "score": 1.31
+      }
+    ],
+    "47D8": [
+      {
+        "picture": "emblematica:E010379",
+        "region_index": 2,
+        "score": 1.591
+      },
+      {
+        "picture": "emblematica:E021534",
+        "region_index": 9,
+        "score": 1.46
+      },
+      {
+        "picture": "emblematica:E010349",
+        "region_index": 5,
+        "score": 1.425
+      },
+      {
+        "picture": "emblematica:E010374",
+        "region_index": 10,
+        "score": 1.388
+      },
+      {
+        "picture": "emblematica:E021527",
+        "region_index": 10,
+        "score": 1.387
+      },
+      {
+        "picture": "emblematica:E013202",
+        "region_index": 1,
+        "score": 1.352
+      }
+    ],
+    "54A7": [
+      {
+        "picture": "emblematica:E013219",
+        "region_index": 2,
+        "score": 1.936
+      },
+      {
+        "picture": "emblematica:E016476",
+        "region_index": 5,
+        "score": 1.703
+      },
+      {
+        "picture": "emblematica:E027444",
+        "region_index": 0,
+        "score": 1.636
+      },
+      {
+        "picture": "emblematica:E016674",
+        "region_index": 1,
+        "score": 1.501
+      },
+      {
+        "picture": "emblematica:E016571",
+        "region_index": 1,
+        "score": 1.449
+      },
+      {
+        "picture": "emblematica:E016089",
+        "region_index": 1,
+        "score": 1.434
+      }
+    ],
+    "25F42": [
+      {
+        "picture": "emblematica:E010385",
+        "region_index": 2,
+        "score": 1.352
+      },
+      {
+        "picture": "emblematica:E021397",
+        "region_index": 1,
+        "score": 1.163
+      },
+      {
+        "picture": "emblematica:E027415",
+        "region_index": 5,
+        "score": 1.159
+      },
+      {
+        "picture": "emblematica:E027416",
+        "region_index": 0,
+        "score": 1.069
+      },
+      {
+        "picture": "emblematica:E021466",
+        "region_index": 5,
+        "score": 1.025
+      },
+      {
+        "picture": "emblematica:E027419",
+        "region_index": 1,
+        "score": 0.971
+      }
+    ],
+    "25I3": [
+      {
+        "picture": "emblematica:E013219",
+        "region_index": 0,
+        "score": 1.923
+      },
+      {
+        "picture": "emblematica:E021351",
+        "region_index": 3,
+        "score": 1.804
+      },
+      {
+        "picture": "emblematica:E012909",
+        "region_index": 1,
+        "score": 1.772
+      },
+      {
+        "picture": "emblematica:E013212",
+        "region_index": 0,
+        "score": 1.691
+      },
+      {
+        "picture": "emblematica:E016543",
+        "region_index": 0,
+        "score": 1.602
+      },
+      {
+        "picture": "emblematica:E021383",
+        "region_index": 2,
+        "score": 1.503
+      }
+    ],
+    "31A2763": [
+      {
+        "picture": "emblematica:E016293",
+        "region_index": 1,
+        "score": 2.426
+      },
+      {
+        "picture": "emblematica:E016083",
+        "region_index": 3,
+        "score": 2.214
+      },
+      {
+        "picture": "emblematica:E016537",
+        "region_index": 0,
+        "score": 1.967
+      },
+      {
+        "picture": "emblematica:E016195",
+        "region_index": 6,
+        "score": 1.703
+      },
+      {
+        "picture": "emblematica:E016360",
+        "region_index": 5,
+        "score": 1.685
+      },
+      {
+        "picture": "emblematica:E016304",
+        "region_index": 6,
+        "score": 1.588
+      }
+    ],
+    "21C": [
+      {
+        "picture": "emblematica:E016546",
+        "region_index": 2,
+        "score": 1.575
+      },
+      {
+        "picture": "emblematica:E013220",
+        "region_index": 1,
+        "score": 1.55
+      },
+      {
+        "picture": "emblematica:E016244",
+        "region_index": 1,
+        "score": 1.469
+      },
+      {
+        "picture": "emblematica:E016024",
+        "region_index": 3,
+        "score": 1.468
+      },
+      {
+        "picture": "emblematica:E016566",
+        "region_index": 1,
+        "score": 1.449
+      },
+      {
+        "picture": "emblematica:E016687",
+        "region_index": 1,
+        "score": 1.401
+      }
+    ],
+    "25H213": [
+      {
+        "picture": "emblematica:E012905",
+        "region_index": 2,
+        "score": 1.803
+      },
+      {
+        "picture": "emblematica:E012891",
+        "region_index": 0,
+        "score": 1.749
+      },
+      {
+        "picture": "emblematica:E004018",
+        "region_index": 2,
+        "score": 1.494
+      },
+      {
+        "picture": "emblematica:E012909",
+        "region_index": 1,
+        "score": 1.305
+      },
+      {
+        "picture": "emblematica:E012908",
+        "region_index": 2,
+        "score": 1.205
+      },
+      {
+        "picture": "emblematica:E013239",
+        "region_index": 3,
+        "score": 1.176
+      }
+    ],
+    "25G4": [
+      {
+        "picture": "emblematica:E016096",
+        "region_index": 1,
+        "score": 1.755
+      },
+      {
+        "picture": "emblematica:E016550",
+        "region_index": 3,
+        "score": 1.641
+      },
+      {
+        "picture": "emblematica:E016485",
+        "region_index": 1,
+        "score": 1.637
+      },
+      {
+        "picture": "emblematica:E012920",
+        "region_index": 1,
+        "score": 1.575
+      },
+      {
+        "picture": "emblematica:E016559",
+        "region_index": 2,
+        "score": 1.483
+      },
+      {
+        "picture": "emblematica:E012888",
+        "region_index": 2,
+        "score": 1.443
+      }
+    ],
+    "25H23": [
+      {
+        "picture": "emblematica:E016540",
+        "region_index": 1,
+        "score": 1.599
+      },
+      {
+        "picture": "emblematica:E016560",
+        "region_index": 1,
+        "score": 1.414
+      },
+      {
+        "picture": "emblematica:E027418",
+        "region_index": 4,
+        "score": 1.276
+      },
+      {
+        "picture": "emblematica:E013222",
+        "region_index": 1,
+        "score": 1.251
+      },
+      {
+        "picture": "emblematica:E016672",
+        "region_index": 5,
+        "score": 1.248
+      },
+      {
+        "picture": "emblematica:E020464",
+        "region_index": 0,
+        "score": 1.138
+      }
+    ],
+    "57A6": [
+      {
+        "picture": "emblematica:E027404",
+        "region_index": 3,
+        "score": 1.292
+      },
+      {
+        "picture": "emblematica:E021368",
+        "region_index": 2,
+        "score": 1.266
+      },
+      {
+        "picture": "emblematica:E016314",
+        "region_index": 6,
+        "score": 1.233
+      },
+      {
+        "picture": "emblematica:E027439",
+        "region_index": 3,
+        "score": 1.204
+      },
+      {
+        "picture": "emblematica:E027402",
+        "region_index": 4,
+        "score": 1.131
+      },
+      {
+        "picture": "emblematica:E027435",
+        "region_index": 0,
+        "score": 1.055
+      }
+    ],
+    "46C24": [
+      {
+        "picture": "emblematica:E020476",
+        "region_index": 1,
+        "score": 1.747
+      },
+      {
+        "picture": "emblematica:E013357",
+        "region_index": 1,
+        "score": 1.496
+      },
+      {
+        "picture": "emblematica:E021493",
+        "region_index": 0,
+        "score": 1.46
+      },
+      {
+        "picture": "emblematica:E020477",
+        "region_index": 2,
+        "score": 1.457
+      },
+      {
+        "picture": "emblematica:E021402",
+        "region_index": 1,
+        "score": 1.372
+      },
+      {
+        "picture": "emblematica:E016532",
+        "region_index": 2,
+        "score": 1.273
+      }
+    ]
+  },
+  "reading": "Beating the prior at bag level means the regions carry the signal, since nothing but regions was given. The witnesses are the contestable part: each names a picture and the index of the region the model holds responsible, so a historian can look and say no."
+}
