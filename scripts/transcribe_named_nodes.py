@@ -99,6 +99,13 @@ def main() -> None:
     parser.add_argument("regions")
     parser.add_argument("manifest")
     parser.add_argument("--vocabulary", default="data/derived/iconclass-wikidata.jsonl")
+    parser.add_argument(
+        "--labels",
+        help="A plain word list, one per line, used instead of the Iconclass labels. "
+             "The catalogue term is the right name for a finding and the wrong name "
+             "for a prompt: a model given 'fable' and 'mandrake' as its choices "
+             "cannot ground either, and answers the same one five times.",
+    )
     parser.add_argument("--max-depth", type=int, default=4)
     parser.add_argument("--max-nodes", type=int, default=12,
                         help="Largest regions named per picture")
@@ -119,7 +126,15 @@ def main() -> None:
     import torch
     from transformers import CLIPModel, CLIPProcessor
 
-    concepts = vocabulary(Path(args.vocabulary), max_depth=args.max_depth)
+    if args.labels:
+        words = [
+            line.strip()
+            for line in Path(args.labels).read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.startswith("#")
+        ]
+        concepts = [(word, word) for word in dict.fromkeys(words)]
+    else:
+        concepts = vocabulary(Path(args.vocabulary), max_depth=args.max_depth)
     if not concepts:
         raise SystemExit("the vocabulary is empty at this depth")
     notations = [notation for notation, _ in concepts]
