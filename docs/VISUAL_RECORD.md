@@ -16,15 +16,23 @@ same shape: a base too narrow for the claim made on it.
 **There is no single best record.** Each question wants a different channel, and mixing the
 channels is right for some questions and actively wrong for others.
 
-| question | best configuration | median rank | pool |
-| --- | --- | ---: | ---: |
-| cross-corpus partner (prints ↔ museum works) | shapes + 2× composition + ½ repetition | 820 | 18 840 |
-| cross-object-kind partner (flat ↔ volume ↔ vessel) | **shapes alone** | 1 008 | 12 944 |
-| a gesture (division 3) | **pose alone** | 65 | 1 729 |
-| a scene (division 1) | **composition** | 1 429 | 12 479 |
-| an object (division 2) | shapes, with or without the rest | 655 | 18 840 |
-| what a museum object is catalogued as | **named nodes, a bag** | hits@1 0.342 | 1 075 |
-| what an emblem is catalogued as | *nothing here works* | hits@1 0.104 | 783 |
+| question | best configuration | result | floor | pool |
+| --- | --- | ---: | ---: | ---: |
+| cross-corpus partner (prints ↔ museum works) | shapes + 2× composition + ½ repetition | rank 180 | 9 420 | 18 840 |
+| cross-object-kind partner (flat ↔ volume ↔ vessel) | **shapes alone** | rank 1 008 | 6 472 | 12 944 |
+| a gesture (division 3) | **pose alone** | rank 65 | 865 | 1 729 |
+| a scene (division 1) | **composition** | rank 1 429 | 6 240 | 12 479 |
+| an object (division 2) | shapes, with or without the rest | rank 655 | 9 420 | 18 840 |
+| what a museum object is catalogued as | **named nodes, a bag** | hits@1 0.342 | 0.022 | 1 075 |
+| what an emblem is catalogued as | *nothing here works* | hits@1 0.104 | 0.095 | 783 |
+
+The floor column was missing until it was noticed that this table breaks the rule the rest of the
+record keeps — a rank means nothing without the chance it beats — and adding it turned up an error
+in the first row. **It read 820, which is the pixel baseline on that benchmark and not the
+record**; the record reaches 180 there, so the table had been publishing a figure four and a half
+times worse than the result, in the row that matters most. The two hits@1 rows were also sitting
+in a column headed *median rank*, where a reader scanning down would have compared 0.342 with 820.
+Both are corrected above.
 
 A sixth channel was added late and belongs in the same table rather than above it. **Named nodes**
 — each part given a word from a closed list of 116 ordinary nouns, by a model that can only emit
@@ -144,8 +152,11 @@ The shape channel places such a partner at **median rank 1 008 of 12 944 against
 6 472**, with 8.6% of queries reaching one in their top hundred and 14.1% of neighbours drawn
 from another family. Six times better than chance and far out of reach.
 
-For scale, crossing corpora reaches 820. **Crossing a viewing condition is harder than crossing a
-workshop**, which is what this benchmark called cross-medium throughout.
+For scale, the same record crossing corpora reaches rank 180 of 18 840 against a chance of 9 420 —
+fifty-two times better than chance, where this is six. **Crossing a viewing condition is eight
+times harder than crossing a workshop**, which is what this benchmark called cross-medium
+throughout. (That comparison was published against 820 until the summary table was audited; 820 is
+what *pixels* score on the cross-corpus benchmark, not what the record scores.)
 
 ## Division 5 is a cataloguing asymmetry, not a limit of the method
 
