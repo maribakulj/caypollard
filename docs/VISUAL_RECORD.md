@@ -402,6 +402,49 @@ exactly those, which is why it reads 0.135 rather than 0.147. The museums corpus
 variants, so the ladder is emblems-only; its cropped subset is Illinois and Glasgow, HAB being
 the full-page collection excluded throughout.
 
+## The grammar, twice asked and twice refused
+
+An isotype is a closed vocabulary *and* a grammar — a lion beneath a crown is not a lion wearing
+one — so the relation between signs was built as its own channel: seven coarse relations
+(above, below, left, right, contains, inside, touching) over ordered pairs of signs, computed
+from geometry the segmenter already records.
+
+On the first corpus of 4 587 objects it helped, moving the best cross-medium partner from median
+rank 92 to 84 and lifting the share reached within fifty from 35.8% to 41.0%. It was then never
+carried over when the corpus grew to 21 128 — dropped at a change of base rather than after a
+failure, which left it the one channel never retested. It has now been retested, paired on the
+20 146 objects it covers:
+
+| division | shapes | shapes + relations | difference | queries |
+|---|---:|---:|---:|---:|
+| 1 · religion (scenes) | 2 589 | 2 613 | −24 | 1 174 |
+| 2 · nature (objects) | 920 | 924 | −4 | 2 954 |
+| 3 · body, action | 3 679 | 3 650 | +29 | 1 782 |
+| 4 · society | 1 280 | 1 279 | +1 | 9 957 |
+| 9 · classical mythology | 1 225 | 1 206 | +19 | 664 |
+
+**Nothing.** On the largest division the median moves by one rank in a pool of twenty thousand,
+and the two visible swings sit on 182 and 51 queries. The narrow-corpus gain does not replicate,
+and it joins the list of conclusions this project drew from a base too thin to carry them.
+
+A second, harder obstacle showed up in building it, and it is a property of the design rather
+than of this corpus. **The relation vocabulary is the square of the sign vocabulary.** At the 256
+signs the record actually uses, there are 458 752 possible (sign, relation, sign) features; 247 631
+occur, and only **635** occur the thirty times needed to be a pattern rather than an accident, so
+**14 651 of 21 128 pictures come out with no relation feature at all**. The channel only exists at
+64 signs, where 20 146 pictures keep one — and a grammar that requires a coarser lexicon than the
+lexicon channel wants is not a free addition to it.
+
+The same question was put a third way, on the annotation rather than the image: hide one notation
+per item, represent the item by what remains, let its neighbours vote it back. A lexicon of bare
+notations reaches hits@10 0.244, the same lexicon with Iconclass's own modifiers 0.254, and the
+lexicon **plus co-occurring pairs — the grammar — 0.236**, against a frequency prior of 0.282 that
+none of them beats. Adding the grammar made it worse there too.
+
+Three constructions, three refusals. What that does not settle is whether a grammar read
+*structurally* would do better than a grammar read as more features in a bag, which is the
+distinction the pooling comparison below was built to test.
+
 ## What this will not do
 
 Impett and Süsstrunk, clustering Warburg's Bilderatlas on relative limb angles, recovered pose
