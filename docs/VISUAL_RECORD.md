@@ -22,23 +22,49 @@ each layer of a picture on its own — a Greek vase painted with dancers being a
 bundled all four. Asked one at a time, on one pool, against a floor computed per query, the
 channels sort themselves:
 
-| the question | the channel that answers it | over chance |
-| --- | --- | ---: |
-| the same **subject** on another kind of object, from another collection, of another century | **named nodes** | ×2.47 |
-| another object of the same **rare kind**, sharing no subject | **pixels** | ×8.44 |
-| another work of the same **century**, sharing no subject | **named nodes** | ×1.38 |
-| another work in the same **collection**, sharing no subject | **named nodes** | ×1.32 |
-| another object of the same **material**, sharing no subject | **every channel mixed** | ×2.09 |
-| another work by the same **hand**, sharing no subject, from another museum | **pixels** | ×18.39 |
-| the same **subject across corpora** — an emblem for a museum object | *nothing reaches chance* | ×0.75 |
+Everything then turns on *what the ranking runs against*, and getting that wrong cost a published
+conclusion. Ranked against the whole pool, a representation that clusters by corpus or by kind
+fills the top of its list with items the regime excludes and is punished for it; ranked against
+only the candidates the regime admits — the field a searcher is actually looking in, since someone
+asking for an emblem about a painting's subject is already inside the emblems — the same
+representations sort quite differently.
 
-The ordering inverts completely between the first two rows: named nodes are first on subject and
-last on object kind, pixels the reverse. Saying one beats the other is a category error. And the
-strongest signal in the whole project is the last-but-one row — **a photographic embedding knows
-the hand**, eighteen times chance with the museum held apart, which names what pixels are for and
-explains why they are blind to what is depicted.
+| the question | whole pool | admissible field |
+| --- | --- | --- |
+| the same **subject** on another kind, collection and century | named nodes ×2.47 | **pixels ×5.51** |
+| another object of the same **rare kind**, no subject shared | pixels ×8.44 | **pixels ×90.05** |
+| another work of the same **century**, no subject shared | named nodes ×1.38 | **pixels ×17.61** |
+| another work in the same **collection**, no subject shared | named nodes ×1.32 | **pixels ×16.49** |
+| another object of the same **material**, no subject shared | everything mixed ×2.09 | **pixels ×2.29** |
+| another work by the same **hand**, no subject, another museum | pixels ×18.39 | **pixels ×27.34** |
+| the same **subject across corpora** — an emblem for a museum work | *nothing reaches chance* | **pixels ×3.58** |
 
-**Choosing beats mixing in six of these seven regimes.** The one exception is material, the single
+**Two claims this record made do not survive the second column, and both are withdrawn.**
+
+*Nothing reaches chance across corpora* was an artefact of the field. Everything reaches it —
+pixels at ×3.58, named nodes at ×1.84 — and 68.7% of queries find their partner inside a hundred.
+What the first column measured there was the cost of ranking a cross-corpus partner against
+thousands of items from the query's own corpus that could never have been the answer.
+
+*The ordering inverts between regimes* does not survive either. In the admissible field **pixels
+win all eight regimes**, subject included. The inversion was largely the penalty: pixels cluster
+hard by corpus and by kind, so they filled the top of every list with excluded items and paid for
+it everywhere except the regimes that reward exactly that clustering. An intermediate diagnostic
+had already said so and was not read closely enough — the first item from the other corpus arrives
+at rank 310 for pixels and at rank 10 for named nodes.
+
+What survives is the difference in *size* rather than in order. Pixels are ninety times chance at
+recognising a rare kind of object and three and a half times chance at a subject across corpora,
+and a factor of twenty-five separates the easiest layer from the hardest. A photographic embedding
+is overwhelmingly a reader of the object, the hand and the institution, and only weakly a reader
+of what is depicted — which is the original finding, now with the symbolic channels no longer
+beating it anywhere.
+
+Both columns are kept because they answer different questions. The first is what a naive search
+over an undifferentiated pool returns; the second is what a system that filters first can reach.
+A system that can filter should.
+
+**Choosing beats mixing in six of these seven regimes**, measured against the whole pool. The one exception is material, the single
 regime where no channel is strong on its own — so the rule gains its condition: *channels are a
 set to select from and not a sum to compute, except where none of them knows, and then summing is
 the best available guess.* Where a channel is keyed to the layer, mixing dilutes it badly: pixels

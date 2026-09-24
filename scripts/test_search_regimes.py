@@ -80,6 +80,17 @@ def main() -> None:
         help="Same, for object kinds. Without any such cut 'painting' swallows the "
              "regime: the floor falls to 1.4 and every representation sits at rank 1.",
     )
+    parser.add_argument(
+        "--admissible-only",
+        action="store_true",
+        help="Rank only among the candidates the regime admits, rather than against "
+             "the whole pool. Ranking a cross-corpus partner against items of the "
+             "query's own corpus measures whether the representation separates corpora, "
+             "which is a different question and one it answers loudly: every "
+             "representation clusters by corpus, so the true partners are pushed down "
+             "and every ratio lands below chance. A searcher asking for an emblem about "
+             "a painting's subject is already looking inside the emblems.",
+    )
     parser.add_argument("--min-queries", type=int, default=100)
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
@@ -242,6 +253,34 @@ def main() -> None:
                 found[item] = hits
         return found
 
+    def admits(regime: str, a: str, b: str) -> bool:
+        """The regime's *differ* clauses alone, with its target clause dropped."""
+        if regime.startswith("sujet, autre corpus"):
+            return corpus[a] != corpus[b] and kind[a] != kind[b]
+        if regime.startswith("sujet"):
+            return (
+                kind[a] != kind[b]
+                and collection[a] != collection[b]
+                and century[a] > 0
+                and century[b] > 0
+                and century[a] != century[b]
+            )
+        if regime.startswith("type"):
+            return not shares_subject(a, b) and collection[a] != collection[b]
+        if regime.startswith("sièc"):
+            return (
+                not shares_subject(a, b)
+                and kind[a] != kind[b]
+                and collection[a] != collection[b]
+            )
+        if regime.startswith("coll"):
+            return not shares_subject(a, b) and kind[a] != kind[b]
+        if regime.startswith("mati"):
+            return not shares_subject(a, b) and collection[a] != collection[b]
+        if regime.startswith("main, autre"):
+            return not shares_subject(a, b) and collection[a] != collection[b]
+        return not shares_subject(a, b)
+
     report = {
         "pool": len(items),
         "hub_size": hub_size,
@@ -261,8 +300,23 @@ def main() -> None:
         targets = targets_for(regime, predicate)
         if len(targets) < args.min_queries:
             continue
-        # Expected rank of the best of k targets under a random ordering.
-        floors = [(len(items) + 1) / (len(hits) + 1) for hits in targets.values()]
+        admissible: dict[str, list[str]] = {}
+        if args.admissible_only:
+            # Everything the regime would accept as a partner, whether or not it
+            # shares the target attribute: the field the searcher is actually
+            # looking in. Built by relaxing the one clause the regime tests.
+            for query in targets:
+                field = [
+                    other for other in items
+                    if other != query and admits(regime, query, other)
+                ]
+                admissible[query] = field or [query]
+            floors = [
+                (len(admissible[q]) + 1) / (len(hits) + 1) for q, hits in targets.items()
+            ]
+        else:
+            # Expected rank of the best of k targets under a random ordering.
+            floors = [(len(items) + 1) / (len(hits) + 1) for hits in targets.values()]
         entry = {
             "queries": len(targets),
             "median_targets_per_query": statistics.median(
@@ -275,10 +329,17 @@ def main() -> None:
             ranks = []
             for query, hits in targets.items():
                 index = position[query]
-                scores = matrix[index] @ matrix.T
-                scores[index] = -np.inf
-                order = np.argsort(-scores)
-                place = {items[int(j)]: rank for rank, j in enumerate(order, start=1)}
+                if args.admissible_only:
+                    field = admissible[query]
+                    rows = np.asarray([position[c] for c in field])
+                    scores = matrix[index] @ matrix[rows].T
+                    order = np.argsort(-scores)
+                    place = {field[int(j)]: rank for rank, j in enumerate(order, start=1)}
+                else:
+                    scores = matrix[index] @ matrix.T
+                    scores[index] = -np.inf
+                    order = np.argsort(-scores)
+                    place = {items[int(j)]: rank for rank, j in enumerate(order, start=1)}
                 ranks.append(min(place[target] for target in hits))
             array = np.asarray(ranks)
             entry["representations"][name] = {

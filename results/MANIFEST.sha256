@@ -389,6 +389,7 @@ bc3985350187ac969bb61593c03c2ae339a21aaa9ce6c778d5e2cd7b6544d43f        1693  ve
 f8dc2c0263d5fc6894310068d371e23c6c5423562f34859b2b983596948a28ff        2412  versioned  results/wide/region-naming-verdict.json
 4a8001fc7e764704a23eff9e920064397d636e8915aac165c5a8ddafb24e4315       21211  versioned  results/wide/region-naming.json
 f31921d40c6609f02669faeb6d0cbe48f0e2ab286978723e609167716477d2cc        3404  versioned  results/wide/relations-by-subject.json
+4d3a7fd0a205f1c278ca202cdcfaec79d03748a97f869427128f13384646dbda        7514  versioned  results/wide/search-regimes-admissible.json
 87f0171dc78ebffe11bfa341976d71993b1b4d8270d105ec3eb5799e0de7a6d0        7760  versioned  results/wide/search-regimes-heterogene.json
 17306e3b01448cb8e328a732915e8e8e012736952c4f847bd12369d9335a7b92       10470  versioned  results/wide/search-regimes-mix.json
 a32cd37e3fe433dcbe2c94a17194fa3e49a56c18d8d2f4eb2fc61b8adfc6ca92        8052  versioned  results/wide/search-regimes-surface.json

@@ -1,0 +1,256 @@
+{
+  "pool": 12424,
+  "hub_size": 397,
+  "hub_type": 298,
+  "regimes": {
+    "sujet (autre objet, autre collection, autre siècle)": {
+      "queries": 2845,
+      "median_targets_per_query": 5,
+      "floor_median_rank_if_random": 88.2,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 35,
+          "ratio_to_floor": 2.52,
+          "share_in_top_10": 0.2914,
+          "share_in_top_100": 0.703
+        },
+        "pixels": {
+          "median_rank": 16,
+          "ratio_to_floor": 5.51,
+          "share_in_top_10": 0.4179,
+          "share_in_top_100": 0.7877
+        },
+        "palette": {
+          "median_rank": 57,
+          "ratio_to_floor": 1.55,
+          "share_in_top_10": 0.1522,
+          "share_in_top_100": 0.658
+        },
+        "signal": {
+          "median_rank": 59,
+          "ratio_to_floor": 1.49,
+          "share_in_top_10": 0.167,
+          "share_in_top_100": 0.6316
+        }
+      }
+    },
+    "type d'objet, rare (aucun sujet commun)": {
+      "queries": 1731,
+      "median_targets_per_query": 2,
+      "floor_median_rank_if_random": 2611.3,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 1149,
+          "ratio_to_floor": 2.27,
+          "share_in_top_10": 0.0832,
+          "share_in_top_100": 0.2062
+        },
+        "pixels": {
+          "median_rank": 29,
+          "ratio_to_floor": 90.05,
+          "share_in_top_10": 0.3628,
+          "share_in_top_100": 0.6603
+        },
+        "palette": {
+          "median_rank": 967,
+          "ratio_to_floor": 2.7,
+          "share_in_top_10": 0.0514,
+          "share_in_top_100": 0.1982
+        },
+        "signal": {
+          "median_rank": 1828,
+          "ratio_to_floor": 1.43,
+          "share_in_top_10": 0.0445,
+          "share_in_top_100": 0.1889
+        }
+      }
+    },
+    "siècle (aucun sujet commun, autre objet)": {
+      "queries": 5827,
+      "median_targets_per_query": 78,
+      "floor_median_rank_if_random": 88.1,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 38,
+          "ratio_to_floor": 2.32,
+          "share_in_top_10": 0.2837,
+          "share_in_top_100": 0.6714
+        },
+        "pixels": {
+          "median_rank": 5,
+          "ratio_to_floor": 17.61,
+          "share_in_top_10": 0.6641,
+          "share_in_top_100": 0.9142
+        },
+        "palette": {
+          "median_rank": 22,
+          "ratio_to_floor": 4.0,
+          "share_in_top_10": 0.3494,
+          "share_in_top_100": 0.8402
+        },
+        "signal": {
+          "median_rank": 19,
+          "ratio_to_floor": 4.63,
+          "share_in_top_10": 0.3437,
+          "share_in_top_100": 0.8807
+        }
+      }
+    },
+    "collection (aucun sujet commun, autre objet)": {
+      "queries": 9708,
+      "median_targets_per_query": 733.0,
+      "floor_median_rank_if_random": 16.5,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 5,
+          "ratio_to_floor": 3.3,
+          "share_in_top_10": 0.5733,
+          "share_in_top_100": 0.7547
+        },
+        "pixels": {
+          "median_rank": 1,
+          "ratio_to_floor": 16.49,
+          "share_in_top_10": 0.6943,
+          "share_in_top_100": 0.9036
+        },
+        "palette": {
+          "median_rank": 4,
+          "ratio_to_floor": 4.12,
+          "share_in_top_10": 0.6183,
+          "share_in_top_100": 0.9087
+        },
+        "signal": {
+          "median_rank": 3,
+          "ratio_to_floor": 5.5,
+          "share_in_top_10": 0.6686,
+          "share_in_top_100": 0.9393
+        }
+      }
+    },
+    "sujet, autre corpus et autre type (sans clause de siècle)": {
+      "queries": 7020,
+      "median_targets_per_query": 32.0,
+      "floor_median_rank_if_random": 123.5,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 67,
+          "ratio_to_floor": 1.84,
+          "share_in_top_10": 0.1754,
+          "share_in_top_100": 0.5739
+        },
+        "pixels": {
+          "median_rank": 34,
+          "ratio_to_floor": 3.58,
+          "share_in_top_10": 0.2943,
+          "share_in_top_100": 0.6868
+        },
+        "palette": {
+          "median_rank": 88,
+          "ratio_to_floor": 1.4,
+          "share_in_top_10": 0.1415,
+          "share_in_top_100": 0.5205
+        },
+        "signal": {
+          "median_rank": 90,
+          "ratio_to_floor": 1.37,
+          "share_in_top_10": 0.1472,
+          "share_in_top_100": 0.5245
+        }
+      }
+    },
+    "matière (aucun sujet commun, autre collection)": {
+      "queries": 851,
+      "median_targets_per_query": 92,
+      "floor_median_rank_if_random": 112.3,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 94,
+          "ratio_to_floor": 1.19,
+          "share_in_top_10": 0.1293,
+          "share_in_top_100": 0.5135
+        },
+        "pixels": {
+          "median_rank": 49,
+          "ratio_to_floor": 2.29,
+          "share_in_top_10": 0.2139,
+          "share_in_top_100": 0.6392
+        },
+        "palette": {
+          "median_rank": 82,
+          "ratio_to_floor": 1.37,
+          "share_in_top_10": 0.1998,
+          "share_in_top_100": 0.5394
+        },
+        "signal": {
+          "median_rank": 72,
+          "ratio_to_floor": 1.56,
+          "share_in_top_10": 0.1774,
+          "share_in_top_100": 0.564
+        }
+      }
+    },
+    "main (même créateur, aucun sujet commun)": {
+      "queries": 4137,
+      "median_targets_per_query": 6,
+      "floor_median_rank_if_random": 1756.4,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 356,
+          "ratio_to_floor": 4.93,
+          "share_in_top_10": 0.0599,
+          "share_in_top_100": 0.2715
+        },
+        "pixels": {
+          "median_rank": 39,
+          "ratio_to_floor": 45.04,
+          "share_in_top_10": 0.3408,
+          "share_in_top_100": 0.6183
+        },
+        "palette": {
+          "median_rank": 404,
+          "ratio_to_floor": 4.35,
+          "share_in_top_10": 0.0696,
+          "share_in_top_100": 0.2686
+        },
+        "signal": {
+          "median_rank": 332,
+          "ratio_to_floor": 5.29,
+          "share_in_top_10": 0.0969,
+          "share_in_top_100": 0.2944
+        }
+      }
+    },
+    "main, autre collection (aucun sujet commun)": {
+      "queries": 3040,
+      "median_targets_per_query": 5.0,
+      "floor_median_rank_if_random": 1872.5,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 462,
+          "ratio_to_floor": 4.05,
+          "share_in_top_10": 0.051,
+          "share_in_top_100": 0.2388
+        },
+        "pixels": {
+          "median_rank": 68,
+          "ratio_to_floor": 27.34,
+          "share_in_top_10": 0.2799,
+          "share_in_top_100": 0.5563
+        },
+        "palette": {
+          "median_rank": 425,
+          "ratio_to_floor": 4.41,
+          "share_in_top_10": 0.0424,
+          "share_in_top_100": 0.2237
+        },
+        "signal": {
+          "median_rank": 417,
+          "ratio_to_floor": 4.49,
+          "share_in_top_10": 0.0589,
+          "share_in_top_100": 0.2447
+        }
+      }
+    }
+  },
+  "reading": "A ratio to floor above one means the representation finds the partner sooner than a random ordering would. Comparing ratios across regimes is the point: a representation keyed to the object's own form will do well in the object-kind regime and badly in the subject regime, and saying which is better is a category error -- they answer different questions."
+}
