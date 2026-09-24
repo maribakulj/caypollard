@@ -1,0 +1,131 @@
+{
+  "pool": 5839,
+  "hub_size": 400,
+  "regimes": {
+    "sujet (autre objet, autre collection, autre siècle)": {
+      "queries": 3126,
+      "median_targets_per_query": 6.0,
+      "floor_median_rank_if_random": 834.3,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 538,
+          "ratio_to_floor": 1.55,
+          "share_in_top_10": 0.0461,
+          "share_in_top_100": 0.278
+        },
+        "formes muettes": {
+          "median_rank": 752,
+          "ratio_to_floor": 1.11,
+          "share_in_top_10": 0.0202,
+          "share_in_top_100": 0.1404
+        },
+        "silhouette": {
+          "median_rank": 954,
+          "ratio_to_floor": 0.87,
+          "share_in_top_10": 0.0243,
+          "share_in_top_100": 0.1382
+        },
+        "pixels": {
+          "median_rank": 656,
+          "ratio_to_floor": 1.27,
+          "share_in_top_10": 0.0528,
+          "share_in_top_100": 0.2172
+        }
+      }
+    },
+    "type d'objet, rare (aucun sujet commun)": {
+      "queries": 478,
+      "median_targets_per_query": 11.0,
+      "floor_median_rank_if_random": 486.7,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 699,
+          "ratio_to_floor": 0.7,
+          "share_in_top_10": 0.0732,
+          "share_in_top_100": 0.2448
+        },
+        "formes muettes": {
+          "median_rank": 325,
+          "ratio_to_floor": 1.5,
+          "share_in_top_10": 0.0816,
+          "share_in_top_100": 0.3285
+        },
+        "silhouette": {
+          "median_rank": 252,
+          "ratio_to_floor": 1.93,
+          "share_in_top_10": 0.0732,
+          "share_in_top_100": 0.3159
+        },
+        "pixels": {
+          "median_rank": 215,
+          "ratio_to_floor": 2.26,
+          "share_in_top_10": 0.1569,
+          "share_in_top_100": 0.3619
+        }
+      }
+    },
+    "siècle (aucun sujet commun, autre objet)": {
+      "queries": 5831,
+      "median_targets_per_query": 78,
+      "floor_median_rank_if_random": 73.9,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 65,
+          "ratio_to_floor": 1.14,
+          "share_in_top_10": 0.1852,
+          "share_in_top_100": 0.6038
+        },
+        "formes muettes": {
+          "median_rank": 72,
+          "ratio_to_floor": 1.03,
+          "share_in_top_10": 0.1698,
+          "share_in_top_100": 0.5927
+        },
+        "silhouette": {
+          "median_rank": 71,
+          "ratio_to_floor": 1.04,
+          "share_in_top_10": 0.1597,
+          "share_in_top_100": 0.5886
+        },
+        "pixels": {
+          "median_rank": 192,
+          "ratio_to_floor": 0.39,
+          "share_in_top_10": 0.1002,
+          "share_in_top_100": 0.3557
+        }
+      }
+    },
+    "collection (aucun sujet commun, autre objet)": {
+      "queries": 5839,
+      "median_targets_per_query": 55,
+      "floor_median_rank_if_random": 104.3,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 94,
+          "ratio_to_floor": 1.11,
+          "share_in_top_10": 0.2113,
+          "share_in_top_100": 0.5095
+        },
+        "formes muettes": {
+          "median_rank": 82,
+          "ratio_to_floor": 1.27,
+          "share_in_top_10": 0.2136,
+          "share_in_top_100": 0.5391
+        },
+        "silhouette": {
+          "median_rank": 110,
+          "ratio_to_floor": 0.95,
+          "share_in_top_10": 0.1834,
+          "share_in_top_100": 0.4833
+        },
+        "pixels": {
+          "median_rank": 313,
+          "ratio_to_floor": 0.33,
+          "share_in_top_10": 0.1406,
+          "share_in_top_100": 0.3542
+        }
+      }
+    }
+  },
+  "reading": "A ratio to floor above one means the representation finds the partner sooner than a random ordering would. Comparing ratios across regimes is the point: a representation keyed to the object's own form will do well in the object-kind regime and badly in the subject regime, and saying which is better is a category error -- they answer different questions."
+}

@@ -765,6 +765,59 @@ institution at all, 47.25% against a 47.3% floor. So the cross-corpus figure was
 with the split**, not support: what emblems and museum objects depict genuinely differs, and a
 namer that works has to say so.
 
+## Peeling the layers: one regime at a time
+
+Every benchmark above bundles. A Greek vase painted with dancers is four things at once — a
+*subject* (people dancing), an *object kind* (a curved vessel whose own form arranges its
+decoration), a *period*, and a *museum photograph* with that institution's ground and lighting —
+and asking whether a representation "crosses the medium" asks about the bundle. Worse, corpora
+confound them by construction: a corpus of eighteenth-century paintings against one of medieval
+portraits will cluster by corpus whatever the representation does, because its *content* really
+does differ.
+
+A regime names one attribute as the target and **requires the others to differ**, so a partner can
+only be found for the reason the regime is about. The subject regime wants the same notation on a
+different kind of object, from a different collection, of a different century: the vase with
+dancers finding a modern painting of dancers rather than a vase with athletes. One pool of 12 349
+museum objects, four regimes, four representations.
+
+The floor is computed per query rather than taken as half the pool, because the regimes are not
+equally hard: under a random ordering the expected rank of the best of *k* targets in a pool of
+*n* is (n+1)/(k+1), which differs by three orders of magnitude between the tightest regime and the
+loosest. The ratio to that floor is what can be compared across regimes.
+
+| regime | named nodes | pixels | mute shapes | silhouette | floor |
+|---|---:|---:|---:|---:|---:|
+| **subject** — other kind, other collection, other century | **×1.55** | ×1.27 | ×1.11 | ×0.87 | 834 |
+| **object kind**, rare kinds, no subject shared | ×0.70 | **×2.26** | ×1.50 | ×1.93 | 487 |
+| **century**, no subject shared, other kind | **×1.14** | ×0.39 | ×1.03 | ×1.04 | 74 |
+| **collection**, no subject shared, other kind | ×1.11 | ×0.33 | **×1.27** | ×0.95 | 104 |
+
+**The ordering inverts.** Named nodes are first on subject and last on object kind; pixels are
+first on object kind and last on both century and collection. There is no best representation
+here, and saying one beats another is a category error — they answer different questions, and the
+question is chosen by what the searcher wants to hold constant.
+
+Three readings follow, and the third is the one that changes what this record is for.
+
+**The named record earns its place on the question it was built for.** Finding the same subject
+across a different kind of object, a different collection *and* a different century is the hardest
+regime — a floor of 834 in a pool of 12 349 — and it is the one where naming wins, reaching the
+partner within the first hundred for 27.8% of queries against 21.7% for pixels. Every earlier
+benchmark that called this a tie was bundling object kind into the question.
+
+**Pixels are keyed to the object and blind to everything else.** They are more than twice the
+floor at recognising a rare kind of thing and *below* the floor at century and collection. A
+photographic embedding knows what sort of object it is looking at and nothing about when it was
+made or who holds it — which is the opposite of what the medium confound suggested, and follows
+from it: pixels cluster by object and subject, so asked for a same-collection partner of a
+different kind about a different subject, they return exactly what the regime excludes.
+
+**And the silhouette inverts against the named nodes.** It is second on object kind and last on
+subject, they are first on subject and last on object kind. The two are not competing
+representations of one thing; they are the outline and the name of it, and a system holding both
+can choose which one the question wants.
+
 ## The grammar, twice asked and twice refused
 
 An isotype is a closed vocabulary *and* a grammar — a lion beneath a crown is not a lion wearing
