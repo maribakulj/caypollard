@@ -96,6 +96,8 @@ def main() -> None:
     kind: dict[str, str] = {}
     collection: dict[str, str] = {}
     century: dict[str, int] = {}
+    material: dict[str, str] = {}
+    creator: dict[str, str] = {}
     for item in sorted(shared):
         row = records.get(item)
         if not row:
@@ -105,6 +107,11 @@ def main() -> None:
         if notes and k and c and s is not None:
             items.append(item)
             notation[item], kind[item], collection[item], century[item] = notes, k, c, s
+            # Material and creator are not on every record, so their regimes run
+            # on the subset that carries them rather than shrinking the pool for
+            # everyone: a regime nobody can answer is not a harder regime.
+            material[item] = first(row.get("material")) or ""
+            creator[item] = first(row.get("creator")) or ""
 
     if len(items) < args.min_queries:
         raise SystemExit("too few items carry all four attributes")
@@ -112,6 +119,12 @@ def main() -> None:
 
     kind_frequency = collections.Counter(kind[item] for item in items)
     rare_kinds = {k for k, count in kind_frequency.items() if count <= args.hub_type}
+    material_frequency = collections.Counter(
+        material[item] for item in items if material[item]
+    )
+    rare_materials = {
+        m for m, count in material_frequency.items() if count <= args.hub_type
+    }
 
     frequency = collections.Counter(n for item in items for n in notation[item])
     motifs = {n for n, count in frequency.items() if count <= args.hub_size}
@@ -148,6 +161,18 @@ def main() -> None:
             and not shares_subject(a, b)
             and kind[a] != kind[b]
         ),
+        "matière (aucun sujet commun, autre collection)": (
+            lambda a, b: bool(material[a])
+            and material[a] == material[b]
+            and material[a] in rare_materials
+            and not shares_subject(a, b)
+            and collection[a] != collection[b]
+        ),
+        "main (même créateur, aucun sujet commun)": (
+            lambda a, b: bool(creator[a])
+            and creator[a] == creator[b]
+            and not shares_subject(a, b)
+        ),
     }
 
     # Candidates are narrowed before the predicate runs, since a full pairwise
@@ -164,7 +189,10 @@ def main() -> None:
                     found[item] = hits
             return found
         by_key: dict[object, list[str]] = collections.defaultdict(list)
-        key = {"type": kind, "sièc": century, "coll": collection}[name[:4]]
+        key = {
+            "type": kind, "sièc": century, "coll": collection,
+            "mati": material, "main": creator,
+        }[name[:4]]
         for item in items:
             by_key[key[item]].append(item)
         for item in items:

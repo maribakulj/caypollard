@@ -786,12 +786,14 @@ equally hard: under a random ordering the expected rank of the best of *k* targe
 *n* is (n+1)/(k+1), which differs by three orders of magnitude between the tightest regime and the
 loosest. The ratio to that floor is what can be compared across regimes.
 
-| regime | named nodes | pixels | mute shapes | silhouette | floor |
-|---|---:|---:|---:|---:|---:|
-| **subject** — other kind, other collection, other century | **×1.55** | ×1.27 | ×1.11 | ×0.87 | 834 |
-| **object kind**, rare kinds, no subject shared | ×0.70 | **×2.26** | ×1.50 | ×1.93 | 487 |
-| **century**, no subject shared, other kind | **×1.14** | ×0.39 | ×1.03 | ×1.04 | 74 |
-| **collection**, no subject shared, other kind | ×1.11 | ×0.33 | **×1.27** | ×0.95 | 104 |
+| regime | named nodes | pixels | mute shapes | silhouette | floor | queries |
+|---|---:|---:|---:|---:|---:|---:|
+| **subject** — other kind, other collection, other century | **×1.55** | ×1.27 | ×1.11 | ×0.87 | 834 | 3 126 |
+| **object kind**, rare kinds, no subject shared | ×0.70 | **×2.26** | ×1.50 | ×1.93 | 487 | 478 |
+| **century**, no subject shared, other kind | **×1.14** | ×0.39 | ×1.03 | ×1.04 | 74 | 5 831 |
+| **collection**, no subject shared, other kind | ×1.11 | ×0.33 | **×1.27** | ×0.95 | 104 | 5 839 |
+| **material**, rare materials, no subject shared | ×0.90 | **×1.05** | ×0.93 | ×0.82 | 63 | 822 |
+| **the hand** — same creator, no subject shared | ×3.08 | **×17.75** | ×1.79 | ×3.60 | 834 | 4 067 |
 
 **The ordering inverts.** Named nodes are first on subject and last on object kind; pixels are
 first on object kind and last on both century and collection. There is no best representation
@@ -806,12 +808,19 @@ regime — a floor of 834 in a pool of 12 349 — and it is the one where naming
 partner within the first hundred for 27.8% of queries against 21.7% for pixels. Every earlier
 benchmark that called this a tie was bundling object kind into the question.
 
-**Pixels are keyed to the object and blind to everything else.** They are more than twice the
-floor at recognising a rare kind of thing and *below* the floor at century and collection. A
-photographic embedding knows what sort of object it is looking at and nothing about when it was
-made or who holds it — which is the opposite of what the medium confound suggested, and follows
-from it: pixels cluster by object and subject, so asked for a same-collection partner of a
-different kind about a different subject, they return exactly what the regime excludes.
+**Pixels recognise the hand.** Asked for another work by the same maker sharing no subject at
+all, they reach it at rank 47 against a floor of 834 — **seventeen times chance, by far the
+strongest signal anywhere in this table**, and more than five times what any symbolic record
+manages. That is style, and naming it settles what a photographic embedding is actually for: it
+is keyed to the object and to the hand that made it, and blind to what is depicted. The same fact
+explains the two rows where it sits *below* the floor. Pixels cluster by object and by maker, so
+asked for a partner of a different kind about a different subject from the same century or the
+same collection, they return precisely what those regimes exclude.
+
+**Material is legible to nobody.** Every representation sits within a tenth of the floor, pixels
+barely above it at ×1.05. Whether a thing is bronze or oak does not survive into any of these
+records — which is consistent rather than surprising, since the record was built to discard
+exactly the surface properties that would carry it.
 
 **And the silhouette inverts against the named nodes.** It is second on object kind and last on
 subject, they are first on subject and last on object kind. The two are not competing

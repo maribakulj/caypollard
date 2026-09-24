@@ -125,6 +125,68 @@
           "share_in_top_100": 0.3542
         }
       }
+    },
+    "matière (aucun sujet commun, autre collection)": {
+      "queries": 822,
+      "median_targets_per_query": 92.0,
+      "floor_median_rank_if_random": 62.8,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 70,
+          "ratio_to_floor": 0.9,
+          "share_in_top_10": 0.1703,
+          "share_in_top_100": 0.5791
+        },
+        "formes muettes": {
+          "median_rank": 67,
+          "ratio_to_floor": 0.93,
+          "share_in_top_10": 0.1545,
+          "share_in_top_100": 0.59
+        },
+        "silhouette": {
+          "median_rank": 77,
+          "ratio_to_floor": 0.82,
+          "share_in_top_10": 0.1582,
+          "share_in_top_100": 0.5572
+        },
+        "pixels": {
+          "median_rank": 60,
+          "ratio_to_floor": 1.05,
+          "share_in_top_10": 0.1703,
+          "share_in_top_100": 0.6046
+        }
+      }
+    },
+    "main (même créateur, aucun sujet commun)": {
+      "queries": 4067,
+      "median_targets_per_query": 6,
+      "floor_median_rank_if_random": 834.3,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 271,
+          "ratio_to_floor": 3.08,
+          "share_in_top_10": 0.0745,
+          "share_in_top_100": 0.3164
+        },
+        "formes muettes": {
+          "median_rank": 466,
+          "ratio_to_floor": 1.79,
+          "share_in_top_10": 0.0452,
+          "share_in_top_100": 0.2196
+        },
+        "silhouette": {
+          "median_rank": 232,
+          "ratio_to_floor": 3.6,
+          "share_in_top_10": 0.0984,
+          "share_in_top_100": 0.3496
+        },
+        "pixels": {
+          "median_rank": 47,
+          "ratio_to_floor": 17.75,
+          "share_in_top_10": 0.3133,
+          "share_in_top_100": 0.6019
+        }
+      }
     }
   },
   "reading": "A ratio to floor above one means the representation finds the partner sooner than a random ordering would. Comparing ratios across regimes is the point: a representation keyed to the object's own form will do well in the object-kind regime and badly in the subject regime, and saying which is better is a category error -- they answer different questions."
