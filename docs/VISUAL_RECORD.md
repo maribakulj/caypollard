@@ -824,6 +824,36 @@ institution at all, 47.25% against a 47.3% floor. So the cross-corpus figure was
 with the split**, not support: what emblems and museum objects depict genuinely differs, and a
 namer that works has to say so.
 
+## Does a painted cat find a carved one?
+
+Every benchmark here aggregates, and aggregates are hard to believe. The question anybody asks
+first deserves answering literally: take each picture carrying a concrete motif — a cat, a ship, a
+dragon, a windmill — ask the representation for ten neighbours, and count how many carry the same
+motif. Then count how many of those are a **different kind of object**, because a painted cat
+finding another painted cat is retrieval by object kind wearing the clothes of iconography.
+
+592 queries over ten motifs, on a pool of 9 708. A query has sixty-three same-motif partners in
+the corpus at the median and **essentially all of them are of another kind**, so scarcity explains
+nothing. Ten neighbours drawn at random would return 0.07 of the motif and 0.06 of another kind.
+
+| representation | same motif in ten | over chance | of another kind | over chance |
+|---|---:|---:|---:|---:|
+| pixels | 2.18 | ×30 | **1.06** | ×17 |
+| named nodes | 0.50 | ×7 | 0.26 | ×4 |
+| palette | 0.28 | ×4 | 0.12 | ×2 |
+| mute shapes | 0.18 | ×2 | 0.10 | ×2 |
+
+**It works, and it is small, and pixels do it four times better.** A cat brings back cats on other
+kinds of object at four times chance through the named intermediate record and seventeen times
+chance through a photographic embedding. Nothing here is at the floor, so the intermediate
+language is not empty; it is simply beaten at the task it was designed for by the representation
+it was designed to replace.
+
+That is the plainest statement of what this record achieved and failed to achieve, and it should
+be read before the regime tables rather than after them. The regimes explain *which layer* each
+representation is keyed to; this says how much any of it is worth on the question a historian
+would actually type.
+
 ## Peeling the layers: one regime at a time
 
 Every benchmark above bundles. A Greek vase painted with dancers is four things at once — a

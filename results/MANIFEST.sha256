@@ -358,6 +358,7 @@ f037c8767e6b368379b3b5a6c3e3032980cc41788c22e5b7df1709de6609ccb5       21278  ve
 6b53aac07b7dbe1120a7a8eac85aca5f90199b84d489ad74bac88bc83ec33924        1864  versioned  results/wide/division5-verdict.json
 6de390135a1a2659babf62c56262cc9407e64490a31fe64aa794febb8acb31bd        1059  versioned  results/wide/labels-dinov2.json
 d872e5d8d5f5177d5f36ee7c81c9435d3e079e0f20476b040bcdbeb1bf21613d        1087  versioned  results/wide/labels-formes.json
+20c62f7f09931433072c8412b5fb86aa3d80d0897c220622e9f3db4f13f78910        1313  versioned  results/wide/motif-retrieval.json
 1802564339d3e3d596e94088605cd6f4dfb10b8a7d902126bd68c14d03223b97         562  versioned  results/wide/namers-musees.json
 f0f496db4ec2c23768d57e01ec6fa3fd1d1ee8dcb6fa00035493bbd7ad0c6c29        5672  versioned  results/wide/naming-analysis.json
 f1f6d7af4b07ed2ce8a41753066e830a21ffd1ce450c1bd201711ce9d88c6ae0      304996  versioned  results/wide/nodes-depth.json

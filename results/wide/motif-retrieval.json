@@ -1,0 +1,48 @@
+{
+  "pool": 9708,
+  "queries": 592,
+  "motifs": {
+    "34B12": "chat",
+    "46C21": "navire",
+    "25FF411": "dragon",
+    "25F6": "poisson",
+    "47I2111": "taureau",
+    "25F36": "oiseau d'eau",
+    "47I213": "mouton",
+    "47D31": "moulin",
+    "46C112": "pont",
+    "25F711": "insecte"
+  },
+  "k": 10,
+  "partners_available_median": 63.0,
+  "of_another_kind_median": 63.0,
+  "floor_same_motif": 0.072,
+  "floor_another_kind": 0.062,
+  "representations": {
+    "pixels": {
+      "same_motif_per_k": 2.177,
+      "ratio_to_floor": 30.0,
+      "another_kind_per_k": 1.062,
+      "ratio_to_floor_another_kind": 17.1
+    },
+    "nœuds nommés": {
+      "same_motif_per_k": 0.503,
+      "ratio_to_floor": 6.9,
+      "another_kind_per_k": 0.26,
+      "ratio_to_floor_another_kind": 4.2
+    },
+    "formes muettes": {
+      "same_motif_per_k": 0.181,
+      "ratio_to_floor": 2.5,
+      "another_kind_per_k": 0.098,
+      "ratio_to_floor_another_kind": 1.6
+    },
+    "palette": {
+      "same_motif_per_k": 0.279,
+      "ratio_to_floor": 3.8,
+      "another_kind_per_k": 0.122,
+      "ratio_to_floor_another_kind": 2.0
+    }
+  },
+  "reading": "The second pair of numbers is the one the record was built for: a painted cat finding another painted cat is retrieval by object kind wearing the clothes of iconography."
+}
