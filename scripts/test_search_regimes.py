@@ -62,15 +62,23 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("manifest", nargs="+")
     parser.add_argument("--table", action="append", required=True, metavar="NAME=PATH")
-    parser.add_argument("--hub-size", type=int, default=400,
-                        help="A notation on more items than this is a category, not a motif")
     parser.add_argument(
-        "--hub-type",
-        type=int,
-        default=300,
-        help="An object kind on more items than this is a category, not a kind. "
-             "Without it 'painting' swallows the regime: the floor falls to 1.4 and "
-             "every representation sits at rank 1, which measures nothing.",
+        "--hub-fraction",
+        type=float,
+        default=0.032,
+        help="A notation or an object kind carried by more than this share of the pool "
+             "is a category rather than a motif or a kind. Expressed as a fraction "
+             "because an absolute count silently redefines the regime when the pool "
+             "changes: at 300 on two pools of 12 349 and 9 708, 'rare kind' admitted 478 "
+             "queries in one run and 1 731 in the other, and the two runs disagreed about "
+             "which representation wins.",
+    )
+    parser.add_argument(
+        "--hub-type-fraction",
+        type=float,
+        default=0.024,
+        help="Same, for object kinds. Without any such cut 'painting' swallows the "
+             "regime: the floor falls to 1.4 and every representation sits at rank 1.",
     )
     parser.add_argument("--min-queries", type=int, default=100)
     parser.add_argument("--output", required=True)
@@ -127,17 +135,19 @@ def main() -> None:
         raise SystemExit("too few items carry all four attributes")
     position = {item: index for index, item in enumerate(items)}
 
+    hub_size = max(int(args.hub_fraction * len(items)), 1)
+    hub_type = max(int(args.hub_type_fraction * len(items)), 1)
     kind_frequency = collections.Counter(kind[item] for item in items)
-    rare_kinds = {k for k, count in kind_frequency.items() if count <= args.hub_type}
+    rare_kinds = {k for k, count in kind_frequency.items() if count <= hub_type}
     material_frequency = collections.Counter(
         material[item] for item in items if material[item]
     )
     rare_materials = {
-        m for m, count in material_frequency.items() if count <= args.hub_type
+        m for m, count in material_frequency.items() if count <= hub_type
     }
 
     frequency = collections.Counter(n for item in items for n in notation[item])
-    motifs = {n for n, count in frequency.items() if count <= args.hub_size}
+    motifs = {n for n, count in frequency.items() if count <= hub_size}
     by_notation: dict[str, set[str]] = collections.defaultdict(set)
     for item in items:
         for n in notation[item] & motifs:
@@ -232,7 +242,12 @@ def main() -> None:
                 found[item] = hits
         return found
 
-    report = {"pool": len(items), "hub_size": args.hub_size, "regimes": {}}
+    report = {
+        "pool": len(items),
+        "hub_size": hub_size,
+        "hub_type": hub_type,
+        "regimes": {},
+    }
     matrices = {
         name: table.vectors[[{i: n for n, i in enumerate(table.ids)}[item] for item in items]]
         for name, table in tables.items()

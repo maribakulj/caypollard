@@ -839,6 +839,42 @@ layer. This is the clearest case in the record of a measurement being correct an
 being over-generalised, and it was reached by someone objecting that the judging was happening in
 the wrong place.
 
+### Mixing helps only where nothing knows the answer
+
+The record's oldest finding is that adding a channel can subtract, and the regimes let that be
+asked properly: for each question, does the best pair of channels beat the best single one? Four
+combinations were built and run through every regime, not only the one each was designed for,
+since a mixture might win somewhere unintended. Pool of 9 708, the intersection of every table.
+
+| regime | best | ratio | best mixture | mixing wins? |
+|---|---|---:|---|:--|
+| subject | named nodes alone | ×2.47 | ×2.38 | no |
+| object kind, rare | pixels alone | ×8.44 | ×5.33 | no |
+| century | named nodes alone | ×1.38 | ×1.29 | no |
+| collection | named nodes alone | ×1.32 | ×1.20 | no |
+| **material** | **everything mixed** | **×2.09** | — | **yes** |
+| the hand | pixels alone | ×31.52 | ×11.75 | no |
+| the hand, other collection | pixels alone | ×18.39 | ×9.25 | no |
+
+**Choosing wins six regimes of seven, and mixing wins only on material** — the single regime where
+no channel is strong, every representation having sat within a tenth of the floor when they were
+measured alone. Where one channel is keyed to the layer, mixing dilutes it, and the dilution is
+severe rather than marginal: pixels fall from ×31.52 to ×11.75 at the hand the moment named nodes
+are added to them.
+
+So the old finding gains a condition. *Channels are a set to select from, not a sum to compute* —
+**except where none of them knows, and then summing is the best available guess.** A search system
+built on this record should choose by the question, and reach for a mixture only in the regimes
+where choosing has nothing to choose.
+
+One methodological repair came out of this and is worth recording, since it made two runs
+disagree. "Rare object kind" was defined by an absolute count — a kind on fewer than 300 items —
+and the pool changes between runs as tables are added or dropped. On 12 349 items that admitted
+478 queries and on 9 708 it admitted 1 731, so the *regime itself* was a different question in the
+two runs, and they duly disagreed about whether palette or pixels wins it. Both thresholds are now
+fractions of the pool, so a regime means the same thing wherever it is run, and the disagreement
+resolves in favour of pixels.
+
 ### And the same regimes on a deliberately heterogeneous pool
 
 Every figure above is measured inside one corpus, which is the objection the regimes were built
