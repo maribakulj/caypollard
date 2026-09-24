@@ -389,7 +389,8 @@ bc3985350187ac969bb61593c03c2ae339a21aaa9ce6c778d5e2cd7b6544d43f        1693  ve
 f8dc2c0263d5fc6894310068d371e23c6c5423562f34859b2b983596948a28ff        2412  versioned  results/wide/region-naming-verdict.json
 4a8001fc7e764704a23eff9e920064397d636e8915aac165c5a8ddafb24e4315       21211  versioned  results/wide/region-naming.json
 f31921d40c6609f02669faeb6d0cbe48f0e2ab286978723e609167716477d2cc        3404  versioned  results/wide/relations-by-subject.json
-3d78b28cf228c561945abefc22643ac3f6b7d3556a357fe76dc1f0c3065af6af        4006  versioned  results/wide/search-regimes.json
+b2f8eaed62f2876b34d02c1786df323c2d9a66f075ec2cb2c28162a459b23098        6963  versioned  results/wide/search-regimes-surface.json
+5bc2f01d78bc83b59e0618a173c976b5316f6f0171d50286f5b63bc0a9106019        5790  versioned  results/wide/search-regimes.json
 9343eddc809fdfdb67db87297c4fb7aff9845c4f056c398ad514ad158c1878b3      329307  versioned  results/wide/sign-names.json
 7d35190fde3dc4cbf337ab57770753f9e2dd8e707896acaaab644092a3da20c7        1968  versioned  results/wide/tradeoff-curve.json
 62a6dc7164107a6144dcf0dac96ff18c49dd6b084d09fb17f026ba12c24fb366        4090  versioned  results/wide/vocabulary-pruning.json

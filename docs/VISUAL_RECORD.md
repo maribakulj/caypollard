@@ -188,6 +188,11 @@ absence.
 Giving it weight degrades every column: the medium probe rises from 74.4% to 80.0%, the partner's
 rank worsens from 176 to 235, and cross-medium neighbours fall from 28.5% to 22.3%.
 
+**That instruction is now restricted rather than repeated.** It holds for a record answering one
+question. Measured per regime, eleven colour terms are the *best* representation of the six for
+recognising a rare kind of object, at ×5.29 against the floor — see *Peeling the layers* below.
+Weight zero in matching *a subject*; a channel of its own for a different question.
+
 ## Does a vase find an engraving?
 
 Yes, and weakly. Object kinds are grouped into families that share a viewing condition rather
@@ -799,6 +804,39 @@ loosest. The ratio to that floor is what can be compared across regimes.
 first on object kind and last on both century and collection. There is no best representation
 here, and saying one beats another is a category error — they answer different questions, and the
 question is chosen by what the searcher wants to hold constant.
+
+A channel this record had banned belongs in that table, and putting it there overturns the ban.
+Colour was measured once, found to name the scanning session — a raw histogram identifies the
+volume 61.3% of the time against a 31.0% floor, eleven canonical terms bring it to 53.2% and
+grey-world balancing to 39.7% — and written up as *this channel must carry weight zero in
+matching*. That verdict was reached by judging it on the subject. A channel that identifies the
+scanning session is a bad channel for finding a subject and may be an excellent one for another
+question, and until there were regimes there was no way to ask.
+
+Built properly on the full museum corpus, with a second channel that names the confound directly
+— luminance histogram, spread, and the share of energy in the high frequencies, which is grain,
+sharpening and compression:
+
+| regime | palette | signal | pixels | best symbolic |
+|---|---:|---:|---:|---:|
+| subject | ×0.43 | ×0.56 | ×1.27 | **×1.55** |
+| **object kind**, rare | **×5.29** | ×5.20 | ×2.26 | ×1.50 |
+| century | ×0.43 | ×0.39 | ×0.39 | **×1.14** |
+| collection | ×0.53 | ×0.66 | ×0.33 | **×1.27** |
+| **material**, rare | ×1.21 | **×1.34** | ×1.05 | ×0.93 |
+| the hand | ×2.80 | ×3.12 | **×17.75** | ×3.08 |
+
+**Eleven colour terms are the best representation measured for recognising a rare kind of
+object** — more than twice the pixels, three times the shapes — and the signal channel is a
+hair behind. Both are the top two on material as well. And both are the *worst* on subject, which
+is the finding that produced the ban.
+
+So the ban was a true statement about one question wearing the clothes of a general rule. **Weight
+zero in matching** is right for a system that asks one question; it is wrong for a system that
+lets the searcher choose what to hold constant, where colour is simply the channel for a different
+layer. This is the clearest case in the record of a measurement being correct and its conclusion
+being over-generalised, and it was reached by someone objecting that the judging was happening in
+the wrong place.
 
 Three readings follow, and the third is the one that changes what this record is for.
 
