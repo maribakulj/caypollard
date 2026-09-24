@@ -16,6 +16,34 @@ same shape: a base too narrow for the claim made on it.
 **There is no single best record.** Each question wants a different channel, and mixing the
 channels is right for some questions and actively wrong for others.
 
+That was found three times by three routes before it was put to the question properly, by asking
+each layer of a picture on its own — a Greek vase painted with dancers being a *subject*, an
+*object kind*, a *period* and a *museum photograph* at once, and every earlier benchmark having
+bundled all four. Asked one at a time, on one pool, against a floor computed per query, the
+channels sort themselves:
+
+| the question | the channel that answers it | over chance |
+| --- | --- | ---: |
+| the same **subject** on another kind of object, from another collection, of another century | **named nodes** | ×2.47 |
+| another object of the same **rare kind**, sharing no subject | **pixels** | ×8.44 |
+| another work of the same **century**, sharing no subject | **named nodes** | ×1.38 |
+| another work in the same **collection**, sharing no subject | **named nodes** | ×1.32 |
+| another object of the same **material**, sharing no subject | **every channel mixed** | ×2.09 |
+| another work by the same **hand**, sharing no subject, from another museum | **pixels** | ×18.39 |
+| the same **subject across corpora** — an emblem for a museum object | *nothing reaches chance* | ×0.75 |
+
+The ordering inverts completely between the first two rows: named nodes are first on subject and
+last on object kind, pixels the reverse. Saying one beats the other is a category error. And the
+strongest signal in the whole project is the last-but-one row — **a photographic embedding knows
+the hand**, eighteen times chance with the museum held apart, which names what pixels are for and
+explains why they are blind to what is depicted.
+
+**Choosing beats mixing in six of these seven regimes.** The one exception is material, the single
+regime where no channel is strong on its own — so the rule gains its condition: *channels are a
+set to select from and not a sum to compute, except where none of them knows, and then summing is
+the best available guess.* Where a channel is keyed to the layer, mixing dilutes it badly: pixels
+fall from ×31.52 to ×11.75 at the hand the moment named nodes are added.
+
 | question | best configuration | result | floor | pool |
 | --- | --- | ---: | ---: | ---: |
 | cross-corpus partner (prints ↔ museum works) | shapes + 2× composition + ½ repetition | rank 820 | 9 420 | 18 840 |
