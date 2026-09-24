@@ -334,12 +334,16 @@ beb41d7b0cde0379d68705525ee69693c954f92c3a24a080fa209bb1cec517bf        3401  ve
 af81ab1336dd65a01aa4c19695e44212d17a3bfe9650a8aa629f0eff319e4999        1962  versioned  results/wide/channel-weights.json
 d7e3c27678f3e8d861b55c99684978fa23fc6e81759fd8578f21eb29cd0b9aed        1122  versioned  results/wide/cross-medium-composition.json
 7028d684d12caeb2bb8778db92eeea350c2b5ec32242d2e5f80d04ffc4986708        1123  versioned  results/wide/cross-medium-dinov2.json
+7b6382358526109d59b5900fc71da6969ffbe640f1a618b48871d53bb8305571        1202  versioned  results/wide/cross-medium-edges.json
 8ca336d04c5aa5574e884b6f517420fdf37244e61da7f5e9f8622b04df65ce44        1125  versioned  results/wide/cross-medium-formes-compo.json
 eaaf8dd12795ed1f2288a2c571ea20a98d498730838b567f302895e542d00946        1121  versioned  results/wide/cross-medium-formes.json
+75e6a59dc0600052e2998e6a073b6f1911d1f0af590b316d070a14ceb795200f        1203  versioned  results/wide/cross-medium-gray.json
 9c59177dbcb552261d2e87e4b0824f78b9dbb2b5d42ad767f027b4947bfe5a70        1126  versioned  results/wide/cross-medium-noeuds-g1.json
+6268cb5f793050cc7ade602fb79cf82825a99d6e8e169c18cd237f0d7a32c140        1200  versioned  results/wide/cross-medium-pixels-final.json
 b804c158c4f99c721ebc8ecfe95d7fb980b6507378c2b10e2f3a7fc8c225cb56        1122  versioned  results/wide/cross-medium-pose.json
 d373978205fed991567d9147ac43d3ec32f5566d90584d77112607354f22c62a        1122  versioned  results/wide/cross-medium-rec-sub.json
 00240ffadffed4a4927d8c89c493e6f16f5f587480eac45af12f017998112f1a        1121  versioned  results/wide/cross-medium-record-v2.json
+c5c802297c446d634c23db557e8595ae35aefa3bdb861b46e0f1af71d4ccdaef        1202  versioned  results/wide/cross-medium-silhouette.json
 52a46aa469095a6371d1052704bff6e411a7d2e5d5da982590614623c5c82c8b        1201  versioned  results/wide/cross-medium-v3.json
 f70476c7eff06ad5c23be2ac09400a01b08cb5be771b1e26ad106e482210fbdd        1434  versioned  results/wide/cross-object-noeuds.json
 f9fed76003232f2e0dc86ff66355171adfe079417252fd2ba0e265b909851e4b        1224  versioned  results/wide/cross-object-type-channels.json

@@ -55,9 +55,33 @@ record should choose its configuration from the question rather than carry one v
 
 A DINOv2 embedding names which corpus an object came from 97.4% of the time and places an
 object's best cross-medium partner in the middle of the pool. It has learned the material, not
-the motif. Re-rendering does not fix it and can make it worse: a Sobel map preserves stroke
-structure, and stroke structure *is* the support — an engraving is made of lines and a painting
-is not. What helps is destroying line structure and then naming what survives.
+the motif.
+
+This document used to add that re-rendering *does not fix it and can make it worse*, on the
+ground that a Sobel map preserves stroke structure and stroke structure is the support. The
+figure supporting that sentence, 95.1%, could not be traced to any artifact, so the four
+renderings were measured together on one pool of 12 479 with one floor:
+
+| rendering | names the corpus | over its floor | cross-corpus neighbours | median rank of the partner |
+|---|---:|---:|---:|---:|
+| pixels | 97.4% | +19.2 | 1.9% | 1 303 |
+| grey, squared | 96.8% | +18.6 | 2.0% | 1 153 |
+| **Sobel edges** | 94.2% | +16.1 | 4.8% | **600** |
+| silhouette | 89.3% | +11.1 | 10.7% | 987 |
+
+*Floors: 78.2% for the probe, 38.1% for the neighbours.*
+
+**The sentence was wrong.** Every rendering lowers the probe, monotonically, and Sobel lowers it
+further than plain greyscale rather than less; it also more than doubles the cross-corpus
+neighbours and gives the best partner rank of the four. Destroying line structure hides the
+support best — the silhouette is five points lower on the probe than Sobel — but it does not
+retrieve best, and the claim that edge detection *makes things worse* is contradicted on this
+corpus. The likely reconciliation is the corpus rather than the method: the earlier reading was
+formed when the museum side was paintings only, where a gradient does amplify hatching against
+brushwork; against sculpture, dress and vessels it does not.
+
+What helps most on the probe is still destroying line structure. What helps most at finding the
+partner is not.
 
 Each row carries its own floors, because the first three are measured on a pool of 4 587 and the
 record on the final 18 840, and the floors differ by more than the figures do.

@@ -1,0 +1,32 @@
+{
+  "corpora": {
+    "emblemes": 2723,
+    "musees": 18405
+  },
+  "pooled_items": 12479,
+  "items_with_a_cross_medium_partner": 7068,
+  "shared_motifs": 3873,
+  "majority_baseline": 0.7818,
+  "neighbour_floor_if_drawn_at_random": 0.3811,
+  "k": 10,
+  "hub_size": 400,
+  "results": {
+    "la représentation testée": {
+      "linear_probe_corpus": 0.99,
+      "knn_probe_corpus": 0.9738,
+      "median_rank_of_best_cross_medium_partner": 1303,
+      "share_with_a_partner_in_top_10": 0.014,
+      "share_with_a_partner_in_top_50": 0.0603,
+      "share_of_top_k_from_the_other_corpus": 0.0192
+    },
+    "l'annotation elle-même (plafond)": {
+      "linear_probe_corpus": 0.9695,
+      "knn_probe_corpus": 0.9473,
+      "median_rank_of_best_cross_medium_partner": 104,
+      "share_with_a_partner_in_top_10": 0.1377,
+      "share_with_a_partner_in_top_50": 0.3349,
+      "share_of_top_k_from_the_other_corpus": 0.0578
+    }
+  },
+  "reading": "The probe says how strongly the representation encodes the support; the median rank says whether a cross-medium relation is reachable at all. A representation that names the corpus perfectly and buries the partner has learned the material, not the motif."
+}
