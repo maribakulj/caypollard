@@ -356,6 +356,7 @@ fe3467f0c0f1b0b6baa98df99995c49c3a62c55ce5d9de11ba36caafb337a1f1       45637  ve
 f037c8767e6b368379b3b5a6c3e3032980cc41788c22e5b7df1709de6609ccb5       21278  versioned  results/wide/ctx-musees-plain.json
 11e8adefcf93a359a41d07da7006314659edb8641ea187ef0f8a5a42e38d2c10      109765  versioned  results/wide/ctx-musees.json
 6b53aac07b7dbe1120a7a8eac85aca5f90199b84d489ad74bac88bc83ec33924        1864  versioned  results/wide/division5-verdict.json
+463d9e1587ac4c4d751ce8d11b5669afb1544953a07c44c3e9541e552f62e818         942  versioned  results/wide/filter-then-rank.json
 6de390135a1a2659babf62c56262cc9407e64490a31fe64aa794febb8acb31bd        1059  versioned  results/wide/labels-dinov2.json
 d872e5d8d5f5177d5f36ee7c81c9435d3e079e0f20476b040bcdbeb1bf21613d        1087  versioned  results/wide/labels-formes.json
 20c62f7f09931433072c8412b5fb86aa3d80d0897c220622e9f3db4f13f78910        1313  versioned  results/wide/motif-retrieval.json

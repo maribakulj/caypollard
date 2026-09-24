@@ -854,6 +854,54 @@ be read before the regime tables rather than after them. The regimes explain *wh
 representation is keyed to; this says how much any of it is worth on the question a historian
 would actually type.
 
+## What is missing, named precisely, and one architecture that helps
+
+The cat test says the intermediate record works at four times chance and the pixels at seventeen.
+Asking *why* decomposes into three different failures that had been running together, and only
+one of them is about the representation at all.
+
+**The vocabulary has holes.** `windmill`, `bull` and `sheep` are recalled at exactly 0% by both
+namers — because those words are not in the list. It was hand-written, 116 ordinary nouns chosen
+for what these corpora seemed to contain, and a list chosen that way will miss what it did not
+think of. A vocabulary derived from the notations the corpus actually carries would not have this
+hole, and nothing else can be concluded about those motifs.
+
+**Recall, not precision, is the binding constraint.** Where the word exists, the two namers see
+quite different things: the whole-picture reader finds a *ship* 48% of the time and a *cat* 5%, the
+region-by-region scorer finds the ship 30% and the cat **41%**. A cat in a genre scene is small,
+and a namer asked for three nodes returns the man and the table. Precision is poor for both — 7 to
+9% on cats — and it does not matter, which contradicts the instinct and agrees with the other
+measurement in this record where the high-precision intersection of two namers loses to either
+alone.
+
+**And the pixels are not doing what their score suggests.** Asked for a cat, sixty-five per cent
+of what they return shares the query's object kind and thirty-seven per cent its collection, while
+eight per cent share the cat. On fish and birds the collection share reaches 80%. The embedding is
+a reader of the object and the institution; the motif rides along.
+
+That last fact suggests the architecture, since the two failures are complementary rather than
+competing. The named channel cannot rank and *can* select; the embedding cannot select and ranks
+well. So the name chooses the field and the pixels order it:
+
+| motif | pixels alone | name, then pixels | field |
+|---|---:|---:|---:|
+| fish | 0.67 | **2.05** | 271 |
+| ship | 2.27 | **2.92** | 178 |
+| cat | 0.19 | **0.43** | 230 |
+| bridge | 0.35 | **0.69** | 116 |
+| grape | 0.82 | 0.65 | 147 |
+| bird | 1.75 | 1.39 | 382 |
+| insect | 0.10 | 0.00 | **0** |
+
+*Same motif on a different kind of object, in the top ten.*
+
+**Four gains of six, doubling or tripling on three of them**, and the two failures name the
+conditions. A word the namer scatters over 382 pictures filters nothing. And a word it never emits
+empties the field entirely — `insect` is in the vocabulary, is never said, and the hybrid returns
+nothing at all where the embedding alone returned something. A system built this way must fall
+back to the ranker when the field it is given is empty or nearly so, which is a line of code and
+a fact worth knowing before writing it.
+
 ## Peeling the layers: one regime at a time
 
 Every benchmark above bundles. A Greek vase painted with dancers is four things at once — a
