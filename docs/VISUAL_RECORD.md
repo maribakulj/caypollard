@@ -22,7 +22,7 @@ channels is right for some questions and actively wrong for others.
 | cross-object-kind partner (flat ↔ volume ↔ vessel) | **shapes alone** | rank 1 008 | 6 472 | 12 944 |
 | a gesture (division 3) | **pose alone** | rank 65 | 865 | 1 729 |
 | a scene (division 1) | **composition** | rank 1 429 | 6 240 | 12 479 |
-| an object (division 2) | shapes, with or without the rest | rank 655 | 9 420 | 18 840 |
+| an object (division 2) | **the record, all three channels** | rank 655 | 9 420 | 18 840 |
 | what a museum object is catalogued as | **named nodes, a bag** | hits@1 0.342 | 0.022 | 1 075 |
 | what an emblem is catalogued as | *nothing here works* | hits@1 0.104 | 0.095 | 783 |
 
@@ -59,16 +59,29 @@ the motif. Re-rendering does not fix it and can make it worse: a Sobel map prese
 structure, and stroke structure *is* the support — an engraving is made of lines and a painting
 is not. What helps is destroying line structure and then naming what survives.
 
-| representation | medium probe | cross-corpus neighbours |
-| --- | ---: | ---: |
-| DINOv2 on the image | 97.4% | 2.6% |
-| DINOv2 on a Sobel rendering | 95.1% | — |
-| DINOv2 on a binarised silhouette | 87.5% | 13.5% |
-| **the record, final corpus** | **85.2%** | **21.8%** |
-| *majority baseline, final corpus* | *86.1%* | *14.5% proportional* |
+Each row carries its own floors, because the first three are measured on a pool of 4 587 and the
+record on the final 18 840, and the floors differ by more than the figures do.
+
+| representation | pool | medium probe | its floor | over floor | cross-corpus neighbours | its floor |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| DINOv2 on the image | 4 587 | 97.4% | 59.4% | **+38.0** | 2.6% | 47.2% |
+| DINOv2 on a Sobel rendering | 4 587 | 95.1% | 59.4% | +35.7 | — | — |
+| DINOv2 on a binarised silhouette | 4 587 | 87.5% | 59.4% | +28.1 | 13.5% | 47.2% |
+| **the record, final corpus** | 18 840 | **85.2%** | **86.1%** | **−0.9** | **21.8%** | **28.4%** |
 
 The probe target is the majority baseline, not chance. Driving it to chance would mean having
-destroyed real iconographic differences between holdings, which are content and not support.
+destroyed real iconographic differences between holdings, which are content and not support. On
+that measure the record does what it was built to do: it sits *at* its floor, a shade under, where
+a pixel embedding sits thirty-eight points above.
+
+The neighbour column is the one that had to be withdrawn. It read *14.5% proportional*, and the
+record's 21.8% was printed as clearing it. That floor was the share a *museum* item alone would
+see; the figure is averaged over every item that has a cross-corpus partner, four fifths of which
+are museum items and one fifth emblems, and computed over that set the floor is **28.4%**. So the
+record draws cross-corpus neighbours **three quarters as often as chance**, not more often — and
+a pixel embedding draws them one eighteenth as often. The improvement is real and large, fourteen
+fold in that ratio, and it does not reach chance. The floor is now computed by the benchmark
+itself and written into every artifact, so it cannot be asserted again.
 
 ## The channels
 
@@ -88,8 +101,12 @@ signs by transitive closure of a proximity test that is relative rather than abs
 box overlap is useless, since a picture's dark and light regions interpenetrate and the closure
 swallows the whole plate.
 
-**This is the object channel.** It reaches division 2 at rank 655 and religious scenes at 10 370,
-which is chance.
+**This is the object channel.** Alone it reaches division 2 at rank 1 194 of 18 840 against a
+chance of 9 420, and religious scenes at 10 370 — which is not merely chance but a shade worse
+than it. (The 655 this document reported for division 2 belongs to the three-channel record, not
+to shapes alone; the two rows sit side by side in the same artifact and one number was taken from
+each. Adding composition and repetition halves the rank here, so "shapes, with or without the
+rest" was wrong in both its number and its claim.)
 
 ### Composition — the scene channel
 

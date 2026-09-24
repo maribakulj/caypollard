@@ -69,7 +69,7 @@ c7cf061121ad5abf5a72b066e9a6e07d6cb9ef5c57a9580473465991b2a40b24        2952  ve
 ed33f563453eaf3062e1603ae6964af6160fdcb1697c98882f772ec34a869d5f        2367  versioned  results/cropped/probe-book.json
 b1122b779fb98c07828374d2018c2328109b5fa8b833d7fbc3fa8aae6217a414        1122  versioned  results/cross-medium/detoures-shape.json
 8c852abd7533e4f7c3c116ddbffcd8116e1cabc2404f7ae45a223bba664faf2b        1122  versioned  results/cross-medium/detoures-silhouette.json
-c942a15ac1ae0e8f628e0567ca38716b54609beb14c2bdb365c914dfcb0db935        1120  versioned  results/cross-medium/emblemes-detoures-vs-musee.json
+51bc0a8e2d34dcc3b259459c11d0b6f8839387e732e383398b395081aff3f3b7        1196  versioned  results/cross-medium/emblemes-detoures-vs-musee.json
 6cada0e94317f014abae86b74953c57c6de669d44dd09b2c3cfe6f3c21d9d608        1121  versioned  results/cross-medium/emblemes-vs-musee.json
 1afb3edfafa37e041bafd4476a14327454fa9a669ff09e817d14ed90a3f620f9         696  versioned  results/emblematica/compositional-signs-random.json
 edd4328344f9a9ce88db1d90a325fc07a5da9b6113da150aa6045664c53ba8b2         725  versioned  results/emblematica/compositional-signs.json
@@ -340,7 +340,7 @@ eaaf8dd12795ed1f2288a2c571ea20a98d498730838b567f302895e542d00946        1121  ve
 b804c158c4f99c721ebc8ecfe95d7fb980b6507378c2b10e2f3a7fc8c225cb56        1122  versioned  results/wide/cross-medium-pose.json
 d373978205fed991567d9147ac43d3ec32f5566d90584d77112607354f22c62a        1122  versioned  results/wide/cross-medium-rec-sub.json
 00240ffadffed4a4927d8c89c493e6f16f5f587480eac45af12f017998112f1a        1121  versioned  results/wide/cross-medium-record-v2.json
-fad1d06b8ac82ad4c00d7faeb52409d2f28fab8cceedba4599e773e9e8506007        1124  versioned  results/wide/cross-medium-v3.json
+52a46aa469095a6371d1052704bff6e411a7d2e5d5da982590614623c5c82c8b        1201  versioned  results/wide/cross-medium-v3.json
 f70476c7eff06ad5c23be2ac09400a01b08cb5be771b1e26ad106e482210fbdd        1434  versioned  results/wide/cross-object-noeuds.json
 f9fed76003232f2e0dc86ff66355171adfe079417252fd2ba0e265b909851e4b        1224  versioned  results/wide/cross-object-type-channels.json
 93f20c0e7c54c10605e7df3bd0226657b0d2e9882483487f8417d51704e17938         838  versioned  results/wide/cross-object-type-v4.json

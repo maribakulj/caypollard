@@ -7,10 +7,11 @@
   "items_with_a_cross_medium_partner": 3188,
   "shared_motifs": 3673,
   "majority_baseline": 0.5936,
+  "neighbour_floor_if_drawn_at_random": 0.4724,
   "k": 10,
   "hub_size": 400,
   "results": {
-    "pixels (DINOv2)": {
+    "la représentation testée": {
       "linear_probe_corpus": 0.9908,
       "knn_probe_corpus": 0.9736,
       "median_rank_of_best_cross_medium_partner": 821,
@@ -18,12 +19,12 @@
       "share_with_a_partner_in_top_50": 0.0875,
       "share_of_top_k_from_the_other_corpus": 0.026
     },
-    "isotype (signes)": {
+    "l'annotation elle-même (plafond)": {
       "linear_probe_corpus": 0.9162,
       "knn_probe_corpus": 0.913,
       "median_rank_of_best_cross_medium_partner": 92,
       "share_with_a_partner_in_top_10": 0.1719,
-      "share_with_a_partner_in_top_50": 0.3582,
+      "share_with_a_partner_in_top_50": 0.3585,
       "share_of_top_k_from_the_other_corpus": 0.0756
     }
   },

@@ -127,6 +127,19 @@ def main() -> None:
     labels = np.array([corpus_of[item] for item in ids])
     majority = collections.Counter(labels).most_common(1)[0][1] / len(labels)
 
+    # The share of neighbours drawn from the other corpus is averaged over the
+    # items that have a partner, not over the pool, so its floor has to be
+    # computed over the same set: what that share would be if neighbours were
+    # drawn at random. Asserting it from the corpus sizes instead gives the
+    # wrong number, because the items with a partner are not a fair sample of
+    # the pool -- and a share without its floor is unreadable either way.
+    sizes = collections.Counter(corpus_of[item] for item in ids)
+    total = len(ids)
+    neighbour_floor = (
+        sum((total - sizes[corpus_of[item]]) / (total - 1) for item in partners)
+        / max(len(partners), 1)
+    )
+
     results = {}
     # Neither row is what its old name said. The first is whatever table was
     # passed on the command line -- the representation under test, which is only
@@ -188,6 +201,7 @@ def main() -> None:
         "items_with_a_cross_medium_partner": len(partners),
         "shared_motifs": len(motifs & set(frequency)),
         "majority_baseline": round(majority, 4),
+        "neighbour_floor_if_drawn_at_random": round(neighbour_floor, 4),
         "k": args.k,
         "hub_size": args.hub_size,
         "results": results,
