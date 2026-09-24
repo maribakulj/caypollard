@@ -879,28 +879,43 @@ of what they return shares the query's object kind and thirty-seven per cent its
 eight per cent share the cat. On fish and birds the collection share reaches 80%. The embedding is
 a reader of the object and the institution; the motif rides along.
 
-That last fact suggests the architecture, since the two failures are complementary rather than
-competing. The named channel cannot rank and *can* select; the embedding cannot select and ranks
-well. So the name chooses the field and the pixels order it:
+That last fact suggests an architecture, since the two failures are complementary rather than
+competing: the named channel cannot rank and can select, the embedding cannot select and ranks
+well. Measured once with the filter word taken from the query's *notation*, it doubled or tripled
+the cross-kind hits — and that measurement was worthless, because taking the word from the
+notation is taking it from the answer. It is retrieval by typing a word, and by typing the right
+one.
 
-| motif | pixels alone | name, then pixels | field |
-|---|---:|---:|---:|
-| fish | 0.67 | **2.05** | 271 |
-| ship | 2.27 | **2.92** | 178 |
-| cat | 0.19 | **0.43** | 230 |
-| bridge | 0.35 | **0.69** | 116 |
-| grape | 0.82 | 0.65 | 147 |
-| bird | 1.75 | 1.39 | 382 |
-| insect | 0.10 | 0.00 | **0** |
+The question is image to image: drop in any picture of a cat, get cats back on canvas, in stone
+and on a vase, without typing anything. So the filter must come from **the query's own
+transcription**, which is all a system would have. Shared names are weighted by rarity, because
+two pictures sharing *man* share almost nothing while two sharing *windmill* share a great deal;
+unweighted, the field fills with whatever the namer says most, and weighting alone moves the cat
+from 0.11 to 0.19 and the ship from 1.59 to 1.91.
 
-*Same motif on a different kind of object, in the top ten.*
+| motif | pixels alone | the query's own names, then pixels |
+|---|---:|---:|
+| fish | 0.67 | **0.75** |
+| bridge | 0.35 | **0.41** |
+| grape | 0.82 | **0.91** |
+| cat | 0.19 | 0.19 |
+| ship | 2.27 | 1.89 |
+| bird | 1.75 | 1.12 |
 
-**Four gains of six, doubling or tripling on three of them**, and the two failures name the
-conditions. A word the namer scatters over 382 pictures filters nothing. And a word it never emits
-empties the field entirely — `insect` is in the vocabulary, is never said, and the hybrid returns
-nothing at all where the embedding alone returned something. A system built this way must fall
-back to the ranker when the field it is given is empty or nearly so, which is a line of code and
-a fact worth knowing before writing it.
+**Three gains, one tie, two losses — the architecture does not work image to image**, and the
+clean version of it was the leak. The reason is measurable rather than mysterious: the query's own
+transcription finds a cat 41% of the time at its best and is right 7 to 9% of the times it speaks,
+so the field it selects is wrong about as often as right. The two losses are the motifs whose names
+the namer scatters most.
+
+This is where the project actually stands on the question it was built for. **Dropping in a picture
+of a cat and getting cats back across media is not achieved here by anything better than a
+photographic embedding**, and the embedding itself manages it by reading the object and the
+institution with the motif riding along. What the record now has that it did not is a decomposition
+of why, into three failures that can each be attacked: a vocabulary with holes in it, a namer that
+returns three nodes and misses what is small, and a filter that needs recall rather than precision.
+If recall went from 41% to something like 80%, the field would contain the cats and the hybrid
+would work — which is a prediction this benchmark can test rather than a hope.
 
 ## Peeling the layers: one regime at a time
 

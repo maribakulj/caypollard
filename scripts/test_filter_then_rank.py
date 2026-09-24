@@ -1,36 +1,41 @@
 #!/usr/bin/env python3
-"""Neither channel alone: the name chooses the field, the pixels rank inside it.
+"""Query by image alone: the picture's own names choose the field, pixels rank it.
 
-The two representations fail in opposite directions, and the failures are
-complementary rather than competing. A photographic embedding ranks beautifully
-and selects badly: asked for a cat, sixty-five per cent of what it returns shares
-the query's *object kind* and thirty-seven per cent its *collection*, while eight
-per cent share the cat. It is a reader of the object and the institution, and the
-motif rides along. A named record selects and cannot rank: it says ``cat`` of two
-hundred and thirty pictures, many of them wrongly, but the field it picks out is
-enormously enriched in cats compared to the corpus.
+An earlier version of this measurement cheated, and the cheat is worth keeping in
+view because it was invisible until someone asked the obvious question. It picked
+the filter word from the *query's Iconclass notation* -- that is, from the answer
+-- and filtered the corpus on it. That is retrieval by typing a word, and by
+typing the right one.
 
-So one does what the other cannot. Restrict to the pictures whose named record
-carries the motif, then order that field by the embedding. Measured on what the
-whole exercise was built for -- the same motif on a *different kind of object* --
-against the embedding used alone.
+The question is image to image: drop in any picture of a cat and get cats back,
+on canvas, in stone, on a vase, without typing anything. So the filter comes from
+the query's own transcription, which is what a system would actually have, and
+the annotation is never consulted.
 
-Recall is what matters in the filter and precision is not, which is worth
-stating because it contradicts the instinct. The named channel is wrong about
-the motif most of the time it speaks, and filtering on it still doubles or
-triples the cross-kind hits, because a loose filter that keeps the right
-pictures is worth more than a tight one that drops them. The same measurement
-appears from the other side elsewhere in this record: the high-precision
-intersection of two namers loses to either namer alone.
+Shared names are weighted by rarity, because they must be: two pictures sharing
+``man`` share almost nothing, two sharing ``windmill`` share a great deal, and
+unweighted overlap fills the field with whatever the namer says most. Weighting
+moves the cat from 0.11 to 0.19 and the ship from 1.59 to 1.91, which is most of
+what the weighting can do.
 
-The failure case is the instructive one. A word the namer emits on four hundred
-pictures filters nothing, and there the hybrid loses.
+It is not enough. Against the embedding used alone the hybrid wins three motifs
+of six, ties one and loses two, and the earlier version's clean gains were the
+cheat. The reason is measurable rather than mysterious: the query's own
+transcription finds a cat 41% of the time at best and is right 7 to 9% of the
+time it says so, so the field it selects is wrong about as often as it is right.
+Whether better recall would rescue this is a prediction the record can carry --
+the vocabulary has holes, the whole-picture namer returns three nodes and misses
+what is small -- rather than a hope.
+
+``--oracle`` restores the leaky version for comparison, and is never the result.
 """
 
 from __future__ import annotations
 
 import argparse
+import collections
 import json
+import math
 import re
 import statistics
 from pathlib import Path
@@ -55,6 +60,15 @@ def main() -> None:
     parser.add_argument("--ranker", required=True, help="The embedding that orders the field")
     parser.add_argument("--k", type=int, default=10)
     parser.add_argument("--min-queries", type=int, default=15)
+    parser.add_argument("--field", type=int, default=500,
+                        help="How many candidates the names hand to the ranker")
+    parser.add_argument(
+        "--oracle",
+        action="store_true",
+        help="Filter on the word for the query's own notation instead of on the "
+             "query's transcription. This reads the answer and is kept only to show "
+             "what the leak was worth; it is never the result.",
+    )
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
 
@@ -90,12 +104,27 @@ def main() -> None:
     matrix /= np.maximum(np.linalg.norm(matrix, axis=1, keepdims=True), 1e-9)
     position = {item: index for index, item in enumerate(ids)}
 
-    report = {"pool": len(ids), "k": args.k, "motifs": {}}
+    document_frequency = collections.Counter(n for i in ids for n in named[i])
+    idf = {
+        n: math.log(len(ids) / (1 + c)) for n, c in document_frequency.items()
+    }
+    holders_of_name: dict[str, set[str]] = collections.defaultdict(set)
+    for item in ids:
+        for name in named[item]:
+            holders_of_name[name].add(item)
+
+    report = {
+        "pool": len(ids),
+        "k": args.k,
+        "oracle": args.oracle,
+        "field": args.field,
+        "motifs": {},
+    }
     for code, word in MOTIFS.items():
         queries = [i for i in ids if code in notations(records[i])]
         if len(queries) < args.min_queries:
             continue
-        field = [i for i in ids if word in named[i]]
+        oracle_field = [i for i in ids if word in named[i]]
         alone, hybrid = [], []
         for query in queries:
             index = position[query]
@@ -109,7 +138,20 @@ def main() -> None:
                     and kind(records[o]) != kind(records[query])
                 )
             )
-            candidates = [c for c in field if c != query]
+            if args.oracle:
+                candidates = [c for c in oracle_field if c != query]
+            else:
+                # Everything sharing a name with the query, scored by how rare the
+                # shared names are: two pictures sharing "man" share almost nothing.
+                weighted: dict[str, float] = collections.defaultdict(float)
+                for name in named[query]:
+                    weight = idf.get(name, 0.0)
+                    for other in holders_of_name[name]:
+                        if other != query:
+                            weighted[other] += weight
+                candidates = [
+                    o for o, _ in sorted(weighted.items(), key=lambda kv: -kv[1])
+                ][: args.field]
             if candidates:
                 rows = np.asarray([position[c] for c in candidates])
                 inner = matrix[index] @ matrix[rows].T
@@ -125,7 +167,7 @@ def main() -> None:
                 hybrid.append(0)
         report["motifs"][word] = {
             "queries": len(queries),
-            "field_size": len(field),
+            "oracle_field_size": len(oracle_field),
             "ranker_alone": round(statistics.mean(alone), 3),
             "filter_then_rank": round(statistics.mean(hybrid), 3),
         }
@@ -137,8 +179,10 @@ def main() -> None:
     print(f"bassin {len(ids)}, cible = même motif sur un AUTRE type d'objet, top-{args.k}\n")
     for word, value in report["motifs"].items():
         gain = value["filter_then_rank"] - value["ranker_alone"]
-        print(f"   {word:8s} pixels {value['ranker_alone']:5.2f}  →  filtré "
-              f"{value['filter_then_rank']:5.2f}  ({gain:+.2f})   champ {value['field_size']}")
+        print(
+            f"   {word:8s} pixels {value['ranker_alone']:5.2f}  →  filtré "
+            f"{value['filter_then_rank']:5.2f}  ({gain:+.2f})"
+        )
 
 
 if __name__ == "__main__":

@@ -1,48 +1,50 @@
 {
   "pool": 9756,
   "k": 10,
+  "oracle": false,
+  "field": 500,
   "motifs": {
     "cat": {
       "queries": 37,
-      "field_size": 230,
+      "oracle_field_size": 230,
       "ranker_alone": 0.189,
-      "filter_then_rank": 0.432
+      "filter_then_rank": 0.189
     },
     "ship": {
       "queries": 64,
-      "field_size": 178,
+      "oracle_field_size": 178,
       "ranker_alone": 2.266,
-      "filter_then_rank": 2.922
+      "filter_then_rank": 1.891
     },
     "fish": {
       "queries": 60,
-      "field_size": 271,
+      "oracle_field_size": 271,
       "ranker_alone": 0.667,
-      "filter_then_rank": 2.05
+      "filter_then_rank": 0.75
     },
     "bird": {
       "queries": 110,
-      "field_size": 382,
+      "oracle_field_size": 382,
       "ranker_alone": 1.755,
-      "filter_then_rank": 1.391
+      "filter_then_rank": 1.118
     },
     "bridge": {
       "queries": 49,
-      "field_size": 116,
+      "oracle_field_size": 116,
       "ranker_alone": 0.347,
-      "filter_then_rank": 0.694
+      "filter_then_rank": 0.408
     },
     "grape": {
       "queries": 128,
-      "field_size": 147,
+      "oracle_field_size": 147,
       "ranker_alone": 0.82,
-      "filter_then_rank": 0.648
+      "filter_then_rank": 0.906
     },
     "insect": {
       "queries": 29,
-      "field_size": 0,
+      "oracle_field_size": 0,
       "ranker_alone": 0.103,
-      "filter_then_rank": 0
+      "filter_then_rank": 0.069
     }
   }
 }
