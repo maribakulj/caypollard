@@ -98,13 +98,22 @@ def main() -> None:
     century: dict[str, int] = {}
     material: dict[str, str] = {}
     creator: dict[str, str] = {}
+    corpus: dict[str, str] = {}
     for item in sorted(shared):
         row = records.get(item)
         if not row:
             continue
         notes = {BASE.split(str(x))[0].strip() for x in row.get("iconclass", [])}
         k, c, s = first(row.get("type")), first(row.get("collection")), century_of(row)
-        if notes and k and c and s is not None:
+        # An emblem carries no Wikidata type and no date, but it is a print, and
+        # that is a fact rather than a filler. It joins the pool and the regimes
+        # whose attributes it has; the century regime is simply not open to it.
+        origin = str(row.get("source_dataset") or "")
+        if not k and origin:
+            k = "estampe"
+        if s is None:
+            s = -1
+        if notes and k and c:
             items.append(item)
             notation[item], kind[item], collection[item], century[item] = notes, k, c, s
             # Material and creator are not on every record, so their regimes run
@@ -112,6 +121,7 @@ def main() -> None:
             # everyone: a regime nobody can answer is not a harder regime.
             material[item] = first(row.get("material")) or ""
             creator[item] = first(row.get("creator")) or ""
+            corpus[item] = origin or "musee"
 
     if len(items) < args.min_queries:
         raise SystemExit("too few items carry all four attributes")
@@ -142,6 +152,8 @@ def main() -> None:
             lambda a, b: shares_subject(a, b)
             and kind[a] != kind[b]
             and collection[a] != collection[b]
+            and century[a] > 0
+            and century[b] > 0
             and century[a] != century[b]
         ),
         "type d'objet, rare (aucun sujet commun)": (
@@ -151,7 +163,8 @@ def main() -> None:
             and collection[a] != collection[b]
         ),
         "siècle (aucun sujet commun, autre objet)": (
-            lambda a, b: century[a] == century[b]
+            lambda a, b: century[a] > 0
+            and century[a] == century[b]
             and not shares_subject(a, b)
             and kind[a] != kind[b]
             and collection[a] != collection[b]
@@ -159,6 +172,11 @@ def main() -> None:
         "collection (aucun sujet commun, autre objet)": (
             lambda a, b: collection[a] == collection[b]
             and not shares_subject(a, b)
+            and kind[a] != kind[b]
+        ),
+        "sujet, autre corpus et autre type (sans clause de siècle)": (
+            lambda a, b: shares_subject(a, b)
+            and corpus[a] != corpus[b]
             and kind[a] != kind[b]
         ),
         "matière (aucun sujet commun, autre collection)": (
@@ -172,6 +190,16 @@ def main() -> None:
             lambda a, b: bool(creator[a])
             and creator[a] == creator[b]
             and not shares_subject(a, b)
+        ),
+        # The same regime with the institution held apart. A maker's works are
+        # usually gathered in one museum, so "same hand" and "same photographic
+        # convention" are confounded until the collection is required to differ;
+        # whichever of the two the pixels were reading, this separates them.
+        "main, autre collection (aucun sujet commun)": (
+            lambda a, b: bool(creator[a])
+            and creator[a] == creator[b]
+            and not shares_subject(a, b)
+            and collection[a] != collection[b]
         ),
     }
 

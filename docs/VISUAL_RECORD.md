@@ -799,6 +799,7 @@ loosest. The ratio to that floor is what can be compared across regimes.
 | **collection**, no subject shared, other kind | ×1.11 | ×0.33 | **×1.27** | ×0.95 | 104 | 5 839 |
 | **material**, rare materials, no subject shared | ×0.90 | **×1.05** | ×0.93 | ×0.82 | 63 | 822 |
 | **the hand** — same creator, no subject shared | ×3.08 | **×17.75** | ×1.79 | ×3.60 | 834 | 4 067 |
+| the hand, **other collection** | ×2.40 | **×10.94** | ×1.67 | — | 973 | 2 977 |
 
 **The ordering inverts.** Named nodes are first on subject and last on object kind; pixels are
 first on object kind and last on both century and collection. There is no best representation
@@ -838,6 +839,39 @@ layer. This is the clearest case in the record of a measurement being correct an
 being over-generalised, and it was reached by someone objecting that the judging was happening in
 the wrong place.
 
+### And the same regimes on a deliberately heterogeneous pool
+
+Every figure above is measured inside one corpus, which is the objection the regimes were built
+to answer and only half answers it: the museum corpus is heterogeneous in object kind and
+homogeneous in being photographs of objects in museums. Folding the 2 723 emblem prints in gives
+a pool of 12 479 where a partner can be required to come from **another corpus as well as another
+kind of object** — the hardest form of the question, and the one a discovery system would actually
+be asked.
+
+| subject, other corpus *and* other kind — 7 020 queries, floor 376 | rank | ratio |
+|---|---:|---:|
+| named nodes | 500 | ×0.75 |
+| signal | 829 | ×0.45 |
+| palette | 1 090 | ×0.35 |
+| pixels | 1 297 | ×0.29 |
+
+**Nothing reaches the floor.** The named record that runs at ×1.55 inside the museum corpus falls
+to ×0.75 the moment the partner has to come from the other corpus — still the best of the four, two
+and a half times the pixels, and still worse than a random ordering. A museum object does not find
+an emblem sharing its subject, by any representation measured here.
+
+That is consistent with everything else rather than a new failure. Crossing the corpus stacks the
+medium on top of the object kind, and the emblems are the corpus where naming was already shown to
+fail because their notations record what a scene *means* while a vocabulary of nouns records what
+it contains. What the heterogeneous pool adds is the size of the gap: the regime that looks
+winnable at ×1.55 within one collection of museums is not merely harder across corpora, it is on
+the other side of chance.
+
+The other regimes survive the fold, and two of them improve — the collection regime reaches ×1.54
+for named nodes against ×1.11 before, and the hand regime stays around ×3.9 to ×5.3 for every
+symbolic channel. Adding a second corpus makes *provenance* easier to read, which is exactly what
+should happen and is a small check that the benchmark behaves.
+
 Three readings follow, and the third is the one that changes what this record is for.
 
 **The named record earns its place on the question it was built for.** Finding the same subject
@@ -849,7 +883,13 @@ benchmark that called this a tie was bundling object kind into the question.
 **Pixels recognise the hand.** Asked for another work by the same maker sharing no subject at
 all, they reach it at rank 47 against a floor of 834 — **seventeen times chance, by far the
 strongest signal anywhere in this table**, and more than five times what any symbolic record
-manages. That is style, and naming it settles what a photographic embedding is actually for: it
+manages.
+
+That number had a confound built into it, since a maker's works are usually gathered in one
+museum, so *same hand* and *same photographic convention* arrive together. Requiring the
+collection to differ separates them: the signal falls to ×10.94 and stays first by a factor of
+four and a half over anything else. **A third of it was the institution and two thirds is the
+hand**, which is a decomposition rather than a retraction. That is style, and naming it settles what a photographic embedding is actually for: it
 is keyed to the object and to the hand that made it, and blind to what is depicted. The same fact
 explains the two rows where it sits *below* the floor. Pixels cluster by object and by maker, so
 asked for a partner of a different kind about a different subject from the same century or the

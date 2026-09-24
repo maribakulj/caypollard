@@ -223,6 +223,43 @@
           "share_in_top_100": 0.3305
         }
       }
+    },
+    "main, autre collection (aucun sujet commun)": {
+      "queries": 2977,
+      "median_targets_per_query": 5,
+      "floor_median_rank_if_random": 973.3,
+      "representations": {
+        "nœuds nommés": {
+          "median_rank": 406,
+          "ratio_to_floor": 2.4,
+          "share_in_top_10": 0.0521,
+          "share_in_top_100": 0.2637
+        },
+        "formes muettes": {
+          "median_rank": 584,
+          "ratio_to_floor": 1.67,
+          "share_in_top_10": 0.0232,
+          "share_in_top_100": 0.1767
+        },
+        "pixels": {
+          "median_rank": 89,
+          "ratio_to_floor": 10.94,
+          "share_in_top_10": 0.2331,
+          "share_in_top_100": 0.5173
+        },
+        "palette (11 termes)": {
+          "median_rank": 408,
+          "ratio_to_floor": 2.39,
+          "share_in_top_10": 0.0427,
+          "share_in_top_100": 0.2338
+        },
+        "signal (bruit, lumière)": {
+          "median_rank": 409,
+          "ratio_to_floor": 2.38,
+          "share_in_top_10": 0.0548,
+          "share_in_top_100": 0.2479
+        }
+      }
     }
   },
   "reading": "A ratio to floor above one means the representation finds the partner sooner than a random ordering would. Comparing ratios across regimes is the point: a representation keyed to the object's own form will do well in the object-kind regime and badly in the subject regime, and saying which is better is a category error -- they answer different questions."
