@@ -854,6 +854,37 @@ be read before the regime tables rather than after them. The regimes explain *wh
 representation is keyed to; this says how much any of it is worth on the question a historian
 would actually type.
 
+## What it brings back instead, which turns out to be coherent
+
+A retrieval that misses can miss at random or miss systematically, and nobody had looked. Taking
+the neighbours of a cat query that are *not* cats and asking what they share with the query
+instead:
+
+| query | non-motif neighbours sharing some other notation | chance | what they share |
+|---|---:|---:|---|
+| windmill | **39%** | 7% | tree, winter, ice, herd |
+| bridge | **33%** | 5% | tree, cloud, windmill, river |
+| cat | **24%** | 6% | woman, table, dog, game, chess |
+| ship | 17% | 4% | flower, woman, coat of arms |
+| fish | 16% | 4% | flower, woman, bird, tablecloth |
+| bird | 13% | 4% | tree, woman, flower, Venus |
+
+**Three to six times chance, and legible.** A windmill brings back winter landscapes with ice and
+herds; a bridge, river landscapes with trees and clouds; a cat, domestic interiors with women,
+tables and dogs; a fish, still lifes with tablecloths and flowers. **The embedding retrieves the
+kind of picture the motif belongs to, not the motif.**
+
+That reframes the failure rather than excusing it. Asked for cats it answers *Dutch domestic
+interiors*, which is a real art-historical question and arguably a more frequently asked one than
+*other cats*. It is also the layer this record never isolated: object kind, century, collection,
+material and hand each got a regime, and the *genre of picture* — landscape, still life, interior,
+portrait — did not, although the manifests carry it on 8 736 works. It is a row in the table now.
+
+The practical consequence is not that the system is secretly right. It is that a searcher must be
+told which axis they are being answered on, because the answer is coherent and is not the question.
+A result list that silently switches from *cats* to *interiors containing cats* is worse than one
+that says which it is doing.
+
 ## What is missing, named precisely, and one architecture that helps
 
 The cat test says the intermediate record works at four times chance and the pixels at seventeen.

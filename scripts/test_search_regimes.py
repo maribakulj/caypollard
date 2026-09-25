@@ -118,6 +118,7 @@ def main() -> None:
     material: dict[str, str] = {}
     creator: dict[str, str] = {}
     corpus: dict[str, str] = {}
+    genre: dict[str, str] = {}
     for item in sorted(shared):
         row = records.get(item)
         if not row:
@@ -141,6 +142,7 @@ def main() -> None:
             material[item] = first(row.get("material")) or ""
             creator[item] = first(row.get("creator")) or ""
             corpus[item] = origin or "musee"
+            genre[item] = first(row.get("genre")) or ""
 
     if len(items) < args.min_queries:
         raise SystemExit("too few items carry all four attributes")
@@ -200,6 +202,16 @@ def main() -> None:
             and corpus[a] != corpus[b]
             and kind[a] != kind[b]
         ),
+        # The finding that made this regime necessary: asked for a cat, the
+        # embedding returns women, tables and dogs; asked for a windmill, winter
+        # landscapes with ice and herds. It retrieves the *kind of picture* the
+        # motif belongs to, and that had never been a row in the table.
+        "genre de tableau (aucun sujet commun, autre collection)": (
+            lambda a, b: bool(genre[a])
+            and genre[a] == genre[b]
+            and not shares_subject(a, b)
+            and collection[a] != collection[b]
+        ),
         "matière (aucun sujet commun, autre collection)": (
             lambda a, b: bool(material[a])
             and material[a] == material[b]
@@ -240,7 +252,7 @@ def main() -> None:
         by_key: dict[object, list[str]] = collections.defaultdict(list)
         key = {
             "type": kind, "sièc": century, "coll": collection,
-            "mati": material, "main": creator,
+            "mati": material, "main": creator, "genr": genre,
         }[name[:4]]
         for item in items:
             by_key[key[item]].append(item)
@@ -275,7 +287,7 @@ def main() -> None:
             )
         if regime.startswith("coll"):
             return not shares_subject(a, b) and kind[a] != kind[b]
-        if regime.startswith("mati"):
+        if regime.startswith("mati") or regime.startswith("genr"):
             return not shares_subject(a, b) and collection[a] != collection[b]
         if regime.startswith("main, autre"):
             return not shares_subject(a, b) and collection[a] != collection[b]
