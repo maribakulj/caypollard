@@ -880,6 +880,25 @@ interiors*, which is a real art-historical question and arguably a more frequent
 material and hand each got a regime, and the *genre of picture* — landscape, still life, interior,
 portrait — did not, although the manifests carry it on 8 736 works. It is a row in the table now.
 
+Measured as a regime, it is the strongest hit rate in the project. Same genre of picture, no
+notation shared, another collection — 5 238 queries against a floor of 10.5:
+
+| representation | median rank | ratio | in the top hundred |
+|---|---:|---:|---:|
+| **pixels** | **1** | ×10.53 | **97.2%** |
+| named nodes | 2 | ×5.27 | 93.9% |
+| palette | 5 | ×2.11 | 90.1% |
+| mute shapes | 7 | ×1.50 | 90.0% |
+
+**The very first neighbour an embedding returns is almost always a picture of the same genre**, and
+97.2% of queries have one inside a hundred. Nothing else in this record is answered that reliably —
+not the object kind, not the hand, not the subject. It is also read by every channel, the named
+record reaching ×5.27, so genre is not a property of pixels but a property of pictures that every
+representation picks up first.
+
+That closes the question the cat test opened. Asked for cats the system returns domestic interiors
+because *genre dominates the neighbourhood of every query*, and a motif is a detail inside a genre.
+
 The practical consequence is not that the system is secretly right. It is that a searcher must be
 told which axis they are being answered on, because the answer is coherent and is not the question.
 A result list that silently switches from *cats* to *interiors containing cats* is worse than one
