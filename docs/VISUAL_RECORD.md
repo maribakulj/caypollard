@@ -896,6 +896,31 @@ not the object kind, not the hand, not the subject. It is also read by every cha
 record reaching ×5.27, so genre is not a property of pixels but a property of pictures that every
 representation picks up first.
 
+Why a record stripped of texture and support should still know the genre has an obvious answer
+and a measured one, and they differ. The obvious answer is composition: a landscape has a horizon
+and small figures, a portrait one central mass, a still life objects on a horizontal in the lower
+half — and arrangement is exactly what survives the stripping. Measured on 5 340 works carrying a
+genre, against a 21% floor:
+
+| channel | first neighbour of the same genre | in the top ten |
+|---|---:|---:|
+| pixels | 74% | 69% |
+| **named nodes** | **53%** | 48% |
+| composition | 34% | 31% |
+| mute shapes | 26% | 24% |
+| palette | 25% | 26% |
+
+**Composition is not it.** At 34% against a floor of 21% it is barely above chance, and the
+channel that reads genre is the one that says *what the things are*: names, at 53%. A landscape
+contains a tree, a sky, a river; a portrait a face, hair, a collar; a still life a vase, fruit, a
+plate. **The vocabulary of objects is genre-specific, so naming objects produces a genre
+descriptor whether or not that was the intention.**
+
+Which explains the cat exactly. The words the transcriber emits in front of a cat are *woman,
+table, dog, chair* — the names of the genre and not of the cat. It describes the dominant
+furniture of the scene, so it builds a descriptor of Dutch domestic interiors that happens to
+contain a cat sometimes, and retrieves accordingly.
+
 That closes the question the cat test opened. Asked for cats the system returns domestic interiors
 because *genre dominates the neighbourhood of every query*, and a motif is a detail inside a genre.
 
