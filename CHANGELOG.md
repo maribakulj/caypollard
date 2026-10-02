@@ -1,5 +1,56 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- **a viewer for the pool.** `viewer/` is a local page, served by `scripts/serve_viewer.py`,
+  that shows the 21 128 pictures of the museum and emblem benchmarks as thumbnails, filters
+  them by corpus, collection, kind, genre or century, and for any picture lists the hundred
+  nearest neighbours under each representation table, saying what each neighbour shares with
+  the query — subject, kind, collection, century, genre, hand, book — so a regime can be read
+  off a list rather than a table. `scripts/build_viewer.py` writes everything it reads;
+  `scripts/fetch_wikidata_labels.py` turns the manifests' Wikidata ids into words, once.
+  Notations carried by more than 3.2% of the pool are treated as categories rather than
+  subjects, the cut the regime scripts apply;
+- **the demo engine, "sous le capot".** `caypollard.demo` recomputes every representation
+  for one picture — dropped in, or taken from the pool — through the experiments' own
+  functions, shows each intermediate step with its parameters and its explanation, lets the
+  parameters be edited, and searches the pool by channel or by weighted mix with exact
+  cosine. `scripts/fit_demo_models.py` recovers the four k-means models the tables were
+  built on (their centres had never been saved) and verifies each against its frozen table:
+  formes muettes and formes v4 at 1.2e-7, répétition at 3e-8, signes composites at 0 — the
+  last only once the outline block is scaled after stacking, in float32, as the script does.
+  On a picture of the pool every channel reproduces its frozen row at cosine 1.0000. The
+  named nodes are produced by Claude (Sonnet) through Claude Code in non-interactive mode
+  rather than by the Mistral namer of the frozen tables, and the reproduction cosine on that
+  step (0.45 on the first picture tried) records how differently two namers see. The two
+  channels the record set aside are shown as well, so they can be seen before being
+  dropped: the relations between signs (the 64-sign vocabulary and the 9 518 keys of
+  `relations-wide64` recovered and verified at 0) and the pose (Keypoint R-CNN, skeleton
+  drawn on the picture, angles per segment; its search table is the partial one of 1 903
+  pictures, the only one that exists).
+
+- **the strokes.** `caypollard.sketch` reduces a picture to its contours at a coarse scale
+  (smoothed gradient, non-maximum suppression, hysteresis: two colours, no fill), thins them,
+  walks them into strokes that continue through crossings along the straightest branch,
+  simplifies each to a polyline, and rations them: the sketch keeps the forty longest, the
+  pictogram the twelve. It starts from edges where every other channel starts from tone.
+  `scripts/build_sketch_channel.py` draws every picture of the pool that way, describes its
+  sketch strokes (size, direction, bending, place: 16 numbers), fits a vocabulary of 128
+  stroke signs balanced across corpora with its centres saved, and writes two tables: the
+  stroke-sign histogram weighted by length, and the contour drawings through DINOv2. Both
+  are search channels in the demo, whose "traits" step shows the four levels and the
+  description of each stroke, with every parameter editable.
+
+### Found
+
+- `docs/VISUAL_RECORD.md` says regions are cut by a watershed; `scripts/segment_shapes.py`
+  thresholds at two polarities and labels connected components. The "formes" block of
+  `record-v3` is the composite signs of `v3-groups`, not a shape-sign table, and `mix-tout`
+  uses the balanced `v4-256` vocabulary rather than `v2-256`. The "mixte" tables have no
+  producing script: they are row concatenations of the per-corpus tables.
+
 ## 0.7.0 — 2026-09-17
 
 Three phases close and one central claim is overturned. The release is dominated by controls

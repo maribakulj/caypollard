@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>caypollard · visualiseur</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="bar">
+  <div class="brand">
+    <h1>caypollard</h1>
+    <span id="count" class="muted">chargement…</span>
+  </div>
+  <input id="q" type="search" placeholder="chercher : identifiant, notation, devise, créateur, nom d'objet…" autocomplete="off">
+  <div class="filters">
+    <select id="f-corpus"><option value="">corpus</option></select>
+    <select id="f-col"><option value="">collection</option></select>
+    <select id="f-typ"><option value="">type d'objet</option></select>
+    <select id="f-gen"><option value="">genre</option></select>
+    <select id="f-cen"><option value="">siècle</option></select>
+    <select id="order">
+      <option value="id">ordre : identifiant</option>
+      <option value="random">ordre : aléatoire</option>
+    </select>
+    <button id="reset" type="button" title="effacer les filtres">×</button>
+  </div>
+  <button id="open-demo" type="button" class="primary" title="analyser une image de l'extérieur ou du pool, étape par étape">Sous le capot</button>
+</header>
+
+<section id="demo" class="demo" hidden>
+  <div class="demo-head">
+    <div>
+      <h2 class="demo-title">Sous le capot</h2>
+      <p class="muted">Une image, toutes les transformations que les expériences lui appliquent, et la recherche par canal sur le pool. Rien n'est recalculé ailleurs : ce sont les fonctions des scripts, sur les modèles réajustés et vérifiés.</p>
+    </div>
+    <button id="close-demo" type="button" title="revenir à la grille">← grille</button>
+  </div>
+  <div class="demo-source">
+    <label class="drop" id="drop">
+      <input id="file" type="file" accept="image/*" hidden>
+      <span id="drop-text">Dépose une image ici, ou clique pour en choisir une</span>
+      <img id="drop-preview" alt="" hidden>
+    </label>
+    <div class="demo-options">
+      <div class="row"><span class="muted">ou l'image du pool sélectionnée :</span> <code id="demo-item">aucune</code></div>
+      <label class="row"><input id="namer" type="checkbox" checked> nommer les objets avec Claude (Sonnet) — quelques secondes de plus</label>
+      <details id="params-box">
+        <summary>Paramètres des transformations <span id="params-state" class="muted"></span></summary>
+        <div id="params" class="params"></div>
+        <button id="params-reset" type="button">revenir aux valeurs du pool</button>
+      </details>
+      <div class="row">
+        <button id="run" type="button" class="primary">Analyser</button>
+        <span id="demo-status" class="muted"></span>
+      </div>
+    </div>
+  </div>
+  <div id="steps" class="steps"></div>
+</section>
+
+<main id="grid" class="grid" aria-label="vignettes"></main>
+<div id="sentinel"></div>
+
+<aside id="detail" class="detail" hidden>
+  <div class="detail-bar">
+    <button id="back" type="button" title="revenir à la vignette précédente">←</button>
+    <span id="crumb" class="muted"></span>
+    <button id="close" type="button" title="fermer (Échap)">×</button>
+  </div>
+  <div id="detail-body"></div>
+</aside>
+
+<script src="app.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>

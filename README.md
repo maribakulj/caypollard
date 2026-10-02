@@ -155,6 +155,7 @@ caypollard/
 │   ├── manifests/
 │   └── samples/
 ├── results/
+├── viewer/                                   # local page: the pool as thumbnails, neighbours per representation
 ├── tests/
 ├── docs/
 └── .github/workflows/
@@ -231,6 +232,18 @@ For the learned projection-head experiments, install the optional PyTorch layer 
 
 ```bash
 uv sync --extra dev --extra alignment
+```
+
+### Looking at the pool
+
+Once the museum and emblem benchmarks and the representation tables exist, a local page shows
+every picture as a thumbnail and, for any one of them, the neighbours each representation
+returns, with what each neighbour shares with the query. It computes nothing and annotates
+nothing; see [`viewer/README.md`](viewer/README.md).
+
+```bash
+make viewer-build   # thumbnails, item table, neighbour lists, Wikidata labels
+make viewer         # http://127.0.0.1:8765/viewer/
 ```
 
 ## Reproducibility and FAIR principles
