@@ -1,0 +1,2064 @@
+{
+ "question": "does the namer still name the object at each level of abstraction?",
+ "namer": "claude-sonnet-5-5",
+ "pictures": {
+  "musées": 30,
+  "emblèmes": 10,
+  "seed": 42
+ },
+ "sketch_params": {
+  "side": 320,
+  "sigma": 2.0,
+  "high": 90.0,
+  "low": 0.4,
+  "turn": 60.0,
+  "epsilon": 1.5,
+  "sketch": 40,
+  "pictogram": 12,
+  "pict_epsilon": 4.0
+ },
+ "summary": {
+  "levels": {
+   "original": {
+    "jaccard_with_original": 0.975,
+    "first_name_survives": 0.975,
+    "empty_answers": 1,
+    "n": 40
+   },
+   "original_bis": {
+    "jaccard_with_original": 0.817,
+    "first_name_survives": 0.95,
+    "empty_answers": 0,
+    "n": 40
+   },
+   "contours": {
+    "jaccard_with_original": 0.254,
+    "first_name_survives": 0.525,
+    "empty_answers": 1,
+    "n": 40
+   },
+   "croquis": {
+    "jaccard_with_original": 0.196,
+    "first_name_survives": 0.325,
+    "empty_answers": 0,
+    "n": 40
+   },
+   "pictogramme": {
+    "jaccard_with_original": 0.059,
+    "first_name_survives": 0.025,
+    "empty_answers": 2,
+    "n": 40
+   }
+  },
+  "floor": {
+   "original": {
+    "jaccard_with_original": 0.078,
+    "first_name_survives": 0.175,
+    "empty_answers": 1,
+    "n": 40
+   },
+   "original_bis": {
+    "jaccard_with_original": 0.085,
+    "first_name_survives": 0.2,
+    "empty_answers": 0,
+    "n": 40
+   },
+   "contours": {
+    "jaccard_with_original": 0.082,
+    "first_name_survives": 0.125,
+    "empty_answers": 1,
+    "n": 40
+   },
+   "croquis": {
+    "jaccard_with_original": 0.097,
+    "first_name_survives": 0.125,
+    "empty_answers": 0,
+    "n": 40
+   },
+   "pictogramme": {
+    "jaccard_with_original": 0.031,
+    "first_name_survives": 0.05,
+    "empty_answers": 2,
+    "n": 40
+   }
+  },
+  "by_corpus": {
+   "musée": {
+    "original": {
+     "jaccard_with_original": 1.0,
+     "first_name_survives": 1.0,
+     "empty_answers": 0,
+     "n": 30
+    },
+    "original_bis": {
+     "jaccard_with_original": 0.868,
+     "first_name_survives": 1.0,
+     "empty_answers": 0,
+     "n": 30
+    },
+    "contours": {
+     "jaccard_with_original": 0.273,
+     "first_name_survives": 0.6,
+     "empty_answers": 0,
+     "n": 30
+    },
+    "croquis": {
+     "jaccard_with_original": 0.21,
+     "first_name_survives": 0.367,
+     "empty_answers": 0,
+     "n": 30
+    },
+    "pictogramme": {
+     "jaccard_with_original": 0.061,
+     "first_name_survives": 0.033,
+     "empty_answers": 2,
+     "n": 30
+    }
+   },
+   "emblème": {
+    "original": {
+     "jaccard_with_original": 0.9,
+     "first_name_survives": 0.9,
+     "empty_answers": 1,
+     "n": 10
+    },
+    "original_bis": {
+     "jaccard_with_original": 0.663,
+     "first_name_survives": 0.8,
+     "empty_answers": 0,
+     "n": 10
+    },
+    "contours": {
+     "jaccard_with_original": 0.196,
+     "first_name_survives": 0.3,
+     "empty_answers": 1,
+     "n": 10
+    },
+    "croquis": {
+     "jaccard_with_original": 0.156,
+     "first_name_survives": 0.2,
+     "empty_answers": 0,
+     "n": 10
+    },
+    "pictogramme": {
+     "jaccard_with_original": 0.055,
+     "first_name_survives": 0.0,
+     "empty_answers": 0,
+     "n": 10
+    }
+   }
+  }
+ },
+ "items": [
+  {
+   "id": "rijksmuseum:Q116371346",
+   "corpus": "musée",
+   "type": [
+    "sucrier"
+   ],
+   "iconclass": [
+    "25F33(EAGLE)"
+   ],
+   "original": [
+    "cup",
+    "eagle",
+    "ornament",
+    "pattern",
+    "flower",
+    "flower"
+   ],
+   "original_bis": [
+    "cup",
+    "eagle",
+    "ornament",
+    "flower",
+    "flower",
+    "pattern"
+   ],
+   "contours": [
+    "vase",
+    "ornament",
+    "cup"
+   ],
+   "croquis": [
+    "vase",
+    "ornament",
+    "table"
+   ],
+   "pictogramme": [
+    "vase",
+    "ornament",
+    "hand",
+    "pattern",
+    "table"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q116272692",
+   "corpus": "musée",
+   "type": [
+    "folium"
+   ],
+   "iconclass": [
+    "41A11",
+    "44B113",
+    "44B15122"
+   ],
+   "original": [
+    "bed",
+    "man",
+    "woman",
+    "sky",
+    "tower",
+    "moon"
+   ],
+   "original_bis": [
+    "man",
+    "bed",
+    "ornament",
+    "sky",
+    "moon",
+    "tree"
+   ],
+   "contours": [
+    "frame",
+    "arch",
+    "ornament",
+    "pattern",
+    "wall",
+    "window"
+   ],
+   "croquis": [
+    "frame",
+    "arch",
+    "curtain",
+    "man",
+    "table",
+    "chair"
+   ],
+   "pictogramme": [
+    "house",
+    "wall",
+    "window",
+    "frame"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q20171406",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "25G3"
+   ],
+   "original": [
+    "tree",
+    "horse",
+    "sky",
+    "cloud",
+    "landscape",
+    "river"
+   ],
+   "original_bis": [
+    "tree",
+    "horse",
+    "sky",
+    "cloud",
+    "landscape",
+    "river"
+   ],
+   "contours": [
+    "tree",
+    "cloud",
+    "landscape",
+    "boat",
+    "sky",
+    "plant"
+   ],
+   "croquis": [
+    "tree",
+    "landscape",
+    "wall",
+    "cloud",
+    "ruin",
+    "plant"
+   ],
+   "pictogramme": [
+    "boat",
+    "wall",
+    "ruin",
+    "rope",
+    "cloud"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q19918471",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "31D15"
+   ],
+   "original": [
+    "woman",
+    "dress",
+    "hand",
+    "face",
+    "chair",
+    "face"
+   ],
+   "original_bis": [
+    "woman",
+    "face",
+    "hand",
+    "dress",
+    "chair",
+    "face"
+   ],
+   "contours": [
+    "face",
+    "hair",
+    "woman",
+    "hand",
+    "hand",
+    "column"
+   ],
+   "croquis": [
+    "man",
+    "face",
+    "cloak",
+    "hand",
+    "frame"
+   ],
+   "pictogramme": [
+    "frame",
+    "face",
+    "hair",
+    "feather",
+    "wall"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q19912385",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "25G3"
+   ],
+   "original": [
+    "tree",
+    "sky",
+    "cloud",
+    "landscape",
+    "river",
+    "tree"
+   ],
+   "original_bis": [
+    "tree",
+    "cloud",
+    "sky",
+    "landscape",
+    "river",
+    "wall"
+   ],
+   "contours": [
+    "tree",
+    "landscape",
+    "ship",
+    "cloud",
+    "sea",
+    "ruin"
+   ],
+   "croquis": [
+    "tree",
+    "landscape",
+    "wall",
+    "boat",
+    "frame"
+   ],
+   "pictogramme": [
+    "frame",
+    "wall",
+    "ruin",
+    "table",
+    "hand"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q17319692",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "25G3"
+   ],
+   "original": [
+    "woman",
+    "bridge",
+    "tree",
+    "sky",
+    "cloud",
+    "mountain"
+   ],
+   "original_bis": [
+    "woman",
+    "bridge",
+    "tree",
+    "sky",
+    "cloud",
+    "mountain"
+   ],
+   "contours": [
+    "tree",
+    "landscape",
+    "horse",
+    "man",
+    "dog",
+    "cloud"
+   ],
+   "croquis": [
+    "tree",
+    "landscape",
+    "ruin",
+    "wall",
+    "horse",
+    "cloud"
+   ],
+   "pictogramme": [
+    "wall",
+    "window",
+    "landscape",
+    "door",
+    "ruin",
+    "arch"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q116364854",
+   "corpus": "musée",
+   "type": [
+    "assiette"
+   ],
+   "iconclass": [
+    "25G41"
+   ],
+   "original": [
+    "plate",
+    "flower",
+    "flower",
+    "flower",
+    "flower",
+    "pattern"
+   ],
+   "original_bis": [
+    "plate",
+    "flower",
+    "flower",
+    "flower",
+    "flower",
+    "ornament"
+   ],
+   "contours": [
+    "mirror",
+    "face",
+    "moon"
+   ],
+   "croquis": [
+    "moon",
+    "face",
+    "wall"
+   ],
+   "pictogramme": [
+    "wheel",
+    "wall"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q97849975",
+   "corpus": "musée",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "56DD1"
+   ],
+   "original": [
+    "man",
+    "man",
+    "cloak",
+    "hand",
+    "cloud",
+    "letter"
+   ],
+   "original_bis": [
+    "man",
+    "man",
+    "hand",
+    "cloud",
+    "letter",
+    "sea"
+   ],
+   "contours": [
+    "tree",
+    "man",
+    "hand",
+    "face",
+    "bird",
+    "cloak"
+   ],
+   "croquis": [
+    "tree",
+    "man",
+    "frame",
+    "wall"
+   ],
+   "pictogramme": [
+    "frame",
+    "tree",
+    "wall",
+    "cloak",
+    "column",
+    "landscape"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q116335941",
+   "corpus": "musée",
+   "type": [
+    "soup plate"
+   ],
+   "iconclass": [
+    "25F3",
+    "44A1",
+    "44B194",
+    "46A122(...)1"
+   ],
+   "original": [
+    "plate",
+    "shield",
+    "bird",
+    "flower",
+    "child",
+    "pattern"
+   ],
+   "original_bis": [
+    "plate",
+    "shield",
+    "bird",
+    "flower",
+    "ornament",
+    "pattern"
+   ],
+   "contours": [
+    "plate",
+    "ornament",
+    "pattern",
+    "pattern",
+    "pattern",
+    "pattern"
+   ],
+   "croquis": [
+    "coin",
+    "shield",
+    "crown",
+    "wheel"
+   ],
+   "pictogramme": [
+    "wheel",
+    "wall"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q64785170",
+   "corpus": "musée",
+   "type": [
+    "xylogravure"
+   ],
+   "iconclass": [
+    "31D112"
+   ],
+   "original": [
+    "tree",
+    "child",
+    "child",
+    "man",
+    "flower",
+    "landscape"
+   ],
+   "original_bis": [
+    "tree",
+    "child",
+    "child",
+    "man",
+    "flower",
+    "landscape"
+   ],
+   "contours": [
+    "landscape",
+    "sea",
+    "cloud",
+    "mountain",
+    "ship",
+    "tree"
+   ],
+   "croquis": [
+    "wall",
+    "arch",
+    "cloud",
+    "ruin",
+    "plant",
+    "landscape"
+   ],
+   "pictogramme": [
+    "frame",
+    "wall",
+    "arch",
+    "ornament",
+    "ruin",
+    "stair"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q116280635",
+   "corpus": "musée",
+   "type": [
+    "broc"
+   ],
+   "iconclass": [
+    "25F3"
+   ],
+   "original": [
+    "bird",
+    "vase",
+    "pattern",
+    "ornament",
+    "tree",
+    "flower"
+   ],
+   "original_bis": [
+    "bird",
+    "pattern",
+    "ornament",
+    "vase",
+    "tree",
+    "flower"
+   ],
+   "contours": [
+    "vase",
+    "ornament",
+    "hand",
+    "bottle",
+    "shell"
+   ],
+   "croquis": [
+    "vase",
+    "ornament",
+    "frame"
+   ],
+   "pictogramme": [
+    "cup",
+    "vase",
+    "hand"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q116276141",
+   "corpus": "musée",
+   "type": [
+    "fenêtre"
+   ],
+   "iconclass": [
+    "11G",
+    "11H",
+    "44A1",
+    "44B194"
+   ],
+   "original": [
+    "saint",
+    "saint",
+    "saint",
+    "angel",
+    "window",
+    "shield"
+   ],
+   "original_bis": [
+    "saint",
+    "saint",
+    "saint",
+    "angel",
+    "window",
+    "saint"
+   ],
+   "contours": [
+    "statue",
+    "bust",
+    "bust",
+    "pattern",
+    "ornament",
+    "scroll"
+   ],
+   "croquis": [
+    "man",
+    "cloak",
+    "hat",
+    "column",
+    "curtain",
+    "hand"
+   ],
+   "pictogramme": [
+    "column",
+    "wall",
+    "cup",
+    "window",
+    "door",
+    "ruin"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q116351832",
+   "corpus": "musée",
+   "type": [
+    "assiette"
+   ],
+   "iconclass": [
+    "25G41"
+   ],
+   "original": [
+    "plate",
+    "landscape",
+    "tree",
+    "house",
+    "flower",
+    "river"
+   ],
+   "original_bis": [
+    "plate",
+    "flower",
+    "flower",
+    "tree",
+    "house",
+    "river"
+   ],
+   "contours": [
+    "plate",
+    "landscape",
+    "ornament",
+    "pattern",
+    "frame"
+   ],
+   "croquis": [
+    "plate",
+    "ornament",
+    "pattern",
+    "frame"
+   ],
+   "pictogramme": [
+    "wheel",
+    "table",
+    "hand"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q19912141",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "31D15"
+   ],
+   "original": [
+    "woman",
+    "face",
+    "hair",
+    "hat",
+    "dress",
+    "cloak"
+   ],
+   "original_bis": [
+    "woman",
+    "face",
+    "hair",
+    "hat",
+    "dress",
+    "cloak"
+   ],
+   "contours": [
+    "woman",
+    "face",
+    "hair",
+    "cloak",
+    "hand",
+    "frame"
+   ],
+   "croquis": [
+    "woman",
+    "hair",
+    "face",
+    "dress",
+    "frame"
+   ],
+   "pictogramme": [
+    "bird",
+    "wall",
+    "column",
+    "landscape"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q19913116",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "31D15"
+   ],
+   "original": [
+    "woman",
+    "dress",
+    "face",
+    "curtain",
+    "glove",
+    "hand"
+   ],
+   "original_bis": [
+    "woman",
+    "dress",
+    "curtain",
+    "hand",
+    "glove",
+    "pattern"
+   ],
+   "contours": [
+    "saint",
+    "cloak",
+    "wall",
+    "landscape",
+    "sky",
+    "hand"
+   ],
+   "croquis": [
+    "cloak",
+    "woman",
+    "face",
+    "curtain",
+    "dress",
+    "wing"
+   ],
+   "pictogramme": [
+    "dress",
+    "woman",
+    "cloak",
+    "hand"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q97012951",
+   "corpus": "musée",
+   "type": [
+    "photographie"
+   ],
+   "iconclass": [
+    "31D11221"
+   ],
+   "original": [
+    "child",
+    "frame",
+    "chair",
+    "dress",
+    "textile",
+    "ornament"
+   ],
+   "original_bis": [
+    "child",
+    "frame",
+    "chair",
+    "dress",
+    "textile",
+    "ornament"
+   ],
+   "contours": [
+    "frame",
+    "book",
+    "horse",
+    "man",
+    "letter"
+   ],
+   "croquis": [
+    "frame",
+    "horse",
+    "wall",
+    "window"
+   ],
+   "pictogramme": [
+    "frame",
+    "face",
+    "book"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q116273575",
+   "corpus": "musée",
+   "type": [
+    "stèle"
+   ],
+   "iconclass": [
+    "31D15"
+   ],
+   "original": [
+    "king",
+    "woman",
+    "man",
+    "child",
+    "table",
+    "chair"
+   ],
+   "original_bis": [
+    "king",
+    "woman",
+    "man",
+    "child",
+    "table",
+    "chair"
+   ],
+   "contours": [
+    "man",
+    "man",
+    "tree",
+    "man",
+    "man",
+    "table"
+   ],
+   "croquis": [
+    "frame",
+    "arch",
+    "man",
+    "book",
+    "wall",
+    "column"
+   ],
+   "pictogramme": [
+    "frame",
+    "wall",
+    "column",
+    "arch",
+    "ruin"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q19905203",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "25G3"
+   ],
+   "original": [
+    "tree",
+    "sky",
+    "landscape",
+    "man",
+    "house",
+    "mountain"
+   ],
+   "original_bis": [
+    "tree",
+    "sky",
+    "landscape",
+    "man",
+    "house",
+    "mountain"
+   ],
+   "contours": [
+    "tree",
+    "mountain",
+    "landscape",
+    "sea",
+    "bird",
+    "plant"
+   ],
+   "croquis": [
+    "mountain",
+    "tree",
+    "landscape",
+    "river",
+    "wall"
+   ],
+   "pictogramme": [
+    "frame",
+    "wall",
+    "ornament",
+    "column",
+    "stair"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q97827086",
+   "corpus": "musée",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "32A5"
+   ],
+   "original": [
+    "horse",
+    "man",
+    "hat",
+    "tree",
+    "landscape",
+    "plant"
+   ],
+   "original_bis": [
+    "horse",
+    "man",
+    "hat",
+    "tree",
+    "landscape",
+    "plant"
+   ],
+   "contours": [
+    "horse",
+    "soldier",
+    "hat",
+    "fish",
+    "spear",
+    "landscape"
+   ],
+   "croquis": [
+    "horse",
+    "soldier",
+    "sword",
+    "landscape"
+   ],
+   "pictogramme": []
+  },
+  {
+   "id": "rijksmuseum:Q62019443",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "31D112",
+    "31D15",
+    "48C73341"
+   ],
+   "original": [
+    "church",
+    "column",
+    "arch",
+    "man",
+    "column",
+    "ornament"
+   ],
+   "original_bis": [
+    "church",
+    "column",
+    "arch",
+    "man",
+    "column",
+    "ornament"
+   ],
+   "contours": [
+    "arch",
+    "column",
+    "wall",
+    "window",
+    "door",
+    "ruin"
+   ],
+   "croquis": [
+    "column",
+    "tower",
+    "column",
+    "wall",
+    "window",
+    "stair"
+   ],
+   "pictogramme": [
+    "column",
+    "column",
+    "wall",
+    "tower"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q19912237",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "31D112",
+    "31D15",
+    "41C11",
+    "46C52"
+   ],
+   "original": [
+    "tree",
+    "man",
+    "house",
+    "sky",
+    "cloud",
+    "dog"
+   ],
+   "original_bis": [
+    "tree",
+    "man",
+    "house",
+    "sky",
+    "cloud",
+    "woman"
+   ],
+   "contours": [
+    "tree",
+    "landscape",
+    "frame",
+    "wall",
+    "cloud"
+   ],
+   "croquis": [
+    "frame",
+    "tree",
+    "landscape",
+    "wall",
+    "hand",
+    "ornament"
+   ],
+   "pictogramme": []
+  },
+  {
+   "id": "rijksmuseum:Q78762381",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "25H11"
+   ],
+   "original": [
+    "tree",
+    "mountain",
+    "landscape",
+    "river",
+    "man",
+    "tree"
+   ],
+   "original_bis": [
+    "landscape",
+    "tree",
+    "mountain",
+    "tree",
+    "river",
+    "house"
+   ],
+   "contours": [
+    "landscape",
+    "tree",
+    "cloud",
+    "column",
+    "man",
+    "wall"
+   ],
+   "croquis": [
+    "wall",
+    "column",
+    "table",
+    "ruin",
+    "hand",
+    "landscape"
+   ],
+   "pictogramme": [
+    "wall",
+    "wall",
+    "column",
+    "table",
+    "window"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q20173636",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "31D15"
+   ],
+   "original": [
+    "woman",
+    "dress",
+    "face",
+    "hair",
+    "textile",
+    "hand"
+   ],
+   "original_bis": [
+    "woman",
+    "dress",
+    "face",
+    "hair",
+    "textile",
+    "cloak"
+   ],
+   "contours": [
+    "woman",
+    "face",
+    "hair",
+    "cloak",
+    "frame"
+   ],
+   "croquis": [
+    "woman",
+    "face",
+    "dress",
+    "hair",
+    "curtain",
+    "frame"
+   ],
+   "pictogramme": [
+    "man",
+    "frame",
+    "cloak"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q113322889",
+   "corpus": "musée",
+   "type": [
+    "icône",
+    "peinture"
+   ],
+   "iconclass": [
+    "11D2",
+    "11F",
+    "11H(FRANCIS)",
+    "11H(VINCENT FERRER)"
+   ],
+   "original": [
+    "woman",
+    "child",
+    "saint",
+    "saint",
+    "angel",
+    "book"
+   ],
+   "original_bis": [
+    "woman",
+    "child",
+    "saint",
+    "saint",
+    "angel",
+    "book"
+   ],
+   "contours": [
+    "woman",
+    "saint",
+    "saint",
+    "frame",
+    "cloak",
+    "bird"
+   ],
+   "croquis": [
+    "saint",
+    "woman",
+    "woman",
+    "face",
+    "face",
+    "cloak"
+   ],
+   "pictogramme": [
+    "column",
+    "wall",
+    "column",
+    "door",
+    "window"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q17329849",
+   "corpus": "musée",
+   "type": [
+    "aquarelle",
+    "peinture"
+   ],
+   "iconclass": [
+    "24B61",
+    "25G3",
+    "26A",
+    "47D31"
+   ],
+   "original": [
+    "sky",
+    "tree",
+    "moon",
+    "cloud",
+    "river",
+    "house"
+   ],
+   "original_bis": [
+    "sky",
+    "tree",
+    "moon",
+    "cloud",
+    "river",
+    "man"
+   ],
+   "contours": [
+    "landscape",
+    "sea",
+    "sky",
+    "cloud",
+    "boat"
+   ],
+   "croquis": [
+    "landscape",
+    "river",
+    "wall",
+    "tree",
+    "cloud"
+   ],
+   "pictogramme": [
+    "face",
+    "hair",
+    "hand",
+    "cloak",
+    "hat"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q64787450",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "11D2",
+    "11F"
+   ],
+   "original": [
+    "woman",
+    "child",
+    "child",
+    "landscape",
+    "mountain",
+    "cross"
+   ],
+   "original_bis": [
+    "woman",
+    "child",
+    "child",
+    "landscape",
+    "mountain",
+    "cross"
+   ],
+   "contours": [
+    "child",
+    "woman",
+    "moon",
+    "landscape",
+    "hand",
+    "cloak"
+   ],
+   "croquis": [
+    "child",
+    "man",
+    "face",
+    "hand",
+    "wall",
+    "foot"
+   ],
+   "pictogramme": [
+    "man",
+    "face",
+    "hand",
+    "foot",
+    "sword",
+    "wing"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q27698876",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "11HH(CECILIA)",
+    "48C7311"
+   ],
+   "original": [
+    "saint",
+    "dress",
+    "face",
+    "hand",
+    "child",
+    "violin"
+   ],
+   "original_bis": [
+    "saint",
+    "dress",
+    "face",
+    "hand",
+    "child",
+    "violin"
+   ],
+   "contours": [
+    "man",
+    "face",
+    "hand",
+    "cloak",
+    "column",
+    "wall"
+   ],
+   "croquis": [
+    "man",
+    "hand",
+    "cloak",
+    "face",
+    "column",
+    "textile"
+   ],
+   "pictogramme": [
+    "column",
+    "cloak",
+    "wall",
+    "rope",
+    "ruin"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q20173354",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "31D15"
+   ],
+   "original": [
+    "woman",
+    "face",
+    "jewel",
+    "hair",
+    "cloak",
+    "textile"
+   ],
+   "original_bis": [
+    "woman",
+    "face",
+    "hair",
+    "jewel",
+    "cloak",
+    "eye"
+   ],
+   "contours": [
+    "face",
+    "man",
+    "cloak",
+    "wall",
+    "hair",
+    "frame"
+   ],
+   "croquis": [
+    "face",
+    "man",
+    "cloak",
+    "arch",
+    "wall",
+    "frame"
+   ],
+   "pictogramme": [
+    "beard",
+    "cloak",
+    "hat",
+    "hand"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q17326812",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "45B"
+   ],
+   "original": [
+    "arch",
+    "soldier",
+    "column",
+    "tree",
+    "horse",
+    "man"
+   ],
+   "original_bis": [
+    "arch",
+    "soldier",
+    "column",
+    "tree",
+    "horse",
+    "man"
+   ],
+   "contours": [
+    "column",
+    "column",
+    "ruin",
+    "wall",
+    "tree",
+    "landscape"
+   ],
+   "croquis": [
+    "column",
+    "column",
+    "wall",
+    "ruin",
+    "plant",
+    "hand"
+   ],
+   "pictogramme": [
+    "column",
+    "column",
+    "column",
+    "wall",
+    "hand",
+    "feather"
+   ]
+  },
+  {
+   "id": "rijksmuseum:Q19911963",
+   "corpus": "musée",
+   "type": [
+    "peinture"
+   ],
+   "iconclass": [
+    "25F36(SWAN)",
+    "31D15",
+    "34B11"
+   ],
+   "original": [
+    "woman",
+    "man",
+    "woman",
+    "bird",
+    "child",
+    "tree"
+   ],
+   "original_bis": [
+    "woman",
+    "man",
+    "woman",
+    "bird",
+    "child",
+    "tree"
+   ],
+   "contours": [
+    "woman",
+    "man",
+    "woman",
+    "child",
+    "man",
+    "man"
+   ],
+   "croquis": [
+    "man",
+    "man",
+    "man",
+    "man",
+    "landscape",
+    "tree"
+   ],
+   "pictogramme": [
+    "frame",
+    "wall",
+    "tree",
+    "rope",
+    "feather",
+    "foot"
+   ]
+  },
+  {
+   "id": "emblematica:E016199",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "24A6",
+    "24A8",
+    "25A13",
+    "42E31"
+   ],
+   "original": [
+    "crown",
+    "vase",
+    "skull",
+    "sceptre",
+    "sun",
+    "tomb"
+   ],
+   "original_bis": [
+    "crown",
+    "tomb",
+    "skull",
+    "spear",
+    "sun",
+    "column"
+   ],
+   "contours": [],
+   "croquis": [
+    "soldier",
+    "spear",
+    "horse",
+    "hat",
+    "frame",
+    "landscape"
+   ],
+   "pictogramme": [
+    "frame",
+    "landscape",
+    "sea",
+    "cloud"
+   ]
+  },
+  {
+   "id": "emblematica:E005126",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "25H11",
+    "25I2",
+    "41A351",
+    "41A7612"
+   ],
+   "original": [
+    "column",
+    "curtain",
+    "mountain",
+    "sky",
+    "sword",
+    "frame"
+   ],
+   "original_bis": [
+    "frame",
+    "column",
+    "cloak",
+    "mountain",
+    "sky",
+    "sword"
+   ],
+   "contours": [
+    "frame",
+    "landscape",
+    "cloud",
+    "sea",
+    "ornament",
+    "tree"
+   ],
+   "croquis": [
+    "frame",
+    "landscape",
+    "cloud",
+    "ornament",
+    "tree",
+    "wall"
+   ],
+   "pictogramme": [
+    "frame",
+    "ornament",
+    "wall"
+   ]
+  },
+  {
+   "id": "emblematica:E004183",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "46A122(...)1",
+    "86(...)"
+   ],
+   "original": [],
+   "original_bis": [
+    "flower",
+    "plant",
+    "landscape",
+    "frame",
+    "ornament"
+   ],
+   "contours": [
+    "frame",
+    "skull",
+    "bone",
+    "ornament",
+    "plant",
+    "mirror"
+   ],
+   "croquis": [
+    "moon",
+    "landscape",
+    "frame"
+   ],
+   "pictogramme": [
+    "wheel",
+    "sea",
+    "frame"
+   ]
+  },
+  {
+   "id": "emblematica:E016377",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "11R5:5(+4)",
+    "25G41(ROSE)",
+    "25G411(ROSE)",
+    "25H16"
+   ],
+   "original": [
+    "flower",
+    "sky",
+    "landscape",
+    "cloud",
+    "plant",
+    "plant"
+   ],
+   "original_bis": [
+    "flower",
+    "landscape",
+    "sky",
+    "cloud"
+   ],
+   "contours": [
+    "flower",
+    "plant",
+    "sea",
+    "landscape",
+    "frame"
+   ],
+   "croquis": [
+    "flower",
+    "sea",
+    "frame"
+   ],
+   "pictogramme": [
+    "frame",
+    "sea",
+    "cloud"
+   ]
+  },
+  {
+   "id": "emblematica:E004200",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "46A122(...)1",
+    "86(...)"
+   ],
+   "original": [
+    "tree",
+    "ruin",
+    "plant",
+    "frame",
+    "ornament",
+    "landscape"
+   ],
+   "original_bis": [
+    "tree",
+    "ruin",
+    "plant",
+    "frame",
+    "ornament",
+    "landscape"
+   ],
+   "contours": [
+    "landscape",
+    "frame",
+    "cloud",
+    "ornament",
+    "bird",
+    "tree"
+   ],
+   "croquis": [
+    "frame",
+    "wheel",
+    "pattern",
+    "plate"
+   ],
+   "pictogramme": [
+    "frame",
+    "wheel",
+    "wall",
+    "column"
+   ]
+  },
+  {
+   "id": "emblematica:E016291",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "21C",
+    "25D13(GOLD)",
+    "41B16",
+    "48C311(+61)"
+   ],
+   "original": [
+    "vase",
+    "cloud",
+    "cloud",
+    "sky",
+    "landscape"
+   ],
+   "original_bis": [
+    "fire",
+    "cloud",
+    "cloud",
+    "sky",
+    "landscape"
+   ],
+   "contours": [
+    "column",
+    "cloud",
+    "sea",
+    "plant",
+    "cloud",
+    "frame"
+   ],
+   "croquis": [
+    "tree",
+    "tree",
+    "plant",
+    "landscape",
+    "frame",
+    "cloud"
+   ],
+   "pictogramme": [
+    "frame",
+    "table",
+    "column",
+    "stair",
+    "wall"
+   ]
+  },
+  {
+   "id": "emblematica:E016229",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "25F42(+4821)",
+    "25H1124",
+    "51D4(+4)",
+    "51K3(+4)"
+   ],
+   "original": [
+    "snake",
+    "landscape",
+    "sky",
+    "plant"
+   ],
+   "original_bis": [
+    "snake",
+    "landscape",
+    "sky",
+    "plant",
+    "mountain"
+   ],
+   "contours": [
+    "sea",
+    "ship",
+    "mountain",
+    "cloud",
+    "sky",
+    "ruin"
+   ],
+   "croquis": [
+    "landscape",
+    "mountain",
+    "sea",
+    "ruin",
+    "cloud"
+   ],
+   "pictogramme": [
+    "frame",
+    "landscape",
+    "hand"
+   ]
+  },
+  {
+   "id": "emblematica:E028373",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "11A",
+    "11C",
+    "11C12",
+    "11C13"
+   ],
+   "original": [
+    "man",
+    "cloak",
+    "cloud",
+    "cloud",
+    "city",
+    "tower"
+   ],
+   "original_bis": [
+    "man",
+    "cloud",
+    "cloud",
+    "city",
+    "tower",
+    "landscape"
+   ],
+   "contours": [
+    "saint",
+    "cloud",
+    "cloud",
+    "cloak",
+    "landscape",
+    "tree"
+   ],
+   "croquis": [
+    "man",
+    "cloak",
+    "frame",
+    "cloud",
+    "landscape",
+    "hand"
+   ],
+   "pictogramme": [
+    "frame",
+    "landscape",
+    "wall",
+    "column",
+    "ornament"
+   ]
+  },
+  {
+   "id": "emblematica:E013203",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "25I3",
+    "34A11",
+    "46C14111",
+    "47I2111(+95247)"
+   ],
+   "original": [
+    "angel",
+    "horse",
+    "tree",
+    "wheel",
+    "house",
+    "sky"
+   ],
+   "original_bis": [
+    "angel",
+    "horse",
+    "tree",
+    "wheel",
+    "cart",
+    "sky"
+   ],
+   "contours": [
+    "horse",
+    "soldier",
+    "tree",
+    "cloud",
+    "landscape",
+    "plant"
+   ],
+   "croquis": [
+    "horse",
+    "man",
+    "landscape",
+    "sky",
+    "tree",
+    "cloud"
+   ],
+   "pictogramme": [
+    "frame",
+    "landscape",
+    "cloud",
+    "cup",
+    "wall",
+    "wall"
+   ]
+  },
+  {
+   "id": "emblematica:E003868",
+   "corpus": "emblème",
+   "type": [
+    "estampe"
+   ],
+   "iconclass": [
+    "11A23",
+    "11D51",
+    "11Q02",
+    "22C311"
+   ],
+   "original": [
+    "angel",
+    "child",
+    "wing",
+    "plant",
+    "flower",
+    "plant"
+   ],
+   "original_bis": [
+    "angel",
+    "child",
+    "wing",
+    "plant",
+    "flower",
+    "landscape"
+   ],
+   "contours": [
+    "angel",
+    "wing",
+    "tree",
+    "landscape",
+    "ruin"
+   ],
+   "croquis": [
+    "bird",
+    "wing",
+    "landscape",
+    "tree",
+    "wall",
+    "shell"
+   ],
+   "pictogramme": [
+    "horse",
+    "man",
+    "landscape",
+    "hat",
+    "wall"
+   ]
+  }
+ ],
+ "reading": "jaccard_with_original: overlap of the name sets between a level and the original (original_bis is the same original named a second time: the ceiling of a non-deterministic namer). first_name_survives: the original's first name is among the level's names. floor: the same scores against another picture's original."
+}

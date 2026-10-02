@@ -1206,6 +1206,60 @@ Three constructions, three refusals. What that does not settle is whether a gram
 *structurally* would do better than a grammar read as more features in a bag, which is the
 distinction the pooling comparison below was built to test.
 
+## The strokes: a drawing of contours, and what a reader still recognises in it
+
+Every channel above starts from tone. This one starts from edges: the picture smoothed until
+hatching and brushwork are gone (σ = 2 px on a 320 side), the gradient's ridges kept and joined
+by hysteresis, a two-colour drawing of contours with no fill. The contours are thinned, walked
+into strokes that pass through crossings along the straightest branch, simplified to polylines,
+and rationed rather than thresholded: the *sketch* keeps the forty longest strokes, the
+*pictogram* the twelve — the way an aleph keeps of an ox the few lines that still say ox. Two
+tables come out of it on the full pool of 21 128: the drawings through DINOv2 (`croquis`), and
+a vocabulary of 128 stroke signs weighted by length (`traits`). Code: `src/caypollard/sketch.py`,
+`scripts/build_sketch_channel.py`.
+
+**Does a machine reader still name the object?** Forty pictures (30 museum works, 10 emblems),
+four versions each, the same closed-vocabulary question put to the same namer (Claude, Sonnet,
+through Claude Code), and the names of each version compared with the names of the original.
+The floor is the same comparison against another picture's original; the ceiling is the
+original named twice, since the namer is not deterministic.
+
+| version | name sets shared (Jaccard) | floor | original's first name survives | floor |
+|---|---:|---:|---:|---:|
+| original, named again | 0.817 | 0.085 | 95.0% | 20.0% |
+| contours | 0.254 | 0.082 | 52.5% | 12.5% |
+| sketch, 40 strokes | 0.196 | 0.097 | 32.5% | 12.5% |
+| **pictogram, 12 strokes** | **0.059** | 0.031 | **2.5%** | 5.0% |
+
+The contour drawing carries the object to a machine reader: the first name survives it one
+time in two, four times the floor. The sketch of forty still does, weakly. **The pictogram of
+twelve tells the reader nothing** — it sits at the floor, and what the namer says in front of it
+is *wall, frame, column*: the longest strokes of a picture are its frame, its horizon and its
+architecture, not its subject. This is the expected failure, and it is the point: choosing the
+twelve strokes that say "house" is a decision about what the thing *is*, taken before the
+drawing, not after it. A bottom-up selection by length cannot take it; a figure-ground step
+that names the object first is what a pictogram needs. Artifact:
+`results/wide/pictogram-naming.json` (`scripts/test_pictogram_naming.py`).
+
+**Does a painted cat find a carved one through its strokes?** The motif test of the section
+above, rerun with the two stroke tables beside pixels, named nodes and mute shapes, on the
+12 424 pictures common to all five tables, 754 queries.
+
+| representation | same motif in ten | over chance | of another kind | over chance |
+|---|---:|---:|---:|---:|
+| pixels | 1.81 | ×26 | 0.83 | ×14 |
+| **croquis** (DINOv2 on the contour drawing) | 0.55 | ×8 | 0.18 | ×3 |
+| named nodes | 0.38 | ×6 | 0.20 | ×3 |
+| **traits** (stroke signs) | 0.18 | ×3 | 0.07 | ×1 |
+| mute shapes | 0.15 | ×2 | 0.10 | ×2 |
+
+The drawing through DINOv2 is the second-best representation measured on this question, ahead
+of the named nodes, and a third of the pixels. The stroke signs themselves are no better than
+the mute shapes. So the contour drawing keeps a real share of what the motif is, and a
+photographic encoder reads it better than a hand-written vocabulary of strokes does — the same
+lesson as the named nodes, where reading beat clustering. Artifact:
+`results/wide/motif-retrieval-traits.json`.
+
 ## What this will not do
 
 Impett and Süsstrunk, clustering Warburg's Bilderatlas on relative limb angles, recovered pose
