@@ -252,9 +252,11 @@ def build_record(description: dict, polygons: dict, corrections: dict | None = N
     """One picture's representation: figures, objects, relations, and the model's sentence.
 
     ``description`` is the proposal (``scripts/pilot_describe.py``), ``polygons`` the outline
-    of each figure and object by id, ``corrections`` what a person changed: per figure id,
-    ``keypoints`` (replacing the proposed ones point by point) and ``name``; per object id,
-    ``name``; and ``removed``, ids to drop. Relations are always recomputed.
+    of each object by id and, for each figure, either one outline or ``{"cuts": [...]}``,
+    alternative outlines best first. ``corrections`` is what a person changed: per figure
+    id, ``keypoints`` (replacing the proposed ones point by point), ``name`` and ``cut``
+    (which alternative outline); per object id, ``name``; and ``removed``, ids to drop.
+    Relations are always recomputed.
     """
     corrections = corrections or {}
     removed = set(corrections.get("removed", []))
@@ -266,13 +268,18 @@ def build_record(description: dict, polygons: dict, corrections: dict | None = N
         edit = edits.get(f["id"], {})
         k = {name: (f.get("keypoints") or {}).get(name) for name in KEYPOINTS}
         k.update(edit.get("keypoints", {}))
+        entry = polygons.get(f["id"])
+        cuts = entry["cuts"] if isinstance(entry, dict) else [entry] if entry else []
+        cut = min(int(edit.get("cut", 0)), max(len(cuts) - 1, 0))
         figure = {
             "id": f["id"],
             "name": edit.get("name", f.get("name", "")),
             "attributes": f.get("attributes", []),
             "box": f["box"],
             "keypoints": k,
-            "polygon": polygons.get(f["id"]),
+            "polygon": cuts[cut] if cuts else None,
+            "cut": cut,
+            "cuts": len(cuts),
             "corrected": sorted(edit.get("keypoints", {})),
         }
         figure["pose"] = pose_angles(k)

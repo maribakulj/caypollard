@@ -60,3 +60,14 @@ def test_relations_from_geometry():
     assert ("F1", "touche", "F2") in found  # right wrist at x=100, inside the youth's box
     assert ("F1", "regarde vers", "F2") in found
     assert not any(a == "F2" for a, _, _ in found)  # no keypoints, no claims
+
+
+def test_build_record_takes_the_chosen_cut():
+    from caypollard.figures import build_record
+
+    description = {"figures": [{"id": "F1", "box": [0, 0, 10, 10], "keypoints": {}}]}
+    a, b = [[0, 0], [5, 0], [5, 5]], [[0, 0], [9, 0], [9, 9]]
+    polygons = {"F1": {"cuts": [a, b]}}
+    assert build_record(description, polygons)["figures"][0]["polygon"] == a
+    chosen = build_record(description, polygons, {"items": {"F1": {"cut": 1}}})["figures"][0]
+    assert chosen["polygon"] == b and chosen["cuts"] == 2

@@ -190,6 +190,10 @@
     return el("div", { class: "pane fig" }, [
       stick(f),
       el("h3", { style: `color:${color(f.id)}`, text: `${f.id} · ${f.name}` }),
+      f.cuts > 1 ? el("div", { class: "edit" }, [
+        el("button", { text: `autre découpe (${f.cut + 1}/${f.cuts})`, onclick: () => save({ [f.id]: (f.cut + 1) % f.cuts }) }),
+        el("span", { class: "muted", text: "la machine en propose plusieurs ; la première est son choix" }),
+      ]) : null,
       f.attributes && f.attributes.length ? el("p", { text: `attributs : ${f.attributes.join(", ")}` }) : null,
       el("p", { class: "muted", text: `tête ${FACING[String(f.facing)]}` }),
       el("p", { class: "muted", text: "squelette normalisé (à droite) : hanches à l'origine, torse vertical, taille unité — trait épais = côté gauche de la figure" }),
@@ -241,16 +245,17 @@
     renderPanes();
   }
 
-  async function save() {
+  async function save(cuts = {}) {
     const corrections = JSON.parse(JSON.stringify(record.corrections || {}));
     corrections.items ||= {};
+    for (const [fig, cut] of Object.entries(cuts)) (corrections.items[fig] ||= {}).cut = cut;
     for (const [fig, pts] of Object.entries(pending)) {
       const item = (corrections.items[fig] ||= {});
       item.keypoints = { ...(item.keypoints || {}), ...pts };
     }
     const res = await fetch("/api/pilote/save", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: current, corrections }) });
     const out = await res.json();
-    if (out.error) { $("#status").textContent = out.error; return; }
+    if (out.error) { const st = $("#status"); if (st) st.textContent = out.error; else console.error(out.error); return; }
     record = out; pending = {}; editing = false; render();
   }
 

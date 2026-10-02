@@ -9,9 +9,10 @@ abstraction, and the shape the relations are measured against. Then
 ``caypollard.figures.build_record`` assembles the record, applying any corrections a
 person saved from the viewer.
 
-Run with ``uv run --with opencv-python-headless``. The SlimSAM weights are expected under
-``data/models/slimsam-77`` (config.json, preprocessor_config.json, model.safetensors from
-the Hugging Face repository Zigeng/SlimSAM-uniform-77).
+Run with ``uv run --with opencv-python-headless``. Two sets of weights are expected, each as
+config.json, preprocessor_config.json and model.safetensors from Hugging Face:
+``data/models/slimsam-77`` (Zigeng/SlimSAM-uniform-77, 39 MB) and
+``data/models/sam-vit-base`` (facebook/sam-vit-base, 375 MB); each figure keeps the better cut.
 """
 
 from __future__ import annotations
@@ -96,63 +97,153 @@ def masks_for(model, processor, image, embeddings, **prompt) -> np.ndarray:
     )[0][0].numpy()
 
 
+UPPER = (
+    "nose",
+    "left_eye",
+    "right_eye",
+    "left_ear",
+    "right_ear",
+    "left_shoulder",
+    "right_shoulder",
+    "left_elbow",
+    "right_elbow",
+    "left_wrist",
+    "right_wrist",
+)
+LOWER = ("left_hip", "right_hip", "left_knee", "right_knee", "left_ankle", "right_ankle")
+
+
+def coverage(mask: np.ndarray, points) -> float:
+    """Share of the points the mask reaches within 8 px of: ankles and wrists sit on the
+    outline, where a strict test drops them at random."""
+    points = list(points)
+    if not points:
+        return 0.0
+    return float(
+        np.mean(
+            [
+                mask[
+                    max(int(p[1]) - 8, 0) : int(p[1]) + 9, max(int(p[0]) - 8, 0) : int(p[0]) + 9
+                ].any()
+                for p in points
+            ]
+        )
+    )
+
+
 def figure_mask(model, processor, image, embeddings, figure: dict, others: list[dict]):
     """Cut one figure out of a busy ground.
 
     A box alone is enough on blank paper; against a hatched landscape SAM takes the whole
     box. So the prompt also carries the figure's own body points (inside), the other
     figures' points that fall in its box (outside), and a grid of points in the box far from
-    its skeleton (outside: likely ground). Of SAM's three proposals the one kept covers the
-    most of the body points while spending the least area far from the skeleton.
+    its skeleton (outside: likely ground). The figure is cut whole, and also as an upper and
+    a lower body joined afterwards -- legs in dark breeches are often in no whole cut.
+    Returns every cut with the share of body points it covers and the share of its area far
+    from the skeleton.
     """
     k = {n: p for n, p in (figure.get("keypoints") or {}).items() if p}
     h, w = image.size[1], image.size[0]
     distance = skeleton_distance((h, w), k)
-    far = 0.7 * torso_length(k)
-    points = [list(map(float, p)) for p in k.values()]
-    labels = [1] * len(points)
+    torso = torso_length(k)
     x0, y0, x1, y1 = figure["box"]
-    for other in others:
-        for p in (other.get("keypoints") or {}).values():
-            if p and x0 <= p[0] <= x1 and y0 <= p[1] <= y1:
-                points.append(list(map(float, p)))
-                labels.append(0)
+    negatives = [
+        list(map(float, p))
+        for other in others
+        for p in (other.get("keypoints") or {}).values()
+        if p and x0 <= p[0] <= x1 and y0 <= p[1] <= y1
+    ]
     for gx in np.linspace(x0, x1, 7)[1:-1]:
         for gy in np.linspace(y0, y1, 7)[1:-1]:
-            if k and distance[min(int(gy), h - 1), min(int(gx), w - 1)] > far:
-                points.append([float(gx), float(gy)])
-                labels.append(0)
-    prompt = {"input_boxes": [[list(map(float, figure["box"]))]]}
-    if points:
-        prompt |= {"input_points": [[points]], "input_labels": [[labels]]}
-    best, best_score = None, -np.inf
-    for mask in masks_for(model, processor, image, embeddings, **prompt):
-        mask = in_box(mask, figure["box"])
-        if not mask.any():
+            if k and distance[min(int(gy), h - 1), min(int(gx), w - 1)] > 0.7 * torso:
+                negatives.append([float(gx), float(gy)])
+
+    def cut(positives: list, box: list[float]) -> list[np.ndarray]:
+        points = [list(map(float, p)) for p in positives] + negatives
+        prompt = {"input_boxes": [[list(map(float, box))]]}
+        if points:
+            labels = [1] * len(positives) + [0] * len(negatives)
+            prompt |= {"input_points": [[points]], "input_labels": [[labels]]}
+        masks = masks_for(model, processor, image, embeddings, **prompt)
+        return [m for m in (in_box(m, figure["box"]) for m in masks) if m.any()]
+
+    def scored(mask: np.ndarray) -> tuple:
+        stray = (mask & (distance > 0.6 * torso)).sum() / mask.sum()
+        return (mask, coverage(mask, k.values()), float(stray))
+
+    candidates = [scored(m) for m in cut(list(k.values()), figure["box"])]
+    parts = []
+    for names in (UPPER, LOWER):
+        pts = [k[n] for n in names if n in k]
+        if len(pts) < 2:
             continue
-        covered = (
-            np.mean([mask[min(int(p[1]), h - 1), min(int(p[0]), w - 1)] for p in k.values()])
-            if k
-            else 0.0
-        )
-        stray = (mask & (distance > 0.6 * torso_length(k))).sum() / mask.sum()
-        if covered - stray > best_score:
-            best, best_score = mask, covered - stray
-    return best
+        pad = 0.4 * torso
+        xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+        box = [
+            max(min(xs) - pad, x0),
+            max(min(ys) - pad, y0),
+            min(max(xs) + pad, x1),
+            min(max(ys) + pad, y1),
+        ]
+        part = [
+            (m, coverage(m, pts), float((m & (distance > 0.6 * torso)).sum() / m.sum()))
+            for m in cut(pts, box)
+        ]
+        if part:
+            parts.append(choose(part))
+    if len(parts) == 2:
+        candidates.append(scored(parts[0] | parts[1]))
+    return candidates
 
 
-def segment(image: Image.Image, description: dict, model, processor, detail: float) -> dict:
-    with torch.no_grad():
-        embeddings = model.get_image_embeddings(
-            processor(image, return_tensors="pt")["pixel_values"]
-        )
+def choose(candidates: list[tuple]) -> np.ndarray | None:
+    """The body first, then tidiness: among the cuts that cover (nearly) as many body points
+    as the best one, the one with the least area far from the skeleton. Trading coverage
+    against stray area in one score kept tidy half-figures (children without legs)."""
+    return rank(candidates)[0] if candidates else None
+
+
+def rank(candidates: list[tuple]) -> list[np.ndarray]:
+    """All distinct cuts, ``choose``'s pick first, then by coverage. Near-duplicates (IoU
+    above 0.9) are dropped, so each alternative a person flips through actually differs."""
+    if not candidates:
+        return []
+    top = max(c[1] for c in candidates)
+    first = min((c for c in candidates if c[1] >= top - 0.05), key=lambda c: c[2])
+    rest = sorted((c for c in candidates if c is not first), key=lambda c: (-c[1], c[2]))
+    kept: list[np.ndarray] = []
+    for mask, _, _ in [first, *rest]:
+        if all((mask & k).sum() / max((mask | k).sum(), 1) < 0.9 for k in kept):
+            kept.append(mask)
+    return kept
+
+
+def segment(image: Image.Image, description: dict, models: list, detail: float) -> dict:
+    """Outline every figure and object, keeping every figure's distinct cuts, best first.
+
+    Neither model wins everywhere: full SAM separates a figure hidden behind another
+    (E014801) and a figure on a cluttered ground (E014782) where SlimSAM merges them, but
+    loses half a skeleton (E014784) or a child's legs (E003797) that SlimSAM keeps, and
+    cutting upper and lower body apart recovers dark legs while losing some upper bodies. No
+    rule tried picks the right cut on all twenty pictures, so each figure keeps its distinct
+    cuts as ``{"cuts": [...]}``, ranked by ``rank``; the viewer lets a person pick another.
+    """
     figures = description.get("figures", [])
+    candidates: dict[str, list] = {f["id"]: [] for f in figures}
+    for model, processor in models:
+        with torch.no_grad():
+            embeddings = model.get_image_embeddings(
+                processor(image, return_tensors="pt")["pixel_values"]
+            )
+        for f in figures:
+            candidates[f["id"]] += figure_mask(
+                model, processor, image, embeddings, f, [o for o in figures if o is not f]
+            )
     polygons = {}
     for f in figures:
-        mask = figure_mask(
-            model, processor, image, embeddings, f, [o for o in figures if o is not f]
-        )
-        polygons[f["id"]] = outline(mask, detail) if mask is not None else None
+        cuts = [outline(m, detail) for m in rank(candidates[f["id"]])]
+        polygons[f["id"]] = {"cuts": [c for c in cuts if c]}
+    # Objects are compact and either model cuts them alike: the last model's cut is kept.
     for o in description.get("objects", []):
         proposals = masks_for(
             model, processor, image, embeddings, input_boxes=[[list(map(float, o["box"]))]]
@@ -169,14 +260,19 @@ def segment(image: Image.Image, description: dict, model, processor, detail: flo
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--images", type=Path, default=Path("data/raw/emblematica/full"))
-    parser.add_argument("--weights", type=Path, default=Path("data/models/slimsam-77"))
+    parser.add_argument(
+        "--weights",
+        type=Path,
+        nargs="+",
+        default=[Path("data/models/slimsam-77"), Path("data/models/sam-vit-base")],
+    )
     parser.add_argument(
         "--detail", type=float, default=0.004, help="contour simplification, share of perimeter"
     )
     parser.add_argument("--resegment", action="store_true")
     args = parser.parse_args()
 
-    model = processor = None
+    models: list = []
     (PILOTE / "masks").mkdir(parents=True, exist_ok=True)
     (PILOTE / "records").mkdir(parents=True, exist_ok=True)
     index = []
@@ -185,11 +281,13 @@ def main() -> None:
         description = json.loads(desc_path.read_text())
         mask_path = PILOTE / "masks" / f"{name}.json"
         if args.resegment or not mask_path.exists():
-            if model is None:
-                model = SamModel.from_pretrained(args.weights).eval()
-                processor = SamProcessor.from_pretrained(args.weights)
+            if not models:
+                models = [
+                    (SamModel.from_pretrained(w).eval(), SamProcessor.from_pretrained(w))
+                    for w in args.weights
+                ]
             image = Image.open(args.images / f"{name}.jpg").convert("RGB")
-            polygons = segment(image, description, model, processor, args.detail)
+            polygons = segment(image, description, models, args.detail)
             mask_path.write_text(json.dumps(polygons))
         polygons = json.loads(mask_path.read_text())
         corr_path = PILOTE / "corrections" / f"{name}.json"
