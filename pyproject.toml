@@ -58,6 +58,8 @@ line-length = 100
 target-version = "py311"
 
 [tool.ruff.lint]
+# The demo explanations are French prose shown on a page: long lines and typographic signs are the point.
+per-file-ignores = { "src/caypollard/demo/explain.py" = ["E501", "RUF001"] }
 # Selected explicitly so the rule set is a property of the project rather than
 # of whichever ruff release CI happens to resolve. The dev extra pins ruff to a
 # minor series for the same reason.
