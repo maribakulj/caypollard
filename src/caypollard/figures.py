@@ -221,14 +221,9 @@ def relations(figures: list[dict], objects: list[dict], *, reach: float = 0.06) 
                 d = distance_to_polygon(p, outline(o))
                 if d <= tol:
                     add("pose le pied sur", o["id"], foot, distance=round(d))
-            for b in figures:
-                if b is not a and distance_to_polygon(p, outline(b)) <= tol and p[1] > centre(b)[1]:
-                    add(
-                        "met le pied sur",
-                        b["id"],
-                        foot,
-                        distance=round(distance_to_polygon(p, outline(b))),
-                    )
+        # A foot on another figure is not read: where two silhouettes overlap in depth, a
+        # foot falls inside the other outline without standing on it (5 false of 5 in the
+        # pilot's first pass).
         out.extend(found.values())
         face = facing(k)
         for b in figures:
