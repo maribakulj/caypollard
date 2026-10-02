@@ -117,6 +117,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             elif path == "/api/demo/search":
                 length = int(self.headers.get("Content-Length", "0"))
                 self.search(json.loads(self.rfile.read(length) or b"{}"))
+            elif path == "/api/pilote/save":
+                length = int(self.headers.get("Content-Length", "0"))
+                self.pilot_save(json.loads(self.rfile.read(length) or b"{}"))
             else:
                 self.send_json({"error": "route inconnue"}, 404)
         except Exception as error:
@@ -154,6 +157,37 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         result["token"] = token
         result["item"] = item
         self.send_json(result)
+
+    def pilot_save(self, request: dict) -> None:
+        """Keep a person's corrections to a pilot picture and recompute its record."""
+        from caypollard.figures import build_record
+
+        name = str(request.get("id", ""))
+        if not name.isalnum():
+            self.send_json({"error": "identifiant invalide"}, 400)
+            return
+        pilot = ROOT / "data/derived/pilote"
+        description_path = pilot / "describe" / f"{name}.json"
+        if not description_path.exists():
+            self.send_json({"error": f"{name} n'est pas dans le pilote"}, 404)
+            return
+        corrections = request.get("corrections") or {}
+        (pilot / "corrections").mkdir(exist_ok=True)
+        (pilot / "corrections" / f"{name}.json").write_text(
+            json.dumps(corrections, ensure_ascii=False, indent=1), encoding="utf-8"
+        )
+        masks = pilot / "masks" / f"{name}.json"
+        record = build_record(
+            json.loads(description_path.read_text(encoding="utf-8")),
+            json.loads(masks.read_text()) if masks.exists() else {},
+            corrections,
+        )
+        record["id"] = name
+        record["image"] = f"data/raw/emblematica/full/{name}.jpg"
+        (pilot / "records" / f"{name}.json").write_text(
+            json.dumps(record, ensure_ascii=False, indent=1), encoding="utf-8"
+        )
+        self.send_json(record)
 
     def search(self, request: dict) -> None:
         analysis = _analyses.get(str(request.get("token", "")))

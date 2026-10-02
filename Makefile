@@ -1,4 +1,4 @@
-.PHONY: test lint notebooks notebooks-alignment phase1-smoke viewer-build sketch-build viewer
+.PHONY: test lint notebooks notebooks-alignment phase1-smoke viewer-build sketch-build viewer pilote-build
 
 # Notebooks that run from repository fixtures with the dev extra alone.
 FIXTURE_NOTEBOOKS := \
@@ -71,3 +71,12 @@ sketch-build:
 
 viewer:
 	uv run python scripts/serve_viewer.py
+
+# The figures pilot: twenty emblems at scan resolution, figures and objects proposed by
+# Claude (Opus), outlined by SlimSAM, relations computed. Seen and corrected at
+# /viewer/pilote.html. The selection is data/derived/pilote/selection.json.
+PILOT_SELECTION := data/derived/pilote/selection.json
+pilote-build:
+	uv run --with opencv-python-headless python scripts/fetch_pilot_pictures.py $(PILOT_SELECTION)
+	uv run python scripts/pilot_describe.py $(PILOT_SELECTION) --model opus
+	uv run --with opencv-python-headless python scripts/pilot_build.py

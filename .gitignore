@@ -15,6 +15,7 @@ __pycache__/
 /data/derived/
 /embeddings/
 /models/
+/data/models/
 
 # Results that should be explicitly versioned rather than dumped
 /results/tmp/
