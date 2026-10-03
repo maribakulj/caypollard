@@ -1,8 +1,8 @@
 # An intermediate visual language for cross-medium iconography
 
 A curated orientation map, not a systematic review. It answers a question the project's
-[review protocol](LITERATURE_REVIEW_PROTOCOL.md) did not originally pose, and which the
-measurements in [`RESULTS.md`](RESULTS.md) forced onto it: **what should an image be transcribed
+[review protocol](../LITERATURE_REVIEW_PROTOCOL.md) did not originally pose, and which the
+measurements in [`RESULTS.md`](../RESULTS.md) forced onto it: **what should an image be transcribed
 into, so that a printed emblem and a painted panel sharing a motif become comparable?**
 
 ## Why the question is now the central one
