@@ -28,25 +28,9 @@ import torch
 from PIL import Image
 from transformers import SamModel, SamProcessor
 
-from caypollard.figures import build_record, torso_axis
+from caypollard.figures import BONES, build_record, torso_axis
 
 PILOTE = Path("data/derived/pilote")
-BONES = (
-    ("left_shoulder", "left_elbow"),
-    ("left_elbow", "left_wrist"),
-    ("right_shoulder", "right_elbow"),
-    ("right_elbow", "right_wrist"),
-    ("left_shoulder", "right_shoulder"),
-    ("left_shoulder", "left_hip"),
-    ("right_shoulder", "right_hip"),
-    ("left_hip", "right_hip"),
-    ("left_hip", "left_knee"),
-    ("left_knee", "left_ankle"),
-    ("right_hip", "right_knee"),
-    ("right_knee", "right_ankle"),
-    ("nose", "left_shoulder"),
-    ("nose", "right_shoulder"),
-)
 
 
 def outline(mask: np.ndarray, detail: float) -> list[list[int]] | None:
@@ -142,7 +126,10 @@ def figure_mask(model, processor, image, embeddings, figure: dict, others: list[
     Returns every cut with the share of body points it covers and the share of its area far
     from the skeleton.
     """
-    k = {n: p for n, p in (figure.get("keypoints") or {}).items() if p}
+    # Only joints that are seen guide the cut: a hidden joint lies on whatever hides it,
+    # and telling SAM "keep this" there would pull the occluder into the figure.
+    hidden = set(figure.get("occluded", []))
+    k = {n: p for n, p in (figure.get("keypoints") or {}).items() if p and n not in hidden}
     h, w = image.size[1], image.size[0]
     distance = skeleton_distance((h, w), k)
     torso = torso_length(k)

@@ -74,8 +74,9 @@
       for (const [name, p] of Object.entries(k)) {
         if (!p) continue;
         const corrected = (f.corrected || []).includes(name) || (pending[f.id] && name in pending[f.id]);
-        const dot = el("circle", { cx: p[0], cy: p[1], r: editing && image ? 9 : 6, fill: name.startsWith("left") ? c : "#fff", stroke: corrected ? "#000" : c, "stroke-width": corrected ? 4 : 3, class: editing && image ? "kp" : "" },
-          [el("title", { text: `${f.name} — ${POINT_FR[name]}${name.startsWith("left") ? " (plein = gauche de la figure)" : ""}` })]);
+        const hidden = (f.occluded || []).includes(name) && !corrected;
+        const dot = el("circle", { cx: p[0], cy: p[1], r: editing && image ? 9 : 6, fill: hidden ? "none" : name.startsWith("left") ? c : "#fff", stroke: corrected ? "#000" : c, "stroke-width": corrected ? 4 : 3, "stroke-dasharray": hidden ? "3 3" : "", class: editing && image ? "kp" : "" },
+          [el("title", { text: `${f.name} — ${POINT_FR[name]}${hidden ? " (caché : déduit, pas vu)" : name.startsWith("left") ? " (plein = gauche de la figure)" : ""}` })]);
         if (editing && image) attachDrag(dot, f, name);
         g.append(dot);
       }
@@ -198,6 +199,7 @@
       el("p", { class: "muted", text: `tête ${FACING[String(f.facing)]}` }),
       el("p", { class: "muted", text: "squelette normalisé (à droite) : hanches à l'origine, torse vertical, taille unité — trait épais = côté gauche de la figure" }),
       missing.length ? el("p", { class: "warn", text: `points absents : ${missing.join(", ")}` }) : null,
+      f.occluded && f.occluded.length ? el("p", { class: "muted", text: `points cachés, déduits (cercles vides) : ${f.occluded.map((n) => POINT_FR[n]).join(", ")}` }) : null,
       el("table", { class: "pose" }, [el("tr", {}, [el("th", { text: "membre" }), el("th", { text: "angle au torse" })]), ...rows]),
     ]);
   }
@@ -231,7 +233,7 @@
       el("div", { class: "panes" }, [
         el("div", { class: "pane" }, [el("h3", { text: "L'image et la proposition" }), toggles, el("div", { id: "stage", class: "stage" }), editBar]),
         el("div", { class: "pane" }, [el("h3", { text: "La représentation, sans les pixels" }), el("div", { id: "abstract" }),
-          el("p", { class: "muted", text: "flèche pleine : touche / tient · tirets longs : tend le bras vers · pointillés : regarde vers" })]),
+          el("p", { class: "muted", text: "flèche pleine : touche / tient · tirets longs : tend le bras vers · pointillés : regarde vers · « passe derrière » est dans la liste des relations" })]),
       ]),
       el("div", { class: "panes", style: "margin-top:16px" }, [
         el("div", { class: "pane" }, [el("h3", { text: "Relations calculées par la géométrie" }),

@@ -52,6 +52,24 @@ SEGMENTS = (
     ("jambe droite", "right_knee", "right_ankle"),
 )
 
+# Bones drawn between keypoints: the skeleton as a set of segments.
+BONES = (
+    ("left_shoulder", "left_elbow"),
+    ("left_elbow", "left_wrist"),
+    ("right_shoulder", "right_elbow"),
+    ("right_elbow", "right_wrist"),
+    ("left_shoulder", "right_shoulder"),
+    ("left_shoulder", "left_hip"),
+    ("right_shoulder", "right_hip"),
+    ("left_hip", "right_hip"),
+    ("left_hip", "left_knee"),
+    ("left_knee", "left_ankle"),
+    ("right_hip", "right_knee"),
+    ("right_knee", "right_ankle"),
+    ("nose", "left_shoulder"),
+    ("nose", "right_shoulder"),
+)
+
 HANDS = (("main gauche", "left_wrist", "left_elbow"), ("main droite", "right_wrist", "right_elbow"))
 FEET = (("pied gauche", "left_ankle"), ("pied droit", "right_ankle"))
 
@@ -178,6 +196,78 @@ def _merge(found: dict, subject: str, rel: str, target: str, part: str, **eviden
         found[key] = {"a": subject, "rel": rel, "b": target, "par": part, **evidence}
 
 
+# Which part of the body each bone and joint belongs to, for saying what passes behind.
+PART = {
+    "left_shoulder": "bras gauche",
+    "left_elbow": "bras gauche",
+    "left_wrist": "bras gauche",
+    "right_shoulder": "bras droit",
+    "right_elbow": "bras droit",
+    "right_wrist": "bras droit",
+    "left_hip": "jambe gauche",
+    "left_knee": "jambe gauche",
+    "left_ankle": "jambe gauche",
+    "right_hip": "jambe droite",
+    "right_knee": "jambe droite",
+    "right_ankle": "jambe droite",
+    "nose": "tête",
+    "left_eye": "tête",
+    "right_eye": "tête",
+    "left_ear": "tête",
+    "right_ear": "tête",
+}
+BONE_PART = {bone: PART[bone[1]] for bone in BONES if bone[0] != "nose"} | {
+    ("left_shoulder", "right_shoulder"): "torse",
+    ("left_shoulder", "left_hip"): "torse",
+    ("right_shoulder", "right_hip"): "torse",
+    ("left_hip", "right_hip"): "torse",
+    ("nose", "left_shoulder"): "tête",
+    ("nose", "right_shoulder"): "tête",
+}
+
+
+def hidden_under(a: dict, b: dict) -> dict[str, int]:
+    """Which parts of ``a``'s body run under ``b``, and how much: ``b`` is in front there.
+
+    The silhouette is what the engraver drew, the skeleton the whole body. Where ``a``'s
+    skeleton passes inside ``b``'s outline but outside its own, ``a`` continues behind
+    ``b``. Counted per body part in samples along ``a``'s bones (one per 2.5% of its
+    height), plus three for each bone that crosses ``b``'s outline end to end, plus four for
+    each joint of ``a`` placed as hidden that lies inside ``b``'s outline. Nothing is
+    invented about the hidden part beyond the joints already placed.
+
+    Depth is read part by part, not figure by figure: in an embrace the bodies interlace,
+    a kneeling soul in front of Christ with her arm behind his back (E003839).
+    """
+    own, other = a.get("polygon"), b.get("polygon")
+    k = a.get("keypoints") or {}
+    parts: dict[str, int] = {}
+    if not own or not other:
+        return parts
+    step = max(0.025 * height(a), 1.0)
+    for bone in BONES:
+        p, q = bone
+        if not k.get(p) or not k.get(q):
+            continue
+        (x0, y0), (x1, y1) = k[p], k[q]
+        n = max(int(math.hypot(x1 - x0, y1 - y0) / step), 1)
+        under = 0
+        for i in range(n + 1):
+            pt = (x0 + (x1 - x0) * i / n, y0 + (y1 - y0) * i / n)
+            if point_in_polygon(pt, other) and not point_in_polygon(pt, own):
+                under += 1
+        # A bone that crosses the other outline -- both ends outside it, its middle under
+        # it -- passes behind however thin the crossing (a leg behind a skeleton's shin).
+        if under and not point_in_polygon(k[p], other) and not point_in_polygon(k[q], other):
+            under += 3
+        if under:
+            parts[BONE_PART[bone]] = parts.get(BONE_PART[bone], 0) + under
+    for name in a.get("occluded", []):
+        if k.get(name) and point_in_polygon(k[name], other):
+            parts[PART[name]] = parts.get(PART[name], 0) + 4
+    return parts
+
+
 def relations(figures: list[dict], objects: list[dict], *, reach: float = 0.06) -> list[dict]:
     """Relations computed from geometry. ``reach`` is a fraction of the figure's height.
 
@@ -236,6 +326,17 @@ def relations(figures: list[dict], objects: list[dict], *, reach: float = 0.06) 
                 out.append({"a": a["id"], "rel": "tourne le dos à", "b": b["id"]})
             if a["box"][3] < b["box"][1] + 0.25 * height(b):
                 out.append({"a": a["id"], "rel": "au-dessus de", "b": b["id"]})
+            for part, evidence in hidden_under(a, b).items():
+                if evidence >= 3:
+                    out.append(
+                        {
+                            "a": a["id"],
+                            "rel": "passe derrière",
+                            "b": b["id"],
+                            "par": part,
+                            "indices": evidence,
+                        }
+                    )
             if height(a) > 1.3 * height(b):
                 out.append(
                     {
@@ -281,6 +382,7 @@ def build_record(description: dict, polygons: dict, corrections: dict | None = N
             "cut": cut,
             "cuts": len(cuts),
             "corrected": sorted(edit.get("keypoints", {})),
+            "occluded": sorted(set(f.get("occluded", [])) - set(edit.get("keypoints", {}))),
         }
         figure["pose"] = pose_angles(k)
         figure["skeleton"] = normalised_skeleton(k)

@@ -71,3 +71,26 @@ def test_build_record_takes_the_chosen_cut():
     assert build_record(description, polygons)["figures"][0]["polygon"] == a
     chosen = build_record(description, polygons, {"items": {"F1": {"cut": 1}}})["figures"][0]
     assert chosen["polygon"] == b and chosen["cuts"] == 2
+
+
+def test_a_body_running_under_another_outline_is_behind_it():
+    from caypollard.figures import relations
+
+    # B's leg (hip to ankle along x=50) is drawn only down to y=60; A's outline covers below.
+    back = {
+        "id": "B",
+        "box": [40, 0, 60, 100],
+        "keypoints": {"left_hip": [50, 40], "left_knee": [50, 70], "left_ankle": [50, 100]},
+        "polygon": [[40, 0], [60, 0], [60, 60], [40, 60]],
+    }
+    front = {
+        "id": "A",
+        "box": [30, 60, 70, 100],
+        "keypoints": {},
+        "polygon": [[30, 60], [70, 60], [70, 100], [30, 100]],
+    }
+    found = {(r["a"], r["rel"], r["b"]) for r in relations([back, front], [])}
+    assert ("B", "passe derrière", "A") in found
+    assert ("A", "passe derrière", "B") not in found
+    (rel,) = [r for r in relations([back, front], []) if r["rel"] == "passe derrière"]
+    assert rel["par"] == "jambe gauche"
