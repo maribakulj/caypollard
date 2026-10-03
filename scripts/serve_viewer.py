@@ -160,6 +160,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def pilot_save(self, request: dict) -> None:
         """Keep a person's corrections to a pilot picture and recompute its record."""
+        from caypollard.demo.bridge import script
         from caypollard.figures import build_record
 
         name = str(request.get("id", ""))
@@ -173,14 +174,27 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return
         corrections = request.get("corrections") or {}
         (pilot / "corrections").mkdir(exist_ok=True)
-        (pilot / "corrections" / f"{name}.json").write_text(
+        corr_path = pilot / "corrections" / f"{name}.json"
+        before = json.loads(corr_path.read_text(encoding="utf-8")) if corr_path.exists() else {}
+        description = json.loads(description_path.read_text(encoding="utf-8"))
+
+        def moved(c: dict) -> dict:
+            return {fid: e.get("keypoints", {}) for fid, e in c.get("items", {}).items()}
+
+        masks = pilot / "masks" / f"{name}.json"
+        if moved(corrections) != moved(before):
+            # Moved points re-cut the silhouettes, which renumbers the alternative cuts:
+            # the figures whose points moved go back to the first one.
+            for fid, points in moved(corrections).items():
+                if points != moved(before).get(fid):
+                    corrections["items"][fid].pop("cut", None)
+            with _engine_lock:
+                script("pilot_build").cut_picture(name, description, corrections)
+        corr_path.write_text(
             json.dumps(corrections, ensure_ascii=False, indent=1), encoding="utf-8"
         )
-        masks = pilot / "masks" / f"{name}.json"
         record = build_record(
-            json.loads(description_path.read_text(encoding="utf-8")),
-            json.loads(masks.read_text()) if masks.exists() else {},
-            corrections,
+            description, json.loads(masks.read_text()) if masks.exists() else {}, corrections
         )
         record["id"] = name
         record["image"] = f"data/raw/emblematica/full/{name}.jpg"

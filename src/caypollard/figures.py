@@ -14,6 +14,7 @@ in keypoint names are the figure's own.
 from __future__ import annotations
 
 import functools
+import json
 import math
 from collections.abc import Sequence
 
@@ -346,6 +347,20 @@ def relations(figures: list[dict], objects: list[dict], *, reach: float = 0.06) 
                         "rapport": round(height(a) / height(b), 2),
                     }
                 )
+    return out
+
+
+def apply_corrections(description: dict, corrections: dict | None) -> dict:
+    """The description with a person's keypoint edits applied, for re-cutting silhouettes.
+
+    A corrected point is a seen point: it leaves the ``occluded`` list.
+    """
+    out = json.loads(json.dumps(description))
+    edits = (corrections or {}).get("items", {})
+    for f in out.get("figures", []):
+        moved = edits.get(f["id"], {}).get("keypoints", {})
+        f.setdefault("keypoints", {}).update(moved)
+        f["occluded"] = [n for n in f.get("occluded", []) if n not in moved]
     return out
 
 

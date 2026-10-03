@@ -28,7 +28,7 @@ import torch
 from PIL import Image
 from transformers import SamModel, SamProcessor
 
-from caypollard.figures import BONES, build_record, torso_axis
+from caypollard.figures import BONES, apply_corrections, build_record, torso_axis
 
 PILOTE = Path("data/derived/pilote")
 
@@ -244,22 +244,48 @@ def segment(image: Image.Image, description: dict, models: list, detail: float) 
     return polygons
 
 
+WEIGHTS = [Path("data/models/slimsam-77"), Path("data/models/sam-vit-base")]
+_models: dict[tuple, list] = {}
+
+
+def load_models(weights=WEIGHTS) -> list:
+    """Both SAM models, loaded once per process (the viewer's server reuses them)."""
+    key = tuple(str(w) for w in weights)
+    if key not in _models:
+        _models[key] = [
+            (SamModel.from_pretrained(w).eval(), SamProcessor.from_pretrained(w)) for w in weights
+        ]
+    return _models[key]
+
+
+def cut_picture(
+    name: str,
+    description: dict,
+    corrections: dict | None,
+    *,
+    models=None,
+    images=Path("data/raw/emblematica/full"),
+    detail: float = 0.004,
+) -> dict:
+    """Outline one picture's figures and objects from its description as corrected."""
+    image = Image.open(images / f"{name}.jpg").convert("RGB")
+    polygons = segment(
+        image, apply_corrections(description, corrections), models or load_models(), detail
+    )
+    (PILOTE / "masks" / f"{name}.json").write_text(json.dumps(polygons))
+    return polygons
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--images", type=Path, default=Path("data/raw/emblematica/full"))
-    parser.add_argument(
-        "--weights",
-        type=Path,
-        nargs="+",
-        default=[Path("data/models/slimsam-77"), Path("data/models/sam-vit-base")],
-    )
+    parser.add_argument("--weights", type=Path, nargs="+", default=WEIGHTS)
     parser.add_argument(
         "--detail", type=float, default=0.004, help="contour simplification, share of perimeter"
     )
     parser.add_argument("--resegment", action="store_true")
     args = parser.parse_args()
 
-    models: list = []
     (PILOTE / "masks").mkdir(parents=True, exist_ok=True)
     (PILOTE / "records").mkdir(parents=True, exist_ok=True)
     index = []
@@ -267,18 +293,18 @@ def main() -> None:
         name = desc_path.stem
         description = json.loads(desc_path.read_text())
         mask_path = PILOTE / "masks" / f"{name}.json"
-        if args.resegment or not mask_path.exists():
-            if not models:
-                models = [
-                    (SamModel.from_pretrained(w).eval(), SamProcessor.from_pretrained(w))
-                    for w in args.weights
-                ]
-            image = Image.open(args.images / f"{name}.jpg").convert("RGB")
-            polygons = segment(image, description, models, args.detail)
-            mask_path.write_text(json.dumps(polygons))
-        polygons = json.loads(mask_path.read_text())
         corr_path = PILOTE / "corrections" / f"{name}.json"
         corrections = json.loads(corr_path.read_text()) if corr_path.exists() else None
+        if args.resegment or not mask_path.exists():
+            cut_picture(
+                name,
+                description,
+                corrections,
+                models=load_models(args.weights),
+                images=args.images,
+                detail=args.detail,
+            )
+        polygons = json.loads(mask_path.read_text())
         record = build_record(description, polygons, corrections)
         record["id"] = name
         record["image"] = f"data/raw/emblematica/full/{name}.jpg"

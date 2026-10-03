@@ -255,8 +255,12 @@
       const item = (corrections.items[fig] ||= {});
       item.keypoints = { ...(item.keypoints || {}), ...pts };
     }
+    const st = $("#status");
+    if (st) st.textContent = "enregistrement… si des points ont bougé, la découpe est refaite (30 s à 2 min)";
+    document.body.style.cursor = "progress";
     const res = await fetch("/api/pilote/save", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: current, corrections }) });
     const out = await res.json();
+    document.body.style.cursor = "";
     if (out.error) { const st = $("#status"); if (st) st.textContent = out.error; else console.error(out.error); return; }
     record = out; pending = {}; editing = false; render();
   }
