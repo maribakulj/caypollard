@@ -4,10 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 
-**A research prototype: a toolkit for studying how cultural-heritage images are similar —
-by their pixels, by the knowledge graph around them, by their text, and by intermediate
-representations of what they depict — and for comparing, evaluating and inspecting those
-similarities side by side.**
+**A research prototype for iconographic image retrieval across prints and other media.**
 
 Status: **prototype, in active exploration.** The tools below run on real corpora (Iconclass AI
 Test Set, Emblematica Online, Rijksmuseum via Wikidata). The measurements made with them so far
