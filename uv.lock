@@ -287,6 +287,7 @@ alignment = [
 ]
 dev = [
     { name = "jupyterlab" },
+    { name = "pillow" },
     { name = "pytest" },
     { name = "ruff" },
 ]
@@ -317,6 +318,7 @@ requires-dist = [
     { name = "numpy", specifier = ">=1.26" },
     { name = "open-clip-torch", marker = "extra == 'vision'", specifier = ">=2.26" },
     { name = "pandas", specifier = ">=2.2" },
+    { name = "pillow", marker = "extra == 'dev'", specifier = ">=10.4" },
     { name = "pillow", marker = "extra == 'vision'", specifier = ">=10.4" },
     { name = "pykeen", marker = "extra == 'graph'", specifier = ">=1.11,<1.12" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
