@@ -16,7 +16,7 @@ STEPS: dict[str, dict] = {
         "(Sobel après lissage gaussien, normalisé au 99e centile), la forme (réduction à 48×48 puis "
         "étirement des centiles 2–98), la silhouette (la forme seuillée à sa médiane), la masse "
         "(Otsu, puis fraction d'encre locale seuillée).",
-        "why": "Mesuré dans docs/archive/VISUAL_RECORD.md « Why pixels will not do » : chaque rendu abaisse la "
+        "why": "Mesuré dans docs/VISUAL_RECORD.md « Why pixels will not do » : chaque rendu abaisse la "
         "reconnaissance du corpus par l'encodeur, monotonement ; la silhouette la cache le mieux "
         "(89,3 % contre 97,4 %), Sobel retrouve le mieux le partenaire (rang médian 600 contre 1 303).",
         "code": "scripts/render_medium_invariant.py : render(mode, side=448, sigma=1.2, coarse=48)",
@@ -62,7 +62,7 @@ STEPS: dict[str, dict] = {
         "(768 valeurs) et on le normalise en L2. Aucun apprentissage sur ce corpus.",
         "why": "C'est la référence que tout le reste tente de battre. Un plongement photographique nomme "
         "le corpus d'origine 97,4 % du temps : il lit l'objet, l'institution et la main, faiblement "
-        "ce qui est représenté (régimes, docs/archive/VISUAL_RECORD.md).",
+        "ce qui est représenté (régimes, docs/VISUAL_RECORD.md).",
         "code": "src/caypollard/vision/encoders.py : HuggingFaceVisionEncoder, pooling CLS",
     },
     "silhouette": {
@@ -119,7 +119,7 @@ STEPS: dict[str, dict] = {
         "signe) ; seuls les 9 518 triplets vus au moins 30 fois dans le pool sont gardés, et le "
         "vecteur compte leurs occurrences. Un lion sous une couronne n'est pas un lion qui la porte.",
         "why": "Refusée trois fois par les mesures : sur le corpus large, ajouter les relations aux formes "
-        "ne bouge le rang médian que d'une unité sur vingt mille (docs/archive/VISUAL_RECORD.md, « The "
+        "ne bouge le rang médian que d'une unité sur vingt mille (docs/VISUAL_RECORD.md, « The "
         "grammar, twice asked and twice refused »). Et le vocabulaire des relations est le carré du "
         "lexique : à 256 signes, 14 651 images sur 21 128 n'ont aucun triplet assez fréquent, d'où "
         "les 64 signes. Elle est exposée ici pour être vue avant d'être écartée.",
@@ -249,7 +249,7 @@ STEPS: dict[str, dict] = {
         "Pour mélanger des canaux : chaque vecteur est normalisé, multiplié par son poids, "
         "concaténé, et le tout renormalisé ; le pool est construit de même sur les images "
         "présentes dans tous les canaux choisis. Poids zéro = canal retiré.",
-        "why": "Les régimes de docs/archive/VISUAL_RECORD.md sont exactement cette recherche, à laquelle on ajoute "
+        "why": "Les régimes de docs/VISUAL_RECORD.md sont exactement cette recherche, à laquelle on ajoute "
         "un filtre : ne classer que les candidats que le régime admet (autre type, autre "
         "collection…). Les badges de chaque résultat disent ce qu'il partage avec la requête, et "
         "les notations « moyeux » (portées par plus de 3,2 % du pool) ne comptent pas comme sujet.",

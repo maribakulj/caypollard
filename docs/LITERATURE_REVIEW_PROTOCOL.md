@@ -26,7 +26,7 @@ constructed.
   support measured rather than asserted? *Added 2026-09-17, after the cross-medium measurement
   showed a visual encoder naming the holding corpus 98.1% of the time while placing an object's
   best cross-medium partner at the middle of the pool. The orientation map for this question is
-  [`archive/VISUAL_LANGUAGE.md`](archive/VISUAL_LANGUAGE.md); a publication-grade review of it has not been run.*
+  [`VISUAL_LANGUAGE.md`](VISUAL_LANGUAGE.md); a publication-grade review of it has not been run.*
 
 ## 2. Sources
 
