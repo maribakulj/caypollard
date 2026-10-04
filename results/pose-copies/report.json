@@ -1,0 +1,554 @@
+{
+ "pictures": 36,
+ "scenes": 10,
+ "chance": {
+  "top1": 0.097,
+  "mAP": 0.181
+ },
+ "pose": {
+  "queries": 34,
+  "top1": 0.971,
+  "mAP": 0.808,
+  "median_first_hit": 1.0
+ },
+ "pose_nearest": {
+  "bewick-abt": [
+   "icones1648-abt",
+   "holbein1526-abt",
+   "mechel-abt",
+   "icones1648-altmann",
+   "hollar-abt"
+  ],
+  "bewick-altmann": [
+   "mechel-altweib",
+   "bewick-altweib",
+   "hollar-abt",
+   "hollar-altweib",
+   "icones1648-narr"
+  ],
+  "bewick-altweib": [
+   "mechel-altweib",
+   "hollar-altweib",
+   "icones1648-altweib",
+   "holbein1526-altweib",
+   "bewick-altmann"
+  ],
+  "bewick-blinde": [
+   "icones1648-blinde",
+   "hollar-abt",
+   "icones1648-narr",
+   "bewick-narr",
+   "holbein1526-abt"
+  ],
+  "bewick-edelmann": [
+   "holbein1526-edelmann",
+   "icones1648-edelmann",
+   "hollar-abt",
+   "holbein1526-abt",
+   "bewick-narr"
+  ],
+  "bewick-graf": [
+   "hollar-graf",
+   "hollar-abt",
+   "icones1648-narr",
+   "mechel-abt",
+   "bewick-narr"
+  ],
+  "bewick-kriegsmann": [
+   "icones1648-kriegsmann",
+   "mechel-kriegsmann",
+   "hollar-kriegsmann",
+   "holbein1526-altweib",
+   "bewick-altweib"
+  ],
+  "bewick-narr": [
+   "icones1648-narr",
+   "mechel-narr",
+   "mechel-abt",
+   "hollar-abt",
+   "bewick-graf"
+  ],
+  "holbein1526-abt": [
+   "icones1648-abt",
+   "bewick-abt",
+   "hollar-abt",
+   "mechel-abt",
+   "mechel-narr"
+  ],
+  "holbein1526-altmann": [
+   "mechel-altmann",
+   "hollar-altmann",
+   "icones1648-altmann",
+   "mechel-narr",
+   "bewick-abt"
+  ],
+  "holbein1526-altweib": [
+   "bewick-altweib",
+   "mechel-altweib",
+   "hollar-altweib",
+   "icones1648-altweib",
+   "icones1648-junggesell"
+  ],
+  "holbein1526-edelmann": [
+   "icones1648-edelmann",
+   "mechel-edelmann",
+   "bewick-edelmann",
+   "mechel-abt",
+   "mechel-narr"
+  ],
+  "holbein1526-graf": [
+   "bewick-graf",
+   "icones1648-narr",
+   "mechel-graf",
+   "bewick-narr",
+   "icones1648-graf"
+  ],
+  "hollar-abt": [
+   "mechel-abt",
+   "bewick-graf",
+   "icones1648-narr",
+   "holbein1526-abt",
+   "icones1648-abt"
+  ],
+  "hollar-altmann": [
+   "mechel-altmann",
+   "icones1648-altmann",
+   "holbein1526-altmann",
+   "mechel-narr",
+   "icones1648-narr"
+  ],
+  "hollar-altweib": [
+   "mechel-altweib",
+   "bewick-altweib",
+   "icones1648-altweib",
+   "holbein1526-altweib",
+   "bewick-altmann"
+  ],
+  "hollar-graf": [
+   "bewick-graf",
+   "hollar-abt",
+   "icones1648-narr",
+   "icones1648-graf",
+   "mechel-graf"
+  ],
+  "hollar-kriegsmann": [
+   "icones1648-kriegsmann",
+   "bewick-kriegsmann",
+   "mechel-kriegsmann",
+   "holbein1526-abt",
+   "icones1648-abt"
+  ],
+  "icones1648-abt": [
+   "holbein1526-abt",
+   "bewick-abt",
+   "mechel-abt",
+   "mechel-narr",
+   "hollar-abt"
+  ],
+  "icones1648-altmann": [
+   "hollar-altmann",
+   "mechel-altmann",
+   "holbein1526-altmann",
+   "mechel-narr",
+   "holbein1526-abt"
+  ],
+  "icones1648-altweib": [
+   "bewick-altweib",
+   "mechel-altweib",
+   "hollar-altweib",
+   "holbein1526-altweib",
+   "bewick-altmann"
+  ],
+  "icones1648-blinde": [
+   "mechel-blinde",
+   "icones1648-altmann",
+   "holbein1526-abt",
+   "icones1648-junggesell",
+   "mechel-narr"
+  ],
+  "icones1648-edelmann": [
+   "holbein1526-edelmann",
+   "bewick-edelmann",
+   "bewick-narr",
+   "hollar-abt",
+   "mechel-edelmann"
+  ],
+  "icones1648-graf": [
+   "mechel-graf",
+   "mechel-narr",
+   "bewick-graf",
+   "holbein1526-abt",
+   "hollar-graf"
+  ],
+  "icones1648-jungfraw": [
+   "icones1648-altmann",
+   "bewick-narr",
+   "icones1648-narr",
+   "icones1648-altweib",
+   "hollar-altmann"
+  ],
+  "icones1648-junggesell": [
+   "icones1648-altmann",
+   "holbein1526-abt",
+   "hollar-altmann",
+   "mechel-altmann",
+   "icones1648-blinde"
+  ],
+  "icones1648-kriegsmann": [
+   "mechel-kriegsmann",
+   "bewick-kriegsmann",
+   "hollar-kriegsmann",
+   "icones1648-altmann",
+   "holbein1526-altweib"
+  ],
+  "icones1648-narr": [
+   "bewick-narr",
+   "mechel-narr",
+   "hollar-abt",
+   "mechel-abt",
+   "bewick-graf"
+  ],
+  "mechel-abt": [
+   "hollar-abt",
+   "icones1648-abt",
+   "icones1648-narr",
+   "bewick-abt",
+   "holbein1526-abt"
+  ],
+  "mechel-altmann": [
+   "hollar-altmann",
+   "holbein1526-altmann",
+   "icones1648-altmann",
+   "mechel-narr",
+   "icones1648-junggesell"
+  ],
+  "mechel-altweib": [
+   "bewick-altweib",
+   "hollar-altweib",
+   "icones1648-altweib",
+   "holbein1526-altweib",
+   "bewick-altmann"
+  ],
+  "mechel-blinde": [
+   "icones1648-blinde",
+   "holbein1526-abt",
+   "icones1648-junggesell",
+   "mechel-graf",
+   "icones1648-altmann"
+  ],
+  "mechel-edelmann": [
+   "holbein1526-edelmann",
+   "bewick-graf",
+   "hollar-abt",
+   "icones1648-edelmann",
+   "holbein1526-abt"
+  ],
+  "mechel-graf": [
+   "icones1648-graf",
+   "mechel-narr",
+   "holbein1526-abt",
+   "icones1648-altmann",
+   "hollar-altmann"
+  ],
+  "mechel-kriegsmann": [
+   "icones1648-kriegsmann",
+   "icones1648-altmann",
+   "mechel-narr",
+   "bewick-kriegsmann",
+   "hollar-altmann"
+  ],
+  "mechel-narr": [
+   "bewick-narr",
+   "icones1648-narr",
+   "icones1648-altmann",
+   "hollar-altmann",
+   "holbein1526-abt"
+  ]
+ },
+ "pixels": {
+  "queries": 34,
+  "top1": 0.971,
+  "mAP": 0.839,
+  "median_first_hit": 1.0
+ },
+ "pixels_nearest": {
+  "bewick-abt": [
+   "holbein1526-abt",
+   "mechel-abt",
+   "icones1648-abt",
+   "bewick-kriegsmann",
+   "bewick-narr"
+  ],
+  "bewick-altmann": [
+   "holbein1526-altmann",
+   "mechel-altmann",
+   "icones1648-altmann",
+   "bewick-altweib",
+   "mechel-altweib"
+  ],
+  "bewick-altweib": [
+   "holbein1526-altweib",
+   "icones1648-altweib",
+   "hollar-altweib",
+   "mechel-altweib",
+   "mechel-altmann"
+  ],
+  "bewick-blinde": [
+   "bewick-altweib",
+   "holbein1526-altweib",
+   "mechel-altmann",
+   "mechel-altweib",
+   "bewick-kriegsmann"
+  ],
+  "bewick-edelmann": [
+   "holbein1526-edelmann",
+   "icones1648-edelmann",
+   "icones1648-graf",
+   "mechel-edelmann",
+   "bewick-narr"
+  ],
+  "bewick-graf": [
+   "holbein1526-graf",
+   "icones1648-graf",
+   "mechel-graf",
+   "hollar-graf",
+   "mechel-blinde"
+  ],
+  "bewick-kriegsmann": [
+   "icones1648-kriegsmann",
+   "bewick-narr",
+   "holbein1526-graf",
+   "bewick-abt",
+   "bewick-graf"
+  ],
+  "bewick-narr": [
+   "icones1648-narr",
+   "mechel-narr",
+   "holbein1526-graf",
+   "mechel-abt",
+   "mechel-altweib"
+  ],
+  "holbein1526-abt": [
+   "bewick-abt",
+   "icones1648-abt",
+   "mechel-abt",
+   "bewick-narr",
+   "bewick-kriegsmann"
+  ],
+  "holbein1526-altmann": [
+   "icones1648-altmann",
+   "bewick-altmann",
+   "mechel-altmann",
+   "bewick-altweib",
+   "mechel-altweib"
+  ],
+  "holbein1526-altweib": [
+   "bewick-altweib",
+   "hollar-altweib",
+   "icones1648-altweib",
+   "mechel-altweib",
+   "mechel-altmann"
+  ],
+  "holbein1526-edelmann": [
+   "bewick-edelmann",
+   "icones1648-edelmann",
+   "mechel-edelmann",
+   "holbein1526-graf",
+   "bewick-narr"
+  ],
+  "holbein1526-graf": [
+   "icones1648-graf",
+   "bewick-graf",
+   "mechel-graf",
+   "bewick-narr",
+   "hollar-graf"
+  ],
+  "hollar-abt": [
+   "mechel-abt",
+   "icones1648-edelmann",
+   "icones1648-abt",
+   "bewick-edelmann",
+   "icones1648-junggesell"
+  ],
+  "hollar-altmann": [
+   "mechel-altmann",
+   "holbein1526-altmann",
+   "hollar-altweib",
+   "bewick-altweib",
+   "icones1648-altmann"
+  ],
+  "hollar-altweib": [
+   "holbein1526-altweib",
+   "bewick-altweib",
+   "mechel-altweib",
+   "icones1648-altweib",
+   "hollar-altmann"
+  ],
+  "hollar-graf": [
+   "icones1648-graf",
+   "bewick-graf",
+   "mechel-graf",
+   "holbein1526-graf",
+   "icones1648-edelmann"
+  ],
+  "hollar-kriegsmann": [
+   "mechel-kriegsmann",
+   "icones1648-kriegsmann",
+   "icones1648-graf",
+   "bewick-kriegsmann",
+   "bewick-graf"
+  ],
+  "icones1648-abt": [
+   "holbein1526-abt",
+   "mechel-abt",
+   "bewick-abt",
+   "icones1648-kriegsmann",
+   "icones1648-narr"
+  ],
+  "icones1648-altmann": [
+   "holbein1526-altmann",
+   "mechel-altmann",
+   "bewick-altmann",
+   "bewick-altweib",
+   "hollar-altmann"
+  ],
+  "icones1648-altweib": [
+   "mechel-altweib",
+   "holbein1526-altweib",
+   "hollar-altweib",
+   "bewick-altweib",
+   "mechel-altmann"
+  ],
+  "icones1648-blinde": [
+   "mechel-blinde",
+   "mechel-narr",
+   "icones1648-narr",
+   "bewick-narr",
+   "bewick-graf"
+  ],
+  "icones1648-edelmann": [
+   "holbein1526-edelmann",
+   "bewick-edelmann",
+   "icones1648-graf",
+   "mechel-abt",
+   "bewick-graf"
+  ],
+  "icones1648-graf": [
+   "holbein1526-graf",
+   "bewick-graf",
+   "hollar-graf",
+   "mechel-graf",
+   "icones1648-edelmann"
+  ],
+  "icones1648-jungfraw": [
+   "icones1648-graf",
+   "icones1648-junggesell",
+   "icones1648-altweib",
+   "icones1648-narr",
+   "bewick-narr"
+  ],
+  "icones1648-junggesell": [
+   "icones1648-graf",
+   "bewick-narr",
+   "icones1648-edelmann",
+   "icones1648-narr",
+   "bewick-edelmann"
+  ],
+  "icones1648-kriegsmann": [
+   "bewick-kriegsmann",
+   "bewick-narr",
+   "hollar-kriegsmann",
+   "icones1648-graf",
+   "icones1648-altweib"
+  ],
+  "icones1648-narr": [
+   "bewick-narr",
+   "mechel-narr",
+   "icones1648-blinde",
+   "holbein1526-graf",
+   "mechel-abt"
+  ],
+  "mechel-abt": [
+   "icones1648-abt",
+   "hollar-abt",
+   "bewick-narr",
+   "holbein1526-abt",
+   "holbein1526-graf"
+  ],
+  "mechel-altmann": [
+   "icones1648-altmann",
+   "holbein1526-altmann",
+   "bewick-altmann",
+   "hollar-altmann",
+   "mechel-altweib"
+  ],
+  "mechel-altweib": [
+   "icones1648-altweib",
+   "mechel-altmann",
+   "bewick-altweib",
+   "hollar-altweib",
+   "bewick-narr"
+  ],
+  "mechel-blinde": [
+   "icones1648-blinde",
+   "holbein1526-graf",
+   "bewick-graf",
+   "mechel-altweib",
+   "mechel-graf"
+  ],
+  "mechel-edelmann": [
+   "holbein1526-edelmann",
+   "bewick-edelmann",
+   "icones1648-edelmann",
+   "mechel-abt",
+   "icones1648-altweib"
+  ],
+  "mechel-graf": [
+   "holbein1526-graf",
+   "icones1648-graf",
+   "bewick-graf",
+   "hollar-graf",
+   "bewick-narr"
+  ],
+  "mechel-kriegsmann": [
+   "hollar-kriegsmann",
+   "mechel-narr",
+   "icones1648-blinde",
+   "mechel-blinde",
+   "icones1648-edelmann"
+  ],
+  "mechel-narr": [
+   "bewick-narr",
+   "icones1648-narr",
+   "icones1648-blinde",
+   "mechel-blinde",
+   "mechel-kriegsmann"
+  ]
+ },
+ "secondary": {
+  "note": "computed after the primary result, to read it, not to replace it",
+  "pose_skeleton_only_LAYOUT_0": {
+   "top1": 0.941,
+   "mAP": 0.736
+  },
+  "pose_layout_only": {
+   "top1": 0.853,
+   "mAP": 0.752
+  },
+  "pose_plus_pixels_zscore_sum": {
+   "top1": 1.0,
+   "mAP": 0.932
+  },
+  "pixels_without_mirror": {
+   "top1": 0.941,
+   "mAP": 0.827
+  }
+ },
+ "sources": {
+  "icones1648": "Emblematica iconesmortissexa01holb (pilot pictures)",
+  "holbein1526": "Cleveland Museum of Art 1929.151/152/160/164/165 via archive.org",
+  "bewick1789": "archive.org emblemsofmortali00bewi",
+  "mechel1803": "archive.org dancesofdeaththr00holb",
+  "hollar1816": "archive.org danceofdeathfrom00holb"
+ }
+}

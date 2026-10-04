@@ -1,0 +1,182 @@
+[
+ {
+  "id": "bewick-abt",
+  "scene": "abt",
+  "edition": "bewick1789"
+ },
+ {
+  "id": "bewick-altmann",
+  "scene": "altmann",
+  "edition": "bewick1789"
+ },
+ {
+  "id": "bewick-altweib",
+  "scene": "altweib",
+  "edition": "bewick1789"
+ },
+ {
+  "id": "bewick-blinde",
+  "scene": "blinde",
+  "edition": "bewick1789"
+ },
+ {
+  "id": "bewick-edelmann",
+  "scene": "edelmann",
+  "edition": "bewick1789"
+ },
+ {
+  "id": "bewick-graf",
+  "scene": "graf",
+  "edition": "bewick1789"
+ },
+ {
+  "id": "bewick-kriegsmann",
+  "scene": "kriegsmann",
+  "edition": "bewick1789"
+ },
+ {
+  "id": "bewick-narr",
+  "scene": "narr",
+  "edition": "bewick1789"
+ },
+ {
+  "id": "holbein1526-abt",
+  "scene": "abt",
+  "edition": "holbein1526"
+ },
+ {
+  "id": "holbein1526-altmann",
+  "scene": "altmann",
+  "edition": "holbein1526"
+ },
+ {
+  "id": "holbein1526-altweib",
+  "scene": "altweib",
+  "edition": "holbein1526"
+ },
+ {
+  "id": "holbein1526-edelmann",
+  "scene": "edelmann",
+  "edition": "holbein1526"
+ },
+ {
+  "id": "holbein1526-graf",
+  "scene": "graf",
+  "edition": "holbein1526"
+ },
+ {
+  "id": "hollar-abt",
+  "scene": "abt",
+  "edition": "hollar1816"
+ },
+ {
+  "id": "hollar-altmann",
+  "scene": "altmann",
+  "edition": "hollar1816"
+ },
+ {
+  "id": "hollar-altweib",
+  "scene": "altweib",
+  "edition": "hollar1816"
+ },
+ {
+  "id": "hollar-graf",
+  "scene": "graf",
+  "edition": "hollar1816"
+ },
+ {
+  "id": "hollar-kriegsmann",
+  "scene": "kriegsmann",
+  "edition": "hollar1816"
+ },
+ {
+  "id": "icones1648-abt",
+  "scene": "abt",
+  "edition": "icones1648"
+ },
+ {
+  "id": "icones1648-altmann",
+  "scene": "altmann",
+  "edition": "icones1648"
+ },
+ {
+  "id": "icones1648-altweib",
+  "scene": "altweib",
+  "edition": "icones1648"
+ },
+ {
+  "id": "icones1648-blinde",
+  "scene": "blinde",
+  "edition": "icones1648"
+ },
+ {
+  "id": "icones1648-edelmann",
+  "scene": "edelmann",
+  "edition": "icones1648"
+ },
+ {
+  "id": "icones1648-graf",
+  "scene": "graf",
+  "edition": "icones1648"
+ },
+ {
+  "id": "icones1648-jungfraw",
+  "scene": "jungfraw",
+  "edition": "icones1648"
+ },
+ {
+  "id": "icones1648-junggesell",
+  "scene": "junggesell",
+  "edition": "icones1648"
+ },
+ {
+  "id": "icones1648-kriegsmann",
+  "scene": "kriegsmann",
+  "edition": "icones1648"
+ },
+ {
+  "id": "icones1648-narr",
+  "scene": "narr",
+  "edition": "icones1648"
+ },
+ {
+  "id": "mechel-abt",
+  "scene": "abt",
+  "edition": "mechel1803"
+ },
+ {
+  "id": "mechel-altmann",
+  "scene": "altmann",
+  "edition": "mechel1803"
+ },
+ {
+  "id": "mechel-altweib",
+  "scene": "altweib",
+  "edition": "mechel1803"
+ },
+ {
+  "id": "mechel-blinde",
+  "scene": "blinde",
+  "edition": "mechel1803"
+ },
+ {
+  "id": "mechel-edelmann",
+  "scene": "edelmann",
+  "edition": "mechel1803"
+ },
+ {
+  "id": "mechel-graf",
+  "scene": "graf",
+  "edition": "mechel1803"
+ },
+ {
+  "id": "mechel-kriegsmann",
+  "scene": "kriegsmann",
+  "edition": "mechel1803"
+ },
+ {
+  "id": "mechel-narr",
+  "scene": "narr",
+  "edition": "mechel1803"
+ }
+]
