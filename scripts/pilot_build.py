@@ -241,18 +241,88 @@ def rank(candidates: list[tuple]) -> list[np.ndarray]:
     return kept
 
 
+def complete_limbs(
+    mask: np.ndarray,
+    figure: dict,
+    others_masks: list,
+    others_points: list,
+    model,
+    processor,
+    image,
+    embeddings,
+) -> np.ndarray:
+    """Add the thin limbs a whole-figure cut misses: a forearm reaching across, a shin
+    between another figure's legs (E014784). For each bone of the skeleton that the mask
+    covers poorly, SAM is asked for that bone alone -- a box around it, points along it --
+    and what it returns within a narrow band around the bone is added. Nothing is added
+    inside another figure's silhouette, so a bone passing behind someone stays hidden."""
+    k = {n: p for n, p in (figure.get("keypoints") or {}).items() if p}
+    torso = torso_length(k)
+    h, w = mask.shape
+    blocked = np.zeros_like(mask)
+    for m in others_masks:
+        blocked |= m
+    out = mask.copy()
+    for a, b in BONES:
+        if a not in k or b not in k:
+            continue
+        samples = [
+            (k[a][0] + (k[b][0] - k[a][0]) * t, k[a][1] + (k[b][1] - k[a][1]) * t)
+            for t in np.linspace(0.15, 0.85, 5)
+        ]
+        visible = [p for p in samples if not blocked[min(int(p[1]), h - 1), min(int(p[0]), w - 1)]]
+        if len(visible) < 2 or coverage(out, visible) >= 0.6:
+            continue
+        pad = 0.25 * torso
+        xs, ys = [k[a][0], k[b][0]], [k[a][1], k[b][1]]
+        box = [
+            max(min(xs) - pad, 0),
+            max(min(ys) - pad, 0),
+            min(max(xs) + pad, w),
+            min(max(ys) + pad, h),
+        ]
+        negatives = [
+            list(map(float, p))
+            for p in others_points
+            if box[0] <= p[0] <= box[2] and box[1] <= p[1] <= box[3]
+        ]
+        points = [list(map(float, p)) for p in visible] + negatives
+        labels = [1] * len(visible) + [0] * len(negatives)
+        proposals = masks_for(
+            model,
+            processor,
+            image,
+            embeddings,
+            input_boxes=[[box]],
+            input_points=[[points]],
+            input_labels=[[labels]],
+        )
+        best = max(proposals, key=lambda m: coverage(m, visible) - m.sum() / (h * w))
+        band = skeleton_distance((h, w), {a: k[a], b: k[b]}) <= 0.25 * torso
+        # A limb lies mostly within the band and is thinner than it; a proposal that spills
+        # far beyond the band, or fills it, is a robe or a whole body (E003840, E014786,
+        # E014810), and clipping it leaves a straight strip.
+        inside = (best & band).sum()
+        if inside < 0.5 * best.sum() or inside > 0.6 * band.sum():
+            continue
+        out |= best & band & ~blocked
+    return out
+
+
 def segment(image: Image.Image, description: dict, models: list, detail: float) -> dict:
     """Outline every figure and object, keeping every figure's distinct cuts, best first.
 
     Neither model wins everywhere: full SAM separates a figure hidden behind another
     (E014801) and a figure on a cluttered ground (E014782) where SlimSAM merges them, but
     loses half a skeleton (E014784) or a child's legs (E003797) that SlimSAM keeps, and
-    cutting upper and lower body apart recovers dark legs while losing some upper bodies. No
+    cutting upper and lower body apart recovers dark legs while losing some upper bodies;
+    thin limbs still missed are completed bone by bone (``complete_limbs``). No
     rule tried picks the right cut on all twenty pictures, so each figure keeps its distinct
     cuts as ``{"cuts": [...]}``, ranked by ``rank``; the viewer lets a person pick another.
     """
     figures = description.get("figures", [])
     candidates: dict[str, list] = {f["id"]: [] for f in figures}
+    model = processor = embeddings = None
     for model, processor in models:
         with torch.no_grad():
             embeddings = model.get_image_embeddings(
@@ -276,6 +346,14 @@ def segment(image: Image.Image, description: dict, models: list, detail: float) 
         }
         near[f["id"]] = skeleton_distance((h, w), seen) if seen else np.full((h, w), np.inf)
     chosen = {fid: cuts[0] for fid, cuts in ranked.items() if cuts}
+    seen_points = {
+        f["id"]: [
+            p
+            for n, p in (f.get("keypoints") or {}).items()
+            if p and n not in set(f.get("occluded", []))
+        ]
+        for f in figures
+    }
     polygons = {}
     for f in figures:
         carved = []
@@ -285,6 +363,14 @@ def segment(image: Image.Image, description: dict, models: list, detail: float) 
                     mask = mask & ~(theirs & (near[other] < near[f["id"]]))
             if mask.any():
                 carved.append(mask)
+        # Thin limbs are completed on the first cut only (the one shown), with the last
+        # model loaded -- full SAM, the better of the two on thin bony shapes.
+        if carved:
+            others = [m for fid, m in chosen.items() if fid != f["id"]]
+            points = [p for fid, pts in seen_points.items() if fid != f["id"] for p in pts]
+            carved[0] = complete_limbs(
+                carved[0], f, others, points, model, processor, image, embeddings
+            )
         cuts = [outline(m, detail) for m in carved]
         polygons[f["id"]] = {"cuts": [c for c in cuts if c]}
     # Objects are compact and either model cuts them alike: the last model's cut is kept.
