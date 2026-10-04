@@ -9,10 +9,10 @@
     ["left_shoulder", "left_elbow"], ["left_elbow", "left_wrist"], ["right_shoulder", "right_elbow"], ["right_elbow", "right_wrist"],
     ["left_shoulder", "right_shoulder"], ["left_shoulder", "left_hip"], ["right_shoulder", "right_hip"], ["left_hip", "right_hip"],
     ["left_hip", "left_knee"], ["left_knee", "left_ankle"], ["right_hip", "right_knee"], ["right_knee", "right_ankle"],
-    ["nose", "left_eye"], ["nose", "right_eye"], ["left_eye", "left_ear"], ["right_eye", "right_ear"],
+    ["crown", "chin"], ["chin", "left_shoulder"], ["chin", "right_shoulder"],
   ];
   const POINT_FR = {
-    nose: "nez", left_eye: "œil gauche", right_eye: "œil droit", left_ear: "oreille gauche", right_ear: "oreille droite",
+    crown: "sommet du crâne", chin: "menton", nose: "bout du nez",
     left_shoulder: "épaule gauche", right_shoulder: "épaule droite", left_elbow: "coude gauche", right_elbow: "coude droit",
     left_wrist: "poignet gauche", right_wrist: "poignet droit", left_hip: "hanche gauche", right_hip: "hanche droite",
     left_knee: "genou gauche", right_knee: "genou droit", left_ankle: "cheville gauche", right_ankle: "cheville droite",

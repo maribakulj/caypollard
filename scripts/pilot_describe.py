@@ -36,7 +36,11 @@ animal acting as a character). For each:
   "attributes": what belongs to the body itself, in French ("ailes", "auréole", "couronne \
 de laurier", "bandeau sur les yeux") -- these are NOT objects;
   "keypoints": an object with exactly these keys: {keys}. Each is [x,y] placed ON that body \
-part, or null if hidden. Left and right are the FIGURE's own left and right, not the viewer's.
+part. "crown" is the top of the skull and "chin" the bottom of the chin, both on the head's \
+axis; "nose" is the tip of the nose. Left and right are the FIGURE's own left and right, not \
+the viewer's. A joint hidden behind something but inferable from the body is still given, \
+and its name listed in "occluded"; null only if it cannot be inferred;
+  "occluded": the names of the joints placed but not seen;
 
 "objects": only the things that matter to the meaning: held, worn as an attribute, pointed \
 at, given, or symbolic (an hourglass, a bow, a heart, a crown). Not walls, ground, sky, \

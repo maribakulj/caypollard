@@ -7,9 +7,9 @@ from caypollard.figures import (
 )
 
 UPRIGHT = {
-    "nose": [50, 10],
-    "left_ear": [45, 10],
-    "right_ear": [55, 10],
+    "crown": [50, 0],
+    "chin": [50, 20],
+    "nose": [50, 12],
     "left_shoulder": [40, 30],
     "right_shoulder": [60, 30],
     "left_elbow": [40, 50],
@@ -32,6 +32,7 @@ def test_pose_angles_read_limbs_against_the_torso():
     assert abs(angles["avant-bras gauche"]) == 180.0  # hanging
     assert angles["avant-bras droit"] == 90.0  # held out toward the picture's right
     assert angles["cuisse gauche"] is None
+    assert angles["tête"] == 0.0  # upright head
 
 
 def test_pose_angles_ignore_the_figure_tilt():
@@ -39,9 +40,12 @@ def test_pose_angles_ignore_the_figure_tilt():
     assert pose_angles(lying) == pose_angles(UPRIGHT)
 
 
-def test_facing_reads_the_nose_against_ears_eyes_or_shoulders():
-    assert facing(UPRIGHT) == 0
+def test_facing_reads_the_nose_against_the_head_axis():
+    assert facing(UPRIGHT) == 0  # nose on the crown-chin axis: seen from the front
     assert facing({**UPRIGHT, "nose": [62, 10]}) == 1
+    assert facing({**UPRIGHT, "nose": [38, 10]}) == -1
+    # head thrown back: axis horizontal, nose offset points up -- no left or right to give
+    assert facing({**UPRIGHT, "crown": [30, 10], "chin": [50, 10], "nose": [40, -2]}) == 0
     assert facing({"nose": [30, 10], "left_shoulder": [40, 30], "right_shoulder": [60, 30]}) == -1
 
 

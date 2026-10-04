@@ -82,11 +82,9 @@ def masks_for(model, processor, image, embeddings, **prompt) -> np.ndarray:
 
 
 UPPER = (
+    "crown",
+    "chin",
     "nose",
-    "left_eye",
-    "right_eye",
-    "left_ear",
-    "right_ear",
     "left_shoulder",
     "right_shoulder",
     "left_elbow",

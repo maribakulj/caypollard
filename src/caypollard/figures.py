@@ -21,12 +21,14 @@ from collections.abc import Sequence
 Point = Sequence[float]
 Polygon = Sequence[Point]
 
+# The head is three points that can be seen on an engraving: the top of the skull and the
+# chin give its axis (bowed, raised, thrown back), the tip of the nose the side the face
+# turns to. The photo convention (nose, eyes, ears) was dropped: on a print the eyes are a
+# few pixels apart and the ears are under hair, so those points fell almost at random.
 KEYPOINTS = (
+    "crown",
+    "chin",
     "nose",
-    "left_eye",
-    "right_eye",
-    "left_ear",
-    "right_ear",
     "left_shoulder",
     "right_shoulder",
     "left_elbow",
@@ -67,8 +69,9 @@ BONES = (
     ("left_knee", "left_ankle"),
     ("right_hip", "right_knee"),
     ("right_knee", "right_ankle"),
-    ("nose", "left_shoulder"),
-    ("nose", "right_shoulder"),
+    ("crown", "chin"),
+    ("chin", "left_shoulder"),
+    ("chin", "right_shoulder"),
 )
 
 HANDS = (("main gauche", "left_wrist", "left_elbow"), ("main droite", "right_wrist", "right_elbow"))
@@ -156,34 +159,41 @@ def pose_angles(k: dict) -> dict[str, float | None]:
         torso = angle((axis[1][0] - axis[0][0], axis[1][1] - axis[0][1]))
         limb = angle((k[b][0] - k[a][0], k[b][1] - k[a][1]))
         out[name] = round(wrap(limb - torso), 1)
+    # The head's axis, chin to crown, against the torso: 0 upright, positive leaning toward
+    # the picture's right as seen with the torso upright, near +-90 bowed or thrown sideways.
+    if axis and k.get("crown") and k.get("chin"):
+        torso = angle((axis[1][0] - axis[0][0], axis[1][1] - axis[0][1]))
+        head = angle((k["crown"][0] - k["chin"][0], k["crown"][1] - k["chin"][1]))
+        out["tête"] = round(wrap(head - torso), 1)
+    else:
+        out["tête"] = None
     return out
 
 
 def facing(k: dict) -> int:
-    """-1 if the head faces the picture's left, +1 its right, 0 when it cannot be told.
+    """-1 if the face turns toward the picture's left, +1 its right, 0 when it cannot be told.
 
-    The nose is compared with the ears, else the eyes, else the shoulders: in profile the
-    nose leads; seen frontally it sits between them and the answer is 0.
+    The nose is read against the head's own axis, crown to chin: how far it stands off that
+    axis, and on which side. Close to the axis the face is seen from the front; when the
+    offset points mostly up or down (a head thrown back, a face to the ground) there is no
+    left or right to give. Without crown and chin, the nose is read against the shoulders.
     """
-    nose = k.get("nose")
+    nose, crown, chin = k.get("nose"), k.get("crown"), k.get("chin")
     if not nose:
         return 0
-    for pair, tolerance in (
-        (("left_ear", "right_ear"), 0.15),
-        (("left_eye", "right_eye"), 0.25),
-        (("left_shoulder", "right_shoulder"), 0.15),
-    ):
-        a, b = k.get(pair[0]), k.get(pair[1])
-        ref = mid(a, b)
-        if not ref:
-            continue
-        span = abs(a[0] - b[0]) if a and b else 0.0
-        offset = nose[0] - ref[0]
-        if a and b and abs(offset) <= tolerance * span:
+    if crown and chin:
+        ax, ay = crown[0] - chin[0], crown[1] - chin[1]
+        length = math.hypot(ax, ay) or 1.0
+        nx, ny = nose[0] - chin[0], nose[1] - chin[1]
+        along = (nx * ax + ny * ay) / length**2
+        px, py = nx - along * ax, ny - along * ay  # the nose's offset across the axis
+        if math.hypot(px, py) < 0.15 * length or abs(px) < 0.5 * math.hypot(px, py):
             return 0
-        if abs(offset) > 2:
-            return 1 if offset > 0 else -1
-    return 0
+        return 1 if px > 0 else -1
+    shoulders = mid(k.get("left_shoulder"), k.get("right_shoulder"))
+    if not shoulders or abs(nose[0] - shoulders[0]) <= 2:
+        return 0
+    return 1 if nose[0] > shoulders[0] else -1
 
 
 def _merge(found: dict, subject: str, rel: str, target: str, part: str, **evidence) -> None:
@@ -217,13 +227,14 @@ PART = {
     "left_ear": "tête",
     "right_ear": "tête",
 }
-BONE_PART = {bone: PART[bone[1]] for bone in BONES if bone[0] != "nose"} | {
+BONE_PART = {bone: PART[bone[1]] for bone in BONES if bone[0] not in ("crown", "chin")} | {
     ("left_shoulder", "right_shoulder"): "torse",
     ("left_shoulder", "left_hip"): "torse",
     ("right_shoulder", "right_hip"): "torse",
     ("left_hip", "right_hip"): "torse",
-    ("nose", "left_shoulder"): "tête",
-    ("nose", "right_shoulder"): "tête",
+    ("crown", "chin"): "tête",
+    ("chin", "left_shoulder"): "tête",
+    ("chin", "right_shoulder"): "tête",
 }
 
 
