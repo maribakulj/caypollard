@@ -84,29 +84,42 @@ def mid(a: Point | None, b: Point | None) -> tuple[float, float] | None:
     return tuple(a or b) if (a or b) else None  # type: ignore[return-value]
 
 
-def point_in_polygon(p: Point, poly: Polygon) -> bool:
-    inside, n = False, len(poly)
+def rings(poly) -> list:
+    """An outline as a list of rings. A silhouette cut in pieces by what stands in front of
+    it (legs below an arm across the body) is several rings; a single ring is accepted too."""
+    if not poly:
+        return []
+    return [poly] if isinstance(poly[0][0], (int, float)) else list(poly)
+
+
+def _in_ring(p: Point, ring) -> bool:
+    inside, n = False, len(ring)
     for i in range(n):
-        (x0, y0), (x1, y1) = poly[i], poly[(i + 1) % n]
+        (x0, y0), (x1, y1) = ring[i], ring[(i + 1) % n]
         if (y0 > p[1]) != (y1 > p[1]) and p[0] < x0 + (p[1] - y0) * (x1 - x0) / (y1 - y0):
             inside = not inside
     return inside
 
 
-def distance_to_polygon(p: Point, poly: Polygon) -> float:
-    """Zero inside, otherwise the distance to the nearest edge."""
-    if len(poly) >= 3 and point_in_polygon(p, poly):
+def point_in_polygon(p: Point, poly) -> bool:
+    return any(len(r) >= 3 and _in_ring(p, r) for r in rings(poly))
+
+
+def distance_to_polygon(p: Point, poly) -> float:
+    """Zero inside, otherwise the distance to the nearest edge of any ring."""
+    if point_in_polygon(p, poly):
         return 0.0
     best = math.inf
-    for i in range(len(poly)):
-        (x0, y0), (x1, y1) = poly[i], poly[(i + 1) % len(poly)]
-        dx, dy = x1 - x0, y1 - y0
-        t = (
-            0.0
-            if dx == dy == 0
-            else max(0.0, min(1.0, ((p[0] - x0) * dx + (p[1] - y0) * dy) / (dx * dx + dy * dy)))
-        )
-        best = min(best, math.hypot(p[0] - (x0 + t * dx), p[1] - (y0 + t * dy)))
+    for ring in rings(poly):
+        for i in range(len(ring)):
+            (x0, y0), (x1, y1) = ring[i], ring[(i + 1) % len(ring)]
+            dx, dy = x1 - x0, y1 - y0
+            t = (
+                0.0
+                if dx == dy == 0
+                else max(0.0, min(1.0, ((p[0] - x0) * dx + (p[1] - y0) * dy) / (dx * dx + dy * dy)))
+            )
+            best = min(best, math.hypot(p[0] - (x0 + t * dx), p[1] - (y0 + t * dy)))
     return best
 
 
@@ -221,11 +234,9 @@ PART = {
     "right_hip": "jambe droite",
     "right_knee": "jambe droite",
     "right_ankle": "jambe droite",
+    "crown": "tête",
+    "chin": "tête",
     "nose": "tête",
-    "left_eye": "tête",
-    "right_eye": "tête",
-    "left_ear": "tête",
-    "right_ear": "tête",
 }
 BONE_PART = {bone: PART[bone[1]] for bone in BONES if bone[0] not in ("crown", "chin")} | {
     ("left_shoulder", "right_shoulder"): "torse",

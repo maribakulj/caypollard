@@ -33,13 +33,22 @@ from caypollard.figures import BONES, apply_corrections, build_record, torso_axi
 PILOTE = Path("data/derived/pilote")
 
 
-def outline(mask: np.ndarray, detail: float) -> list[list[int]] | None:
+def outline(mask: np.ndarray, detail: float) -> list[list[list[int]]] | None:
+    """The mask's outer contours as rings, simplified. Every piece at least 2% the area of
+    the largest is kept: a figure crossed by another's arm or a sword falls into pieces, and
+    keeping only the largest threw its legs away (E014784)."""
     contours, _ = cv2.findContours(mask.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     if not contours:
         return None
-    contour = max(contours, key=cv2.contourArea)
-    simple = cv2.approxPolyDP(contour, detail * cv2.arcLength(contour, True), True)
-    return simple[:, 0, :].tolist() if len(simple) >= 3 else None
+    largest = max(cv2.contourArea(c) for c in contours)
+    out = []
+    for contour in sorted(contours, key=cv2.contourArea, reverse=True):
+        if cv2.contourArea(contour) < 0.02 * largest:
+            continue
+        simple = cv2.approxPolyDP(contour, detail * cv2.arcLength(contour, True), True)
+        if len(simple) >= 3:
+            out.append(simple[:, 0, :].tolist())
+    return out or None
 
 
 def skeleton_distance(shape: tuple[int, int], k: dict) -> np.ndarray:
@@ -121,8 +130,9 @@ def figure_mask(model, processor, image, embeddings, figure: dict, others: list[
     figures' points that fall in its box (outside), and a grid of points in the box far from
     its skeleton (outside: likely ground). The figure is cut whole, and also as an upper and
     a lower body joined afterwards -- legs in dark breeches are often in no whole cut.
-    Returns every cut with the share of body points it covers and the share of its area far
-    from the skeleton.
+    Returns every cut with the share of the body it covers (joints, and points along the
+    bones) and its stray share: area far from its skeleton, or nearer another figure's seen
+    skeleton than its own.
     """
     # Only joints that are seen guide the cut: a hidden joint lies on whatever hides it,
     # and telling SAM "keep this" there would pull the occluder into the figure.
@@ -131,6 +141,17 @@ def figure_mask(model, processor, image, embeddings, figure: dict, others: list[
     h, w = image.size[1], image.size[0]
     distance = skeleton_distance((h, w), k)
     torso = torso_length(k)
+    # A pixel nearer another figure's seen skeleton than this one's belongs to that figure.
+    nearest_other = np.full((h, w), np.inf, np.float32)
+    for other in others:
+        seen = {
+            n: p
+            for n, p in (other.get("keypoints") or {}).items()
+            if p and n not in set(other.get("occluded", []))
+        }
+        if seen:
+            nearest_other = np.minimum(nearest_other, skeleton_distance((h, w), seen))
+    elsewhere = (distance > 0.6 * torso) | (nearest_other < distance)
     x0, y0, x1, y1 = figure["box"]
     negatives = [
         list(map(float, p))
@@ -152,9 +173,27 @@ def figure_mask(model, processor, image, embeddings, figure: dict, others: list[
         masks = masks_for(model, processor, image, embeddings, **prompt)
         return [m for m in (in_box(m, figure["box"]) for m in masks) if m.any()]
 
+    # Points along every bone, hidden joints included: a cut must hold the body between its
+    # joints too. Covering the visible joints alone let a cut keep head, sleeves and one
+    # stocking and drop the robe in between (E014784, whose hips are under that robe).
+    every = {n: p for n, p in (figure.get("keypoints") or {}).items() if p}
+    along = []
+    for a, b in BONES:
+        if a in every and b in every:
+            along += [
+                (
+                    every[a][0] + (every[b][0] - every[a][0]) * t,
+                    every[a][1] + (every[b][1] - every[a][1]) * t,
+                )
+                for t in np.linspace(0.1, 0.9, 5)
+            ]
+
     def scored(mask: np.ndarray) -> tuple:
-        stray = (mask & (distance > 0.6 * torso)).sum() / mask.sum()
-        return (mask, coverage(mask, k.values()), float(stray))
+        stray = (mask & elsewhere).sum() / mask.sum()
+        body = coverage(mask, k.values())
+        if along:
+            body = (body + coverage(mask, along)) / 2
+        return (mask, body, float(stray))
 
     candidates = [scored(m) for m in cut(list(k.values()), figure["box"])]
     parts = []
@@ -171,8 +210,7 @@ def figure_mask(model, processor, image, embeddings, figure: dict, others: list[
             min(max(ys) + pad, y1),
         ]
         part = [
-            (m, coverage(m, pts), float((m & (distance > 0.6 * torso)).sum() / m.sum()))
-            for m in cut(pts, box)
+            (m, coverage(m, pts), float((m & elsewhere).sum() / m.sum())) for m in cut(pts, box)
         ]
         if part:
             parts.append(choose(part))
@@ -224,9 +262,30 @@ def segment(image: Image.Image, description: dict, models: list, detail: float) 
             candidates[f["id"]] += figure_mask(
                 model, processor, image, embeddings, f, [o for o in figures if o is not f]
             )
+    ranked = {f["id"]: rank(candidates[f["id"]]) for f in figures}
+    # Where two figures' cuts overlap, each pixel goes to the figure whose seen skeleton is
+    # nearer. SAM cannot always part two bodies (E014782: every cut of the count spills over
+    # Death), but Death's own cut is right, and the nearer skeleton settles the overlap.
+    h, w = image.size[1], image.size[0]
+    near = {}
+    for f in figures:
+        seen = {
+            n: p
+            for n, p in (f.get("keypoints") or {}).items()
+            if p and n not in set(f.get("occluded", []))
+        }
+        near[f["id"]] = skeleton_distance((h, w), seen) if seen else np.full((h, w), np.inf)
+    chosen = {fid: cuts[0] for fid, cuts in ranked.items() if cuts}
     polygons = {}
     for f in figures:
-        cuts = [outline(m, detail) for m in rank(candidates[f["id"]])]
+        carved = []
+        for mask in ranked[f["id"]]:
+            for other, theirs in chosen.items():
+                if other != f["id"]:
+                    mask = mask & ~(theirs & (near[other] < near[f["id"]]))
+            if mask.any():
+                carved.append(mask)
+        cuts = [outline(m, detail) for m in carved]
         polygons[f["id"]] = {"cuts": [c for c in cuts if c]}
     # Objects are compact and either model cuts them alike: the last model's cut is kept.
     for o in description.get("objects", []):

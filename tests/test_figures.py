@@ -98,3 +98,25 @@ def test_a_body_running_under_another_outline_is_behind_it():
     assert ("A", "passe derrière", "B") not in found
     (rel,) = [r for r in relations([back, front], []) if r["rel"] == "passe derrière"]
     assert rel["par"] == "jambe gauche"
+
+
+def test_an_outline_in_pieces_counts_every_piece():
+    from caypollard.figures import distance_to_polygon, point_in_polygon
+
+    torso, legs = [[0, 0], [10, 0], [10, 10], [0, 10]], [[0, 20], [10, 20], [10, 30], [0, 30]]
+    assert point_in_polygon((5, 25), [torso, legs])
+    assert not point_in_polygon((5, 15), [torso, legs])
+    assert distance_to_polygon((5, 18), [torso, legs]) == 2.0
+
+
+def test_a_hidden_head_point_is_read_as_the_head():
+    from caypollard.figures import hidden_under
+
+    a = {
+        "box": [0, 0, 10, 100],
+        "keypoints": {"crown": [5, 5]},
+        "occluded": ["crown"],
+        "polygon": [[0, 50], [10, 50], [10, 100], [0, 100]],
+    }
+    b = {"box": [0, 0, 10, 20], "polygon": [[0, 0], [10, 0], [10, 20], [0, 20]]}
+    assert hidden_under(a, b) == {"tête": 4}

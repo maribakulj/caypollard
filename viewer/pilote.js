@@ -35,6 +35,9 @@
   const color = (id) => (id.startsWith("F") ? COLORS[(parseInt(id.slice(1), 10) - 1) % COLORS.length] : OBJ);
   const byId = () => Object.fromEntries([...record.figures, ...record.objects].map((x) => [x.id, x]));
   const centre = (b) => [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2];
+  // An outline is one ring or several (a figure cut in pieces by what stands in front).
+  const rings = (poly) => (!poly ? [] : typeof poly[0][0] === "number" ? [poly] : poly);
+  const ringsPath = (poly) => rings(poly).map((r) => "M" + r.map((p) => p.join(",")).join("L") + "Z").join(" ");
 
   async function load() {
     index = await (await fetch(DATA + "index.json", { cache: "no-store" })).json();
@@ -64,7 +67,7 @@
   // ---- drawing ----
   function drawFigure(g, f, { image }) {
     const c = color(f.id);
-    if (show.contours && f.polygon) g.append(el("polygon", { points: f.polygon.map((p) => p.join(",")).join(" "), fill: c, "fill-opacity": image ? 0.18 : 0.12, stroke: c, "stroke-width": 3 }));
+    if (show.contours && f.polygon) g.append(el("path", { d: ringsPath(f.polygon), fill: c, "fill-opacity": image ? 0.18 : 0.12, stroke: c, "stroke-width": 3 }));
     if (show.boites && image) g.append(el("rect", { x: f.box[0], y: f.box[1], width: f.box[2] - f.box[0], height: f.box[3] - f.box[1], fill: "none", stroke: c, "stroke-dasharray": "8 6", "stroke-width": 2 }));
     const k = keypoints(f);
     if (show.squelettes || !image) {
@@ -88,7 +91,7 @@
   function drawObject(g, o, { image }) {
     if (show.contours || !image) {
       const pts = o.polygon || [[o.box[0], o.box[1]], [o.box[2], o.box[1]], [o.box[2], o.box[3]], [o.box[0], o.box[3]]];
-      g.append(el("polygon", { points: pts.map((p) => p.join(",")).join(" "), fill: OBJ, "fill-opacity": image ? 0.15 : 0.25, stroke: OBJ, "stroke-width": 3, "stroke-dasharray": o.polygon ? "" : "6 4" }));
+      g.append(el("path", { d: ringsPath(pts), fill: OBJ, "fill-opacity": image ? 0.15 : 0.25, stroke: OBJ, "stroke-width": 3, "stroke-dasharray": o.polygon ? "" : "6 4" }));
     }
     if (show.boites && image) g.append(el("rect", { x: o.box[0], y: o.box[1], width: o.box[2] - o.box[0], height: o.box[3] - o.box[1], fill: "none", stroke: OBJ, "stroke-dasharray": "8 6", "stroke-width": 2 }));
     if (!image) g.append(el("text", { x: o.box[0], y: o.box[3] + 26, fill: OBJ, "font-size": 24, text: o.name }));
@@ -130,7 +133,8 @@
         if (!placing || ev.target.classList.contains("kp")) return;
         const p = toSvg(svg, ev);
         (pending[placing.fig] ||= {})[placing.point] = p;
-        renderPanes();
+        placing = null;
+        render();
       });
     }
     return svg;
@@ -214,7 +218,7 @@
     $("#abstract").replaceChildren(svgFor(false));
     const changed = Object.values(pending).reduce((n, o) => n + Object.keys(o).length, 0);
     const status = $("#status");
-    if (status) status.textContent = changed ? `${changed} point(s) modifié(s), non enregistré(s)` : "";
+    if (status) status.textContent = placing ? `cliquer sur l'image pour placer : ${POINT_FR[placing.point]}` : changed ? `${changed} point(s) modifié(s), non enregistré(s)` : "";
   }
 
   function render() {
@@ -223,9 +227,20 @@
       el("label", {}, [el("input", { type: "checkbox", ...(show[k] ? { checked: "" } : {}), onchange: (e) => { show[k] = e.target.checked; renderPanes(); } }), k])));
     const pointSel = el("select", { onchange: (e) => { const [fig, point] = e.target.value.split("|"); placing = fig ? { fig, point } : null; } },
       [el("option", { value: "", text: "placer un point : —" }), ...record.figures.flatMap((f) => Object.keys(POINT_FR).map((p) => el("option", { value: `${f.id}|${p}`, text: `${f.name} · ${POINT_FR[p]}` })))]);
+    // Every point a figure lacks gets its own button: choose it, then click on the image.
+    const missing = record.figures.flatMap((f) => Object.keys(POINT_FR)
+      .filter((p) => !keypoints(f)[p])
+      .map((p) => el("button", {
+        class: placing && placing.fig === f.id && placing.point === p ? "primary" : "",
+        style: `border-color:${color(f.id)}`,
+        text: `+ ${POINT_FR[p]} (${f.name.split(" (")[0]})`,
+        onclick: () => { placing = { fig: f.id, point: p }; render(); },
+      })));
     const editBar = el("div", { class: "edit" }, editing
-      ? [el("button", { class: "primary", text: "enregistrer", onclick: save }), el("button", { text: "annuler", onclick: () => open(current) }), pointSel,
-         el("span", { class: "muted", text: "glisser un point · alt-clic pour l'effacer · choisir puis cliquer pour placer" }), el("span", { id: "status", class: "warn" })]
+      ? [el("button", { class: "primary", text: "enregistrer", onclick: () => save() }), el("button", { text: "annuler", onclick: () => open(current) }), pointSel,
+         el("span", { class: "muted", text: "glisser un point · alt-clic pour l'effacer · un bouton « + » puis un clic sur l'image pour placer un point qui manque" }),
+         el("span", { id: "status", class: "warn", text: placing ? `cliquer sur l'image pour placer : ${POINT_FR[placing.point]}` : "" }),
+         missing.length ? el("div", { class: "edit", style: "width:100%" }, [el("span", { class: "muted", text: "points manquants :" }), ...missing]) : null]
       : [el("button", { text: "corriger les points", onclick: () => { editing = true; render(); } })]);
 
     $("#view").replaceChildren(
