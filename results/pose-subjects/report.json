@@ -1,0 +1,274 @@
+{
+ "pictures": 80,
+ "emblems": 12,
+ "museum_works": 68,
+ "emblem_queries": {
+  "chance": {
+   "top1": 0.202,
+   "mAP": 0.245
+  },
+  "pose": {
+   "queries": 12,
+   "top1": 0.667,
+   "mAP": 0.438,
+   "median_first_hit": 1.0,
+   "top1_by_subject": {
+    "crucifixion": "6/6",
+    "portement": "0/1",
+    "tentation": "2/4",
+    "visitation": "0/1"
+   }
+  },
+  "pixels": {
+   "queries": 12,
+   "top1": 0.75,
+   "mAP": 0.482,
+   "median_first_hit": 1.0,
+   "top1_by_subject": {
+    "crucifixion": "6/6",
+    "portement": "0/1",
+    "tentation": "2/4",
+    "visitation": "1/1"
+   }
+  }
+ },
+ "museum_queries": {
+  "chance": {
+   "top1": 0.264,
+   "mAP": 0.402
+  },
+  "pose": {
+   "queries": 52,
+   "top1": 0.423,
+   "mAP": 0.492,
+   "median_first_hit": 2.5,
+   "top1_by_subject": {
+    "crucifixion": "18/19",
+    "portement": "0/15",
+    "tentation": "2/5",
+    "visitation": "2/13"
+   }
+  },
+  "pixels": {
+   "queries": 52,
+   "top1": 0.481,
+   "mAP": 0.613,
+   "median_first_hit": 2.0,
+   "top1_by_subject": {
+    "crucifixion": "9/19",
+    "portement": "0/15",
+    "tentation": "5/5",
+    "visitation": "11/13"
+   }
+  }
+ },
+ "pose_nearest_museum_works": {
+  "E002934": [
+   "Q27697147 (crucifixion)",
+   "Q27982015 (tentation)",
+   "Q7728258 (crucifixion)",
+   "Q21715922 (crucifixion)",
+   "Q17319791 (crucifixion)"
+  ],
+  "E003648": [
+   "Q18339731 (crucifixion)",
+   "Q20188044 (flagellation)",
+   "Q118342204 (crucifixion)",
+   "Q27697137 (visitation)",
+   "Q27982855 (visitation)"
+  ],
+  "E003650": [
+   "Q18339731 (crucifixion)",
+   "Q138206756 (crucifixion)",
+   "Q20188044 (flagellation)",
+   "Q27697137 (visitation)",
+   "Q18338447 (crucifixion)"
+  ],
+  "E003811": [
+   "Q17319791 (crucifixion)",
+   "Q128029061 (visitation)",
+   "Q27699361 (crucifixion)",
+   "Q19905266 (crucifixion)",
+   "Q27697147 (crucifixion)"
+  ],
+  "E010333": [
+   "Q19905266 (crucifixion)",
+   "Q27699361 (crucifixion)",
+   "Q3543898 (crucifixion)",
+   "Q55594040 (portement)",
+   "Q27979739 (tentation)"
+  ],
+  "E012766": [
+   "Q19905266 (crucifixion)",
+   "Q27699361 (crucifixion)",
+   "Q3543898 (crucifixion)",
+   "Q27979739 (tentation)",
+   "Q17319791 (crucifixion)"
+  ],
+  "E009355": [
+   "Q27979739 (tentation)",
+   "Q128029061 (visitation)",
+   "Q8464346 (portement)",
+   "Q17319791 (crucifixion)",
+   "Q116275857 (visitation)"
+  ],
+  "E003673": [
+   "Q128029061 (visitation)",
+   "Q116275857 (visitation)",
+   "Q3605057 (tentation)",
+   "Q20176573 (bapteme)",
+   "Q29385381 (visitation)"
+  ],
+  "E010062": [
+   "Q17319791 (crucifixion)",
+   "Q20201631 (bapteme)",
+   "Q128029061 (visitation)",
+   "Q17341374 (tentation)",
+   "Q3898507 (tentation)"
+  ],
+  "E010284": [
+   "Q3898507 (tentation)",
+   "Q17319791 (crucifixion)",
+   "Q128029061 (visitation)",
+   "Q3605057 (tentation)",
+   "Q18508794 (crucifixion)"
+  ],
+  "E012765": [
+   "Q3605057 (tentation)",
+   "Q27982015 (tentation)",
+   "Q20176573 (bapteme)",
+   "Q116275857 (visitation)",
+   "Q18508794 (crucifixion)"
+  ],
+  "E002924": [
+   "Q20188044 (flagellation)",
+   "Q17335824 (flagellation)",
+   "Q27982855 (visitation)",
+   "Q19912212 (portement)",
+   "Q27979421 (visitation)"
+  ]
+ },
+ "pixels_nearest_museum_works": {
+  "E002934": [
+   "Q138206756 (crucifixion)",
+   "Q19911646 (bapteme)",
+   "Q17330849 (bapteme)",
+   "Q27697132 (bapteme)",
+   "Q20184103 (crucifixion)"
+  ],
+  "E003648": [
+   "Q118342204 (crucifixion)",
+   "Q17319791 (crucifixion)",
+   "Q17339837 (crucifixion)",
+   "Q138206756 (crucifixion)",
+   "Q29384693 (portement)"
+  ],
+  "E003650": [
+   "Q18338447 (crucifixion)",
+   "Q118342204 (crucifixion)",
+   "Q19912212 (portement)",
+   "Q29384693 (portement)",
+   "Q27697886 (visitation)"
+  ],
+  "E003811": [
+   "Q17339837 (crucifixion)",
+   "Q17319791 (crucifixion)",
+   "Q118342204 (crucifixion)",
+   "Q7728258 (crucifixion)",
+   "Q18339731 (crucifixion)"
+  ],
+  "E010333": [
+   "Q118342204 (crucifixion)",
+   "Q17319791 (crucifixion)",
+   "Q138206756 (crucifixion)",
+   "Q18339731 (crucifixion)",
+   "Q17339837 (crucifixion)"
+  ],
+  "E012766": [
+   "Q118342204 (crucifixion)",
+   "Q1218084 (crucifixion)",
+   "Q17339461 (bapteme)",
+   "Q27697147 (crucifixion)",
+   "Q27699361 (crucifixion)"
+  ],
+  "E009355": [
+   "Q18339731 (crucifixion)",
+   "Q29384693 (portement)",
+   "Q20184103 (crucifixion)",
+   "Q19912212 (portement)",
+   "Q18338701 (crucifixion)"
+  ],
+  "E003673": [
+   "Q3605057 (tentation)",
+   "Q17339461 (bapteme)",
+   "Q27982015 (tentation)",
+   "Q27698580 (bapteme)",
+   "Q3898507 (tentation)"
+  ],
+  "E010062": [
+   "Q17339461 (bapteme)",
+   "Q3605057 (tentation)",
+   "Q27698580 (bapteme)",
+   "Q27982015 (tentation)",
+   "Q27979333 (bapteme)"
+  ],
+  "E010284": [
+   "Q17339461 (bapteme)",
+   "Q27698580 (bapteme)",
+   "Q27981483 (crucifixion)",
+   "Q3898507 (tentation)",
+   "Q18338447 (crucifixion)"
+  ],
+  "E012765": [
+   "Q3605057 (tentation)",
+   "Q17339461 (bapteme)",
+   "Q27982015 (tentation)",
+   "Q18338447 (crucifixion)",
+   "Q17330849 (bapteme)"
+  ],
+  "E002924": [
+   "Q27697886 (visitation)",
+   "Q18338447 (crucifixion)",
+   "Q27698580 (bapteme)",
+   "Q27981483 (crucifixion)",
+   "Q18338701 (crucifixion)"
+  ]
+ },
+ "secondary": {
+  "note": "computed after the primary result, to read it, not to replace it",
+  "emblem_queries_pose_plus_pixels_zscore_sum": {
+   "queries": 12,
+   "top1": 0.917,
+   "mAP": 0.598,
+   "median_first_hit": 1.0,
+   "top1_by_subject": {
+    "crucifixion": "6/6",
+    "portement": "0/1",
+    "tentation": "4/4",
+    "visitation": "1/1"
+   }
+  },
+  "museum_queries_pose_plus_pixels_zscore_sum": {
+   "queries": 52,
+   "top1": 0.577,
+   "mAP": 0.623,
+   "median_first_hit": 1.0,
+   "top1_by_subject": {
+    "crucifixion": "17/19",
+    "portement": "0/15",
+    "tentation": "4/5",
+    "visitation": "9/13"
+   }
+  }
+ },
+ "selection_notes": {
+  "emblems_kept": 12,
+  "emblems_with_these_notations": 139,
+  "museum_works_kept": 68,
+  "museum_works_with_these_notations": 120,
+  "excluded_after_viewing_full_size": [
+   "E003625",
+   "E009608"
+  ]
+ }
+}

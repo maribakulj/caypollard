@@ -66,6 +66,13 @@ def main() -> None:
     args = parser.parse_args()
 
     items = {it["id"]: it for it in json.loads(args.items.read_text())["items"]}
+    # Emblems outside the viewer's pool are found in the full Emblematica manifest.
+    for line in Path("data/derived/emblematica-v0.1/manifest.jsonl").read_text().splitlines():
+        row = json.loads(line)
+        items.setdefault(
+            row["id"],
+            {"book": row["book_id"], "img": f"data/raw/emblematica/images/{row['filename']}"},
+        )
     pages = args.output / "pages"
     pages.mkdir(parents=True, exist_ok=True)
     log_path = args.output / "crops.json"
