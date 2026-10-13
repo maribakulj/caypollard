@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Replace Opus's body points by ViTPose-B trained on Human-Art, and rerun both pose tests.
+"""Superseded by the workshop (``scripts/atelier.py``), which reproduces its numbers exactly;
+kept to rebuild ``results/pose-vitpose``.
+
+Replace Opus's body points by ViTPose-B trained on Human-Art, and rerun both pose tests.
 
 Opus places the points well but at about a minute a picture, which does not scale. A
 pose estimator trained on depicted people (Human-Art: paintings, sculpture, drawings)

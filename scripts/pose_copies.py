@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Does a figure's pose find the copies of a scene that pixels miss?
+"""Superseded by the workshop (``scripts/atelier.py``), which reproduces its numbers exactly;
+kept to rebuild ``results/pose-copies``.
+
+Does a figure's pose find the copies of a scene that pixels miss?
 
 Holbein's Dance of Death was copied for three centuries: the woodcuts of 1526, the
 *Icones mortis* of 1648 (the pilot's ten), Bewick's wood engravings of 1789, Mechel's

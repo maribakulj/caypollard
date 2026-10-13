@@ -1,0 +1,155 @@
+"""Run bricks on a bench, keep every intermediate, score, and write the common table.
+
+A *combination* is either a pose chain (a figures brick, then a pose brick) or a vector
+brick, or a sum of combinations already run. Its descriptions are cached under
+``data/derived/atelier/<bench>/<combination>/`` and its distance matrix beside them, so a
+combination is computed once and can be fused with others later. Each run writes
+``results/atelier/<bench>/<combination>.json`` (scores, chance, bricks, timing, commit);
+``table`` gathers them in ``results/atelier/TABLEAU.md``.
+"""
+
+from __future__ import annotations
+
+import datetime
+import json
+import subprocess
+import time
+from pathlib import Path
+
+import numpy as np
+from PIL import Image, ImageOps
+
+from .benches import BENCHES, Bench
+from .bricks import COCO_KEPT, brick
+from .measure import pose_matrix, vector_matrix, zsum
+
+CACHE = Path("data/derived/atelier")
+RESULTS = Path("results/atelier")
+
+
+def pose_name(figures: str, pose: str, joints: str | None = None) -> str:
+    return f"pose--{figures}--{pose}" + (f"--{joints}" if joints else "")
+
+
+def describe(bench: Bench, figures: str, pose: str) -> tuple[list[dict], list[float]]:
+    """Boxes then points for every picture of the bench, cached one file per picture."""
+    find, place = brick("figures", figures), brick("pose", pose)
+    folder = CACHE / bench.name / pose_name(figures, pose)
+    folder.mkdir(parents=True, exist_ok=True)
+    out, seconds = [], []
+    for it in bench.items():
+        cache = folder / f"{it['id']}.json"
+        image = Image.open(bench.image(it["id"])).convert("RGB")
+        if cache.exists():
+            d = json.loads(cache.read_text())
+        else:
+            start = time.time()
+            boxes = find.boxes(image, it["id"], bench)
+            points = place.points(image, boxes, it["id"], bench)
+            d = {
+                "figures": [{"box": b, "keypoints": k} for b, k in zip(boxes, points, strict=True)],
+                "seconds": round(time.time() - start, 2),
+            }
+            cache.write_text(json.dumps(d))
+        seconds.append(d.get("seconds", 0.0))
+        d["size"] = image.size
+        out.append(d)
+    return out, seconds
+
+
+def run_pose(bench_name: str, figures: str, pose: str, joints: str | None = None) -> dict:
+    bench = BENCHES[bench_name]
+    descriptions, seconds = describe(bench, figures, pose)
+    kept = {"coco": set(COCO_KEPT)}.get(joints) if joints else None
+    dist = pose_matrix(descriptions, joints=kept)
+    figures_found = [len(d.get("figures", [])) for d in descriptions]
+    extra = {
+        "seconds_per_picture_median": float(np.median(seconds)),
+        "figures_per_picture_median": float(np.median(figures_found)),
+        "pictures_without_figure": int(sum(n == 0 for n in figures_found)),
+    }
+    bricks = [brick("figures", figures).meta(), brick("pose", pose).meta()]
+    return _save(bench, pose_name(figures, pose, joints), dist, bricks, extra)
+
+
+def run_vector(bench_name: str, vector: str) -> dict:
+    bench = BENCHES[bench_name]
+    encoder = brick("vector", vector)
+    images = [Image.open(bench.image(it["id"])).convert("RGB") for it in bench.items()]
+    start = time.time()
+    plain = encoder.encode(images)
+    flipped = encoder.encode([ImageOps.mirror(im) for im in images])
+    extra = {"seconds_per_picture": round((time.time() - start) / len(images) / 2, 3)}
+    return _save(bench, f"vector--{vector}", vector_matrix(plain, flipped), [encoder.meta()], extra)
+
+
+def run_fusion(bench_name: str, combinations: list[str]) -> dict:
+    bench = BENCHES[bench_name]
+    matrices = [np.load(CACHE / bench.name / f"{c}.npy") for c in combinations]
+    name = "sum--" + "--and--".join(combinations)
+    return _save(bench, name, zsum(*matrices), [], {"of": combinations})
+
+
+def _save(bench: Bench, name: str, dist: np.ndarray, bricks: list, extra: dict) -> dict:
+    items = bench.items()
+    (CACHE / bench.name).mkdir(parents=True, exist_ok=True)
+    np.save(CACHE / bench.name / f"{name}.npy", dist)
+    result = {
+        "bench": bench.name,
+        "combination": name,
+        "date": datetime.date.today().isoformat(),
+        "commit": _commit(),
+        "bricks": bricks,
+        "scores": bench.score(dist, items),
+        "chance": bench.chance(items),
+        **extra,
+    }
+    folder = RESULTS / bench.name
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / f"{name}.json").write_text(json.dumps(result, ensure_ascii=False, indent=1))
+    table()
+    return result
+
+
+def _commit() -> str:
+    try:
+        return subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, check=True
+        ).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        return "unknown"
+
+
+def table() -> Path:
+    """One Markdown table per bench: every combination run so far, best first."""
+    lines = [
+        "# Atelier — tableau commun",
+        "",
+        "Generated by `scripts/atelier.py`; do not edit by hand. top1 = the nearest answer is",
+        "right; mAP = average precision over all right answers. Settings of each brick are in",
+        "`src/caypollard/atelier/bricks.py`; each result's JSON keeps scores per label.",
+        "",
+    ]
+    for bench in BENCHES.values():
+        runs = [json.loads(p.read_text()) for p in sorted((RESULTS / bench.name).glob("*.json"))]
+        if not runs:
+            continue
+        directions = list(runs[0]["scores"])
+        lines += [f"## {bench.name}", "", bench.description, ""]
+        header = "| combination | " + " | ".join(f"{d} top1 | {d} mAP" for d in directions)
+        lines += [header + " | s/picture |", "|" + "---|" * (1 + 2 * len(directions) + 1)]
+        chance = runs[0]["chance"]
+        cells = " | ".join(f"{chance[d]['top1']} | {chance[d]['mAP']}" for d in directions)
+        lines.append(f"| *chance* | {cells} | |")
+        runs.sort(key=lambda r: -r["scores"][directions[0]]["mAP"])
+        for r in runs:
+            cells = " | ".join(
+                f"{r['scores'][d]['top1']} | {r['scores'][d]['mAP']}" for d in directions
+            )
+            speed = r.get("seconds_per_picture_median", r.get("seconds_per_picture", ""))
+            lines.append(f"| {r['combination']} | {cells} | {speed} |")
+        lines.append("")
+    path = RESULTS / "TABLEAU.md"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines))
+    return path

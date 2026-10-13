@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Does a figure's pose find the same subject across media, where pixels do not?
+"""Superseded by the workshop (``scripts/atelier.py``), which reproduces its numbers exactly;
+kept to rebuild ``results/pose-subjects``.
+
+Does a figure's pose find the same subject across media, where pixels do not?
 
 The copies test (``scripts/pose_copies.py``) was the easy case: a copy keeps the whole
 composition, and pixels found it as well as pose did. Here the composition changes and

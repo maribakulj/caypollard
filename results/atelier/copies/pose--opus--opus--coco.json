@@ -1,0 +1,51 @@
+{
+ "bench": "copies",
+ "combination": "pose--opus--opus--coco",
+ "date": "2026-10-13",
+ "commit": "be69e26",
+ "bricks": [
+  {
+   "name": "opus",
+   "kind": "figures",
+   "summary": "Claude Opus names each figure and boxes it (one pass, ~1 min a picture, no review)",
+   "source": "scripts/pilot_describe.py",
+   "weights_mb": 0,
+   "heavy": false
+  },
+  {
+   "name": "opus",
+   "kind": "pose",
+   "summary": "Claude Opus's body points (15 joints, crown and chin included)",
+   "source": "scripts/pilot_describe.py",
+   "weights_mb": 0,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 34,
+   "top1": 0.971,
+   "mAP": 0.797,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "abt": "5/5",
+    "altmann": "4/5",
+    "altweib": "5/5",
+    "blinde": "3/3",
+    "edelmann": "4/4",
+    "graf": "5/5",
+    "kriegsmann": "4/4",
+    "narr": "3/3"
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.097,
+   "mAP": 0.181
+  }
+ },
+ "seconds_per_picture_median": 0.0,
+ "figures_per_picture_median": 2.0,
+ "pictures_without_figure": 0
+}

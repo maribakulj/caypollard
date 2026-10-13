@@ -1,0 +1,41 @@
+{
+ "bench": "copies",
+ "combination": "vector--dinov2",
+ "date": "2026-10-13",
+ "commit": "be69e26",
+ "bricks": [
+  {
+   "name": "dinov2",
+   "kind": "vector",
+   "summary": "DINOv2 base, CLS token (self-supervised, 2023)",
+   "source": "https://huggingface.co/facebook/dinov2-base",
+   "weights_mb": 350,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 34,
+   "top1": 0.971,
+   "mAP": 0.839,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "abt": "5/5",
+    "altmann": "5/5",
+    "altweib": "5/5",
+    "blinde": "2/3",
+    "edelmann": "4/4",
+    "graf": "5/5",
+    "kriegsmann": "4/4",
+    "narr": "3/3"
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.097,
+   "mAP": 0.181
+  }
+ },
+ "seconds_per_picture": 0.146
+}

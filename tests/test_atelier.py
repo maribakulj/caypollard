@@ -1,0 +1,115 @@
+"""The workshop's measure, benches and bricks, without loading any model."""
+
+from __future__ import annotations
+
+import numpy as np
+import pytest
+
+from caypollard.atelier.benches import _score
+from caypollard.atelier.bricks import BRICKS, COCO_KEPT, brick, convert_vitpose
+from caypollard.atelier.measure import mirrored_keypoints, pose_matrix, vector_matrix, zsum
+
+STANDING = {
+    "left_shoulder": [60, 40],
+    "right_shoulder": [40, 40],
+    "left_hip": [58, 80],
+    "right_hip": [42, 80],
+    "left_wrist": [90, 20],  # the figure's left arm raised
+    "right_wrist": [35, 70],
+}
+
+
+def picture(keypoints, box=(30, 10, 95, 120), size=(200, 150)):
+    return {"size": size, "figures": [{"box": list(box), "keypoints": keypoints}]}
+
+
+def test_mirror_swaps_sides_and_reverses_x():
+    m = mirrored_keypoints({"left_wrist": [90, 20], "nose": [50, 30]}, 200)
+    assert m == {"right_wrist": [110, 20], "nose": [150, 30]}
+
+
+def test_a_mirrored_copy_is_as_close_as_the_original():
+    flipped = mirrored_keypoints(STANDING, 200)
+    other = dict(STANDING, left_wrist=[70, 110])  # the arm lowered
+    pictures = [
+        picture(STANDING),
+        picture(flipped, box=(105, 10, 170, 120)),
+        picture(other),
+    ]
+    d = pose_matrix(pictures)
+    assert d[0, 1] == pytest.approx(0.0, abs=1e-9)
+    assert d[0, 2] > d[0, 1]
+
+
+def test_joints_filter_drops_the_others():
+    with_head = dict(STANDING, crown=[50, 0])
+    d_all = pose_matrix([picture(with_head), picture(STANDING)])
+    d_coco = pose_matrix([picture(with_head), picture(STANDING)], joints=set(COCO_KEPT))
+    assert d_all[0, 1] > d_coco[0, 1] == pytest.approx(0.0, abs=1e-9)
+
+
+def test_vector_matrix_keeps_the_closer_reading():
+    plain = np.array([[1.0, 0.0], [0.0, 1.0]])
+    flipped = np.array([[0.0, 1.0], [1.0, 0.0]])
+    assert vector_matrix(plain, None)[0, 1] == 0.0
+    assert vector_matrix(plain, flipped)[0, 1] == -1.0
+
+
+def test_zsum_puts_matrices_on_one_scale():
+    a = np.array([[0.0, 1.0], [1.0, 0.0]])
+    assert np.allclose(zsum(a, 10 * a), 2 * (a - a.mean()) / a.std())
+
+
+def test_score_all_and_cross():
+    items = [
+        {"id": "a", "label": "x", "group": "emblem"},
+        {"id": "b", "label": "x", "group": "museum"},
+        {"id": "c", "label": "y", "group": "museum"},
+        {"id": "d", "label": "y", "group": "emblem"},
+    ]
+    dist = np.array(
+        [
+            [0, 1, 2, 0.5],  # a: nearest overall is d (wrong), nearest museum work is b
+            [1, 0, 2, 2],
+            [2, 2, 0, 1],
+            [0.5, 2, 1, 0],
+        ]
+    )
+    everything = _score(dist, items, None)
+    assert everything["top1"] == 0.5 and everything["queries"] == 4
+    emblems = _score(dist, items, "emblem")
+    assert emblems["top1"] == 1.0 and emblems["queries"] == 2
+
+
+def test_vitpose_conversion_names_every_weight():
+    import torch
+
+    mm = {
+        "backbone.pos_embed": torch.zeros(1),
+        "backbone.patch_embed.projection.weight": torch.zeros(1),
+        "backbone.patch_embed.projection.bias": torch.zeros(1),
+        "backbone.ln1.weight": torch.zeros(1),
+        "backbone.ln1.bias": torch.zeros(1),
+        "head.deconv_layers.0.weight": torch.zeros(1),
+        "head.deconv_layers.3.weight": torch.zeros(1),
+        "head.final_layer.weight": torch.zeros(1),
+        "head.final_layer.bias": torch.zeros(1),
+    }
+    for part in ("weight", "bias", "running_mean", "running_var", "num_batches_tracked"):
+        mm[f"head.deconv_layers.1.{part}"] = torch.zeros(1)
+        mm[f"head.deconv_layers.4.{part}"] = torch.zeros(1)
+    for part in ("weight", "bias"):
+        mm[f"backbone.layers.0.attn.qkv.{part}"] = torch.arange(6.0)
+        for name in ("attn.proj", "ln1", "ln2", "ffn.layers.0.0", "ffn.layers.1"):
+            mm[f"backbone.layers.0.{name}.{part}"] = torch.zeros(1)
+    out = convert_vitpose(mm)
+    assert out["backbone.encoder.layer.0.attention.attention.key.weight"].tolist() == [2.0, 3.0]
+    assert "head.batchnorm2.running_var" in out and len(out) == 5 + 16 + 14
+
+
+def test_bricks_are_found_by_kind_and_name():
+    assert brick("figures", "opus").kind == "figures"
+    assert brick("pose", "opus").kind == "pose"
+    assert {k for k, _ in BRICKS} == {"figures", "pose", "vector"}
+    with pytest.raises(SystemExit):
+        brick("pose", "nothing")

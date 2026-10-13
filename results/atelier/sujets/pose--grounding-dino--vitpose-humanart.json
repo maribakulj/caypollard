@@ -1,0 +1,63 @@
+{
+ "bench": "sujets",
+ "combination": "pose--grounding-dino--vitpose-humanart",
+ "date": "2026-10-13",
+ "commit": "be69e26",
+ "bricks": [
+  {
+   "name": "grounding-dino",
+   "kind": "figures",
+   "summary": "Grounding DINO base, zero-shot; prompt 'a person. a skeleton. an angel. a child.', boxes above 0.3, NMS 0.5",
+   "source": "https://huggingface.co/IDEA-Research/grounding-dino-base",
+   "weights_mb": 900,
+   "heavy": false
+  },
+  {
+   "name": "vitpose-humanart",
+   "kind": "pose",
+   "summary": "ViTPose-B trained on COCO + Human-Art (paintings, sculpture, drawings): 0.759 AP on Human-Art with given boxes; points above 0.3",
+   "source": "https://download.openmmlab.com/mmpose/v1/body_2d_keypoint/topdown_heatmap/human_art/td-hm_ViTPose-base_8xb64-210e_humanart-256x192-b417f546_20230611.pth",
+   "weights_mb": 360,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "emblem_queries": {
+   "queries": 12,
+   "top1": 0.75,
+   "mAP": 0.465,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "crucifixion": "6/6",
+    "portement": "1/1",
+    "tentation": "2/4",
+    "visitation": "0/1"
+   }
+  },
+  "museum_queries": {
+   "queries": 52,
+   "top1": 0.365,
+   "mAP": 0.423,
+   "median_first_hit": 3.0,
+   "top1_by_label": {
+    "crucifixion": "16/19",
+    "portement": "0/15",
+    "tentation": "3/5",
+    "visitation": "0/13"
+   }
+  }
+ },
+ "chance": {
+  "emblem_queries": {
+   "top1": 0.202,
+   "mAP": 0.245
+  },
+  "museum_queries": {
+   "top1": 0.263,
+   "mAP": 0.402
+  }
+ },
+ "seconds_per_picture_median": 3.07,
+ "figures_per_picture_median": 4.0,
+ "pictures_without_figure": 4
+}

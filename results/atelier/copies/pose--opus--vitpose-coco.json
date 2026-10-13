@@ -1,0 +1,51 @@
+{
+ "bench": "copies",
+ "combination": "pose--opus--vitpose-coco",
+ "date": "2026-10-13",
+ "commit": "be69e26",
+ "bricks": [
+  {
+   "name": "opus",
+   "kind": "figures",
+   "summary": "Claude Opus names each figure and boxes it (one pass, ~1 min a picture, no review)",
+   "source": "scripts/pilot_describe.py",
+   "weights_mb": 0,
+   "heavy": false
+  },
+  {
+   "name": "vitpose-coco",
+   "kind": "pose",
+   "summary": "ViTPose-B trained on photographs only (COCO): 0.555 AP on Human-Art with given boxes; points above 0.3. The control for what Human-Art adds",
+   "source": "https://download.openmmlab.com/mmpose/v1/body_2d_keypoint/topdown_heatmap/coco/td-hm_ViTPose-base_8xb64-210e_coco-256x192-216eae50_20230314.pth",
+   "weights_mb": 360,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 34,
+   "top1": 0.853,
+   "mAP": 0.693,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "abt": "2/5",
+    "altmann": "5/5",
+    "altweib": "5/5",
+    "blinde": "2/3",
+    "edelmann": "3/4",
+    "graf": "5/5",
+    "kriegsmann": "4/4",
+    "narr": "3/3"
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.097,
+   "mAP": 0.181
+  }
+ },
+ "seconds_per_picture_median": 0.15,
+ "figures_per_picture_median": 2.0,
+ "pictures_without_figure": 0
+}

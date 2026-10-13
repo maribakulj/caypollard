@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Find the figures without Opus: Grounding DINO boxes, then ViTPose points in them.
+"""Superseded by the workshop (``scripts/atelier.py``), which reproduces its numbers exactly;
+kept to rebuild ``results/pose-detect``.
+
+Find the figures without Opus: Grounding DINO boxes, then ViTPose points in them.
 
 ``scripts/pose_vitpose.py`` showed that ViTPose (Human-Art) places points as well as
 Opus inside Opus's boxes. This removes Opus altogether: Grounding DINO (base, zero-shot)
