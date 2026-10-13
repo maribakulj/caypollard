@@ -1,0 +1,115 @@
+{
+ "copies": {
+  "chance": {
+   "top1": 0.097,
+   "mAP": 0.181
+  },
+  "opus": {
+   "queries": 34,
+   "top1": 0.971,
+   "mAP": 0.808,
+   "median_first_hit": 1.0
+  },
+  "opus_same_joints": {
+   "queries": 34,
+   "top1": 0.971,
+   "mAP": 0.797,
+   "median_first_hit": 1.0
+  },
+  "vitpose_humanart": {
+   "queries": 34,
+   "top1": 1.0,
+   "mAP": 0.891,
+   "median_first_hit": 1.0
+  }
+ },
+ "subjects_emblem_queries": {
+  "opus": {
+   "queries": 12,
+   "top1": 0.667,
+   "mAP": 0.438,
+   "median_first_hit": 1.0,
+   "top1_by_subject": {
+    "crucifixion": "6/6",
+    "portement": "0/1",
+    "tentation": "2/4",
+    "visitation": "0/1"
+   }
+  },
+  "opus_same_joints": {
+   "queries": 12,
+   "top1": 0.667,
+   "mAP": 0.445,
+   "median_first_hit": 1.0,
+   "top1_by_subject": {
+    "crucifixion": "6/6",
+    "portement": "0/1",
+    "tentation": "2/4",
+    "visitation": "0/1"
+   }
+  },
+  "vitpose_humanart": {
+   "queries": 12,
+   "top1": 0.5,
+   "mAP": 0.411,
+   "median_first_hit": 1.5,
+   "top1_by_subject": {
+    "crucifixion": "5/6",
+    "portement": "0/1",
+    "tentation": "0/4",
+    "visitation": "1/1"
+   }
+  },
+  "chance": {
+   "top1": 0.202,
+   "mAP": 0.245
+  }
+ },
+ "subjects_museum_queries": {
+  "opus": {
+   "queries": 52,
+   "top1": 0.423,
+   "mAP": 0.492,
+   "median_first_hit": 2.5,
+   "top1_by_subject": {
+    "crucifixion": "18/19",
+    "portement": "0/15",
+    "tentation": "2/5",
+    "visitation": "2/13"
+   }
+  },
+  "opus_same_joints": {
+   "queries": 52,
+   "top1": 0.423,
+   "mAP": 0.5,
+   "median_first_hit": 3.0,
+   "top1_by_subject": {
+    "crucifixion": "18/19",
+    "portement": "1/15",
+    "tentation": "2/5",
+    "visitation": "1/13"
+   }
+  },
+  "vitpose_humanart": {
+   "queries": 52,
+   "top1": 0.462,
+   "mAP": 0.498,
+   "median_first_hit": 2.0,
+   "top1_by_subject": {
+    "crucifixion": "19/19",
+    "portement": "1/15",
+    "tentation": "3/5",
+    "visitation": "1/13"
+   }
+  },
+  "chance": {
+   "top1": 0.264,
+   "mAP": 0.402
+  }
+ },
+ "vitpose_points_per_figure": {
+  "figures": 495,
+  "median": 13.0,
+  "under_6": 36
+ }
+}
