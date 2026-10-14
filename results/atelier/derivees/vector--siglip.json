@@ -1,0 +1,63 @@
+{
+ "bench": "derivees",
+ "combination": "vector--siglip",
+ "date": "2026-10-14",
+ "commit": "1702174",
+ "bricks": [
+  {
+   "name": "siglip",
+   "kind": "vector",
+   "summary": "SigLIP base 224 image features (image-text, 2023)",
+   "source": "https://huggingface.co/google/siglip-base-patch16-224",
+   "weights_mb": 800,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "derived_queries": {
+   "queries": 748,
+   "top1": 0.711,
+   "mAP": 0.779,
+   "median_first_hit": 1.0,
+   "by_medium": {
+    "autre": {
+     "queries": 79,
+     "top1": 0.544,
+     "mAP": 0.618
+    },
+    "copie peinte": {
+     "queries": 380,
+     "top1": 0.776,
+     "mAP": 0.832
+    },
+    "dessin": {
+     "queries": 35,
+     "top1": 0.657,
+     "mAP": 0.711
+    },
+    "estampe": {
+     "queries": 218,
+     "top1": 0.748,
+     "mAP": 0.828
+    },
+    "sculpture": {
+     "queries": 13,
+     "top1": 0.308,
+     "mAP": 0.363
+    },
+    "textile": {
+     "queries": 23,
+     "top1": 0.174,
+     "mAP": 0.341
+    }
+   }
+  }
+ },
+ "chance": {
+  "derived_queries": {
+   "top1": 0.002,
+   "mAP": 0.01
+  }
+ },
+ "seconds_per_picture": 0.079
+}

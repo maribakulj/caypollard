@@ -37,3 +37,22 @@ Same subject across media: 12 emblems and 68 museum works (Crucifixion, Carrying
 | pose--opus--vitpose-coco | 0.75 | 0.429 | 0.481 | 0.511 | 0.345 |
 | pose--opus--vitpose-humanart | 0.5 | 0.411 | 0.462 | 0.498 | 0.33999999999999997 |
 | pose--owlv2--vitpose-humanart | 0.5 | 0.366 | 0.442 | 0.478 | 2.42 |
+
+## derivees
+
+Wikidata's documented derivations ('based on' a painting): every derived work in another medium (prints, drawings, tapestries, sculpture) and as many painted copies at random. A derived work searches the source paintings; a hit is its own source. Scores per medium.
+
+| combination | derived_queries top1 | derived_queries mAP | s/picture |
+|---|---|---|---|
+| *chance* | 0.002 | 0.01 | |
+| vector--dinov2 | 0.742 | 0.787 | 0.356 |
+| vector--siglip | 0.711 | 0.779 | 0.079 |
+| vector--clip | 0.623 | 0.707 | 0.048 |
+
+Top1 by medium (derived_queries; queries: autre 79, copie peinte 380, dessin 35, estampe 218, sculpture 13, textile 23)
+
+| combination | autre | copie peinte | dessin | estampe | sculpture | textile |
+|---|---|---|---|---|---|---|
+| vector--dinov2 | 0.57 | 0.776 | 0.714 | 0.794 | 0.231 | 0.609 |
+| vector--siglip | 0.544 | 0.776 | 0.657 | 0.748 | 0.308 | 0.174 |
+| vector--clip | 0.532 | 0.734 | 0.571 | 0.541 | 0.154 | 0.217 |

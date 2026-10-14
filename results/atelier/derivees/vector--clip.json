@@ -1,0 +1,63 @@
+{
+ "bench": "derivees",
+ "combination": "vector--clip",
+ "date": "2026-10-14",
+ "commit": "1702174",
+ "bricks": [
+  {
+   "name": "clip",
+   "kind": "vector",
+   "summary": "CLIP ViT-B/32 image features (image-text, 2021)",
+   "source": "https://huggingface.co/openai/clip-vit-base-patch32",
+   "weights_mb": 600,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "derived_queries": {
+   "queries": 748,
+   "top1": 0.623,
+   "mAP": 0.707,
+   "median_first_hit": 1.0,
+   "by_medium": {
+    "autre": {
+     "queries": 79,
+     "top1": 0.532,
+     "mAP": 0.607
+    },
+    "copie peinte": {
+     "queries": 380,
+     "top1": 0.734,
+     "mAP": 0.798
+    },
+    "dessin": {
+     "queries": 35,
+     "top1": 0.571,
+     "mAP": 0.617
+    },
+    "estampe": {
+     "queries": 218,
+     "top1": 0.541,
+     "mAP": 0.667
+    },
+    "sculpture": {
+     "queries": 13,
+     "top1": 0.154,
+     "mAP": 0.197
+    },
+    "textile": {
+     "queries": 23,
+     "top1": 0.217,
+     "mAP": 0.371
+    }
+   }
+  }
+ },
+ "chance": {
+  "derived_queries": {
+   "top1": 0.002,
+   "mAP": 0.01
+  }
+ },
+ "seconds_per_picture": 0.048
+}

@@ -28,7 +28,8 @@ def show(result: dict) -> None:
         c = result["chance"][direction]
         print(
             f"  {direction}: top1 {s['top1']} (chance {c['top1']}), mAP {s['mAP']} "
-            f"(chance {c['mAP']}) — {json.dumps(s['top1_by_label'], ensure_ascii=False)}"
+            f"(chance {c['mAP']}) — "
+            + json.dumps(s.get("by_medium") or s.get("top1_by_label"), ensure_ascii=False)
         )
 
 

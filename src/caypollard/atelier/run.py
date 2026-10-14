@@ -77,8 +77,14 @@ def run_vector(bench_name: str, vector: str) -> dict:
     encoder = brick("vector", vector)
     images = [Image.open(bench.image(it["id"])).convert("RGB") for it in bench.items()]
     start = time.time()
-    plain = encoder.encode(images)
-    flipped = encoder.encode([ImageOps.mirror(im) for im in images])
+    # In batches: a whole bench at once filled 18 GB of memory on 1,410 pictures.
+    plain = np.concatenate([encoder.encode(images[i : i + 32]) for i in range(0, len(images), 32)])
+    flipped = np.concatenate(
+        [
+            encoder.encode([ImageOps.mirror(im) for im in images[i : i + 32]])
+            for i in range(0, len(images), 32)
+        ]
+    )
     extra = {"seconds_per_picture": round((time.time() - start) / len(images) / 2, 3)}
     return _save(bench, f"vector--{vector}", vector_matrix(plain, flipped), [encoder.meta()], extra)
 
@@ -149,6 +155,24 @@ def table() -> Path:
             speed = r.get("seconds_per_picture_median", r.get("seconds_per_picture", ""))
             lines.append(f"| {r['combination']} | {cells} | {speed} |")
         lines.append("")
+        for d in directions:
+            media = sorted({m for r in runs for m in r["scores"][d].get("by_medium", {})})
+            if not media:
+                continue
+            counts = {m: runs[0]["scores"][d]["by_medium"].get(m, {}).get("queries") for m in media}
+            lines += [
+                f"Top1 by medium ({d}; queries: "
+                + ", ".join(f"{m} {n}" for m, n in counts.items())
+                + ")",
+                "",
+                "| combination | " + " | ".join(media) + " |",
+                "|" + "---|" * (1 + len(media)),
+            ]
+            for r in runs:
+                by = r["scores"][d].get("by_medium", {})
+                cells = " | ".join(str(by.get(m, {}).get("top1", "")) for m in media)
+                lines.append(f"| {r['combination']} | {cells} |")
+            lines.append("")
     path = RESULTS / "TABLEAU.md"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines))
