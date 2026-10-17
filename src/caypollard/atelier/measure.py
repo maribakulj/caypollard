@@ -222,6 +222,32 @@ def scene_words(scene: dict, relations_too: bool = True) -> dict[str, int]:
     return words
 
 
+def scene_phrases(scene: dict) -> list[str]:
+    """A scene graph as short phrases, one per figure and one per relation, so that a text
+    encoder can bring synonyms together ("holds" and "carries")."""
+    figures = {f.get("id"): f for f in scene.get("figures", []) if isinstance(f, dict)}
+    out = [f"{f.get('posture')} {f.get('role')}" for f in figures.values()]
+    for r in scene.get("relations", []):
+        a, b = figures.get(r.get("a")), figures.get(r.get("b"))
+        if a and b:
+            out.append(f"{a.get('role')} {r.get('rel')} {b.get('role')}")
+    return out
+
+
+def set_matrix(sets: Sequence[np.ndarray]) -> np.ndarray:
+    """Distances between sets of unit vectors: each vector takes its best match in the
+    other set, mean of both directions (an empty set is far from everything)."""
+    n = len(sets)
+    sim = np.zeros((n, n))
+    for i in range(n):
+        for j in range(i, n):
+            a, b = sets[i], sets[j]
+            if len(a) and len(b):
+                m = a @ b.T
+                sim[i, j] = sim[j, i] = (m.max(1).mean() + m.max(0).mean()) / 2
+    return -sim  # lower is closer
+
+
 def words_matrix(bags: Sequence[dict[str, int]]) -> np.ndarray:
     """Distances between bags of words: cosine over counts (a picture without words is far
     from everything)."""

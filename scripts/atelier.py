@@ -27,6 +27,7 @@ from caypollard.atelier.run import (
     run_regions,
     run_relations,
     run_scene,
+    run_scene_vectors,
     run_vector,
     table,
 )
@@ -66,6 +67,7 @@ def main() -> None:
     g.add_argument("banc", choices=sorted(BENCHES))
     g.add_argument("--brique", required=True)
     g.add_argument("--figures-seules", action="store_true", help="the control without relations")
+    g.add_argument("--vecteurs", action="store_true", help="phrases through a text encoder")
     r = sub.add_parser("regions")
     r.add_argument("banc", choices=sorted(BENCHES))
     r.add_argument("--brique", required=True)
@@ -90,7 +92,10 @@ def main() -> None:
     elif args.command == "relations":
         show(run_relations(args.banc, args.figures, args.pose, not args.postures_seules))
     elif args.command == "scene":
-        show(run_scene(args.banc, args.brique, not args.figures_seules))
+        if args.vecteurs:
+            show(run_scene_vectors(args.banc, args.brique))
+        else:
+            show(run_scene(args.banc, args.brique, not args.figures_seules))
     elif args.command == "regions":
         show(run_regions(args.banc, args.brique))
     else:

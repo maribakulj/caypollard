@@ -25,7 +25,9 @@ from .measure import (
     dense_matrix,
     pose_matrix,
     relation_words,
+    scene_phrases,
     scene_words,
+    set_matrix,
     vector_matrix,
     words_matrix,
     zsum,
@@ -131,6 +133,26 @@ def run_scene(bench_name: str, name: str, relations_too: bool = True) -> dict:
         },
     }
     return _save(bench, f"{kind}--{name}", words_matrix(bags), [brick("scene", name).meta()], extra)
+
+
+def run_scene_vectors(bench_name: str, name: str, text: str = "minilm-multilingual") -> dict:
+    """A scene brick's graphs compared phrase by phrase through a text encoder."""
+    from caypollard.text.encoders import DEFAULT_MODELS, HuggingFaceTextEncoder
+
+    bench = BENCHES[bench_name]
+    items = bench.items()
+    read = scenes(bench, items, name)
+    phrases = [scene_phrases(d) for d in read]
+    encoder = HuggingFaceTextEncoder(DEFAULT_MODELS[text], device="cpu")
+    flat = sorted({p for ps in phrases for p in ps})
+    vectors = dict(zip(flat, encoder.encode(flat), strict=True)) if flat else {}
+    sets = [np.array([vectors[p] for p in ps]) for ps in phrases]
+    extra = {
+        "phrases_per_picture_median": float(np.median([len(p) for p in phrases])),
+        "text": text,
+    }
+    bricks = [brick("scene", name).meta()]
+    return _save(bench, f"scene-vecteurs--{name}--{text}", set_matrix(sets), bricks, extra)
 
 
 def run_vector(bench_name: str, vector: str) -> dict:

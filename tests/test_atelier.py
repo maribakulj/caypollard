@@ -13,7 +13,9 @@ from caypollard.atelier.measure import (
     pose_matrix,
     posture,
     relation_words,
+    scene_phrases,
     scene_words,
+    set_matrix,
     vector_matrix,
     words_matrix,
     zsum,
@@ -131,6 +133,17 @@ def test_scene_words_use_roles_not_the_subject():
         "woman:embraces:old woman": 1,
     }
     assert "woman:embraces:old woman" not in scene_words(scene, relations_too=False)
+
+
+def test_scene_phrases_and_set_matrix():
+    scene = {
+        "figures": [{"id": "f1", "role": "woman", "posture": "standing"}],
+        "relations": [{"a": "f1", "rel": "holds", "b": "f1"}],
+    }
+    assert scene_phrases(scene) == ["standing woman", "woman holds woman"]
+    e = np.eye(2)
+    d = set_matrix([e[[0]], e[[0, 1]], np.zeros((0, 2))])
+    assert d[0, 1] == pytest.approx(-0.75) and d[0, 2] == 0.0
 
 
 def test_words_matrix_is_a_cosine_and_empty_is_far():

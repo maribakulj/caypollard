@@ -1,0 +1,62 @@
+{
+ "bench": "relations",
+ "combination": "scene-vecteurs--opus-scene--minilm-multilingual",
+ "date": "2026-10-17",
+ "commit": "7250ec8",
+ "bricks": [
+  {
+   "name": "opus-scene",
+   "kind": "scene",
+   "summary": "Claude Opus reads a scene graph without names: figures with a generic role and a posture, relations in a closed vocabulary of 18 verbs; one pass, no review",
+   "source": "claude -p (Claude Code, headless)",
+   "weights_mb": 0,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.814,
+   "mAP": 0.604,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "annonciation": "29/30",
+    "bergers": "20/29",
+    "crucifixion": "26/30",
+    "deploration": "18/30",
+    "descente": "21/29",
+    "ecce-homo": "28/30",
+    "fuite-egypte": "19/22",
+    "gethsemani": "23/24",
+    "mages": "30/30",
+    "mise-au-tombeau": "15/29",
+    "nativite": "13/24",
+    "portement": "21/28",
+    "presentation": "26/29",
+    "resurrection": "19/20",
+    "sainte-famille": "24/29",
+    "visitation": "26/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.85,
+     "mAP": 0.683
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.777,
+     "mAP": 0.524
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "phrases_per_picture_median": 14.0,
+ "text": "minilm-multilingual"
+}

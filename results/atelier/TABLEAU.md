@@ -32,6 +32,7 @@ Same subject across media: 12 emblems and 68 museum works (Crucifixion, Carrying
 | *chance* | 0.202 | 0.245 | 0.263 | 0.402 | |
 | vector--siglip | 0.75 | 0.675 | 0.558 | 0.652 | 0.208 |
 | scene--opus-scene | 0.583 | 0.613 | 0.442 | 0.516 | 15.649999999999999 |
+| scene-vecteurs--opus-scene--minilm-multilingual | 0.5 | 0.557 | 0.519 | 0.546 |  |
 | scene-figures--opus-scene | 0.417 | 0.519 | 0.404 | 0.51 | 15.649999999999999 |
 | regions--dinov2-patchs | 0.75 | 0.513 | 0.481 | 0.574 | 0.397 |
 | vector--dinov2 | 0.75 | 0.482 | 0.481 | 0.613 | 0.087 |
@@ -78,6 +79,7 @@ Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two
 | combination | all top1 | all mAP | s/picture |
 |---|---|---|---|
 | *chance* | 0.063 | 0.073 | |
+| scene-vecteurs--opus-scene--minilm-multilingual | 0.814 | 0.604 |  |
 | scene--opus-scene | 0.807 | 0.569 | 15.5 |
 | sum--scene--opus-scene--and--vector--siglip | 0.836 | 0.543 |  |
 | scene-figures--opus-scene | 0.668 | 0.41 | 15.5 |
@@ -94,6 +96,7 @@ Top1 by medium (all; queries: enfance 220, passion 220)
 
 | combination | enfance | passion |
 |---|---|---|
+| scene-vecteurs--opus-scene--minilm-multilingual | 0.85 | 0.777 |
 | scene--opus-scene | 0.855 | 0.759 |
 | sum--scene--opus-scene--and--vector--siglip | 0.877 | 0.795 |
 | scene-figures--opus-scene | 0.682 | 0.655 |
