@@ -391,6 +391,14 @@ class ClaudeScene(Brick):
         return {"figures": [], "relations": [], "subject": "", **data, "_raw": text}
 
 
+class ElsewhereScene(Brick):
+    """Scene graphs computed elsewhere (a Kaggle notebook) with the same prompt, read from
+    the cache; nothing runs here."""
+
+    def scene(self, path: Path) -> dict:
+        raise RuntimeError(f"{self.name} runs on Kaggle ({self.source}); fetch its cache first")
+
+
 def _opus(bench, item_id: str) -> dict:
     path = bench.root / "describe" / f"{item_id}.json"
     if not path.exists():
@@ -504,6 +512,15 @@ BRICKS: dict[tuple[str, str], Brick] = {
             "opus",
             "Claude Opus reads a scene graph without names: figures with a generic role and "
             "a posture, relations in a closed vocabulary of 18 verbs; one pass, no review",
+        ),
+        ElsewhereScene(
+            "qwen25vl3b-scene",
+            "scene",
+            "Qwen2.5-VL-3B-Instruct, zero-shot, the same prompt as opus-scene; on Kaggle (T4), "
+            "greedy decoding, pictures at 256-640 x 28 x 28 pixels",
+            "https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct",
+            7500,
+            heavy=True,
         ),
         # Both regions bricks were fixed together, before either was run.
         _patches(
