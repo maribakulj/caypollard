@@ -41,6 +41,8 @@ Same subject across media: 12 emblems and 68 museum works (Crucifixion, Carrying
 | pose--opus--vitpose-coco | 0.75 | 0.429 | 0.481 | 0.511 | 0.345 |
 | pose--opus--vitpose-humanart | 0.5 | 0.411 | 0.462 | 0.498 | 0.33999999999999997 |
 | pose--owlv2--vitpose-humanart | 0.5 | 0.366 | 0.442 | 0.478 | 2.42 |
+| scene--opus-scene | 0.25 | 0.366 | 0.365 | 0.427 | 14.15 |
+| scene-figures--opus-scene | 0.167 | 0.361 | 0.346 | 0.422 | 14.15 |
 | relations--grounding-dino--vitpose-humanart | 0.5 | 0.356 | 0.288 | 0.419 |  |
 | postures--opus--opus | 0.5 | 0.337 | 0.423 | 0.541 |  |
 | relations--opus--opus | 0.25 | 0.322 | 0.423 | 0.505 |  |
