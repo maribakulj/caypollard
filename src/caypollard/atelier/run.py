@@ -21,7 +21,15 @@ from PIL import Image, ImageOps
 
 from .benches import BENCHES, Bench
 from .bricks import COCO_KEPT, brick
-from .measure import dense_matrix, pose_matrix, vector_matrix, zsum
+from .measure import (
+    dense_matrix,
+    pose_matrix,
+    relation_words,
+    scene_words,
+    vector_matrix,
+    words_matrix,
+    zsum,
+)
 
 CACHE = Path("data/derived/atelier")
 RESULTS = Path("results/atelier")
@@ -70,6 +78,58 @@ def run_pose(bench_name: str, figures: str, pose: str, joints: str | None = None
     }
     bricks = [brick("figures", figures).meta(), brick("pose", pose).meta()]
     return _save(bench, pose_name(figures, pose, joints), dist, bricks, extra)
+
+
+def run_relations(bench_name: str, figures: str, pose: str, relations_too: bool = True) -> dict:
+    """Bags of postures and relations, from a pose chain's cached descriptions."""
+    bench = BENCHES[bench_name]
+    descriptions, _ = describe(bench, figures, pose)
+    bags = [relation_words(d, relations_too) for d in descriptions]
+    kind = "relations" if relations_too else "postures"
+    extra = {
+        "words_per_picture_median": float(np.median([sum(b.values()) for b in bags])),
+        "vocabulary": len({w for b in bags for w in b}),
+    }
+    bricks = [brick("figures", figures).meta(), brick("pose", pose).meta()]
+    return _save(bench, f"{kind}--{figures}--{pose}", words_matrix(bags), bricks, extra)
+
+
+def scenes(bench: Bench, name: str, workers: int = 4) -> list[dict]:
+    """A scene brick's reading of every picture, cached one file per picture."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    reader = brick("scene", name)
+    folder = CACHE / bench.name / f"scene--{name}"
+    folder.mkdir(parents=True, exist_ok=True)
+
+    def one(item_id: str) -> dict:
+        cache = folder / f"{item_id}.json"
+        if not cache.exists():
+            start = time.time()
+            d = reader.scene(bench.image(item_id))
+            d["seconds"] = round(time.time() - start, 1)
+            cache.write_text(json.dumps(d, ensure_ascii=False))
+            print(f"  {item_id}: {len(d.get('relations', []))} relations", flush=True)
+        return json.loads(cache.read_text())
+
+    with ThreadPoolExecutor(workers) as pool:
+        return list(pool.map(one, [it["id"] for it in bench.items()]))
+
+
+def run_scene(bench_name: str, name: str, relations_too: bool = True) -> dict:
+    bench = BENCHES[bench_name]
+    read = scenes(bench, name)
+    bags = [scene_words(d, relations_too) for d in read]
+    kind = "scene" if relations_too else "scene-figures"
+    extra = {
+        "seconds_per_picture_median": float(np.median([d.get("seconds", 0) for d in read])),
+        "words_per_picture_median": float(np.median([sum(b.values()) for b in bags])),
+        "vocabulary": len({w for b in bags for w in b}),
+        "subjects_named": {
+            it["id"]: d.get("subject", "") for it, d in zip(bench.items(), read, strict=True)
+        },
+    }
+    return _save(bench, f"{kind}--{name}", words_matrix(bags), [brick("scene", name).meta()], extra)
 
 
 def run_vector(bench_name: str, vector: str) -> dict:

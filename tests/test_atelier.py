@@ -11,7 +11,11 @@ from caypollard.atelier.measure import (
     dense_matrix,
     mirrored_keypoints,
     pose_matrix,
+    posture,
+    relation_words,
+    scene_words,
     vector_matrix,
+    words_matrix,
     zsum,
 )
 
@@ -82,6 +86,58 @@ def test_dense_matrix_keeps_the_mirrored_reading():
     assert dense_matrix(plain, flipped, True)[0, 1] == pytest.approx(-1.0)
 
 
+def test_posture_reads_the_torso_and_the_knees():
+    hips = {"left_hip": [58, 80], "right_hip": [42, 80]}
+    up = dict(hips, left_shoulder=[60, 40], right_shoulder=[40, 40])
+    assert posture(dict(up, left_knee=[58, 120], right_knee=[42, 120])) == "debout"
+    assert posture(dict(up, left_knee=[60, 90], right_knee=[40, 90])) == "agenouillée-assise"
+    flat = dict(hips, left_shoulder=[10, 82], right_shoulder=[10, 78])
+    assert posture(flat) == "couchée"
+    assert posture({}) == "inconnue"
+
+
+def test_relation_words_count_figures_postures_and_relations():
+    standing = dict(STANDING, left_knee=[58, 120], right_knee=[42, 120], nose=[60, 30])
+    d = {
+        "size": (300, 200),
+        "figures": [
+            {"box": [30, 10, 95, 130], "keypoints": standing},
+            {"box": [100, 10, 165, 130], "keypoints": standing},
+        ],
+    }
+    words = relation_words(d)
+    assert words["figures:2"] == 1 and words["posture:debout"] == 2
+    assert any(w.startswith("regarde vers:debout>debout") for w in words)
+    assert not any(":" in w and ">" in w for w in relation_words(d, relations_too=False))
+
+
+def test_scene_words_use_roles_not_the_subject():
+    scene = {
+        "figures": [
+            {"id": "f1", "role": "woman", "posture": "standing"},
+            {"id": "f2", "role": "old woman", "posture": "bending"},
+        ],
+        "relations": [
+            {"a": "f1", "rel": "embraces", "b": "f2"},
+            {"a": "f1", "rel": "x", "b": "f9"},
+        ],
+        "subject": "the Visitation",
+    }
+    words = scene_words(scene)
+    assert words == {
+        "figures:2": 1,
+        "figure:woman:standing": 1,
+        "figure:old woman:bending": 1,
+        "woman:embraces:old woman": 1,
+    }
+    assert "woman:embraces:old woman" not in scene_words(scene, relations_too=False)
+
+
+def test_words_matrix_is_a_cosine_and_empty_is_far():
+    d = words_matrix([{"a": 1}, {"a": 2}, {}])
+    assert d[0, 1] == pytest.approx(-1.0) and d[0, 2] == 0.0
+
+
 def test_zsum_puts_matrices_on_one_scale():
     a = np.array([[0.0, 1.0], [1.0, 0.0]])
     assert np.allclose(zsum(a, 10 * a), 2 * (a - a.mean()) / a.std())
@@ -137,6 +193,6 @@ def test_vitpose_conversion_names_every_weight():
 def test_bricks_are_found_by_kind_and_name():
     assert brick("figures", "opus").kind == "figures"
     assert brick("pose", "opus").kind == "pose"
-    assert {k for k, _ in BRICKS} == {"figures", "pose", "regions", "vector"}
+    assert {k for k, _ in BRICKS} == {"figures", "pose", "regions", "scene", "vector"}
     with pytest.raises(SystemExit):
         brick("pose", "nothing")

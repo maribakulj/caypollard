@@ -6,6 +6,7 @@
     uv run python scripts/atelier.py pose copies --figures owlv2 --pose vitpose-humanart
     uv run python scripts/atelier.py vecteur sujets --brique dinov2
     uv run python scripts/atelier.py regions derivees --brique dinov2-patchs
+    uv run python scripts/atelier.py relations sujets --figures opus --pose opus
     uv run python scripts/atelier.py somme sujets pose--opus--opus vector--dinov2
     uv run python scripts/atelier.py tableau
 
@@ -20,7 +21,15 @@ import json
 
 from caypollard.atelier.benches import BENCHES
 from caypollard.atelier.bricks import BRICKS
-from caypollard.atelier.run import run_fusion, run_pose, run_regions, run_vector, table
+from caypollard.atelier.run import (
+    run_fusion,
+    run_pose,
+    run_regions,
+    run_relations,
+    run_scene,
+    run_vector,
+    table,
+)
 
 
 def show(result: dict) -> None:
@@ -48,6 +57,15 @@ def main() -> None:
     v = sub.add_parser("vecteur")
     v.add_argument("banc", choices=sorted(BENCHES))
     v.add_argument("--brique", required=True)
+    q = sub.add_parser("relations")
+    q.add_argument("banc", choices=sorted(BENCHES))
+    q.add_argument("--figures", required=True)
+    q.add_argument("--pose", required=True)
+    q.add_argument("--postures-seules", action="store_true", help="the control without relations")
+    g = sub.add_parser("scene")
+    g.add_argument("banc", choices=sorted(BENCHES))
+    g.add_argument("--brique", required=True)
+    g.add_argument("--figures-seules", action="store_true", help="the control without relations")
     r = sub.add_parser("regions")
     r.add_argument("banc", choices=sorted(BENCHES))
     r.add_argument("--brique", required=True)
@@ -69,6 +87,10 @@ def main() -> None:
         show(run_pose(args.banc, args.figures, args.pose, args.joints))
     elif args.command == "vecteur":
         show(run_vector(args.banc, args.brique))
+    elif args.command == "relations":
+        show(run_relations(args.banc, args.figures, args.pose, not args.postures_seules))
+    elif args.command == "scene":
+        show(run_scene(args.banc, args.brique, not args.figures_seules))
     elif args.command == "regions":
         show(run_regions(args.banc, args.brique))
     else:

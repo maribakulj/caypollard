@@ -1,0 +1,62 @@
+{
+ "bench": "sujets",
+ "combination": "relations--opus--opus",
+ "date": "2026-10-17",
+ "commit": "c9f9cbf",
+ "bricks": [
+  {
+   "name": "opus",
+   "kind": "figures",
+   "summary": "Claude Opus names each figure and boxes it (one pass, ~1 min a picture, no review)",
+   "source": "scripts/pilot_describe.py",
+   "weights_mb": 0,
+   "heavy": false
+  },
+  {
+   "name": "opus",
+   "kind": "pose",
+   "summary": "Claude Opus's body points (15 joints, crown and chin included)",
+   "source": "scripts/pilot_describe.py",
+   "weights_mb": 0,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "emblem_queries": {
+   "queries": 12,
+   "top1": 0.25,
+   "mAP": 0.322,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "crucifixion": "0/6",
+    "portement": "1/1",
+    "tentation": "2/4",
+    "visitation": "0/1"
+   }
+  },
+  "museum_queries": {
+   "queries": 52,
+   "top1": 0.423,
+   "mAP": 0.505,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "crucifixion": "14/19",
+    "portement": "0/15",
+    "tentation": "2/5",
+    "visitation": "6/13"
+   }
+  }
+ },
+ "chance": {
+  "emblem_queries": {
+   "top1": 0.202,
+   "mAP": 0.245
+  },
+  "museum_queries": {
+   "top1": 0.263,
+   "mAP": 0.402
+  }
+ },
+ "words_per_picture_median": 25.5,
+ "vocabulary": 136
+}

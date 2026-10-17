@@ -147,5 +147,14 @@ BENCHES = {
             "Scores per medium.",
             queries=("derived",),
         ),
+        Bench(
+            "relations",
+            ROOT / "relations",
+            "all",
+            "Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two "
+            "families where the same figures come back (childhood of Christ, Passion) and "
+            "mostly their relations tell the subjects apart. A hit is the same subject; "
+            "scores per family.",
+        ),
     )
 }

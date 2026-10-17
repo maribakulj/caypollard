@@ -5,6 +5,8 @@
 - ``vector``: pictures -> one L2-normalised vector each (the whole picture).
 - ``regions``: pictures -> one L2-normalised vector per patch (a grid over the picture),
   compared patch by patch rather than as wholes.
+- ``scene``: picture -> its figures (a generic role and a posture each) and the relations
+  between them, in a closed vocabulary: a scene graph without names.
 
 A brick states where it comes from, how heavy its weights are, and whether it counts as
 a heavy job on this machine (more than 1 GB in memory: run it through
@@ -292,6 +294,101 @@ class DinoPatches(Brick):
         return tokens.cpu().numpy().astype(np.float16)
 
 
+SCENE_ROLES = (
+    "man",
+    "woman",
+    "old man",
+    "old woman",
+    "child",
+    "infant",
+    "angel",
+    "soldier",
+    "crowd",
+    "animal",
+)
+SCENE_POSTURES = ("standing", "seated", "kneeling", "lying", "bending", "flying", "riding")
+SCENE_RELATIONS = (
+    "holds",
+    "carries",
+    "embraces",
+    "touches",
+    "reaches toward",
+    "points at",
+    "looks at",
+    "kneels before",
+    "bows to",
+    "gives to",
+    "blesses",
+    "supports",
+    "mourns over",
+    "strikes",
+    "leads",
+    "lies before",
+    "is above",
+    "stands beside",
+)
+SCENE_PROMPT = """Read the image file {path} with the Read tool.
+
+Describe what is visible in it as a scene graph, without naming anyone and without saying \
+what story or subject it shows: no proper names, no titles, no religious identities. Give \
+only the figures that take part in the main scene (at most 8; a group can be one figure \
+with role "crowd").
+
+Answer with JSON only:
+{{"figures": [{{"id": "f1", "role": ..., "posture": ...}}, ...],
+ "relations": [{{"a": "f1", "rel": ..., "b": "f2"}}, ...],
+ "subject": "..."}}
+
+role is one of: {roles}.
+posture is one of: {postures}.
+rel is one of: {relations} (a and b are figure ids).
+Give every relation you can see between the figures, and only those.
+Last, and only last, "subject": the subject you think the picture shows, in a few words."""
+
+
+class ClaudeScene(Brick):
+    """A vision-language model reads the scene graph, headless (``claude -p``), once per
+    picture. The subject it names is kept apart and never used by the distance."""
+
+    model: str = "opus"
+
+    def scene(self, path: Path) -> dict:
+        import subprocess
+
+        prompt = SCENE_PROMPT.format(
+            path=path.resolve(),
+            roles=", ".join(SCENE_ROLES),
+            postures=", ".join(SCENE_POSTURES),
+            relations=", ".join(SCENE_RELATIONS),
+        )
+        run = subprocess.run(
+            [
+                "claude",
+                "-p",
+                "--model",
+                self.model,
+                "--allowedTools",
+                "Read",
+                "--output-format",
+                "json",
+                prompt,
+            ],
+            capture_output=True,
+            text=True,
+            timeout=600,
+            stdin=subprocess.DEVNULL,
+        )
+        text = str(json.loads(run.stdout).get("result", ""))
+        if text.startswith("API Error"):
+            raise RuntimeError(f"{path.name}: {text[:80]}")
+        start = text.find("{")
+        try:
+            data, _ = json.JSONDecoder().raw_decode(text[start:]) if start >= 0 else ({}, 0)
+        except json.JSONDecodeError:
+            data = {}
+        return {"figures": [], "relations": [], "subject": "", **data, "_raw": text}
+
+
 def _opus(bench, item_id: str) -> dict:
     path = bench.root / "describe" / f"{item_id}.json"
     if not path.exists():
@@ -323,6 +420,12 @@ def _patches(name: str, symmetric: bool, summary: str) -> DinoPatches:
         name, "regions", summary, "https://huggingface.co/facebook/dinov2-base", 350
     )
     brick.symmetric = symmetric
+    return brick
+
+
+def _scene(name: str, model: str, summary: str) -> ClaudeScene:
+    brick = ClaudeScene(name, "scene", summary, "claude -p (Claude Code, headless)", 0)
+    brick.model = model
     return brick
 
 
@@ -393,6 +496,12 @@ BRICKS: dict[tuple[str, str], Brick] = {
             "SigLIP base 224 image features (image-text, 2023)",
             "https://huggingface.co/google/siglip-base-patch16-224",
             800,
+        ),
+        _scene(
+            "opus-scene",
+            "opus",
+            "Claude Opus reads a scene graph without names: figures with a generic role and "
+            "a posture, relations in a closed vocabulary of 18 verbs; one pass, no review",
         ),
         # Both regions bricks were fixed together, before either was run.
         _patches(

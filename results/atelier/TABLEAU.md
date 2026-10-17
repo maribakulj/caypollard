@@ -41,6 +41,10 @@ Same subject across media: 12 emblems and 68 museum works (Crucifixion, Carrying
 | pose--opus--vitpose-coco | 0.75 | 0.429 | 0.481 | 0.511 | 0.345 |
 | pose--opus--vitpose-humanart | 0.5 | 0.411 | 0.462 | 0.498 | 0.33999999999999997 |
 | pose--owlv2--vitpose-humanart | 0.5 | 0.366 | 0.442 | 0.478 | 2.42 |
+| relations--grounding-dino--vitpose-humanart | 0.5 | 0.356 | 0.288 | 0.419 |  |
+| postures--opus--opus | 0.5 | 0.337 | 0.423 | 0.541 |  |
+| relations--opus--opus | 0.25 | 0.322 | 0.423 | 0.505 |  |
+| postures--grounding-dino--vitpose-humanart | 0.333 | 0.313 | 0.327 | 0.434 |  |
 
 ## derivees
 
@@ -64,3 +68,24 @@ Top1 by medium (derived_queries; queries: autre 79, copie peinte 380, dessin 35,
 | regions--dinov2-patchs-requete | 0.506 | 0.821 | 0.714 | 0.807 | 0.308 | 0.348 |
 | vector--siglip | 0.544 | 0.776 | 0.657 | 0.748 | 0.308 | 0.174 |
 | vector--clip | 0.532 | 0.734 | 0.571 | 0.541 | 0.154 | 0.217 |
+
+## relations
+
+Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two families where the same figures come back (childhood of Christ, Passion) and mostly their relations tell the subjects apart. A hit is the same subject; scores per family.
+
+| combination | all top1 | all mAP | s/picture |
+|---|---|---|---|
+| *chance* | 0.058 | 0.073 | |
+| vector--siglip | 0.521 | 0.229 | 0.082 |
+| vector--dinov2 | 0.443 | 0.196 | 0.091 |
+| regions--dinov2-patchs | 0.408 | 0.184 | 0.086 |
+| vector--clip | 0.373 | 0.168 | 0.036 |
+
+Top1 by medium (all; queries: enfance 226, passion 225)
+
+| combination | enfance | passion |
+|---|---|---|
+| vector--siglip | 0.518 | 0.524 |
+| vector--dinov2 | 0.416 | 0.471 |
+| regions--dinov2-patchs | 0.42 | 0.396 |
+| vector--clip | 0.354 | 0.391 |

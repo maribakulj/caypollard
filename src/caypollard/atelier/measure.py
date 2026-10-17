@@ -16,7 +16,7 @@ from collections.abc import Sequence
 
 import numpy as np
 
-from caypollard.figures import KEYPOINTS, normalised_skeleton
+from caypollard.figures import KEYPOINTS, mid, normalised_skeleton, relations, torso_axis
 
 MISS = 1.0  # a joint, or a figure, that has no counterpart
 LAYOUT = 0.5  # weight of where a figure stands in its frame, against its pose
@@ -136,6 +136,102 @@ def dense_matrix(
             best = score if best is None else torch.maximum(best, score)
         out[start : start + block] = best.cpu().numpy()
     return -out  # lower is closer
+
+
+def posture(k: dict) -> str:
+    """A figure's posture from its points: lying, leaning, kneeling or seated, standing.
+
+    The torso (hips to shoulders) against the vertical: beyond 60 degrees the figure lies,
+    beyond 30 it leans. An upright torso whose knees come up to less than half a torso below
+    the hips kneels or sits; with lower knees it stands. Without hips and shoulders: unknown.
+    """
+    axis = torso_axis(k)
+    if not axis:
+        return "inconnue"
+    (hx, hy), (sx, sy) = axis
+    torso = math.hypot(sx - hx, sy - hy)
+    if torso == 0:
+        return "inconnue"
+    tilt = math.degrees(math.acos(max(-1.0, min(1.0, (hy - sy) / torso))))
+    if tilt > 60:
+        return "couchée"
+    if tilt > 30:
+        return "penchée"
+    knees = mid(k.get("left_knee"), k.get("right_knee"))
+    if knees and knees[1] - hy < 0.5 * torso:
+        return "agenouillée-assise"
+    return "debout"
+
+
+def relation_words(description: dict, relations_too: bool = True) -> dict[str, int]:
+    """One picture as a bag of words: how many figures, each figure's posture, and (with
+    ``relations_too``) each geometric relation between two figures with both postures.
+
+    The relations are the pilot's (``caypollard.figures.relations``) read on boxes and
+    points only, without silhouettes or objects: touches, reaches toward, looks toward,
+    turns its back to, above, taller than. Who is who is not known, only the postures.
+    """
+    figures = [
+        {"id": str(i), "box": f["box"], "keypoints": f.get("keypoints") or {}}
+        for i, f in enumerate(description.get("figures", []))
+        if f.get("box")
+    ]
+    n = len(figures)
+    words: dict[str, int] = {}
+
+    def add(word: str) -> None:
+        words[word] = words.get(word, 0) + 1
+
+    add(
+        "figures:"
+        + ("0" if n == 0 else "1" if n == 1 else "2" if n == 2 else "3-4" if n < 5 else "5+")
+    )
+    kinds = {f["id"]: posture(f["keypoints"]) for f in figures}
+    for kind in kinds.values():
+        add("posture:" + kind)
+    if relations_too:
+        for r in relations(figures, []):
+            add(f"{r['rel']}:{kinds[r['a']]}>{kinds[r['b']]}")
+    return words
+
+
+def scene_words(scene: dict, relations_too: bool = True) -> dict[str, int]:
+    """A scene graph read by a vision-language model as a bag of words: how many figures,
+    each figure's role and posture, and (with ``relations_too``) each relation with the
+    roles at both ends. The subject the model names is not used."""
+    figures = {f.get("id"): f for f in scene.get("figures", []) if isinstance(f, dict)}
+    n = len(figures)
+    words: dict[str, int] = {}
+
+    def add(word: str) -> None:
+        words[word] = words.get(word, 0) + 1
+
+    add(
+        "figures:"
+        + ("0" if n == 0 else "1" if n == 1 else "2" if n == 2 else "3-4" if n < 5 else "5+")
+    )
+    for f in figures.values():
+        add(f"figure:{f.get('role')}:{f.get('posture')}")
+    if relations_too:
+        for r in scene.get("relations", []):
+            a, b = figures.get(r.get("a")), figures.get(r.get("b"))
+            if a and b:
+                add(f"{a.get('role')}:{r.get('rel')}:{b.get('role')}")
+    return words
+
+
+def words_matrix(bags: Sequence[dict[str, int]]) -> np.ndarray:
+    """Distances between bags of words: cosine over counts (a picture without words is far
+    from everything)."""
+    vocabulary = sorted({w for bag in bags for w in bag})
+    index = {w: i for i, w in enumerate(vocabulary)}
+    counts = np.zeros((len(bags), len(vocabulary)))
+    for row, bag in enumerate(bags):
+        for w, c in bag.items():
+            counts[row, index[w]] = c
+    norms = np.linalg.norm(counts, axis=1, keepdims=True)
+    unit = np.divide(counts, norms, out=np.zeros_like(counts), where=norms > 0)
+    return -(unit @ unit.T)  # lower is closer
 
 
 def zsum(*matrices: np.ndarray) -> np.ndarray:
