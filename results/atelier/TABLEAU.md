@@ -87,8 +87,11 @@ Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two
 | vector--dinov2 | 0.414 | 0.193 | 0.099 |
 | regions--dinov2-patchs | 0.386 | 0.182 | 0.11 |
 | vector--clip | 0.341 | 0.167 | 0.082 |
+| scene-vecteurs--qwen25vl3b-scene--minilm-multilingual | 0.273 | 0.165 |  |
+| scene--qwen25vl3b-scene | 0.243 | 0.157 | 13.55 |
 | pose--grounding-dino--vitpose-humanart | 0.293 | 0.149 | 0.69 |
 | pose--grounding-dino--vitpose-coco | 0.268 | 0.142 | 0.7 |
+| scene-figures--qwen25vl3b-scene | 0.18 | 0.142 | 13.55 |
 | relations--grounding-dino--vitpose-humanart | 0.23 | 0.131 |  |
 | postures--grounding-dino--vitpose-humanart | 0.15 | 0.122 |  |
 
@@ -104,7 +107,10 @@ Top1 by medium (all; queries: enfance 220, passion 220)
 | vector--dinov2 | 0.386 | 0.441 |
 | regions--dinov2-patchs | 0.409 | 0.364 |
 | vector--clip | 0.332 | 0.35 |
+| scene-vecteurs--qwen25vl3b-scene--minilm-multilingual | 0.332 | 0.214 |
+| scene--qwen25vl3b-scene | 0.318 | 0.168 |
 | pose--grounding-dino--vitpose-humanart | 0.291 | 0.295 |
 | pose--grounding-dino--vitpose-coco | 0.3 | 0.236 |
+| scene-figures--qwen25vl3b-scene | 0.277 | 0.082 |
 | relations--grounding-dino--vitpose-humanart | 0.305 | 0.155 |
 | postures--grounding-dino--vitpose-humanart | 0.268 | 0.032 |
