@@ -1,4 +1,5 @@
 # Raw downloads and working scripts (RichArt is CC BY-NC): only the reports are kept.
 *
+!*/
 !*.md
 !.gitignore
