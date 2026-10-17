@@ -7,7 +7,13 @@ import pytest
 
 from caypollard.atelier.benches import _score
 from caypollard.atelier.bricks import BRICKS, COCO_KEPT, brick, convert_vitpose
-from caypollard.atelier.measure import mirrored_keypoints, pose_matrix, vector_matrix, zsum
+from caypollard.atelier.measure import (
+    dense_matrix,
+    mirrored_keypoints,
+    pose_matrix,
+    vector_matrix,
+    zsum,
+)
 
 STANDING = {
     "left_shoulder": [60, 40],
@@ -53,6 +59,27 @@ def test_vector_matrix_keeps_the_closer_reading():
     flipped = np.array([[0.0, 1.0], [1.0, 0.0]])
     assert vector_matrix(plain, None)[0, 1] == 0.0
     assert vector_matrix(plain, flipped)[0, 1] == -1.0
+
+
+def test_dense_matrix_finds_a_detail_from_the_query_side():
+    e = np.eye(4, dtype=np.float16)
+    whole = e[[0, 1, 2, 3]]  # four different squares
+    detail = e[[1, 1, 1, 1]]  # one of them, filling the picture
+    other = e[[3, 3, 3, 3]] * 0 + np.float16(0.5)  # nothing in common, equally
+    pictures = np.stack([detail, whole, other])
+    one_way = dense_matrix(pictures, None, symmetric=False)
+    both = dense_matrix(pictures, None, symmetric=True)
+    assert one_way[0, 1] == pytest.approx(-1.0)  # every patch of the detail is found
+    assert both[0, 1] == pytest.approx(-(1.0 + 0.25) / 2)  # most of the whole is not
+    assert one_way[1, 0] == pytest.approx(-0.25)
+
+
+def test_dense_matrix_keeps_the_mirrored_reading():
+    e = np.eye(2, dtype=np.float16)
+    plain = np.stack([e[[0, 0]], e[[1, 1]]])
+    flipped = np.stack([e[[1, 1]], e[[0, 0]]])
+    assert dense_matrix(plain, None, True)[0, 1] == pytest.approx(0.0)
+    assert dense_matrix(plain, flipped, True)[0, 1] == pytest.approx(-1.0)
 
 
 def test_zsum_puts_matrices_on_one_scale():
@@ -110,6 +137,6 @@ def test_vitpose_conversion_names_every_weight():
 def test_bricks_are_found_by_kind_and_name():
     assert brick("figures", "opus").kind == "figures"
     assert brick("pose", "opus").kind == "pose"
-    assert {k for k, _ in BRICKS} == {"figures", "pose", "vector"}
+    assert {k for k, _ in BRICKS} == {"figures", "pose", "regions", "vector"}
     with pytest.raises(SystemExit):
         brick("pose", "nothing")

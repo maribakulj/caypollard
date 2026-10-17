@@ -11,6 +11,8 @@ Eight scenes of Holbein's Dance of Death in five editions (1526-1816), copies of
 | combination | all top1 | all mAP | s/picture |
 |---|---|---|---|
 | *chance* | 0.097 | 0.181 | |
+| regions--dinov2-patchs | 1.0 | 0.965 | 0.588 |
+| regions--dinov2-patchs-requete | 1.0 | 0.964 | 0.52 |
 | pose--opus--vitpose-humanart | 1.0 | 0.891 | 0.15 |
 | vector--dinov2 | 0.971 | 0.839 | 0.146 |
 | pose--opus--opus | 0.971 | 0.808 | 0.0 |

@@ -7,7 +7,9 @@ platforms such as AIKON; it borrows their bricks when useful and measures them.
 ## Three ideas
 
 - **Bricks.** Every tool does one job: `figures` (picture → one box per figure), `pose`
-  (picture + boxes → body points), `vector` (picture → one vector). A brick states its source,
+  (picture + boxes → body points), `vector` (picture → one vector), `regions` (picture → one
+  vector per square of a grid, compared square by square: a detail or a change of tone weighs
+  less than in a whole-picture vector). A brick states its source,
   the size of its weights, and its settings (prompts, thresholds), fixed in
   `src/caypollard/atelier/bricks.py`. A variant with other settings is a new brick with a new
   name, so a setting chosen after seeing a result never hides inside an old name.
@@ -19,6 +21,10 @@ platforms such as AIKON; it borrows their bricks when useful and measures them.
   - `sujets`: one subject across media, 12 emblems against 68 museum works, kept by looking at
     them (the subject must be the main scene). Each side searches the other; a hit shares the
     Iconclass subject.
+  - `derivees`: 748 works made after a painting (prints, drawings, tapestries, sculpture,
+    painted copies), from Wikidata's "based on", searching their source among 661 paintings.
+    Pictures are 512 px thumbnails: enough for whole-picture and grid bricks, too small for
+    figures in large compositions.
 - **One table.** Each run writes `results/atelier/<bench>/<combination>.json` and rebuilds
   [`results/atelier/TABLEAU.md`](../results/atelier/TABLEAU.md). Intermediate descriptions and
   distance matrices are cached under `data/derived/atelier/` (git-ignored).
@@ -30,6 +36,7 @@ uv run python scripts/atelier.py briques          # what can be plugged in
 uv run python scripts/atelier.py bancs            # what it is scored on
 uv run python scripts/atelier.py pose copies --figures owlv2 --pose vitpose-humanart
 uv run python scripts/atelier.py vecteur sujets --brique siglip
+uv run python scripts/atelier.py regions derivees --brique dinov2-patchs
 uv run python scripts/atelier.py somme sujets pose--opus--opus vector--dinov2
 uv run python scripts/atelier.py tableau
 ```
@@ -40,7 +47,7 @@ queue: `~/outils-seg/lourd.sh uv run python scripts/atelier.py …` (two at a ti
 ## Adding a brick
 
 Write a class with `boxes(image, item_id, bench)`, `points(image, boxes, item_id, bench)` or
-`encode(images)`, register it in `BRICKS` with its summary, source and weight size, and run it
+`encode(images)` or `patches(images)`, register it in `BRICKS` with its summary, source and weight size, and run it
 on both benches. Look at a few of its outputs drawn on the pictures before reading its scores.
 
 ## Adding a bench

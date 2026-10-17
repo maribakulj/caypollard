@@ -21,7 +21,7 @@ from PIL import Image, ImageOps
 
 from .benches import BENCHES, Bench
 from .bricks import COCO_KEPT, brick
-from .measure import pose_matrix, vector_matrix, zsum
+from .measure import dense_matrix, pose_matrix, vector_matrix, zsum
 
 CACHE = Path("data/derived/atelier")
 RESULTS = Path("results/atelier")
@@ -87,6 +87,27 @@ def run_vector(bench_name: str, vector: str) -> dict:
     )
     extra = {"seconds_per_picture": round((time.time() - start) / len(images) / 2, 3)}
     return _save(bench, f"vector--{vector}", vector_matrix(plain, flipped), [encoder.meta()], extra)
+
+
+def run_regions(bench_name: str, name: str) -> dict:
+    bench = BENCHES[bench_name]
+    encoder = brick("regions", name)
+    images = [Image.open(bench.image(it["id"])).convert("RGB") for it in bench.items()]
+    start = time.time()
+    plain = np.concatenate([encoder.patches(images[i : i + 32]) for i in range(0, len(images), 32)])
+    flipped = np.concatenate(
+        [
+            encoder.patches([ImageOps.mirror(im) for im in images[i : i + 32]])
+            for i in range(0, len(images), 32)
+        ]
+    )
+    encoded = time.time()
+    dist = dense_matrix(plain, flipped, encoder.symmetric)
+    extra = {
+        "seconds_per_picture": round((encoded - start) / len(images) / 2, 3),
+        "seconds_matching": round(time.time() - encoded, 1),
+    }
+    return _save(bench, f"regions--{name}", dist, [encoder.meta()], extra)
 
 
 def run_fusion(bench_name: str, combinations: list[str]) -> dict:

@@ -106,6 +106,38 @@ def vector_matrix(plain: np.ndarray, flipped: np.ndarray | None) -> np.ndarray:
     return -similarity  # lower is closer
 
 
+def dense_matrix(
+    plain: np.ndarray, flipped: np.ndarray | None, symmetric: bool, block: int = 4
+) -> np.ndarray:
+    """Distances from patch features (pictures x patches x dims, L2-normalised).
+
+    Each patch of the query finds its most similar patch in the other picture; the
+    similarity of two pictures is the mean of these best matches. ``symmetric`` averages
+    both directions (two pictures with the same content); otherwise only the query's
+    patches are matched (a detail taken from a larger picture still finds it). With the
+    mirror, the query is also read flipped and the closer reading is kept.
+    """
+    import torch
+
+    dev = "mps" if torch.backends.mps.is_available() else "cpu"
+    gallery = torch.from_numpy(plain).to(dev, torch.float16)
+    n = len(plain)
+    out = np.empty((n, n), dtype=np.float32)
+    readings = [plain] + ([flipped] if flipped is not None else [])
+    for start in range(0, n, block):
+        best = None
+        for reading in readings:
+            q = torch.from_numpy(reading[start : start + block]).to(dev, torch.float16)
+            # (queries, gallery, query patches, gallery patches)
+            sim = torch.einsum("apd,bqd->abpq", q, gallery)
+            score = sim.amax(3).float().mean(2)
+            if symmetric:
+                score = (score + sim.amax(2).float().mean(2)) / 2
+            best = score if best is None else torch.maximum(best, score)
+        out[start : start + block] = best.cpu().numpy()
+    return -out  # lower is closer
+
+
 def zsum(*matrices: np.ndarray) -> np.ndarray:
     """Distances combined after putting each on the same scale (mean 0, deviation 1)."""
     return sum((m - m.mean()) / m.std() for m in matrices)

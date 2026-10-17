@@ -3,6 +3,8 @@
 - ``figures``: picture -> one box per figure (x0, y0, x1, y1).
 - ``pose``: picture + boxes -> body points per box, in the pilot's joint names.
 - ``vector``: pictures -> one L2-normalised vector each (the whole picture).
+- ``regions``: pictures -> one L2-normalised vector per patch (a grid over the picture),
+  compared patch by patch rather than as wholes.
 
 A brick states where it comes from, how heavy its weights are, and whether it counts as
 a heavy job on this machine (more than 1 GB in memory: run it through
@@ -267,6 +269,29 @@ class HuggingFaceVector(Brick):
         return self._model.encode(images)
 
 
+class DinoPatches(Brick):
+    """DINOv2's patch tokens at 224 px: a 16 x 16 grid, one 768-d vector per square."""
+
+    symmetric: bool = True
+
+    def patches(self, images: list) -> np.ndarray:
+        import torch
+        from transformers import AutoImageProcessor, AutoModel
+
+        if self._model is None:
+            repo = "facebook/dinov2-base"
+            processor = AutoImageProcessor.from_pretrained(
+                repo, size={"height": 224, "width": 224}, do_center_crop=False
+            )
+            self._model = (AutoModel.from_pretrained(repo).to(device()).eval(), processor)
+        model, processor = self._model
+        inputs = processor(images=images, return_tensors="pt").to(device())
+        with torch.no_grad():
+            tokens = model(**inputs).last_hidden_state[:, 1:]  # drop the CLS token
+        tokens = torch.nn.functional.normalize(tokens, dim=-1)
+        return tokens.cpu().numpy().astype(np.float16)
+
+
 def _opus(bench, item_id: str) -> dict:
     path = bench.root / "describe" / f"{item_id}.json"
     if not path.exists():
@@ -290,6 +315,14 @@ def _vitpose(name: str, summary: str, checkpoint: str, url: str) -> VitPose:
 def _vector(name: str, spec: str, summary: str, source: str, mb: int) -> HuggingFaceVector:
     brick = HuggingFaceVector(name, "vector", summary, source, mb)
     brick.spec = spec
+    return brick
+
+
+def _patches(name: str, symmetric: bool, summary: str) -> DinoPatches:
+    brick = DinoPatches(
+        name, "regions", summary, "https://huggingface.co/facebook/dinov2-base", 350
+    )
+    brick.symmetric = symmetric
     return brick
 
 
@@ -360,6 +393,19 @@ BRICKS: dict[tuple[str, str], Brick] = {
             "SigLIP base 224 image features (image-text, 2023)",
             "https://huggingface.co/google/siglip-base-patch16-224",
             800,
+        ),
+        # Both regions bricks were fixed together, before either was run.
+        _patches(
+            "dinov2-patchs",
+            True,
+            "DINOv2 base patch tokens (16 x 16 at 224 px, whole picture, no crop); each patch "
+            "takes its best match in the other picture, mean of both directions",
+        ),
+        _patches(
+            "dinov2-patchs-requete",
+            False,
+            "The same patches, matched from the query only: a detail taken from a larger "
+            "picture can still find it, but a busy picture can match everything",
         ),
     )
 }
