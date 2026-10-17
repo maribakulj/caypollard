@@ -54,6 +54,8 @@ FIGURE_PROMPT = ("a person", "a skeleton", "an angel", "a child")
 def device() -> str:
     import torch
 
+    if torch.cuda.is_available():  # on Kaggle or Colab
+        return "cuda"
     return "mps" if torch.backends.mps.is_available() else "cpu"
 
 

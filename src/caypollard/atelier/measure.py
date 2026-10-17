@@ -119,7 +119,9 @@ def dense_matrix(
     """
     import torch
 
-    dev = "mps" if torch.backends.mps.is_available() else "cpu"
+    from .bricks import device
+
+    dev = device()
     gallery = torch.from_numpy(plain).to(dev, torch.float16)
     n = len(plain)
     out = np.empty((n, n), dtype=np.float32)

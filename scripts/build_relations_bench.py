@@ -16,10 +16,12 @@ codes; 48 candidates per subject are drawn at random (seed 0) and looked at, and
 out: book pages where the scene is a small vignette in the text, sheets of several
 scenes, pictures that do not show the subject (a portrait, a page of text, a landscape
 where the flight into Egypt is a speck, Mary or Simeon alone), and later copies of a print
-already kept. Some subjects keep fewer than 30. Many paintings are museum photographs on
-the same beige mount (RKD), often of the Holy Family and the shepherds: a whole-picture
-channel can match the mount rather than the scene. Each picture searches all the others;
-a hit has the same subject. Images are linked, not copied.
+already kept. Then the closest pairs by DINOv2 (cosine above 0.9) were looked at: nine
+were the same print or painting twice (one copy dropped each time) and one the same
+painting under two subjects (both dropped). Some subjects keep fewer than 30. Many
+paintings are museum photographs on the same beige mount (RKD), often of the Holy Family
+and the shepherds: a whole-picture channel can match the mount rather than the scene. Each
+picture searches all the others; a hit has the same subject. Images are linked, not copied.
 
 Run: ``uv run python scripts/build_relations_bench.py``.
 """
