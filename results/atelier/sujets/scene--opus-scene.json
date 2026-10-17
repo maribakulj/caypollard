@@ -2,7 +2,7 @@
  "bench": "sujets",
  "combination": "scene--opus-scene",
  "date": "2026-10-17",
- "commit": "5a87b24",
+ "commit": "314b927",
  "bricks": [
   {
    "name": "opus-scene",
@@ -16,25 +16,25 @@
  "scores": {
   "emblem_queries": {
    "queries": 12,
-   "top1": 0.25,
-   "mAP": 0.366,
-   "median_first_hit": 4.0,
+   "top1": 0.583,
+   "mAP": 0.613,
+   "median_first_hit": 1.0,
    "top1_by_label": {
     "crucifixion": "2/6",
     "portement": "1/1",
-    "tentation": "0/4",
+    "tentation": "4/4",
     "visitation": "0/1"
    }
   },
   "museum_queries": {
    "queries": 52,
-   "top1": 0.365,
-   "mAP": 0.427,
-   "median_first_hit": 8.0,
+   "top1": 0.442,
+   "mAP": 0.516,
+   "median_first_hit": 3.0,
    "top1_by_label": {
     "crucifixion": "19/19",
     "portement": "0/15",
-    "tentation": "0/5",
+    "tentation": "4/5",
     "visitation": "0/13"
    }
   }
@@ -49,9 +49,9 @@
    "mAP": 0.402
   }
  },
- "seconds_per_picture_median": 14.15,
- "words_per_picture_median": 8.0,
- "vocabulary": 150,
+ "seconds_per_picture_median": 15.649999999999999,
+ "words_per_picture_median": 12.0,
+ "vocabulary": 199,
  "subjects_named": {
   "E002934": "A crucifixion with two kneeling mourners at the foot of the cross",
   "E003648": "Crucifixion between two thieves",
@@ -108,30 +108,30 @@
   "Q19912695": "Baptism of Christ",
   "Q20176573": "Baptism of Christ",
   "Q20201631": "Baptism of Christ",
-  "Q17330849": "",
-  "Q17339461": "",
-  "Q56045665": "",
-  "Q27697132": "",
-  "Q27698580": "",
-  "Q5824027": "",
-  "Q27979333": "",
-  "Q17341374": "",
-  "Q3605057": "",
-  "Q27979739": "",
-  "Q27982015": "",
-  "Q3898507": "",
-  "Q116275857": "",
-  "Q20200964": "",
-  "Q29385381": "",
-  "Q128029061": "",
-  "Q17328232": "",
-  "Q2467082": "",
-  "Q27697137": "",
-  "Q27697240": "",
-  "Q27697672": "",
-  "Q27697886": "",
-  "Q27979421": "",
-  "Q27982855": "",
-  "Q57393179": ""
+  "Q17330849": "The Baptism of Christ",
+  "Q17339461": "Baptism of Christ in the Jordan",
+  "Q56045665": "Baptism of Christ",
+  "Q27697132": "the Baptism of Christ",
+  "Q27698580": "Baptism of Christ in the Jordan",
+  "Q5824027": "Baptism of Christ",
+  "Q27979333": "A baptism in a river",
+  "Q17341374": "Adam and Eve hearing God's voice after the Fall",
+  "Q3605057": "the Fall of Man: the temptation in the Garden of Eden",
+  "Q27979739": "nude woman holding a fruit in a niche",
+  "Q27982015": "The Fall of Man: Adam and Eve tempted by the serpent",
+  "Q3898507": "The Fall of Man in the Garden of Eden",
+  "Q116275857": "The Visitation",
+  "Q20200964": "Visitation",
+  "Q29385381": "The Visitation",
+  "Q128029061": "The Visitation",
+  "Q17328232": "Visitation with kneeling monk donors over an open grave (memorial epitaph)",
+  "Q2467082": "The Visitation",
+  "Q27697137": "The Visitation",
+  "Q27697240": "The Visitation",
+  "Q27697672": "The Visitation",
+  "Q27697886": "the Visitation",
+  "Q27979421": "The Visitation",
+  "Q27982855": "The Visitation",
+  "Q57393179": "the Visitation"
  }
 }

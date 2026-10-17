@@ -381,9 +381,11 @@ class ClaudeScene(Brick):
             stdin=subprocess.DEVNULL,
         )
         text = str(json.loads(run.stdout).get("result", ""))
-        if text.startswith("API Error"):
-            raise RuntimeError(f"{path.name}: {text[:80]}")
         start = text.find("{")
+        # No JSON at all is a failed call (API error, usage limit...), not an empty scene:
+        # raising keeps it out of the cache so the next run asks again.
+        if text.startswith("API Error") or start < 0:
+            raise RuntimeError(f"{path.name}: {text[:80]}")
         try:
             data, _ = json.JSONDecoder().raw_decode(text[start:]) if start >= 0 else ({}, 0)
         except json.JSONDecodeError:
