@@ -4,7 +4,9 @@
 Qwen2.5-VL-3B-Instruct reads every picture of a bench with the same prompt as
 ``opus-scene`` (without the line asking to open a file) and writes one JSON per picture,
 in the same shape as the ``scene`` cache. Greedy decoding, pictures between 256 and 640
-x 28 x 28 pixels. Too heavy for the Mac (7.5 GB of weights): it runs remotely, e.g.
+x 28 x 28 pixels. ``CAY_MODEL``, ``CAY_BRICK`` and ``CAY_SUBSET`` (a JSON list of ids in
+``code.tar``) choose another Qwen2.5-VL size and a subset. Too heavy for the Mac (7.5 GB
+of weights for the 3B): it runs remotely, e.g.
 
     colab new -s cayqwen --gpu T4
     colab upload -s cayqwen code.tar /content/code.tar
@@ -28,8 +30,11 @@ import tarfile
 import time
 
 ROOT = os.environ.get("CAY_REMOTE_ROOT", "/content")
+REPO = os.environ.get("CAY_MODEL", "Qwen/Qwen2.5-VL-3B-Instruct")
+BRICK = os.environ.get("CAY_BRICK", "qwen25vl3b-scene")
+SUBSET = os.environ.get("CAY_SUBSET")  # a JSON list of picture ids, inside code.tar
 WORK = ROOT + "/cay"
-OUT = ROOT + "/scene--qwen25vl3b-scene"
+OUT = ROOT + "/scene--" + BRICK
 
 os.makedirs(WORK + "/data/derived", exist_ok=True)
 with tarfile.open(ROOT + "/code.tar") as archive:
@@ -57,15 +62,18 @@ prompt = SCENE_PROMPT.split("\n", 2)[2].format(
     relations=", ".join(SCENE_RELATIONS),
 )
 print(torch.__version__, torch.cuda.get_device_name(0), flush=True)
-repo = "Qwen/Qwen2.5-VL-3B-Instruct"
 model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-    repo, torch_dtype=torch.float16, device_map="cuda"
+    REPO, torch_dtype=torch.float16, device_map="cuda"
 ).eval()
-processor = AutoProcessor.from_pretrained(repo, min_pixels=256 * 28 * 28, max_pixels=640 * 28 * 28)
+processor = AutoProcessor.from_pretrained(REPO, min_pixels=256 * 28 * 28, max_pixels=640 * 28 * 28)
+wanted = None
+if SUBSET:
+    with open(WORK + "/" + SUBSET) as f:
+        wanted = set(json.load(f))
 os.makedirs(OUT, exist_ok=True)
 for path in sorted(glob.glob(WORK + "/data/derived/relations/images/*.jpg")):
     item = os.path.basename(path)[:-4]
-    if os.path.exists(f"{OUT}/{item}.json"):
+    if (wanted is not None and item not in wanted) or os.path.exists(f"{OUT}/{item}.json"):
         continue
     start = time.time()
     messages = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": prompt}]}]
@@ -94,5 +102,5 @@ for path in sorted(glob.glob(WORK + "/data/derived/relations/images/*.jpg")):
     with open(f"{OUT}/{item}.json", "w") as f:
         json.dump(data, f, ensure_ascii=False)
     print(item, len(data.get("relations", [])), data["seconds"], flush=True)
-shutil.make_archive(ROOT + "/scene-qwen", "gztar", OUT)
+shutil.make_archive(ROOT + "/scene-" + BRICK, "gztar", OUT)
 print("done", len(os.listdir(OUT)), flush=True)

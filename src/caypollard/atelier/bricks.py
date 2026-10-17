@@ -524,6 +524,15 @@ BRICKS: dict[tuple[str, str], Brick] = {
             7500,
             heavy=True,
         ),
+        ElsewhereScene(
+            "qwen25vl7b-scene",
+            "scene",
+            "Qwen2.5-VL-7B-Instruct, zero-shot, the same prompt and settings as qwen25vl3b-scene; "
+            "on Colab (L4), on the fixed 160-picture subset of the relations bench",
+            "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct",
+            16600,
+            heavy=True,
+        ),
         # Both regions bricks were fixed together, before either was run.
         _patches(
             "dinov2-patchs",
