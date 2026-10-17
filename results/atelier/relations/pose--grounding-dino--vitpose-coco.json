@@ -1,0 +1,71 @@
+{
+ "bench": "relations",
+ "combination": "pose--grounding-dino--vitpose-coco",
+ "date": "2026-10-17",
+ "commit": "c3c6ff6",
+ "bricks": [
+  {
+   "name": "grounding-dino",
+   "kind": "figures",
+   "summary": "Grounding DINO base, zero-shot; prompt 'a person. a skeleton. an angel. a child.', boxes above 0.3, NMS 0.5",
+   "source": "https://huggingface.co/IDEA-Research/grounding-dino-base",
+   "weights_mb": 900,
+   "heavy": false
+  },
+  {
+   "name": "vitpose-coco",
+   "kind": "pose",
+   "summary": "ViTPose-B trained on photographs only (COCO): 0.555 AP on Human-Art with given boxes; points above 0.3. The control for what Human-Art adds",
+   "source": "https://download.openmmlab.com/mmpose/v1/body_2d_keypoint/topdown_heatmap/coco/td-hm_ViTPose-base_8xb64-210e_coco-256x192-216eae50_20230314.pth",
+   "weights_mb": 360,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.268,
+   "mAP": 0.142,
+   "median_first_hit": 4.0,
+   "top1_by_label": {
+    "annonciation": "17/30",
+    "bergers": "5/29",
+    "crucifixion": "22/30",
+    "deploration": "1/30",
+    "descente": "4/29",
+    "ecce-homo": "15/30",
+    "fuite-egypte": "3/22",
+    "gethsemani": "2/24",
+    "mages": "8/30",
+    "mise-au-tombeau": "4/29",
+    "nativite": "2/24",
+    "portement": "1/28",
+    "presentation": "9/29",
+    "resurrection": "3/20",
+    "sainte-famille": "11/29",
+    "visitation": "11/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.3,
+     "mAP": 0.156
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.236,
+     "mAP": 0.128
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "seconds_per_picture_median": 0.7,
+ "figures_per_picture_median": 4.0,
+ "pictures_without_figure": 0
+}

@@ -75,17 +75,31 @@ Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two
 
 | combination | all top1 | all mAP | s/picture |
 |---|---|---|---|
-| *chance* | 0.058 | 0.073 | |
-| vector--siglip | 0.521 | 0.229 | 0.082 |
-| vector--dinov2 | 0.443 | 0.196 | 0.091 |
-| regions--dinov2-patchs | 0.408 | 0.184 | 0.086 |
-| vector--clip | 0.373 | 0.168 | 0.036 |
+| *chance* | 0.063 | 0.073 | |
+| scene--opus-scene | 0.807 | 0.569 | 15.5 |
+| sum--scene--opus-scene--and--vector--siglip | 0.836 | 0.543 |  |
+| scene-figures--opus-scene | 0.668 | 0.41 | 15.5 |
+| vector--siglip | 0.507 | 0.228 | 0.082 |
+| vector--dinov2 | 0.414 | 0.193 | 0.099 |
+| regions--dinov2-patchs | 0.386 | 0.182 | 0.11 |
+| vector--clip | 0.341 | 0.167 | 0.082 |
+| pose--grounding-dino--vitpose-humanart | 0.293 | 0.149 | 0.69 |
+| pose--grounding-dino--vitpose-coco | 0.268 | 0.142 | 0.7 |
+| relations--grounding-dino--vitpose-humanart | 0.23 | 0.131 |  |
+| postures--grounding-dino--vitpose-humanart | 0.15 | 0.122 |  |
 
-Top1 by medium (all; queries: enfance 226, passion 225)
+Top1 by medium (all; queries: enfance 220, passion 220)
 
 | combination | enfance | passion |
 |---|---|---|
-| vector--siglip | 0.518 | 0.524 |
-| vector--dinov2 | 0.416 | 0.471 |
-| regions--dinov2-patchs | 0.42 | 0.396 |
-| vector--clip | 0.354 | 0.391 |
+| scene--opus-scene | 0.855 | 0.759 |
+| sum--scene--opus-scene--and--vector--siglip | 0.877 | 0.795 |
+| scene-figures--opus-scene | 0.682 | 0.655 |
+| vector--siglip | 0.505 | 0.509 |
+| vector--dinov2 | 0.386 | 0.441 |
+| regions--dinov2-patchs | 0.409 | 0.364 |
+| vector--clip | 0.332 | 0.35 |
+| pose--grounding-dino--vitpose-humanart | 0.291 | 0.295 |
+| pose--grounding-dino--vitpose-coco | 0.3 | 0.236 |
+| relations--grounding-dino--vitpose-humanart | 0.305 | 0.155 |
+| postures--grounding-dino--vitpose-humanart | 0.268 | 0.032 |

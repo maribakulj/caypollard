@@ -1,0 +1,61 @@
+{
+ "bench": "relations",
+ "combination": "vector--dinov2",
+ "date": "2026-10-17",
+ "commit": "c3c6ff6",
+ "bricks": [
+  {
+   "name": "dinov2",
+   "kind": "vector",
+   "summary": "DINOv2 base, CLS token (self-supervised, 2023)",
+   "source": "https://huggingface.co/facebook/dinov2-base",
+   "weights_mb": 350,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.414,
+   "mAP": 0.193,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "annonciation": "9/30",
+    "bergers": "8/29",
+    "crucifixion": "17/30",
+    "deploration": "13/30",
+    "descente": "12/29",
+    "ecce-homo": "20/30",
+    "fuite-egypte": "14/22",
+    "gethsemani": "9/24",
+    "mages": "13/30",
+    "mise-au-tombeau": "7/29",
+    "nativite": "3/24",
+    "portement": "13/28",
+    "presentation": "9/29",
+    "resurrection": "6/20",
+    "sainte-famille": "17/29",
+    "visitation": "12/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.386,
+     "mAP": 0.205
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.441,
+     "mAP": 0.181
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "seconds_per_picture": 0.099
+}

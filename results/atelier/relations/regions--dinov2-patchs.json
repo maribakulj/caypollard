@@ -1,0 +1,62 @@
+{
+ "bench": "relations",
+ "combination": "regions--dinov2-patchs",
+ "date": "2026-10-17",
+ "commit": "c3c6ff6",
+ "bricks": [
+  {
+   "name": "dinov2-patchs",
+   "kind": "regions",
+   "summary": "DINOv2 base patch tokens (16 x 16 at 224 px, whole picture, no crop); each patch takes its best match in the other picture, mean of both directions",
+   "source": "https://huggingface.co/facebook/dinov2-base",
+   "weights_mb": 350,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.386,
+   "mAP": 0.182,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "annonciation": "10/30",
+    "bergers": "10/29",
+    "crucifixion": "14/30",
+    "deploration": "8/30",
+    "descente": "15/29",
+    "ecce-homo": "17/30",
+    "fuite-egypte": "11/22",
+    "gethsemani": "4/24",
+    "mages": "15/30",
+    "mise-au-tombeau": "7/29",
+    "nativite": "5/24",
+    "portement": "8/28",
+    "presentation": "6/29",
+    "resurrection": "7/20",
+    "sainte-famille": "20/29",
+    "visitation": "13/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.409,
+     "mAP": 0.18
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.364,
+     "mAP": 0.183
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "seconds_per_picture": 0.11,
+ "seconds_matching": 61.8
+}

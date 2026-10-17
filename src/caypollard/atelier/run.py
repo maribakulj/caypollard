@@ -94,7 +94,7 @@ def run_relations(bench_name: str, figures: str, pose: str, relations_too: bool 
     return _save(bench, f"{kind}--{figures}--{pose}", words_matrix(bags), bricks, extra)
 
 
-def scenes(bench: Bench, name: str, workers: int = 4) -> list[dict]:
+def scenes(bench: Bench, items: list[dict], name: str, workers: int = 4) -> list[dict]:
     """A scene brick's reading of every picture, cached one file per picture."""
     from concurrent.futures import ThreadPoolExecutor
 
@@ -113,12 +113,13 @@ def scenes(bench: Bench, name: str, workers: int = 4) -> list[dict]:
         return json.loads(cache.read_text())
 
     with ThreadPoolExecutor(workers) as pool:
-        return list(pool.map(one, [it["id"] for it in bench.items()]))
+        return list(pool.map(one, [it["id"] for it in items]))
 
 
 def run_scene(bench_name: str, name: str, relations_too: bool = True) -> dict:
     bench = BENCHES[bench_name]
-    read = scenes(bench, name)
+    items = bench.items()
+    read = scenes(bench, items, name)
     bags = [scene_words(d, relations_too) for d in read]
     kind = "scene" if relations_too else "scene-figures"
     extra = {
@@ -126,7 +127,7 @@ def run_scene(bench_name: str, name: str, relations_too: bool = True) -> dict:
         "words_per_picture_median": float(np.median([sum(b.values()) for b in bags])),
         "vocabulary": len({w for b in bags for w in b}),
         "subjects_named": {
-            it["id"]: d.get("subject", "") for it, d in zip(bench.items(), read, strict=True)
+            it["id"]: d.get("subject", "") for it, d in zip(items, read, strict=True)
         },
     }
     return _save(bench, f"{kind}--{name}", words_matrix(bags), [brick("scene", name).meta()], extra)

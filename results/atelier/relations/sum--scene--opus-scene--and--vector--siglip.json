@@ -1,0 +1,55 @@
+{
+ "bench": "relations",
+ "combination": "sum--scene--opus-scene--and--vector--siglip",
+ "date": "2026-10-17",
+ "commit": "c3c6ff6",
+ "bricks": [],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.836,
+   "mAP": 0.543,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "annonciation": "29/30",
+    "bergers": "21/29",
+    "crucifixion": "30/30",
+    "deploration": "20/30",
+    "descente": "20/29",
+    "ecce-homo": "29/30",
+    "fuite-egypte": "18/22",
+    "gethsemani": "23/24",
+    "mages": "30/30",
+    "mise-au-tombeau": "18/29",
+    "nativite": "16/24",
+    "portement": "16/28",
+    "presentation": "27/29",
+    "resurrection": "19/20",
+    "sainte-famille": "27/29",
+    "visitation": "25/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.877,
+     "mAP": 0.605
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.795,
+     "mAP": 0.481
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "of": [
+  "scene--opus-scene",
+  "vector--siglip"
+ ]
+}
