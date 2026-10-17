@@ -156,5 +156,13 @@ BENCHES = {
             "mostly their relations tell the subjects apart. A hit is the same subject; "
             "scores per family.",
         ),
+        Bench(
+            "entrainement",
+            ROOT / "scene-train",
+            "all",
+            "Not a test: 1,200 Iconclass pictures away from every bench (half the sixteen "
+            "subjects of 'relations', half other narrative scenes), whose Opus scene graphs "
+            "train a student model. Its scores mean nothing.",
+        ),
     )
 }
