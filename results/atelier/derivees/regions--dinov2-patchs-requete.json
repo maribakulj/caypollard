@@ -1,0 +1,64 @@
+{
+ "bench": "derivees",
+ "combination": "regions--dinov2-patchs-requete",
+ "date": "2026-10-17",
+ "commit": "6dd84a8",
+ "bricks": [
+  {
+   "name": "dinov2-patchs-requete",
+   "kind": "regions",
+   "summary": "The same patches, matched from the query only: a detail taken from a larger picture can still find it, but a busy picture can match everything",
+   "source": "https://huggingface.co/facebook/dinov2-base",
+   "weights_mb": 350,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "derived_queries": {
+   "queries": 748,
+   "top1": 0.755,
+   "mAP": 0.786,
+   "median_first_hit": 1.0,
+   "by_medium": {
+    "autre": {
+     "queries": 79,
+     "top1": 0.506,
+     "mAP": 0.579
+    },
+    "copie peinte": {
+     "queries": 380,
+     "top1": 0.821,
+     "mAP": 0.843
+    },
+    "dessin": {
+     "queries": 35,
+     "top1": 0.714,
+     "mAP": 0.738
+    },
+    "estampe": {
+     "queries": 218,
+     "top1": 0.807,
+     "mAP": 0.827
+    },
+    "sculpture": {
+     "queries": 13,
+     "top1": 0.308,
+     "mAP": 0.348
+    },
+    "textile": {
+     "queries": 23,
+     "top1": 0.348,
+     "mAP": 0.476
+    }
+   }
+  }
+ },
+ "chance": {
+  "derived_queries": {
+   "top1": 0.002,
+   "mAP": 0.01
+  }
+ },
+ "seconds_per_picture": 0.144,
+ "seconds_matching": 556.3
+}

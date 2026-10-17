@@ -1,0 +1,64 @@
+{
+ "bench": "derivees",
+ "combination": "regions--dinov2-patchs",
+ "date": "2026-10-17",
+ "commit": "6dd84a8",
+ "bricks": [
+  {
+   "name": "dinov2-patchs",
+   "kind": "regions",
+   "summary": "DINOv2 base patch tokens (16 x 16 at 224 px, whole picture, no crop); each patch takes its best match in the other picture, mean of both directions",
+   "source": "https://huggingface.co/facebook/dinov2-base",
+   "weights_mb": 350,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "derived_queries": {
+   "queries": 748,
+   "top1": 0.775,
+   "mAP": 0.806,
+   "median_first_hit": 1.0,
+   "by_medium": {
+    "autre": {
+     "queries": 79,
+     "top1": 0.57,
+     "mAP": 0.618
+    },
+    "copie peinte": {
+     "queries": 380,
+     "top1": 0.821,
+     "mAP": 0.842
+    },
+    "dessin": {
+     "queries": 35,
+     "top1": 0.714,
+     "mAP": 0.744
+    },
+    "estampe": {
+     "queries": 218,
+     "top1": 0.817,
+     "mAP": 0.851
+    },
+    "sculpture": {
+     "queries": 13,
+     "top1": 0.385,
+     "mAP": 0.413
+    },
+    "textile": {
+     "queries": 23,
+     "top1": 0.652,
+     "mAP": 0.761
+    }
+   }
+  }
+ },
+ "chance": {
+  "derived_queries": {
+   "top1": 0.002,
+   "mAP": 0.01
+  }
+ },
+ "seconds_per_picture": 0.246,
+ "seconds_matching": 640.2
+}

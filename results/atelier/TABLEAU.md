@@ -31,7 +31,9 @@ Same subject across media: 12 emblems and 68 museum works (Crucifixion, Carrying
 |---|---|---|---|---|---|
 | *chance* | 0.202 | 0.245 | 0.263 | 0.402 | |
 | vector--siglip | 0.75 | 0.675 | 0.558 | 0.652 | 0.208 |
+| regions--dinov2-patchs | 0.75 | 0.513 | 0.481 | 0.574 | 0.397 |
 | vector--dinov2 | 0.75 | 0.482 | 0.481 | 0.613 | 0.087 |
+| regions--dinov2-patchs-requete | 0.75 | 0.48 | 0.5 | 0.609 | 0.351 |
 | pose--grounding-dino--vitpose-humanart | 0.75 | 0.465 | 0.365 | 0.423 | 3.07 |
 | vector--clip | 0.583 | 0.461 | 0.635 | 0.677 | 0.141 |
 | pose--opus--opus--coco | 0.667 | 0.445 | 0.423 | 0.5 | 0.0 |
@@ -47,7 +49,9 @@ Wikidata's documented derivations ('based on' a painting): every derived work in
 | combination | derived_queries top1 | derived_queries mAP | s/picture |
 |---|---|---|---|
 | *chance* | 0.002 | 0.01 | |
+| regions--dinov2-patchs | 0.775 | 0.806 | 0.246 |
 | vector--dinov2 | 0.742 | 0.787 | 0.356 |
+| regions--dinov2-patchs-requete | 0.755 | 0.786 | 0.144 |
 | vector--siglip | 0.711 | 0.779 | 0.079 |
 | vector--clip | 0.623 | 0.707 | 0.048 |
 
@@ -55,6 +59,8 @@ Top1 by medium (derived_queries; queries: autre 79, copie peinte 380, dessin 35,
 
 | combination | autre | copie peinte | dessin | estampe | sculpture | textile |
 |---|---|---|---|---|---|---|
+| regions--dinov2-patchs | 0.57 | 0.821 | 0.714 | 0.817 | 0.385 | 0.652 |
 | vector--dinov2 | 0.57 | 0.776 | 0.714 | 0.794 | 0.231 | 0.609 |
+| regions--dinov2-patchs-requete | 0.506 | 0.821 | 0.714 | 0.807 | 0.308 | 0.348 |
 | vector--siglip | 0.544 | 0.776 | 0.657 | 0.748 | 0.308 | 0.174 |
 | vector--clip | 0.532 | 0.734 | 0.571 | 0.541 | 0.154 | 0.217 |
