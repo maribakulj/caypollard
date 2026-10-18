@@ -55,6 +55,8 @@ for name, where in (
 subprocess.run(
     [sys.executable, "-m", "pip", "install", "-q", "transformers==5.17.0", "peft"], check=True
 )
+# Colab ships an old torchao that peft refuses to import alongside; it is not used here.
+subprocess.run([sys.executable, "-m", "pip", "uninstall", "-q", "-y", "torchao"], check=False)
 sys.path.insert(0, WORK + "/src")
 
 import torch  # noqa: E402

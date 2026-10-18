@@ -1,0 +1,62 @@
+{
+ "bench": "relations",
+ "combination": "scene-vecteurs--haiku-scene--minilm-multilingual",
+ "date": "2026-10-17",
+ "commit": "6d18439",
+ "bricks": [
+  {
+   "name": "haiku-scene",
+   "kind": "scene",
+   "summary": "Claude Haiku reads the same scene graph as opus-scene, same prompt, one pass",
+   "source": "claude -p (Claude Code, headless)",
+   "weights_mb": 0,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.584,
+   "mAP": 0.411,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "annonciation": "25/30",
+    "bergers": "15/29",
+    "crucifixion": "23/30",
+    "deploration": "9/30",
+    "descente": "10/29",
+    "ecce-homo": "20/30",
+    "fuite-egypte": "17/22",
+    "gethsemani": "12/24",
+    "mages": "24/30",
+    "mise-au-tombeau": "10/29",
+    "nativite": "4/24",
+    "portement": "15/28",
+    "presentation": "17/29",
+    "resurrection": "13/20",
+    "sainte-famille": "24/29",
+    "visitation": "19/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.659,
+     "mAP": 0.475
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.509,
+     "mAP": 0.346
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "phrases_per_picture_median": 9.0,
+ "text": "minilm-multilingual"
+}

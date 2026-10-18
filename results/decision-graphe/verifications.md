@@ -8,9 +8,9 @@ Date : 17/10/2026. Règle : une URL par fait ; « non vérifié » quand je n'ai
 - **Auteurs** : Dekun Qian, Ruiqi Yu, Li Ye, Yize Li, Fengling Zheng, Weigui Zheng, Yigang Wang, Jinchang Li, Zhiguang Zhou (même page).
 - **Dates** : v1 soumise le 8 juillet 2026 ; v2 révisée le 29 juillet 2026 (même page).
 - **Ce qu'il fait** : un système de visualisation analytique. Il s'appuie sur une représentation « CompoGraph » en quatre couches (entités, relations, vides, contexte) et permet à des historiens de l'art de définir des cohortes de peintures, de comparer des motifs de composition et de remonter aux peintures individuelles. Évaluation : étude de tâches avec 12 participants du domaine, deux études de cas et des entretiens d'experts (résumé de la page arXiv et des agrégateurs ; je n'ai pas lu le PDF complet).
-- **Graphe appris ou annoté à la main ?** **non vérifié** : la page arXiv ne dit pas comment les graphes sont produits.
-- **Nombre d'images** : **non vérifié** (« several thousands » est mentionné pour un autre jeu dans un résultat de recherche, pas pour CompoVista ; à ne pas reprendre sans lecture du PDF).
-- **Relations annotées** : **non vérifié** (seulement « relations » comme couche).
+- **Graphe appris ou annoté à la main ?** **Annoté à la main** : « Entity and relation annotations were manually assigned using predefined taxonomies » ; les métadonnées sont recopiées, seuls les vides (« voids ») sont proposés par traitement d'image puis corrigés par des annotateurs (32 % des propositions ont demandé une intervention). Aucun détecteur, modèle de relations ni VLM n'est décrit pour les entités et relations. Source : https://arxiv.org/html/2607.07105 (lecture des 100 000 premiers caractères).
+- **Nombre d'images** : **960 peintures**, 7 587 instances d'entités, 6 180 instances de relations, 589 vides annotés. Corpus source : Chinese Ancient Open Dataset (CAOD), cité par l'article (même source).
+- **Relations annotées** : **37 types** en deux familles. Localisation (au-dessus, derrière, le long de, à l'intérieur) et événement (tenir, être assis sur, regarder). Six classes d'entités (humain, animal, artefact, végétation, relief, eau), 109 étiquettes fines.
 - **Code, données, poids publics ?** La page arXiv ne mentionne **aucune publication de code, de données ou de poids**. Seuls le PDF, la version HTML et les sources TeX sont proposés. Licence de l'article : CC BY-NC-ND 4.0, qui couvre l'article et non un logiciel ou des données. https://arxiv.org/abs/2607.07105
 - Article compagnon cité : VisTCP (arXiv 2607.05841), graphe de connaissances pour la peinture chinoise traditionnelle, mêmes auteurs en partie : https://papers.cool/arxiv/2607.05841 (non ouvert).
 
@@ -48,7 +48,7 @@ Aucun résultat sur VISART (ECCV) ni sur les actes CHR/DH avec des relations ent
 
 ## Constats principaux
 
-1. **CompoVista** : article arXiv du 8/07/2026 (v2 le 29/07), système de visualisation analytique, pas de graphe de scène publié. Ni code ni données annoncés ; mode de production des graphes non précisé.
+1. **CompoVista** : article arXiv du 8/07/2026 (v2 le 29/07). Graphe de composition de 960 peintures, annoté à la main (37 types de relations, dont événements « tenir » et « regarder »), mais pas de modèle de génération. Ni code ni données annoncés : il faudrait demander les annotations aux auteurs.
 2. **RelTR** : aucune licence trouvée (LICENSE absent, 404). À demander aux auteurs.
 3. **SemArt-HOI** : 14 187 images, 99 objets, 66 verbes, 248 interactions, annoté à la main par l'auteur ; **non publié à ma connaissance**, sans URL ni licence trouvées. Base SemArt en CC BY-NC 4.0.
 4. **Autres jeux** : aucun graphe de scène publié avec licence claire. Les candidats les plus proches sont SemArt-HOI (non publié), le jeu de peinture chinoise (accès payant, relations seulement événement/lieu) et DEArt (relations ajoutées par une extension non publiée à ma connaissance).

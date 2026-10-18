@@ -515,6 +515,11 @@ BRICKS: dict[tuple[str, str], Brick] = {
             "Claude Opus reads a scene graph without names: figures with a generic role and "
             "a posture, relations in a closed vocabulary of 18 verbs; one pass, no review",
         ),
+        _scene(
+            "haiku-scene",
+            "haiku",
+            "Claude Haiku reads the same scene graph as opus-scene, same prompt, one pass",
+        ),
         ElsewhereScene(
             "qwen25vl3b-scene",
             "scene",

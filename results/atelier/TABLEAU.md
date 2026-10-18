@@ -82,7 +82,10 @@ Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two
 | scene-vecteurs--opus-scene--minilm-multilingual | 0.814 | 0.604 |  |
 | scene--opus-scene | 0.807 | 0.569 | 15.5 |
 | sum--scene--opus-scene--and--vector--siglip | 0.836 | 0.543 |  |
+| scene-vecteurs--haiku-scene--minilm-multilingual | 0.584 | 0.411 |  |
 | scene-figures--opus-scene | 0.668 | 0.41 | 15.5 |
+| scene--haiku-scene | 0.611 | 0.346 | 14.2 |
+| scene-figures--haiku-scene | 0.5 | 0.297 | 14.2 |
 | vector--siglip | 0.507 | 0.228 | 0.082 |
 | vector--dinov2 | 0.414 | 0.193 | 0.099 |
 | regions--dinov2-patchs | 0.386 | 0.182 | 0.11 |
@@ -102,7 +105,10 @@ Top1 by medium (all; queries: enfance 220, passion 220)
 | scene-vecteurs--opus-scene--minilm-multilingual | 0.85 | 0.777 |
 | scene--opus-scene | 0.855 | 0.759 |
 | sum--scene--opus-scene--and--vector--siglip | 0.877 | 0.795 |
+| scene-vecteurs--haiku-scene--minilm-multilingual | 0.659 | 0.509 |
 | scene-figures--opus-scene | 0.682 | 0.655 |
+| scene--haiku-scene | 0.641 | 0.582 |
+| scene-figures--haiku-scene | 0.559 | 0.441 |
 | vector--siglip | 0.505 | 0.509 |
 | vector--dinov2 | 0.386 | 0.441 |
 | regions--dinov2-patchs | 0.409 | 0.364 |
