@@ -42,11 +42,16 @@ def read_triples_tsv(path: str | Path, *, has_header: bool = False) -> tuple[Tri
         for line_number, row in enumerate(reader, start=1):
             if not row or (row and row[0].lstrip().startswith("#")):
                 continue
-            if has_header and not rows and [cell.strip().lower() for cell in row] == [
-                "head",
-                "relation",
-                "tail",
-            ]:
+            if (
+                has_header
+                and not rows
+                and [cell.strip().lower() for cell in row]
+                == [
+                    "head",
+                    "relation",
+                    "tail",
+                ]
+            ):
                 continue
             if len(row) != 3:
                 raise ValueError(f"{source}:{line_number}: expected three TSV columns")

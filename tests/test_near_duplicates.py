@@ -87,8 +87,10 @@ def test_assign_groups_uses_stable_identifier_and_skips_missing_hashes():
         {"id": "c", "phash": 0xF0F0},
         {"id": "d", "phash": None},
     ]
-    assigned = {row["id"]: row["near_duplicate_group"] for row in
-                assign_near_duplicate_groups(records, threshold=1)}
+    assigned = {
+        row["id"]: row["near_duplicate_group"]
+        for row in assign_near_duplicate_groups(records, threshold=1)
+    }
     assert assigned["a"] == assigned["b"] == "a"
     assert assigned["c"] == "c"
     assert assigned["d"] is None

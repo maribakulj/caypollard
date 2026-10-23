@@ -103,5 +103,5 @@ def test_resolve_prefers_the_most_specific_available_node():
 
     augmented = key_augmented_parents({"86": set()}, ["86(A)"])
     assert resolve_notation("86(A)", augmented) == "86(A)"
-    assert resolve_notation("86(A)(+3)", augmented) == "86(A)"   # plus-key folded
-    assert resolve_notation("86(B)", augmented) == "86"          # unobserved key -> base
+    assert resolve_notation("86(A)(+3)", augmented) == "86(A)"  # plus-key folded
+    assert resolve_notation("86(B)", augmented) == "86"  # unobserved key -> base

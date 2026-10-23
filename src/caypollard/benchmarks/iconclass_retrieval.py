@@ -207,9 +207,7 @@ class IconclassRelevanceIndex:
         labels = self.labels_by_id[query_id]
         frequencies = [self.label_frequencies[label] for label in labels]
         depths = [
-            depth
-            for label in labels
-            if (depth := hierarchy_depth(label, self.parents)) is not None
+            depth for label in labels if (depth := hierarchy_depth(label, self.parents)) is not None
         ]
         return (
             float(median(frequencies)) if frequencies else 0.0,
@@ -307,8 +305,7 @@ def evaluate_iconclass_retrieval(
             import faiss
         except ImportError as exc:
             raise RuntimeError(
-                "FAISS backend requested but faiss is not installed; "
-                "install the retrieval extra"
+                "FAISS backend requested but faiss is not installed; install the retrieval extra"
             ) from exc
         faiss_index = faiss.IndexFlatIP(candidate_matrix.shape[1])
         faiss_index.add(np.ascontiguousarray(candidate_matrix, dtype=np.float32))
@@ -375,9 +372,7 @@ def evaluate_iconclass_retrieval(
                     )
                     if int(position) >= 0 and int(position) != own_position
                 ]
-                ranked_pairs.sort(
-                    key=lambda pair: (-pair[1], candidate_ids[pair[0]])
-                )
+                ranked_pairs.sort(key=lambda pair: (-pair[1], candidate_ids[pair[0]]))
 
             ranked_ids = [candidate_ids[position] for position, _score in ranked_pairs]
             score_by_position = dict(ranked_pairs)
@@ -399,10 +394,7 @@ def evaluate_iconclass_retrieval(
             if n_exact:
                 rr_value = reciprocal_rank(binary)
                 ap_value = average_precision(binary, total_relevant=n_exact)
-                recalls = {
-                    k: sum(binary[:k]) / n_exact
-                    for k in ks
-                }
+                recalls = {k: sum(binary[:k]) / n_exact for k in ks}
             else:
                 rr_value = None
                 ap_value = None

@@ -109,9 +109,7 @@ def book_coverage_report(
     multi = sorted((size for size in counts.values() if size > 1), reverse=True)
     with_book = total - without
     emblem = sum(
-        size
-        for book, size in counts.items()
-        if book.split("_", 1)[0] in EMBLEM_COLLECTIONS
+        size for book, size in counts.items() if book.split("_", 1)[0] in EMBLEM_COLLECTIONS
     )
     return {
         "n_images": total,

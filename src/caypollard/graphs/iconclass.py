@@ -172,7 +172,6 @@ def _ancestor_distances(node: str, parents: dict[str, set[str]]) -> dict[str, in
     return distances
 
 
-
 def hierarchy_depth(notation: str, parents: dict[str, set[str]]) -> int | None:
     """Return minimum number of parent edges from a resolved concept to a root."""
     node = resolve_notation(notation, parents)

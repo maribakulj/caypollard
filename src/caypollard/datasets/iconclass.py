@@ -15,9 +15,7 @@ from statistics import median
 from typing import Any
 
 ICONCLASS_TESTSET_URL = "https://iconclass.org/testset/"
-ICONCLASS_TESTSET_ARCHIVE_URL = (
-    "https://iconclass.org/testset/779ba2ca9e977c58d818e3823a676973.zip"
-)
+ICONCLASS_TESTSET_ARCHIVE_URL = "https://iconclass.org/testset/779ba2ca9e977c58d818e3823a676973.zip"
 ICONCLASS_TESTSET_MD5 = "779ba2ca9e977c58d818e3823a676973"
 
 

@@ -201,7 +201,7 @@ def scene_words(scene: dict, relations_too: bool = True) -> dict[str, int]:
     """A scene graph read by a vision-language model as a bag of words: how many figures,
     each figure's role and posture, and (with ``relations_too``) each relation with the
     roles at both ends. The subject the model names is not used."""
-    figures = {f.get("id"): f for f in scene.get("figures", []) if isinstance(f, dict)}
+    figures = {f.get("id"): f for f in scene.get("figures") or [] if isinstance(f, dict)}
     n = len(figures)
     words: dict[str, int] = {}
 
@@ -215,7 +215,9 @@ def scene_words(scene: dict, relations_too: bool = True) -> dict[str, int]:
     for f in figures.values():
         add(f"figure:{f.get('role')}:{f.get('posture')}")
     if relations_too:
-        for r in scene.get("relations", []):
+        for r in scene.get("relations") or []:
+            if not isinstance(r, dict):
+                continue
             a, b = figures.get(r.get("a")), figures.get(r.get("b"))
             if a and b:
                 add(f"{a.get('role')}:{r.get('rel')}:{b.get('role')}")
@@ -225,9 +227,11 @@ def scene_words(scene: dict, relations_too: bool = True) -> dict[str, int]:
 def scene_phrases(scene: dict) -> list[str]:
     """A scene graph as short phrases, one per figure and one per relation, so that a text
     encoder can bring synonyms together ("holds" and "carries")."""
-    figures = {f.get("id"): f for f in scene.get("figures", []) if isinstance(f, dict)}
+    figures = {f.get("id"): f for f in scene.get("figures") or [] if isinstance(f, dict)}
     out = [f"{f.get('posture')} {f.get('role')}" for f in figures.values()]
-    for r in scene.get("relations", []):
+    for r in scene.get("relations") or []:
+        if not isinstance(r, dict):
+            continue
         a, b = figures.get(r.get("a")), figures.get(r.get("b"))
         if a and b:
             out.append(f"{a.get('role')} {r.get('rel')} {b.get('role')}")
@@ -236,7 +240,8 @@ def scene_phrases(scene: dict) -> list[str]:
 
 def set_matrix(sets: Sequence[np.ndarray]) -> np.ndarray:
     """Distances between sets of unit vectors: each vector takes its best match in the
-    other set, mean of both directions (an empty set is far from everything)."""
+    other set, mean of both directions. An empty set gets similarity 0 with everything,
+    which is not the largest distance when cosines can be negative."""
     n = len(sets)
     sim = np.zeros((n, n))
     for i in range(n):

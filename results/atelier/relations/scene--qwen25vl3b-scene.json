@@ -1,8 +1,8 @@
 {
  "bench": "relations",
  "combination": "scene--qwen25vl3b-scene",
- "date": "2026-10-17",
- "commit": "8478f83",
+ "date": "2026-10-23",
+ "commit": "1d3ed8e",
  "bricks": [
   {
    "name": "qwen25vl3b-scene",
@@ -501,5 +501,11 @@
   "IIHIM_-1090583016": "Jesus and Child",
   "129f4_069v": "crucifixion",
   "IIHIM_733403720": "man with animal"
+ },
+ "sensitivity": {
+  "invalid_readings": 14,
+  "top1_ties_equally_likely": 0.2522,
+  "queries_tied_at_best": 188,
+  "top1_invalid_as_failure": 0.2432
  }
 }

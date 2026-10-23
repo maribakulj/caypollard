@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from caypollard.atelier.benches import _score
+from caypollard.atelier.benches import _score, top1_detail
 from caypollard.atelier.bricks import BRICKS, COCO_KEPT, brick, convert_vitpose
 from caypollard.atelier.measure import (
     dense_matrix,
@@ -175,6 +175,14 @@ def test_score_all_and_cross():
     assert everything["top1"] == 0.5 and everything["queries"] == 4
     emblems = _score(dist, items, "emblem")
     assert emblems["top1"] == 1.0 and emblems["queries"] == 2
+
+
+def test_top1_detail_counts_ties_as_equally_likely():
+    items = [{"label": "x"}, {"label": "y"}, {"label": "x"}]
+    dist = np.array([[0, 1, 1], [1, 0, 2], [1, 2, 0]], dtype=float)
+    detail = top1_detail(dist, items)
+    assert detail[0] == {"hit": False, "expected": 0.5, "tied": 2}  # manifest order picks y
+    assert detail[2]["hit"] and detail[2]["expected"] == 1.0
 
 
 def test_vitpose_conversion_names_every_weight():

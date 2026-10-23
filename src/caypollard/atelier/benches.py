@@ -119,6 +119,26 @@ def _score(dist: np.ndarray, items: list[dict], direction: str | None) -> dict:
     return out
 
 
+def top1_detail(dist: np.ndarray, items: list[dict]) -> list[dict]:
+    """Per query of an "all" bench: the historic top-1 hit (ties broken by manifest order,
+    as ``_score`` does) and the expected hit when the answers tied at the best distance are
+    taken as equally likely. Used for sensitivity only; the main score stays ``_score``."""
+    out = []
+    for i, it in enumerate(items):
+        gallery = [j for j in range(len(items)) if j != i]
+        ranked = sorted(gallery, key=lambda j: dist[i, j])
+        best = dist[i, ranked[0]]
+        tied = [j for j in gallery if dist[i, j] == best]
+        out.append(
+            {
+                "hit": items[ranked[0]]["label"] == it["label"],
+                "expected": sum(items[j]["label"] == it["label"] for j in tied) / len(tied),
+                "tied": len(tied),
+            }
+        )
+    return out
+
+
 BENCHES = {
     b.name: b
     for b in (

@@ -538,6 +538,26 @@ BRICKS: dict[tuple[str, str], Brick] = {
             16600,
             heavy=True,
         ),
+        # Declared before the training run (Codex review, 23/10/2026): both come out of the
+        # same run of scripts/remote_train_scene_lora.py, same precision, same settings.
+        ElsewhereScene(
+            "qwen25vl7b-bf16-scene",
+            "scene",
+            "Qwen2.5-VL-7B-Instruct without adapter, bf16, read in the training run before "
+            "training: the zero-shot reference of qwen25vl7b-lora-scene",
+            "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct",
+            16600,
+            heavy=True,
+        ),
+        ElsewhereScene(
+            "qwen25vl7b-lora-scene",
+            "scene",
+            "Qwen2.5-VL-7B-Instruct + LoRA (rank 16, language model only) trained on 1,200 "
+            "Opus scene graphs of Iconclass pictures away from the benches; same prompt",
+            "scripts/remote_train_scene_lora.py",
+            16600,
+            heavy=True,
+        ),
         # Both regions bricks were fixed together, before either was run.
         _patches(
             "dinov2-patchs",

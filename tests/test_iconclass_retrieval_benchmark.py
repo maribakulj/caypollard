@@ -107,9 +107,7 @@ def test_stratified_summary_is_exposed_in_run_summary():
         [[1.0, 0.0], [0.9, 0.1], [0.0, 1.0], [0.1, 0.9], [0.8, 0.2], [0.7, 0.3]],
         dtype=np.float32,
     )
-    table = EmbeddingTable(
-        ids=tuple(row["id"] for row in _records()), vectors=vectors, metadata={}
-    )
+    table = EmbeddingTable(ids=tuple(row["id"] for row in _records()), vectors=vectors, metadata={})
     summary, _ = evaluate_iconclass_retrieval(table, _records(), _parents())
     assert "strata" in summary
     assert "label_frequency" in summary["strata"]

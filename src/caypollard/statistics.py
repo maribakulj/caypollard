@@ -37,9 +37,7 @@ def _check_confidence(confidence: float) -> tuple[float, float]:
     return 100.0 * tail, 100.0 * (1.0 - tail)
 
 
-def _paired(
-    first: Sequence[float], second: Sequence[float]
-) -> tuple[np.ndarray, np.ndarray]:
+def _paired(first: Sequence[float], second: Sequence[float]) -> tuple[np.ndarray, np.ndarray]:
     left = _as_vector(first, name="first")
     right = _as_vector(second, name="second")
     if left.size != right.size:
@@ -189,9 +187,7 @@ def compare_methods(
     difference = paired_bootstrap_difference(
         first, second, confidence=confidence, n_resamples=n_resamples, seed=seed
     )
-    test = paired_permutation_test(
-        first, second, n_permutations=n_permutations, seed=seed
-    )
+    test = paired_permutation_test(first, second, n_permutations=n_permutations, seed=seed)
     return {
         "first": first_name,
         "second": second_name,

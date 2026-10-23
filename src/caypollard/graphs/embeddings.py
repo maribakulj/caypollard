@@ -124,9 +124,7 @@ def aggregate_concept_embeddings_to_images(
             resolved_label_count / total_label_count if total_label_count else 0.0
         ),
         "unresolved_image_ids": unresolved_images,
-        "warning": (
-            "taxonomy-derived control representation; not an independent semantic target"
-        ),
+        "warning": ("taxonomy-derived control representation; not an independent semantic target"),
     }
     return EmbeddingTable(ids=tuple(ids), vectors=matrix, metadata=metadata)
 

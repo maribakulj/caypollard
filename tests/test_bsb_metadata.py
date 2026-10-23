@@ -69,7 +69,7 @@ def test_html_is_stripped_from_values():
 
 def test_authority_identifiers_win_over_names():
     # Two people can share a spelling; an authority id cannot be conflated that way.
-    with_gnd = VolumeMetadata("b1", creator_gnds=("118", ), creator_names=("mueller",))
+    with_gnd = VolumeMetadata("b1", creator_gnds=("118",), creator_names=("mueller",))
     triples = metadata_triples([with_gnd])
     assert ("book:b1", "created_by", "person:gnd-118") in triples
     assert not any(t[2].startswith("person:name-") for t in triples)

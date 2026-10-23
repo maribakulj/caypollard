@@ -19,7 +19,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageOps
 
-from .benches import BENCHES, Bench
+from .benches import BENCHES, Bench, top1_detail
 from .bricks import COCO_KEPT, brick
 from .measure import (
     dense_matrix,
@@ -132,7 +132,25 @@ def run_scene(bench_name: str, name: str, relations_too: bool = True) -> dict:
             it["id"]: d.get("subject", "") for it, d in zip(items, read, strict=True)
         },
     }
-    return _save(bench, f"{kind}--{name}", words_matrix(bags), [brick("scene", name).meta()], extra)
+    dist = words_matrix(bags)
+    if bench.rule == "all":
+        # Sensitivity only, fixed before the LoRA result (Codex review, 23/10/2026): ties at
+        # the best distance taken as equally likely, and every reading without figures
+        # counted as a failed search. The main score stays the historic one.
+        detail = top1_detail(dist, items)
+        invalid = [not any(isinstance(f, dict) for f in d.get("figures") or []) for d in read]
+        extra["sensitivity"] = {
+            "invalid_readings": int(sum(invalid)),
+            "top1_ties_equally_likely": round(float(np.mean([q["expected"] for q in detail])), 4),
+            "queries_tied_at_best": int(sum(q["tied"] > 1 for q in detail)),
+            "top1_invalid_as_failure": round(
+                float(
+                    np.mean([q["hit"] and not bad for q, bad in zip(detail, invalid, strict=True)])
+                ),
+                4,
+            ),
+        }
+    return _save(bench, f"{kind}--{name}", dist, [brick("scene", name).meta()], extra)
 
 
 def run_scene_vectors(bench_name: str, name: str, text: str = "minilm-multilingual") -> dict:

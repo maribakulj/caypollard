@@ -39,8 +39,10 @@ def test_combine_group_keys_merges_signals_transitively():
         {"id": "c", "book_id": None, "near_duplicate_group": "dup-x"},
         {"id": "d", "book_id": None, "near_duplicate_group": None},
     ]
-    grouped = {row["id"]: row["group_id"] for row in
-               combine_group_keys(records, keys=["book_id", "near_duplicate_group"])}
+    grouped = {
+        row["id"]: row["group_id"]
+        for row in combine_group_keys(records, keys=["book_id", "near_duplicate_group"])
+    }
 
     assert grouped["a"] == grouped["b"] == grouped["c"] == "a"
     assert grouped["d"] == "d"  # absent provenance isolates rather than pools
@@ -57,8 +59,9 @@ def test_combine_group_keys_is_stable_and_non_mutating():
     forward = combine_group_keys(records, keys=["book_id"])
     backward = combine_group_keys(list(reversed(records)), keys=["book_id"])
 
-    assert {row["id"]: row["group_id"] for row in forward} == \
-           {row["id"]: row["group_id"] for row in backward}
+    assert {row["id"]: row["group_id"] for row in forward} == {
+        row["id"]: row["group_id"] for row in backward
+    }
     assert forward[0]["group_id"] == "y"  # lexicographically smallest member
     assert "group_id" not in records[0]
 

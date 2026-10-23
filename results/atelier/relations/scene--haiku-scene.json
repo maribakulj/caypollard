@@ -1,8 +1,8 @@
 {
  "bench": "relations",
  "combination": "scene--haiku-scene",
- "date": "2026-10-17",
- "commit": "6d18439",
+ "date": "2026-10-23",
+ "commit": "1d3ed8e",
  "bricks": [
   {
    "name": "haiku-scene",
@@ -501,5 +501,11 @@
   "IIHIM_-1090583016": "standing robed figure with a cross banner, flanked by a kneeling and a seated armed figure",
   "129f4_069v": "standing figure with a banner in an open stone tomb, two men at its base, in an illuminated page border",
   "IIHIM_733403720": "engraved scene: a haloed standing man with raised hand, a bent figure before him, and a helmeted armed man at right"
+ },
+ "sensitivity": {
+  "invalid_readings": 0,
+  "top1_ties_equally_likely": 0.6087,
+  "queries_tied_at_best": 50,
+  "top1_invalid_as_failure": 0.6114
  }
 }

@@ -112,8 +112,10 @@ def test_stratum_key_rejects_cross_stratum_pairs():
     table = EmbeddingTable(ids=ids, vectors=vectors, metadata={})
     parents = {"25F23": set(), "99Z": set(), "25F23(BEAR)": {"25F23"}}
     thresholds = HardPairThresholds(
-        visual_close_min=0.9, visual_distant_max=0.5,
-        semantic_close_min=0.5, semantic_distant_max=0.2,
+        visual_close_min=0.9,
+        visual_distant_max=0.5,
+        semantic_close_min=0.5,
+        semantic_distant_max=0.2,
     )
 
     pairs, mining = mine_hard_pairs(
@@ -140,8 +142,10 @@ def test_without_a_stratum_key_cross_stratum_pairs_survive():
     )
     parents = {"25F23": set(), "99Z": set(), "25F23(BEAR)": {"25F23"}}
     thresholds = HardPairThresholds(
-        visual_close_min=0.9, visual_distant_max=0.5,
-        semantic_close_min=0.5, semantic_distant_max=0.2,
+        visual_close_min=0.9,
+        visual_distant_max=0.5,
+        semantic_close_min=0.5,
+        semantic_distant_max=0.2,
     )
     pairs, _ = mine_hard_pairs(table, records, parents, thresholds, max_per_class=50)
     assert any(
@@ -165,8 +169,11 @@ def test_records_missing_the_stratum_field_are_excluded():
         ids=["a", "b"], vectors=np.array([[1.0, 0.0], [0.0, 1.0]], dtype=np.float32), metadata={}
     )
     pairs, _ = mine_hard_pairs(
-        table, records, {"25F23": set(), "25F23(BEAR)": {"25F23"}},
-        HardPairThresholds(0.9, 0.5, 0.5, 0.2), stratum_key="collection",
+        table,
+        records,
+        {"25F23": set(), "25F23(BEAR)": {"25F23"}},
+        HardPairThresholds(0.9, 0.5, 0.5, 0.2),
+        stratum_key="collection",
     )
     # Two nulls are not a shared stratum; provenance must be positive, not absent.
     assert pairs == []

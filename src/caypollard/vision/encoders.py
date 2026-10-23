@@ -96,9 +96,7 @@ class HuggingFaceVisionEncoder:
     def metadata(self) -> dict[str, Any]:
         from importlib.metadata import version
 
-        processor_config = (
-            self.processor.to_dict() if hasattr(self.processor, "to_dict") else None
-        )
+        processor_config = self.processor.to_dict() if hasattr(self.processor, "to_dict") else None
         return {
             "family": self.spec.family,
             "model_id": self.spec.model_id,

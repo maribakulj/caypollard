@@ -1,8 +1,8 @@
 {
  "bench": "relations",
  "combination": "scene--opus-scene",
- "date": "2026-10-17",
- "commit": "c3c6ff6",
+ "date": "2026-10-23",
+ "commit": "1d3ed8e",
  "bricks": [
   {
    "name": "opus-scene",
@@ -501,5 +501,11 @@
   "IIHIM_-1090583016": "Resurrection of Christ, rising from the tomb with sleeping guards",
   "129f4_069v": "Resurrection of Christ from the tomb, with sleeping guards",
   "IIHIM_733403720": "Resurrection of Christ, with the guards asleep at the tomb"
+ },
+ "sensitivity": {
+  "invalid_readings": 0,
+  "top1_ties_equally_likely": 0.8057,
+  "queries_tied_at_best": 28,
+  "top1_invalid_as_failure": 0.8068
  }
 }

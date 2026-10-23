@@ -63,9 +63,7 @@ class HuggingFaceTextEncoder:
             import torch
             from transformers import AutoModel, AutoTokenizer
         except ImportError as exc:  # pragma: no cover - depends on optional extra
-            raise RuntimeError(
-                "Install the text dependencies with `uv sync --extra text`"
-            ) from exc
+            raise RuntimeError("Install the text dependencies with `uv sync --extra text`") from exc
 
         self._torch = torch
         self.spec = spec

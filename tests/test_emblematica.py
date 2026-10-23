@@ -55,8 +55,11 @@ def test_text_keys_survive_parsing():
 
 
 def test_notations_are_deduplicated_in_order():
-    doubled = GLASGOW.replace("</pictura>", """
-      <iconclass><skos:notation>25F23(BEAR)</skos:notation></iconclass></pictura>""")
+    doubled = GLASGOW.replace(
+        "</pictura>",
+        """
+      <iconclass><skos:notation>25F23(BEAR)</skos:notation></iconclass></pictura>""",
+    )
     assert parse_emblem_xml(doubled, emblem_id="E1").iconclass == ("25F23(BEAR)", "31A22221")
 
 

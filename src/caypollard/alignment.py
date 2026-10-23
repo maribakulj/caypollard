@@ -206,9 +206,7 @@ def train_joint_alignment(
     train_ids_tuple, train_visual, train_graph = aligned_embedding_matrices(
         visual, graph, train_ids
     )
-    val_ids_tuple, val_visual, val_graph = aligned_embedding_matrices(
-        visual, graph, validation_ids
-    )
+    val_ids_tuple, val_visual, val_graph = aligned_embedding_matrices(visual, graph, validation_ids)
     overlap = set(train_ids_tuple).intersection(val_ids_tuple)
     if overlap:
         raise ValueError(f"train and validation ids overlap: {sorted(overlap)[:5]}")
@@ -218,9 +216,7 @@ def train_joint_alignment(
         if output_ids is None
         else tuple(str(item_id) for item_id in output_ids)
     )
-    out_ids, out_visual, out_graph = aligned_embedding_matrices(
-        visual, graph, selected_output_ids
-    )
+    out_ids, out_visual, out_graph = aligned_embedding_matrices(visual, graph, selected_output_ids)
 
     visual_head = _build_projection_head(train_visual.shape[1], config).to(device)
     graph_head = _build_projection_head(train_graph.shape[1], config).to(device)

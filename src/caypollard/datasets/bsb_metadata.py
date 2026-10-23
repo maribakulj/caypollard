@@ -222,8 +222,15 @@ def metadata_report(volumes: Sequence[VolumeMetadata]) -> dict[str, Any]:
         "n_volumes": total,
         "coverage": {
             name: (filled(name) / total if total else 0.0)
-            for name in ("creator_gnds", "creator_names", "printer", "place", "year",
-                         "language", "work_title")
+            for name in (
+                "creator_gnds",
+                "creator_names",
+                "printer",
+                "place",
+                "year",
+                "language",
+                "work_title",
+            )
         },
         "n_distinct_creators_gnd": len({g for v in volumes for g in v.creator_gnds}),
         "n_distinct_printers": len({v.printer for v in volumes if v.printer}),
