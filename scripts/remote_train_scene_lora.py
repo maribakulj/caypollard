@@ -300,7 +300,7 @@ def val_loss():
     losses = []
     with torch.no_grad():
         for path, answer in val[: 3 if SMOKE else len(val)]:
-            losses.append(model(**batch_for(path, answer)).loss.item())
+            losses.append(model(**batch_for(path, answer), use_cache=False).loss.item())
     model.train()
     return sum(losses) / len(losses)
 
@@ -320,7 +320,7 @@ for step in range(steps):
     group_start = step - step % accumulate
     group = min(accumulate, steps - group_start)  # the last group may be shorter
     path, answer = train[step % len(train)]
-    loss = model(**batch_for(path, answer)).loss / group
+    loss = model(**batch_for(path, answer), use_cache=False).loss / group
     loss.backward()
     running += loss.item()
     if step + 1 == group_start + group:
