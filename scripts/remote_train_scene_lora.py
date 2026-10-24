@@ -220,6 +220,16 @@ print(
 )
 # A resumed stage must come from the same data, split and code as this run.
 log["resumed"] = {}
+os.makedirs(OUT, exist_ok=True)  # a fresh machine without resume archives has no OUT yet
+# What a reading depends on besides the data: the prompt and the generation settings.
+log["settings"] = {
+    "prompt_sha256": hashlib.sha256(PROMPT.encode()).hexdigest(),
+    "max_new_tokens": 700,
+    "min_pixels": 256 * 28 * 28,
+    "max_pixels": 640 * 28 * 28,
+    "dtype": "bfloat16",
+    "greedy": True,
+}
 for tag in sorted(os.listdir(OUT)):
     previous = f"{OUT}/{tag}/log.json"
     if tag in ("zeroshot-bf16", "adapter", "lora") and os.path.exists(previous):
@@ -228,6 +238,7 @@ for tag in sorted(os.listdir(OUT)):
         same = {
             "archives": {k: v for k, v in old.get("archives_sha256", {}).items() if k != "code.tar"}
             == {k: v for k, v in log["archives_sha256"].items() if k != "code.tar"},
+            "settings": old.get("settings") == log["settings"],
             "split": old.get("train_ids") == log["train_ids"]
             and old.get("val_ids") == log["val_ids"],
         }
@@ -236,11 +247,20 @@ for tag in sorted(os.listdir(OUT)):
         log["resumed"][tag] = {"previous_log": old, "checked": same}
 write_log()
 
-processor = AutoProcessor.from_pretrained(REPO, min_pixels=256 * 28 * 28, max_pixels=640 * 28 * 28)
+# A resumed run reloads the very model revision of the stages it resumes.
+pinned = {r["previous_log"].get("model_revision") for r in log["resumed"].values()} - {None}
+if len(pinned) > 1:
+    raise SystemExit(f"resumed stages come from different model revisions: {pinned}")
+revision = pinned.pop() if pinned else None
+processor = AutoProcessor.from_pretrained(
+    REPO, revision=revision, min_pixels=256 * 28 * 28, max_pixels=640 * 28 * 28
+)
 model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-    REPO, torch_dtype=torch.bfloat16, device_map="cuda"
+    REPO, revision=revision, torch_dtype=torch.bfloat16, device_map="cuda"
 )
 log["model_revision"] = getattr(model.config, "_commit_hash", None)
+if revision and log["model_revision"] != revision:
+    raise SystemExit(f"model revision {log['model_revision']} is not the resumed {revision}")
 
 
 def batch_for(path, answer=None):
@@ -326,7 +346,13 @@ ADAPTER = OUT + "/adapter"
 
 
 def adapter_sha():
-    return sha256(ADAPTER + "/adapter_model.safetensors")
+    """Weights and configuration of the adapter, together."""
+    return hashlib.sha256(
+        (
+            sha256(ADAPTER + "/adapter_model.safetensors")
+            + sha256(ADAPTER + "/adapter_config.json")
+        ).encode()
+    ).hexdigest()
 
 
 if os.path.exists(ADAPTER + "/adapter_model.safetensors"):
