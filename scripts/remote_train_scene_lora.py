@@ -62,6 +62,13 @@ for name, where in (
 ):
     with tarfile.open(f"{ROOT}/{name}") as archive:
         archive.extractall(where)
+# Resuming after a lost machine: the stage archives brought back (student-*.tar.gz) are
+# sent again as resume-*.tar.gz; finished pictures and a saved adapter are not redone.
+for resume in sorted(glob.glob(ROOT + "/resume-*.tar.gz")):
+    tag = os.path.basename(resume)[len("resume-") : -len(".tar.gz")]
+    with tarfile.open(resume) as archive:
+        archive.extractall(f"{OUT}/{tag}")
+    print(f"resumed {tag}", flush=True)
 subprocess.run(
     [sys.executable, "-m", "pip", "install", "-q", "transformers==5.17.0", "peft"], check=True
 )
@@ -244,6 +251,8 @@ def read_benches(tag):
         os.makedirs(f"{OUT}/{tag}/{bench}", exist_ok=True)
         for path in manifest_paths(folder)[: 3 if SMOKE else None]:
             item = os.path.basename(path)[:-4]
+            if os.path.exists(f"{OUT}/{tag}/{bench}/{item}.json"):
+                continue  # read before the machine was lost
             t0 = time.time()
             inputs = batch_for(path)
             with torch.no_grad():
@@ -270,14 +279,31 @@ def read_benches(tag):
                 json.dump(data, f, ensure_ascii=False)
         print(f"{tag} {bench} read", flush=True)
     write_log()
+    snapshot(tag)
+
+
+def snapshot(tag):
+    """One archive per finished stage, fetched by the Mac at once: nothing is lost if the
+    machine goes."""
+    shutil.copy(OUT + "/log.json", f"{OUT}/{tag}/log.json")
+    shutil.make_archive(f"{ROOT}/student-{tag}", "gztar", f"{OUT}/{tag}")
+    print(f"snapshot {tag}", flush=True)
 
 
 # 2. The same model without any adapter, in the same precision: the zero-shot reference.
 read_benches("zeroshot-bf16")
 
 # 3. LoRA on the language model, the answer only in the loss.
-from peft import LoraConfig, get_peft_model  # noqa: E402
+from peft import LoraConfig, PeftModel, get_peft_model  # noqa: E402
 
+ADAPTER = OUT + "/adapter"
+RESUMED = os.path.exists(ADAPTER + "/adapter_config.json")
+
+if RESUMED:
+    model = PeftModel.from_pretrained(model, ADAPTER)
+    log["adapter_resumed"] = True
+    print("adapter resumed, training skipped", flush=True)
+    steps = 0
 model.config.use_cache = False
 model.gradient_checkpointing_enable()
 model.enable_input_require_grads()
@@ -288,9 +314,12 @@ lora = LoraConfig(
     target_modules=r".*language_model.*\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)",
     task_type="CAUSAL_LM",
 )
-model = get_peft_model(model, lora)
+if not RESUMED:
+    model = get_peft_model(model, lora)
 trainable = [n for n, p in model.named_parameters() if p.requires_grad]
-if not trainable or any("language_model" not in n or "lora_" not in n for n in trainable):
+if RESUMED:
+    pass
+elif not trainable or any("language_model" not in n or "lora_" not in n for n in trainable):
     raise SystemExit(f"unexpected trainable parameters: {trainable[:5]}")
 log["trainable"] = sum(p.numel() for p in model.parameters() if p.requires_grad)
 
@@ -306,14 +335,14 @@ def val_loss():
 
 
 epochs, accumulate = 2, 8
-steps = 4 if SMOKE else epochs * len(train)
-updates = math.ceil(steps / accumulate)
+steps = 0 if RESUMED else (4 if SMOKE else epochs * len(train))
+updates = max(1, math.ceil(steps / accumulate))
 log.update(
     epochs=epochs, accumulate=accumulate, steps=steps, updates=updates, order="same each epoch"
 )
 optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=1e-4)
 scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lambda u: max(0.0, 1 - u / updates))
-log["losses"], log["val_losses"] = [], [val_loss()]
+log["losses"], log["val_losses"] = [], [] if RESUMED else [val_loss()]
 model.train()
 running = 0.0
 for step in range(steps):
@@ -336,8 +365,10 @@ for step in range(steps):
     if (step + 1) % 100 == 0:
         print(f"step {step + 1}/{steps} loss {log['losses'][-1]}", flush=True)
 log["train_seconds"] = round(time.time() - start)
-model.save_pretrained(OUT + "/adapter")
-write_log()
+if not RESUMED:
+    model.save_pretrained(ADAPTER)
+    write_log()
+    snapshot("adapter")
 
 # 4. The student reads both benches.
 model.config.use_cache = True
