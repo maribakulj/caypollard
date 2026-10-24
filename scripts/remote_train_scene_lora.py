@@ -218,6 +218,22 @@ print(
     f"empty {len(dropped['empty_graph'])}, absent {len(absent)}",
     flush=True,
 )
+# A resumed stage must come from the same data, split and code as this run.
+log["resumed"] = {}
+for tag in sorted(os.listdir(OUT)):
+    previous = f"{OUT}/{tag}/log.json"
+    if tag in ("zeroshot-bf16", "adapter", "lora") and os.path.exists(previous):
+        with open(previous) as f:
+            old = json.load(f)
+        same = {
+            "archives": {k: v for k, v in old.get("archives_sha256", {}).items() if k != "code.tar"}
+            == {k: v for k, v in log["archives_sha256"].items() if k != "code.tar"},
+            "split": old.get("train_ids") == log["train_ids"]
+            and old.get("val_ids") == log["val_ids"],
+        }
+        if not all(same.values()):
+            raise SystemExit(f"resumed stage {tag} does not match this run: {same}")
+        log["resumed"][tag] = {"previous_log": old, "checked": same}
 write_log()
 
 processor = AutoProcessor.from_pretrained(REPO, min_pixels=256 * 28 * 28, max_pixels=640 * 28 * 28)
@@ -244,6 +260,15 @@ def batch_for(path, answer=None):
     return inputs
 
 
+def valid_json(path):
+    """A reading kept from a lost machine counts only if it is a whole JSON object."""
+    try:
+        with open(path) as f:
+            return isinstance(json.load(f), dict)
+    except (OSError, ValueError):
+        return False
+
+
 def read_benches(tag):
     """The model as it stands reads both benches with the zero-shot prompt and settings."""
     model.eval()
@@ -251,7 +276,7 @@ def read_benches(tag):
         os.makedirs(f"{OUT}/{tag}/{bench}", exist_ok=True)
         for path in manifest_paths(folder)[: 3 if SMOKE else None]:
             item = os.path.basename(path)[:-4]
-            if os.path.exists(f"{OUT}/{tag}/{bench}/{item}.json"):
+            if valid_json(f"{OUT}/{tag}/{bench}/{item}.json"):
                 continue  # read before the machine was lost
             t0 = time.time()
             inputs = batch_for(path)
@@ -293,84 +318,94 @@ def snapshot(tag):
 # 2. The same model without any adapter, in the same precision: the zero-shot reference.
 read_benches("zeroshot-bf16")
 
-# 3. LoRA on the language model, the answer only in the loss.
+# 3. LoRA on the language model, the answer only in the loss. A resumed adapter is loaded
+# for reading only: no optimizer, no training, its original log kept.
 from peft import LoraConfig, PeftModel, get_peft_model  # noqa: E402
 
 ADAPTER = OUT + "/adapter"
-RESUMED = os.path.exists(ADAPTER + "/adapter_config.json")
 
-if RESUMED:
-    model = PeftModel.from_pretrained(model, ADAPTER)
-    log["adapter_resumed"] = True
+
+def adapter_sha():
+    return sha256(ADAPTER + "/adapter_model.safetensors")
+
+
+if os.path.exists(ADAPTER + "/adapter_model.safetensors"):
+    model = PeftModel.from_pretrained(model, ADAPTER, is_trainable=False)
+    log["adapter_sha256"] = adapter_sha()
+    previous = log["resumed"].get("adapter", {}).get("previous_log", {})
+    for key in ("trainable", "losses", "val_losses", "steps", "updates", "train_seconds"):
+        if key in previous:
+            log[key] = previous[key]
     print("adapter resumed, training skipped", flush=True)
-    steps = 0
-model.config.use_cache = False
-model.gradient_checkpointing_enable()
-model.enable_input_require_grads()
-lora = LoraConfig(
-    r=16,
-    lora_alpha=32,
-    lora_dropout=0.05,
-    target_modules=r".*language_model.*\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)",
-    task_type="CAUSAL_LM",
-)
-if not RESUMED:
+else:
+    model.config.use_cache = False
+    model.gradient_checkpointing_enable()
+    model.enable_input_require_grads()
+    lora = LoraConfig(
+        r=16,
+        lora_alpha=32,
+        lora_dropout=0.05,
+        target_modules=r".*language_model.*\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)",
+        task_type="CAUSAL_LM",
+    )
     model = get_peft_model(model, lora)
-trainable = [n for n, p in model.named_parameters() if p.requires_grad]
-if RESUMED:
-    pass
-elif not trainable or any("language_model" not in n or "lora_" not in n for n in trainable):
-    raise SystemExit(f"unexpected trainable parameters: {trainable[:5]}")
-log["trainable"] = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    trainable = [n for n, p in model.named_parameters() if p.requires_grad]
+    if not trainable or any("language_model" not in n or "lora_" not in n for n in trainable):
+        raise SystemExit(f"unexpected trainable parameters: {trainable[:5]}")
+    log["trainable"] = sum(p.numel() for p in model.parameters() if p.requires_grad)
 
+    def val_loss():
+        model.eval()
+        losses = []
+        with torch.no_grad():
+            for path, answer in val[: 3 if SMOKE else len(val)]:
+                losses.append(model(**batch_for(path, answer), use_cache=False).loss.item())
+        model.train()
+        return sum(losses) / len(losses)
 
-def val_loss():
-    model.eval()
-    losses = []
-    with torch.no_grad():
-        for path, answer in val[: 3 if SMOKE else len(val)]:
-            losses.append(model(**batch_for(path, answer), use_cache=False).loss.item())
+    epochs, accumulate = 2, 8
+    steps = 4 if SMOKE else epochs * len(train)
+    updates = math.ceil(steps / accumulate)
+    log.update(
+        epochs=epochs, accumulate=accumulate, steps=steps, updates=updates, order="same each epoch"
+    )
+    optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=1e-4)
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lambda u: max(0.0, 1 - u / updates))
+    log["losses"], log["val_losses"] = [], [val_loss()]
     model.train()
-    return sum(losses) / len(losses)
-
-
-epochs, accumulate = 2, 8
-steps = 0 if RESUMED else (4 if SMOKE else epochs * len(train))
-updates = max(1, math.ceil(steps / accumulate))
-log.update(
-    epochs=epochs, accumulate=accumulate, steps=steps, updates=updates, order="same each epoch"
-)
-optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=1e-4)
-scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lambda u: max(0.0, 1 - u / updates))
-log["losses"], log["val_losses"] = [], [] if RESUMED else [val_loss()]
-model.train()
-running = 0.0
-for step in range(steps):
-    group_start = step - step % accumulate
-    group = min(accumulate, steps - group_start)  # the last group may be shorter
-    path, answer = train[step % len(train)]
-    loss = model(**batch_for(path, answer), use_cache=False).loss / group
-    loss.backward()
-    running += loss.item()
-    if step + 1 == group_start + group:
-        optimizer.step()
-        scheduler.step()
-        optimizer.zero_grad()
-        log["losses"].append(round(running, 4))
-        running = 0.0
-    if (step + 1) % len(train) == 0 or step + 1 == steps:
-        log["val_losses"].append(val_loss())
-        print(f"step {step + 1}/{steps} val {log['val_losses'][-1]:.4f}", flush=True)
-        write_log()
-    if (step + 1) % 100 == 0:
-        print(f"step {step + 1}/{steps} loss {log['losses'][-1]}", flush=True)
-log["train_seconds"] = round(time.time() - start)
-if not RESUMED:
+    running = 0.0
+    for step in range(steps):
+        group_start = step - step % accumulate
+        group = min(accumulate, steps - group_start)  # the last group may be shorter
+        path, answer = train[step % len(train)]
+        loss = model(**batch_for(path, answer), use_cache=False).loss / group
+        loss.backward()
+        running += loss.item()
+        if step + 1 == group_start + group:
+            optimizer.step()
+            scheduler.step()
+            optimizer.zero_grad()
+            log["losses"].append(round(running, 4))
+            running = 0.0
+        if (step + 1) % len(train) == 0 or step + 1 == steps:
+            log["val_losses"].append(val_loss())
+            print(f"step {step + 1}/{steps} val {log['val_losses'][-1]:.4f}", flush=True)
+            write_log()
+        if (step + 1) % 100 == 0:
+            print(f"step {step + 1}/{steps} loss {log['losses'][-1]}", flush=True)
+    log["train_seconds"] = round(time.time() - start)
     model.save_pretrained(ADAPTER)
+    log["adapter_sha256"] = adapter_sha()
     write_log()
     snapshot("adapter")
 
-# 4. The student reads both benches.
+# 4. The student reads both benches. Readings resumed from a lost machine are kept only if
+# they were made with this very adapter.
+lora_previous = log["resumed"].get("lora", {}).get("previous_log", {})
+if lora_previous and lora_previous.get("adapter_sha256") != log["adapter_sha256"]:
+    shutil.rmtree(OUT + "/lora")
+    log["resumed"].pop("lora")
+    print("resumed lora readings dropped: made with another adapter", flush=True)
 model.config.use_cache = True
 read_benches("lora")
 shutil.make_archive(ROOT + "/student", "gztar", OUT)
