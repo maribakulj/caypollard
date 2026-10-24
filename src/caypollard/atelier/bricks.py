@@ -289,6 +289,8 @@ class PerceptionEncoder(Brick):
     """Meta's Perception Encoder, spatial variant (timm, Apache 2.0), at 448 px. The vector
     is the mean of the patch tokens; the regions are those tokens pooled to 16 x 16."""
 
+    symmetric: bool = True
+
     def _load(self):
         import timm
         import torch
