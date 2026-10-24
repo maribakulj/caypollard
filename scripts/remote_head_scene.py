@@ -17,7 +17,13 @@ Settings, fixed before any result (24/10/2026):
 
 - the training pictures, exclusions (near-copies of bench pictures, DINOv2 cosine above
   0.9; graphs without figures) and the 5 % validation split (seed 0) are those of
-  ``scripts/remote_train_scene_lora.py``, recomputed the same way;
+  ``scripts/remote_train_scene_lora.py``, recomputed the same way and logged with their
+  ids; since the head also sees training pictures mirrored, a picture whose MIRROR is a
+  near-copy of a bench picture is also left out (counted apart: the LoRA run filtered
+  originals only);
+- known limit, accepted before any result (Codex review): the Hungarian matching uses
+  roles and postures only, so two identical figures may be swapped; the graph is the
+  same but the relation loss is not;
 - encoders, frozen, eval mode: PE-Spatial large 448 px (timm
   ``vit_pe_spatial_large_patch14_448.fb``), DINOv2-base 448 px, SigLIP 2 base 384 px
   (``google/siglip2-base-patch16-384``); patch tokens pooled to a 16 x 16 grid; the
@@ -163,20 +169,63 @@ def cls_embed(paths, model):
     return torch.cat(out)
 
 
+def cls_embed_mirrored(paths, model):
+    out = []
+    for i in range(0, len(paths), 32):
+        batch = [ImageOps.mirror(Image.open(p).convert("RGB")) for p in paths[i : i + 32]]
+        with torch.no_grad():
+            cls = model(**dino_in(images=batch, return_tensors="pt").to(DEV)).pooler_output
+        out.append(torch.nn.functional.normalize(cls.float(), dim=-1))
+    return torch.cat(out)
+
+
 bench_all = [p for paths in benches.values() for p in paths]
-closest = (cls_embed(train_paths, dino) @ cls_embed(bench_all, dino).T).max(1).values
+bench_v = cls_embed(bench_all, dino)
+closest = (cls_embed(train_paths, dino) @ bench_v.T).max(1).values
+# The training pictures are also seen mirrored: a mirrored near-copy of a bench picture
+# would leak. Counted apart, so the LoRA run (which filtered originals only) can be judged.
+closest_mirror = (cls_embed_mirrored(train_paths, dino) @ bench_v.T).max(1).values
 del dino
 torch.cuda.empty_cache()
 examples = []
-for path, c in zip(train_paths, closest.tolist(), strict=True):
-    graph = teacher[os.path.basename(path)[:-4]]
-    if c > 0.9 or not graph.get("figures"):
+excluded = {"near_copy": [], "mirror_near_copy_only": [], "empty_graph": []}
+lora_examples = []  # the split exactly as the LoRA run computed it (originals only)
+for path, c, cm in zip(train_paths, closest.tolist(), closest_mirror.tolist(), strict=True):
+    item = os.path.basename(path)[:-4]
+    graph = teacher[item]
+    if c > 0.9:
+        excluded["near_copy"].append(item)
+        continue
+    if not graph.get("figures"):
+        excluded["empty_graph"].append(item)
+        continue
+    lora_examples.append(item)
+    if cm > 0.9:
+        excluded["mirror_near_copy_only"].append(item)
         continue
     examples.append((path, target(graph)))
-random.Random(0).shuffle(examples)
-held = max(1, len(examples) // 20)
-val, train = examples[:held], examples[held:]
-log.update(train=len(train), val=len(val))
+lora_order = list(lora_examples)
+random.Random(0).shuffle(lora_order)
+lora_held = max(1, len(lora_order) // 20)
+log["lora_split"] = {"val": lora_order[:lora_held], "train": lora_order[lora_held:]}
+# The head keeps the LoRA split, minus the mirrored near-copies (if any).
+dropped = set(excluded["mirror_near_copy_only"])
+by_id = {os.path.basename(p)[:-4]: (p, t) for p, t in examples}
+val = [by_id[i] for i in lora_order[:lora_held] if i not in dropped]
+train = [by_id[i] for i in lora_order[lora_held:] if i not in dropped]
+log.update(
+    train=len(train),
+    val=len(val),
+    excluded=excluded,
+    train_ids=[os.path.basename(p)[:-4] for p, _ in train],
+    val_ids=[os.path.basename(p)[:-4] for p, _ in val],
+    lora_counts_expected={"train": 1110, "val": 58},
+    lora_counts_recomputed={"train": len(lora_order) - lora_held, "val": lora_held},
+    matching_limit=(
+        "the Hungarian matching uses roles and postures only: two identical figures may be "
+        "swapped, which leaves the graph unchanged but changes the relation loss (Codex)"
+    ),
+)
 print(f"train {len(train)} val {len(val)}", flush=True)
 write_log()
 
@@ -352,7 +401,7 @@ for name in ENCODERS:
     opt = torch.optim.AdamW(head.parameters(), lr=3e-4, weight_decay=0.01)
     epochs, batch = 60, 32
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, epochs)
-    best, best_state, history = float("inf"), None, []
+    best, best_state, best_epoch, history = float("inf"), None, 0, []
     order = list(range(len(train_x)))
     for epoch in range(epochs):
         head.train()
@@ -367,10 +416,14 @@ for name in ENCODERS:
         head.eval()
         with torch.no_grad():
             v = loss_for(head, val_x, val_y).item()
-        history.append(round(v, 4))
+        history.append(v)
         if v < best:
-            best = v
+            best, best_epoch = v, epoch + 1
             best_state = {k: t.detach().clone() for k, t in head.state_dict().items()}
+            os.makedirs(f"{OUT}/{name}", exist_ok=True)
+            torch.save(best_state, f"{OUT}/{name}/head.pt")
+        log[name] = {"val_losses": [round(h, 5) for h in history], "best_epoch": best_epoch}
+        write_log()
     head.load_state_dict(best_state)
     for b, x in bench_x.items():
         os.makedirs(f"{OUT}/{name}/{b}", exist_ok=True)
@@ -378,8 +431,8 @@ for name in ENCODERS:
             with open(f"{OUT}/{name}/{b}/{os.path.basename(path)[:-4]}.json", "w") as f:
                 json.dump(graph, f)
     log[name] = {
-        "val_losses": history,
-        "best_epoch": int(np.argmin(history)) + 1,
+        "val_losses": [round(h, 5) for h in history],
+        "best_epoch": best_epoch,
         "parameters": sum(p.numel() for p in head.parameters()),
         "seconds": round(time.time() - t0),
     }
