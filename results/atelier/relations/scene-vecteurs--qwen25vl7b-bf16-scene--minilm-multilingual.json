@@ -1,0 +1,62 @@
+{
+ "bench": "relations",
+ "combination": "scene-vecteurs--qwen25vl7b-bf16-scene--minilm-multilingual",
+ "date": "2026-10-24",
+ "commit": "b4a3b2e",
+ "bricks": [
+  {
+   "name": "qwen25vl7b-bf16-scene",
+   "kind": "scene",
+   "summary": "Qwen2.5-VL-7B-Instruct without adapter, bf16, read in the training run before training: the zero-shot reference of qwen25vl7b-lora-scene",
+   "source": "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct",
+   "weights_mb": 16600,
+   "heavy": true
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.334,
+   "mAP": 0.203,
+   "median_first_hit": 3.0,
+   "top1_by_label": {
+    "annonciation": "13/30",
+    "bergers": "12/29",
+    "crucifixion": "5/30",
+    "deploration": "17/30",
+    "descente": "8/29",
+    "ecce-homo": "11/30",
+    "fuite-egypte": "13/22",
+    "gethsemani": "4/24",
+    "mages": "8/30",
+    "mise-au-tombeau": "2/29",
+    "nativite": "3/24",
+    "portement": "4/28",
+    "presentation": "9/29",
+    "resurrection": "1/20",
+    "sainte-famille": "23/29",
+    "visitation": "14/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.432,
+     "mAP": 0.241
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.236,
+     "mAP": 0.165
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "phrases_per_picture_median": 15.0,
+ "text": "minilm-multilingual"
+}

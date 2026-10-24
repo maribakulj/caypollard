@@ -1,0 +1,54 @@
+{
+ "bench": "sujets",
+ "combination": "scene-vecteurs--qwen25vl7b-bf16-scene--minilm-multilingual",
+ "date": "2026-10-24",
+ "commit": "b4a3b2e",
+ "bricks": [
+  {
+   "name": "qwen25vl7b-bf16-scene",
+   "kind": "scene",
+   "summary": "Qwen2.5-VL-7B-Instruct without adapter, bf16, read in the training run before training: the zero-shot reference of qwen25vl7b-lora-scene",
+   "source": "https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct",
+   "weights_mb": 16600,
+   "heavy": true
+  }
+ ],
+ "scores": {
+  "emblem_queries": {
+   "queries": 12,
+   "top1": 0.333,
+   "mAP": 0.369,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "crucifixion": "2/6",
+    "portement": "0/1",
+    "tentation": "1/4",
+    "visitation": "1/1"
+   }
+  },
+  "museum_queries": {
+   "queries": 52,
+   "top1": 0.577,
+   "mAP": 0.693,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "crucifixion": "13/19",
+    "portement": "4/15",
+    "tentation": "3/5",
+    "visitation": "10/13"
+   }
+  }
+ },
+ "chance": {
+  "emblem_queries": {
+   "top1": 0.202,
+   "mAP": 0.245
+  },
+  "museum_queries": {
+   "top1": 0.263,
+   "mAP": 0.402
+  }
+ },
+ "phrases_per_picture_median": 15.0,
+ "text": "minilm-multilingual"
+}
