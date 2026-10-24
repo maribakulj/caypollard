@@ -478,6 +478,61 @@ class ClaudeScene(Brick):
         return {"figures": [], "relations": [], "subject": "", **data, "_raw": text}
 
 
+class GeminiScene(Brick):
+    """Gemini reads the same scene graph through the Antigravity CLI (``agy -p``), once per
+    picture, with tools forbidden. A reading counts only if agy's own conversation log shows
+    the picture was opened: in print mode Gemini has answered without looking (BBVLM,
+    18/10/2026)."""
+
+    model: str = "gemini-3.8-flash-medium"
+
+    def scene(self, path: Path) -> dict:
+        import re
+        import sqlite3
+        import subprocess
+
+        path = path.resolve()
+        prompt = SCENE_PROMPT.format(
+            path=path.name,
+            roles=", ".join(SCENE_ROLES),
+            postures=", ".join(SCENE_POSTURES),
+            relations=", ".join(SCENE_RELATIONS),
+        ).replace(f"Read the image file {path.name} with the Read tool.", f"Image: @{path.name}")
+        prompt += (
+            "\nOpen the attached image first. If you cannot see it, answer only NO_IMAGE. "
+            "Read no other file, run no command and use no tool other than reading this image."
+        )
+        run = subprocess.run(
+            ["agy", "-p", prompt, "--model", self.model, "--output-format", "json",
+             "--print-timeout", "540s"],
+            cwd=path.parent,
+            capture_output=True,
+            text=True,
+            timeout=600,
+            stdin=subprocess.DEVNULL,
+        )
+        envelope = json.loads(run.stdout) if run.stdout.strip().startswith("{") else {}
+        text = str(envelope.get("response") or "")
+        log = Path.home() / ".gemini/antigravity-cli/conversations" / f"{envelope.get('conversation_id')}.db"
+        opened = set()
+        if log.exists():
+            with sqlite3.connect(log.as_uri() + "?mode=ro", uri=True) as con:
+                for (payload,) in con.execute("SELECT step_payload FROM steps"):
+                    raw = payload.decode("utf-8", "ignore") if isinstance(payload, bytes) else str(payload or "")
+                    opened.update(re.findall(r'"AbsolutePath":"([^"]+)"', raw))
+                    opened.update(re.findall(r'(?:read_file|view_file)[^{]{0,8}\{"Path":"([^"]+)"', raw))
+        start = text.find("{")
+        # An unfinished turn, an unopened picture or no JSON is a failed call, kept out of
+        # the cache so the next run asks again.
+        if envelope.get("status") != "SUCCESS" or str(path) not in opened or "NO_IMAGE" in text or start < 0:
+            raise RuntimeError(f"{path.name}: status {envelope.get('status')}, opened {str(path) in opened}")
+        try:
+            data, _ = json.JSONDecoder().raw_decode(text[start:])
+        except json.JSONDecodeError:
+            data = {}
+        return {"figures": [], "relations": [], "subject": "", **data, "_raw": text}
+
+
 class ElsewhereScene(Brick):
     """Scene graphs computed elsewhere (a Kaggle notebook) with the same prompt, read from
     the cache; nothing runs here."""
@@ -604,6 +659,14 @@ BRICKS: dict[tuple[str, str], Brick] = {
             "haiku-scene",
             "haiku",
             "Claude Haiku reads the same scene graph as opus-scene, same prompt, one pass",
+        ),
+        GeminiScene(
+            "gemini-flash-scene",
+            "scene",
+            "Gemini 3.8 Flash (medium) reads the same scene graph as opus-scene, same prompt, "
+            "one pass, through agy -p; a reading counts only if the picture was opened",
+            "agy -p (Antigravity CLI, headless)",
+            0,
         ),
         ElsewhereScene(
             "qwen25vl3b-scene",

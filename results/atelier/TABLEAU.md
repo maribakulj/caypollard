@@ -107,6 +107,7 @@ Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two
 | *chance* | 0.063 | 0.073 | |
 | scene-vecteurs--opus-scene--minilm-multilingual | 0.814 | 0.604 |  |
 | scene--opus-scene | 0.807 | 0.569 | 15.5 |
+| scene--gemini-flash-scene | 0.793 | 0.566 | 41.849999999999994 |
 | sum--scene--opus-scene--and--vector--siglip | 0.836 | 0.543 |  |
 | scene-vecteurs--haiku-scene--minilm-multilingual | 0.584 | 0.411 |  |
 | scene-figures--opus-scene | 0.668 | 0.41 | 15.5 |
@@ -144,6 +145,7 @@ Top1 by medium (all; queries: enfance 220, passion 220)
 |---|---|---|
 | scene-vecteurs--opus-scene--minilm-multilingual | 0.85 | 0.777 |
 | scene--opus-scene | 0.855 | 0.759 |
+| scene--gemini-flash-scene | 0.855 | 0.732 |
 | sum--scene--opus-scene--and--vector--siglip | 0.877 | 0.795 |
 | scene-vecteurs--haiku-scene--minilm-multilingual | 0.659 | 0.509 |
 | scene-figures--opus-scene | 0.682 | 0.655 |
