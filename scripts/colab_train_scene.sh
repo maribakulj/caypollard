@@ -9,7 +9,7 @@
 # The run continues on the Colab machine after this script returns; read /content/train.log.
 set -u
 here="$(cd "$(dirname "$0")" && pwd)"
-cd "$3"
+cd "$3" || exit 1
 c() { colab --auth=adc "$@"; }
 for f in code.tar train.tar.gz teacher.tar.gz relations.tar.gz subjects.tar.gz; do
   c upload -s "$1" "$f" "/content/$f" || exit 1
