@@ -1,0 +1,64 @@
+{
+ "bench": "derivees",
+ "combination": "regions--pe-spatial-patchs",
+ "date": "2026-10-24",
+ "commit": "unknown",
+ "bricks": [
+  {
+   "name": "pe-spatial-patchs",
+   "kind": "regions",
+   "summary": "The same PE-Spatial patch tokens pooled to 16 x 16, compared square by square both ways, as dinov2-patchs",
+   "source": "https://huggingface.co/timm/vit_pe_spatial_large_patch14_448.fb",
+   "weights_mb": 1200,
+   "heavy": true
+  }
+ ],
+ "scores": {
+  "derived_queries": {
+   "queries": 748,
+   "top1": 0.787,
+   "mAP": 0.823,
+   "median_first_hit": 1.0,
+   "by_medium": {
+    "autre": {
+     "queries": 79,
+     "top1": 0.544,
+     "mAP": 0.612
+    },
+    "copie peinte": {
+     "queries": 380,
+     "top1": 0.837,
+     "mAP": 0.86
+    },
+    "dessin": {
+     "queries": 35,
+     "top1": 0.714,
+     "mAP": 0.751
+    },
+    "estampe": {
+     "queries": 218,
+     "top1": 0.849,
+     "mAP": 0.885
+    },
+    "sculpture": {
+     "queries": 13,
+     "top1": 0.231,
+     "mAP": 0.303
+    },
+    "textile": {
+     "queries": 23,
+     "top1": 0.652,
+     "mAP": 0.752
+    }
+   }
+  }
+ },
+ "chance": {
+  "derived_queries": {
+   "top1": 0.002,
+   "mAP": 0.01
+  }
+ },
+ "seconds_per_picture": 0.309,
+ "seconds_matching": 38.9
+}

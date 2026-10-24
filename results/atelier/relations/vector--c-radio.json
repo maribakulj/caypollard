@@ -1,0 +1,61 @@
+{
+ "bench": "relations",
+ "combination": "vector--c-radio",
+ "date": "2026-10-24",
+ "commit": "unknown",
+ "bricks": [
+  {
+   "name": "c-radio",
+   "kind": "vector",
+   "summary": "NVIDIA C-RADIOv3-L (NVIDIA licence), 448 px, its summary token",
+   "source": "https://huggingface.co/nvidia/C-RADIOv3-L",
+   "weights_mb": 1300,
+   "heavy": true
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.602,
+   "mAP": 0.273,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "annonciation": "20/30",
+    "bergers": "18/29",
+    "crucifixion": "24/30",
+    "deploration": "12/30",
+    "descente": "16/29",
+    "ecce-homo": "22/30",
+    "fuite-egypte": "18/22",
+    "gethsemani": "7/24",
+    "mages": "19/30",
+    "mise-au-tombeau": "17/29",
+    "nativite": "6/24",
+    "portement": "10/28",
+    "presentation": "17/29",
+    "resurrection": "16/20",
+    "sainte-famille": "26/29",
+    "visitation": "17/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.641,
+     "mAP": 0.295
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.564,
+     "mAP": 0.25
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "seconds_per_picture": 0.203
+}

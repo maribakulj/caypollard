@@ -1,0 +1,62 @@
+{
+ "bench": "relations",
+ "combination": "regions--c-radio-patchs",
+ "date": "2026-10-24",
+ "commit": "unknown",
+ "bricks": [
+  {
+   "name": "c-radio-patchs",
+   "kind": "regions",
+   "summary": "The same C-RADIOv3-L spatial features pooled to 16 x 16, compared square by square both ways, as dinov2-patchs",
+   "source": "https://huggingface.co/nvidia/C-RADIOv3-L",
+   "weights_mb": 1300,
+   "heavy": true
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.473,
+   "mAP": 0.204,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "annonciation": "16/30",
+    "bergers": "13/29",
+    "crucifixion": "21/30",
+    "deploration": "8/30",
+    "descente": "19/29",
+    "ecce-homo": "16/30",
+    "fuite-egypte": "13/22",
+    "gethsemani": "10/24",
+    "mages": "16/30",
+    "mise-au-tombeau": "8/29",
+    "nativite": "6/24",
+    "portement": "11/28",
+    "presentation": "7/29",
+    "resurrection": "8/20",
+    "sainte-famille": "23/29",
+    "visitation": "13/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.486,
+     "mAP": 0.21
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.459,
+     "mAP": 0.197
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "seconds_per_picture": 0.205,
+ "seconds_matching": 3.8
+}

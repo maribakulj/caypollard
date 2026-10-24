@@ -1,0 +1,61 @@
+{
+ "bench": "relations",
+ "combination": "vector--pe-spatial",
+ "date": "2026-10-24",
+ "commit": "unknown",
+ "bricks": [
+  {
+   "name": "pe-spatial",
+   "kind": "vector",
+   "summary": "Meta Perception Encoder, spatial, large (timm vit_pe_spatial_large_patch14_448.fb, Apache 2.0), 448 px; mean of the patch tokens",
+   "source": "https://huggingface.co/timm/vit_pe_spatial_large_patch14_448.fb",
+   "weights_mb": 1200,
+   "heavy": true
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.32,
+   "mAP": 0.131,
+   "median_first_hit": 3.0,
+   "top1_by_label": {
+    "annonciation": "10/30",
+    "bergers": "7/29",
+    "crucifixion": "13/30",
+    "deploration": "7/30",
+    "descente": "15/29",
+    "ecce-homo": "12/30",
+    "fuite-egypte": "9/22",
+    "gethsemani": "4/24",
+    "mages": "14/30",
+    "mise-au-tombeau": "5/29",
+    "nativite": "6/24",
+    "portement": "4/28",
+    "presentation": "4/29",
+    "resurrection": "6/20",
+    "sainte-famille": "20/29",
+    "visitation": "5/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.341,
+     "mAP": 0.138
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.3,
+     "mAP": 0.124
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "seconds_per_picture": 0.305
+}

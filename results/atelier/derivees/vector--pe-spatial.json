@@ -1,0 +1,63 @@
+{
+ "bench": "derivees",
+ "combination": "vector--pe-spatial",
+ "date": "2026-10-24",
+ "commit": "unknown",
+ "bricks": [
+  {
+   "name": "pe-spatial",
+   "kind": "vector",
+   "summary": "Meta Perception Encoder, spatial, large (timm vit_pe_spatial_large_patch14_448.fb, Apache 2.0), 448 px; mean of the patch tokens",
+   "source": "https://huggingface.co/timm/vit_pe_spatial_large_patch14_448.fb",
+   "weights_mb": 1200,
+   "heavy": true
+  }
+ ],
+ "scores": {
+  "derived_queries": {
+   "queries": 748,
+   "top1": 0.42,
+   "mAP": 0.508,
+   "median_first_hit": 2.0,
+   "by_medium": {
+    "autre": {
+     "queries": 79,
+     "top1": 0.38,
+     "mAP": 0.443
+    },
+    "copie peinte": {
+     "queries": 380,
+     "top1": 0.534,
+     "mAP": 0.61
+    },
+    "dessin": {
+     "queries": 35,
+     "top1": 0.4,
+     "mAP": 0.477
+    },
+    "estampe": {
+     "queries": 218,
+     "top1": 0.28,
+     "mAP": 0.405
+    },
+    "sculpture": {
+     "queries": 13,
+     "top1": 0.0,
+     "mAP": 0.092
+    },
+    "textile": {
+     "queries": 23,
+     "top1": 0.261,
+     "mAP": 0.289
+    }
+   }
+  }
+ },
+ "chance": {
+  "derived_queries": {
+   "top1": 0.002,
+   "mAP": 0.01
+  }
+ },
+ "seconds_per_picture": 0.306
+}

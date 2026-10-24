@@ -11,10 +11,13 @@ Eight scenes of Holbein's Dance of Death in five editions (1526-1816), copies of
 | combination | all top1 | all mAP | s/picture |
 |---|---|---|---|
 | *chance* | 0.097 | 0.181 | |
+| regions--c-radio-patchs | 1.0 | 0.995 | 0.347 |
 | regions--dinov2-patchs | 1.0 | 0.965 | 0.588 |
 | regions--dinov2-patchs-requete | 1.0 | 0.964 | 0.52 |
+| regions--pe-spatial-patchs | 1.0 | 0.955 | 0.422 |
 | pose--opus--vitpose-humanart | 1.0 | 0.891 | 0.15 |
 | vector--dinov2 | 0.971 | 0.839 | 0.146 |
+| vector--c-radio | 0.941 | 0.832 | 0.758 |
 | pose--opus--opus | 0.971 | 0.808 | 0.0 |
 | pose--opus--opus--coco | 0.971 | 0.797 | 0.0 |
 | vector--siglip | 0.882 | 0.769 | 0.303 |
@@ -22,6 +25,7 @@ Eight scenes of Holbein's Dance of Death in five editions (1526-1816), copies of
 | pose--grounding-dino--vitpose-humanart | 0.794 | 0.651 | 2.935 |
 | pose--owlv2--vitpose-humanart | 0.765 | 0.64 | 1.8 |
 | vector--clip | 0.5 | 0.499 | 0.289 |
+| vector--pe-spatial | 0.353 | 0.404 | 0.736 |
 
 ## sujets
 
@@ -30,10 +34,13 @@ Same subject across media: 12 emblems and 68 museum works (Crucifixion, Carrying
 | combination | emblem_queries top1 | emblem_queries mAP | museum_queries top1 | museum_queries mAP | s/picture |
 |---|---|---|---|---|---|
 | *chance* | 0.202 | 0.245 | 0.263 | 0.402 | |
+| vector--c-radio | 0.917 | 0.707 | 0.692 | 0.741 | 0.263 |
 | vector--siglip | 0.75 | 0.675 | 0.558 | 0.652 | 0.208 |
+| regions--c-radio-patchs | 0.75 | 0.624 | 0.481 | 0.584 | 0.267 |
 | scene--opus-scene | 0.583 | 0.613 | 0.442 | 0.516 | 15.649999999999999 |
 | scene-vecteurs--opus-scene--minilm-multilingual | 0.5 | 0.557 | 0.519 | 0.546 |  |
 | scene--head-dinov2-scene | 0.75 | 0.551 | 0.538 | 0.607 | 0.0 |
+| regions--pe-spatial-patchs | 0.583 | 0.532 | 0.481 | 0.546 | 0.369 |
 | scene-figures--opus-scene | 0.417 | 0.519 | 0.404 | 0.51 | 15.649999999999999 |
 | scene-vecteurs--head-dinov2-scene--minilm-multilingual | 0.667 | 0.515 | 0.635 | 0.687 |  |
 | regions--dinov2-patchs | 0.75 | 0.513 | 0.481 | 0.574 | 0.397 |
@@ -50,6 +57,7 @@ Same subject across media: 12 emblems and 68 museum works (Crucifixion, Carrying
 | scene--head-siglip2-scene | 0.417 | 0.421 | 0.442 | 0.492 | 0.0 |
 | pose--opus--vitpose-humanart | 0.5 | 0.411 | 0.462 | 0.498 | 0.33999999999999997 |
 | pose--owlv2--vitpose-humanart | 0.5 | 0.366 | 0.442 | 0.478 | 2.42 |
+| vector--pe-spatial | 0.25 | 0.358 | 0.231 | 0.414 | 0.361 |
 | relations--grounding-dino--vitpose-humanart | 0.5 | 0.356 | 0.288 | 0.419 |  |
 | postures--opus--opus | 0.5 | 0.337 | 0.423 | 0.541 |  |
 | relations--opus--opus | 0.25 | 0.322 | 0.423 | 0.505 |  |
@@ -62,21 +70,29 @@ Wikidata's documented derivations ('based on' a painting): every derived work in
 | combination | derived_queries top1 | derived_queries mAP | s/picture |
 |---|---|---|---|
 | *chance* | 0.002 | 0.01 | |
+| vector--c-radio | 0.837 | 0.87 | 0.203 |
+| regions--c-radio-patchs | 0.807 | 0.842 | 0.207 |
+| regions--pe-spatial-patchs | 0.787 | 0.823 | 0.309 |
 | regions--dinov2-patchs | 0.775 | 0.806 | 0.246 |
 | vector--dinov2 | 0.742 | 0.787 | 0.356 |
 | regions--dinov2-patchs-requete | 0.755 | 0.786 | 0.144 |
 | vector--siglip | 0.711 | 0.779 | 0.079 |
 | vector--clip | 0.623 | 0.707 | 0.048 |
+| vector--pe-spatial | 0.42 | 0.508 | 0.306 |
 
 Top1 by medium (derived_queries; queries: autre 79, copie peinte 380, dessin 35, estampe 218, sculpture 13, textile 23)
 
 | combination | autre | copie peinte | dessin | estampe | sculpture | textile |
 |---|---|---|---|---|---|---|
+| vector--c-radio | 0.608 | 0.85 | 0.771 | 0.936 | 0.538 | 0.739 |
+| regions--c-radio-patchs | 0.595 | 0.826 | 0.714 | 0.89 | 0.308 | 0.87 |
+| regions--pe-spatial-patchs | 0.544 | 0.837 | 0.714 | 0.849 | 0.231 | 0.652 |
 | regions--dinov2-patchs | 0.57 | 0.821 | 0.714 | 0.817 | 0.385 | 0.652 |
 | vector--dinov2 | 0.57 | 0.776 | 0.714 | 0.794 | 0.231 | 0.609 |
 | regions--dinov2-patchs-requete | 0.506 | 0.821 | 0.714 | 0.807 | 0.308 | 0.348 |
 | vector--siglip | 0.544 | 0.776 | 0.657 | 0.748 | 0.308 | 0.174 |
 | vector--clip | 0.532 | 0.734 | 0.571 | 0.541 | 0.154 | 0.217 |
+| vector--pe-spatial | 0.38 | 0.534 | 0.4 | 0.28 | 0.0 | 0.261 |
 
 ## relations
 
@@ -97,9 +113,12 @@ Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two
 | scene-vecteurs--head-dinov2-scene--minilm-multilingual | 0.434 | 0.297 |  |
 | scene--head-dinov2-scene | 0.436 | 0.286 | 0.0 |
 | scene-vecteurs--head-pe-spatial-scene--minilm-multilingual | 0.464 | 0.283 |  |
+| vector--c-radio | 0.602 | 0.273 | 0.203 |
 | scene--head-pe-spatial-scene | 0.475 | 0.266 | 0.0 |
 | vector--siglip | 0.507 | 0.228 | 0.082 |
+| regions--c-radio-patchs | 0.473 | 0.204 | 0.205 |
 | vector--dinov2 | 0.414 | 0.193 | 0.099 |
+| regions--pe-spatial-patchs | 0.432 | 0.186 | 0.308 |
 | regions--dinov2-patchs | 0.386 | 0.182 | 0.11 |
 | vector--clip | 0.341 | 0.167 | 0.082 |
 | scene-vecteurs--qwen25vl3b-scene--minilm-multilingual | 0.273 | 0.165 |  |
@@ -108,6 +127,7 @@ Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two
 | pose--grounding-dino--vitpose-coco | 0.268 | 0.142 | 0.7 |
 | scene-figures--qwen25vl3b-scene | 0.18 | 0.142 | 13.55 |
 | relations--grounding-dino--vitpose-humanart | 0.23 | 0.131 |  |
+| vector--pe-spatial | 0.32 | 0.131 | 0.305 |
 | postures--grounding-dino--vitpose-humanart | 0.15 | 0.122 |  |
 
 Top1 by medium (all; queries: enfance 220, passion 220)
@@ -126,9 +146,12 @@ Top1 by medium (all; queries: enfance 220, passion 220)
 | scene-vecteurs--head-dinov2-scene--minilm-multilingual | 0.509 | 0.359 |
 | scene--head-dinov2-scene | 0.486 | 0.386 |
 | scene-vecteurs--head-pe-spatial-scene--minilm-multilingual | 0.482 | 0.445 |
+| vector--c-radio | 0.641 | 0.564 |
 | scene--head-pe-spatial-scene | 0.509 | 0.441 |
 | vector--siglip | 0.505 | 0.509 |
+| regions--c-radio-patchs | 0.486 | 0.459 |
 | vector--dinov2 | 0.386 | 0.441 |
+| regions--pe-spatial-patchs | 0.486 | 0.377 |
 | regions--dinov2-patchs | 0.409 | 0.364 |
 | vector--clip | 0.332 | 0.35 |
 | scene-vecteurs--qwen25vl3b-scene--minilm-multilingual | 0.332 | 0.214 |
@@ -137,6 +160,7 @@ Top1 by medium (all; queries: enfance 220, passion 220)
 | pose--grounding-dino--vitpose-coco | 0.3 | 0.236 |
 | scene-figures--qwen25vl3b-scene | 0.277 | 0.082 |
 | relations--grounding-dino--vitpose-humanart | 0.305 | 0.155 |
+| vector--pe-spatial | 0.341 | 0.3 |
 | postures--grounding-dino--vitpose-humanart | 0.268 | 0.032 |
 
 ## entrainement

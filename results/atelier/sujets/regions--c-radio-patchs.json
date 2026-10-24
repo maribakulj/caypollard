@@ -1,0 +1,54 @@
+{
+ "bench": "sujets",
+ "combination": "regions--c-radio-patchs",
+ "date": "2026-10-24",
+ "commit": "unknown",
+ "bricks": [
+  {
+   "name": "c-radio-patchs",
+   "kind": "regions",
+   "summary": "The same C-RADIOv3-L spatial features pooled to 16 x 16, compared square by square both ways, as dinov2-patchs",
+   "source": "https://huggingface.co/nvidia/C-RADIOv3-L",
+   "weights_mb": 1300,
+   "heavy": true
+  }
+ ],
+ "scores": {
+  "emblem_queries": {
+   "queries": 12,
+   "top1": 0.75,
+   "mAP": 0.624,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "crucifixion": "6/6",
+    "portement": "0/1",
+    "tentation": "3/4",
+    "visitation": "0/1"
+   }
+  },
+  "museum_queries": {
+   "queries": 52,
+   "top1": 0.481,
+   "mAP": 0.584,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "crucifixion": "19/19",
+    "portement": "0/15",
+    "tentation": "5/5",
+    "visitation": "1/13"
+   }
+  }
+ },
+ "chance": {
+  "emblem_queries": {
+   "top1": 0.202,
+   "mAP": 0.245
+  },
+  "museum_queries": {
+   "top1": 0.263,
+   "mAP": 0.402
+  }
+ },
+ "seconds_per_picture": 0.267,
+ "seconds_matching": 0.2
+}

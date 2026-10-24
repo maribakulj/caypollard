@@ -1,0 +1,63 @@
+{
+ "bench": "derivees",
+ "combination": "vector--c-radio",
+ "date": "2026-10-24",
+ "commit": "unknown",
+ "bricks": [
+  {
+   "name": "c-radio",
+   "kind": "vector",
+   "summary": "NVIDIA C-RADIOv3-L (NVIDIA licence), 448 px, its summary token",
+   "source": "https://huggingface.co/nvidia/C-RADIOv3-L",
+   "weights_mb": 1300,
+   "heavy": true
+  }
+ ],
+ "scores": {
+  "derived_queries": {
+   "queries": 748,
+   "top1": 0.837,
+   "mAP": 0.87,
+   "median_first_hit": 1.0,
+   "by_medium": {
+    "autre": {
+     "queries": 79,
+     "top1": 0.608,
+     "mAP": 0.687
+    },
+    "copie peinte": {
+     "queries": 380,
+     "top1": 0.85,
+     "mAP": 0.881
+    },
+    "dessin": {
+     "queries": 35,
+     "top1": 0.771,
+     "mAP": 0.813
+    },
+    "estampe": {
+     "queries": 218,
+     "top1": 0.936,
+     "mAP": 0.954
+    },
+    "sculpture": {
+     "queries": 13,
+     "top1": 0.538,
+     "mAP": 0.568
+    },
+    "textile": {
+     "queries": 23,
+     "top1": 0.739,
+     "mAP": 0.798
+    }
+   }
+  }
+ },
+ "chance": {
+  "derived_queries": {
+   "top1": 0.002,
+   "mAP": 0.01
+  }
+ },
+ "seconds_per_picture": 0.203
+}
