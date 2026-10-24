@@ -273,6 +273,87 @@ class HuggingFaceVector(Brick):
         return self._model.encode(images)
 
 
+def _grid(tokens, side: int = 16):
+    """Patch tokens (batch, n, dim) of a square grid, average-pooled to side x side and
+    L2-normalised, as float16 numpy: the shape the regions measure expects."""
+    import torch
+
+    b, n, d = tokens.shape
+    g = round(n**0.5)
+    grid = tokens[:, : g * g].reshape(b, g, g, d).permute(0, 3, 1, 2).float()
+    pooled = torch.nn.functional.adaptive_avg_pool2d(grid, side).flatten(2).transpose(1, 2)
+    return torch.nn.functional.normalize(pooled, dim=-1).cpu().numpy().astype(np.float16)
+
+
+class PerceptionEncoder(Brick):
+    """Meta's Perception Encoder, spatial variant (timm, Apache 2.0), at 448 px. The vector
+    is the mean of the patch tokens; the regions are those tokens pooled to 16 x 16."""
+
+    def _load(self):
+        import timm
+        import torch
+
+        if self._model is None:
+            model = timm.create_model("vit_pe_spatial_large_patch14_448.fb", pretrained=True)
+            model = model.to(device()).eval()
+            config = timm.data.resolve_data_config({}, model=model)
+            self._model = (model, timm.data.create_transform(**config), torch)
+        return self._model
+
+    def _tokens(self, images: list):
+        model, transform, torch = self._load()
+        batch = torch.stack([transform(im) for im in images]).to(device())
+        with torch.no_grad():
+            tokens = model.forward_features(batch)
+        return tokens[:, getattr(model, "num_prefix_tokens", 0) :]
+
+    def encode(self, images: list) -> np.ndarray:
+        import torch
+
+        v = self._tokens(images).float().mean(1)
+        return torch.nn.functional.normalize(v, dim=-1).cpu().numpy()
+
+    def patches(self, images: list) -> np.ndarray:
+        return _grid(self._tokens(images))
+
+
+class Radio(Brick):
+    """NVIDIA's C-RADIOv3-L (distilled from DINOv2, SigLIP and SAM; NVIDIA licence), at
+    448 px, loaded with its own published code. The vector is its summary token; the
+    regions are its spatial features pooled to 16 x 16."""
+
+    symmetric: bool = True
+
+    def _load(self):
+        import torch
+        from transformers import AutoModel, CLIPImageProcessor
+
+        if self._model is None:
+            repo = "nvidia/C-RADIOv3-L"
+            model = AutoModel.from_pretrained(repo, trust_remote_code=True).to(device()).eval()
+            processor = CLIPImageProcessor.from_pretrained(repo)
+            self._model = (model, processor, torch)
+        return self._model
+
+    def _run(self, images: list):
+        model, processor, torch = self._load()
+        sized = [im.resize((448, 448)) for im in images]
+        pixels = processor(images=sized, return_tensors="pt", do_resize=False).pixel_values
+        with torch.no_grad():
+            summary, spatial = model(pixels.to(device()))
+        return summary, spatial
+
+    def encode(self, images: list) -> np.ndarray:
+        import torch
+
+        summary, _ = self._run(images)
+        return torch.nn.functional.normalize(summary.float(), dim=-1).cpu().numpy()
+
+    def patches(self, images: list) -> np.ndarray:
+        _, spatial = self._run(images)
+        return _grid(spatial)
+
+
 class DinoPatches(Brick):
     """DINOv2's patch tokens at 224 px: a 16 x 16 grid, one 768-d vector per square."""
 
@@ -556,6 +637,42 @@ BRICKS: dict[tuple[str, str], Brick] = {
             "Opus scene graphs of Iconclass pictures away from the benches; same prompt",
             "scripts/remote_train_scene_lora.py",
             16600,
+            heavy=True,
+        ),
+        # PE-Spatial and C-RADIO bricks fixed together before any run (24/10/2026).
+        PerceptionEncoder(
+            "pe-spatial",
+            "vector",
+            "Meta Perception Encoder, spatial, large (timm vit_pe_spatial_large_patch14_448.fb, "
+            "Apache 2.0), 448 px; mean of the patch tokens",
+            "https://huggingface.co/timm/vit_pe_spatial_large_patch14_448.fb",
+            1200,
+            heavy=True,
+        ),
+        Radio(
+            "c-radio",
+            "vector",
+            "NVIDIA C-RADIOv3-L (NVIDIA licence), 448 px, its summary token",
+            "https://huggingface.co/nvidia/C-RADIOv3-L",
+            1300,
+            heavy=True,
+        ),
+        PerceptionEncoder(
+            "pe-spatial-patchs",
+            "regions",
+            "The same PE-Spatial patch tokens pooled to 16 x 16, compared square by square "
+            "both ways, as dinov2-patchs",
+            "https://huggingface.co/timm/vit_pe_spatial_large_patch14_448.fb",
+            1200,
+            heavy=True,
+        ),
+        Radio(
+            "c-radio-patchs",
+            "regions",
+            "The same C-RADIOv3-L spatial features pooled to 16 x 16, compared square by square "
+            "both ways, as dinov2-patchs",
+            "https://huggingface.co/nvidia/C-RADIOv3-L",
+            1300,
             heavy=True,
         ),
         # Both regions bricks were fixed together, before either was run.

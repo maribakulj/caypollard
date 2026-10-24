@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 
 from caypollard.atelier.benches import _score, top1_detail
-from caypollard.atelier.bricks import BRICKS, COCO_KEPT, brick, convert_vitpose
+from caypollard.atelier.bricks import BRICKS, COCO_KEPT, _grid, brick, convert_vitpose
 from caypollard.atelier.measure import (
     dense_matrix,
     mirrored_keypoints,
@@ -183,6 +183,15 @@ def test_top1_detail_counts_ties_as_equally_likely():
     detail = top1_detail(dist, items)
     assert detail[0] == {"hit": False, "expected": 0.5, "tied": 2}  # manifest order picks y
     assert detail[2]["hit"] and detail[2]["expected"] == 1.0
+
+
+def test_grid_pools_patch_tokens_to_16_by_16():
+    import torch
+
+    tokens = torch.zeros(1, 32 * 32, 4)
+    tokens[0, :, 0] = 1.0  # every patch points the same way
+    g = _grid(tokens)
+    assert g.shape == (1, 256, 4) and np.allclose(g[0, :, 0], 1.0)
 
 
 def test_vitpose_conversion_names_every_weight():
