@@ -1,0 +1,62 @@
+{
+ "bench": "relations",
+ "combination": "scene-vecteurs--head-siglip2-scene--minilm-multilingual",
+ "date": "2026-10-24",
+ "commit": "af91265",
+ "bricks": [
+  {
+   "name": "head-siglip2-scene",
+   "kind": "scene",
+   "summary": "Home-made head, closed vocabulary, no language model (8 queries, 3-layer decoder, ~3.4 M parameters), trained from scratch on the 1,200 Opus graphs, on frozen SigLIP 2 base 384 px",
+   "source": "scripts/remote_head_scene.py",
+   "weights_mb": 0,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.43,
+   "mAP": 0.314,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "annonciation": "18/30",
+    "bergers": "11/29",
+    "crucifixion": "8/30",
+    "deploration": "20/30",
+    "descente": "11/29",
+    "ecce-homo": "16/30",
+    "fuite-egypte": "13/22",
+    "gethsemani": "10/24",
+    "mages": "18/30",
+    "mise-au-tombeau": "8/29",
+    "nativite": "4/24",
+    "portement": "11/28",
+    "presentation": "5/29",
+    "resurrection": "11/20",
+    "sainte-famille": "19/29",
+    "visitation": "6/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.427,
+     "mAP": 0.324
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.432,
+     "mAP": 0.305
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "phrases_per_picture_median": 8.0,
+ "text": "minilm-multilingual"
+}

@@ -33,15 +33,21 @@ Same subject across media: 12 emblems and 68 museum works (Crucifixion, Carrying
 | vector--siglip | 0.75 | 0.675 | 0.558 | 0.652 | 0.208 |
 | scene--opus-scene | 0.583 | 0.613 | 0.442 | 0.516 | 15.649999999999999 |
 | scene-vecteurs--opus-scene--minilm-multilingual | 0.5 | 0.557 | 0.519 | 0.546 |  |
+| scene--head-dinov2-scene | 0.75 | 0.551 | 0.538 | 0.607 | 0.0 |
 | scene-figures--opus-scene | 0.417 | 0.519 | 0.404 | 0.51 | 15.649999999999999 |
+| scene-vecteurs--head-dinov2-scene--minilm-multilingual | 0.667 | 0.515 | 0.635 | 0.687 |  |
 | regions--dinov2-patchs | 0.75 | 0.513 | 0.481 | 0.574 | 0.397 |
+| scene--head-pe-spatial-scene | 0.5 | 0.483 | 0.462 | 0.518 | 0.0 |
 | vector--dinov2 | 0.75 | 0.482 | 0.481 | 0.613 | 0.087 |
 | regions--dinov2-patchs-requete | 0.75 | 0.48 | 0.5 | 0.609 | 0.351 |
+| scene-vecteurs--head-pe-spatial-scene--minilm-multilingual | 0.5 | 0.473 | 0.5 | 0.565 |  |
 | pose--grounding-dino--vitpose-humanart | 0.75 | 0.465 | 0.365 | 0.423 | 3.07 |
 | vector--clip | 0.583 | 0.461 | 0.635 | 0.677 | 0.141 |
 | pose--opus--opus--coco | 0.667 | 0.445 | 0.423 | 0.5 | 0.0 |
+| scene-vecteurs--head-siglip2-scene--minilm-multilingual | 0.5 | 0.443 | 0.442 | 0.497 |  |
 | pose--opus--opus | 0.667 | 0.438 | 0.423 | 0.492 | 0.0 |
 | pose--opus--vitpose-coco | 0.75 | 0.429 | 0.481 | 0.511 | 0.345 |
+| scene--head-siglip2-scene | 0.417 | 0.421 | 0.442 | 0.492 | 0.0 |
 | pose--opus--vitpose-humanart | 0.5 | 0.411 | 0.462 | 0.498 | 0.33999999999999997 |
 | pose--owlv2--vitpose-humanart | 0.5 | 0.366 | 0.442 | 0.478 | 2.42 |
 | relations--grounding-dino--vitpose-humanart | 0.5 | 0.356 | 0.288 | 0.419 |  |
@@ -85,7 +91,13 @@ Sixteen Christian subjects from the Iconclass test set, 30 pictures each, in two
 | scene-vecteurs--haiku-scene--minilm-multilingual | 0.584 | 0.411 |  |
 | scene-figures--opus-scene | 0.668 | 0.41 | 15.5 |
 | scene--haiku-scene | 0.611 | 0.346 | 14.2 |
+| scene-vecteurs--head-siglip2-scene--minilm-multilingual | 0.43 | 0.314 |  |
+| scene--head-siglip2-scene | 0.459 | 0.304 | 0.0 |
 | scene-figures--haiku-scene | 0.5 | 0.297 | 14.2 |
+| scene-vecteurs--head-dinov2-scene--minilm-multilingual | 0.434 | 0.297 |  |
+| scene--head-dinov2-scene | 0.436 | 0.286 | 0.0 |
+| scene-vecteurs--head-pe-spatial-scene--minilm-multilingual | 0.464 | 0.283 |  |
+| scene--head-pe-spatial-scene | 0.475 | 0.266 | 0.0 |
 | vector--siglip | 0.507 | 0.228 | 0.082 |
 | vector--dinov2 | 0.414 | 0.193 | 0.099 |
 | regions--dinov2-patchs | 0.386 | 0.182 | 0.11 |
@@ -108,7 +120,13 @@ Top1 by medium (all; queries: enfance 220, passion 220)
 | scene-vecteurs--haiku-scene--minilm-multilingual | 0.659 | 0.509 |
 | scene-figures--opus-scene | 0.682 | 0.655 |
 | scene--haiku-scene | 0.641 | 0.582 |
+| scene-vecteurs--head-siglip2-scene--minilm-multilingual | 0.427 | 0.432 |
+| scene--head-siglip2-scene | 0.468 | 0.45 |
 | scene-figures--haiku-scene | 0.559 | 0.441 |
+| scene-vecteurs--head-dinov2-scene--minilm-multilingual | 0.509 | 0.359 |
+| scene--head-dinov2-scene | 0.486 | 0.386 |
+| scene-vecteurs--head-pe-spatial-scene--minilm-multilingual | 0.482 | 0.445 |
+| scene--head-pe-spatial-scene | 0.509 | 0.441 |
 | vector--siglip | 0.505 | 0.509 |
 | vector--dinov2 | 0.386 | 0.441 |
 | regions--dinov2-patchs | 0.409 | 0.364 |
@@ -120,3 +138,12 @@ Top1 by medium (all; queries: enfance 220, passion 220)
 | scene-figures--qwen25vl3b-scene | 0.277 | 0.082 |
 | relations--grounding-dino--vitpose-humanart | 0.305 | 0.155 |
 | postures--grounding-dino--vitpose-humanart | 0.268 | 0.032 |
+
+## entrainement
+
+Not a test: 1,200 Iconclass pictures away from every bench (half the sixteen subjects of 'relations', half other narrative scenes), whose Opus scene graphs train a student model. Its scores mean nothing.
+
+| combination | all top1 | all mAP | s/picture |
+|---|---|---|---|
+| *chance* | 1.0 | 1.0 | |
+| scene--opus-scene | 1.0 | 1.0 | 12.95 |

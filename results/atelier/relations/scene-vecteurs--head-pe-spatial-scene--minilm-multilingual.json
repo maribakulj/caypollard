@@ -1,0 +1,62 @@
+{
+ "bench": "relations",
+ "combination": "scene-vecteurs--head-pe-spatial-scene--minilm-multilingual",
+ "date": "2026-10-24",
+ "commit": "af91265",
+ "bricks": [
+  {
+   "name": "head-pe-spatial-scene",
+   "kind": "scene",
+   "summary": "Home-made head, closed vocabulary, no language model (8 queries, 3-layer decoder, ~3.4 M parameters), trained from scratch on the 1,200 Opus graphs, on frozen PE-Spatial large 448 px",
+   "source": "scripts/remote_head_scene.py",
+   "weights_mb": 0,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "all": {
+   "queries": 440,
+   "top1": 0.464,
+   "mAP": 0.283,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "annonciation": "19/30",
+    "bergers": "16/29",
+    "crucifixion": "16/30",
+    "deploration": "14/30",
+    "descente": "7/29",
+    "ecce-homo": "16/30",
+    "fuite-egypte": "14/22",
+    "gethsemani": "11/24",
+    "mages": "17/30",
+    "mise-au-tombeau": "10/29",
+    "nativite": "4/24",
+    "portement": "17/28",
+    "presentation": "13/29",
+    "resurrection": "7/20",
+    "sainte-famille": "16/29",
+    "visitation": "7/27"
+   },
+   "by_medium": {
+    "enfance": {
+     "queries": 220,
+     "top1": 0.482,
+     "mAP": 0.299
+    },
+    "passion": {
+     "queries": 220,
+     "top1": 0.445,
+     "mAP": 0.266
+    }
+   }
+  }
+ },
+ "chance": {
+  "all": {
+   "top1": 0.063,
+   "mAP": 0.073
+  }
+ },
+ "phrases_per_picture_median": 8.0,
+ "text": "minilm-multilingual"
+}

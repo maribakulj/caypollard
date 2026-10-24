@@ -1,0 +1,54 @@
+{
+ "bench": "sujets",
+ "combination": "scene-vecteurs--head-siglip2-scene--minilm-multilingual",
+ "date": "2026-10-24",
+ "commit": "af91265",
+ "bricks": [
+  {
+   "name": "head-siglip2-scene",
+   "kind": "scene",
+   "summary": "Home-made head, closed vocabulary, no language model (8 queries, 3-layer decoder, ~3.4 M parameters), trained from scratch on the 1,200 Opus graphs, on frozen SigLIP 2 base 384 px",
+   "source": "scripts/remote_head_scene.py",
+   "weights_mb": 0,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "emblem_queries": {
+   "queries": 12,
+   "top1": 0.5,
+   "mAP": 0.443,
+   "median_first_hit": 1.5,
+   "top1_by_label": {
+    "crucifixion": "3/6",
+    "portement": "0/1",
+    "tentation": "3/4",
+    "visitation": "0/1"
+   }
+  },
+  "museum_queries": {
+   "queries": 52,
+   "top1": 0.442,
+   "mAP": 0.497,
+   "median_first_hit": 2.0,
+   "top1_by_label": {
+    "crucifixion": "15/19",
+    "portement": "0/15",
+    "tentation": "3/5",
+    "visitation": "5/13"
+   }
+  }
+ },
+ "chance": {
+  "emblem_queries": {
+   "top1": 0.202,
+   "mAP": 0.245
+  },
+  "museum_queries": {
+   "top1": 0.263,
+   "mAP": 0.402
+  }
+ },
+ "phrases_per_picture_median": 7.0,
+ "text": "minilm-multilingual"
+}

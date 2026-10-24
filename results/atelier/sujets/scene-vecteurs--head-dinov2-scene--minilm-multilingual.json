@@ -1,0 +1,54 @@
+{
+ "bench": "sujets",
+ "combination": "scene-vecteurs--head-dinov2-scene--minilm-multilingual",
+ "date": "2026-10-24",
+ "commit": "af91265",
+ "bricks": [
+  {
+   "name": "head-dinov2-scene",
+   "kind": "scene",
+   "summary": "Home-made head, closed vocabulary, no language model (8 queries, 3-layer decoder, ~3.4 M parameters), trained from scratch on the 1,200 Opus graphs, on frozen DINOv2-base 448 px",
+   "source": "scripts/remote_head_scene.py",
+   "weights_mb": 0,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "emblem_queries": {
+   "queries": 12,
+   "top1": 0.667,
+   "mAP": 0.515,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "crucifixion": "4/6",
+    "portement": "1/1",
+    "tentation": "3/4",
+    "visitation": "0/1"
+   }
+  },
+  "museum_queries": {
+   "queries": 52,
+   "top1": 0.635,
+   "mAP": 0.687,
+   "median_first_hit": 1.0,
+   "top1_by_label": {
+    "crucifixion": "19/19",
+    "portement": "4/15",
+    "tentation": "2/5",
+    "visitation": "8/13"
+   }
+  }
+ },
+ "chance": {
+  "emblem_queries": {
+   "top1": 0.202,
+   "mAP": 0.245
+  },
+  "museum_queries": {
+   "top1": 0.263,
+   "mAP": 0.402
+  }
+ },
+ "phrases_per_picture_median": 8.0,
+ "text": "minilm-multilingual"
+}

@@ -1,0 +1,54 @@
+{
+ "bench": "sujets",
+ "combination": "scene-vecteurs--head-pe-spatial-scene--minilm-multilingual",
+ "date": "2026-10-24",
+ "commit": "af91265",
+ "bricks": [
+  {
+   "name": "head-pe-spatial-scene",
+   "kind": "scene",
+   "summary": "Home-made head, closed vocabulary, no language model (8 queries, 3-layer decoder, ~3.4 M parameters), trained from scratch on the 1,200 Opus graphs, on frozen PE-Spatial large 448 px",
+   "source": "scripts/remote_head_scene.py",
+   "weights_mb": 0,
+   "heavy": false
+  }
+ ],
+ "scores": {
+  "emblem_queries": {
+   "queries": 12,
+   "top1": 0.5,
+   "mAP": 0.473,
+   "median_first_hit": 1.5,
+   "top1_by_label": {
+    "crucifixion": "0/6",
+    "portement": "1/1",
+    "tentation": "4/4",
+    "visitation": "1/1"
+   }
+  },
+  "museum_queries": {
+   "queries": 52,
+   "top1": 0.5,
+   "mAP": 0.565,
+   "median_first_hit": 1.5,
+   "top1_by_label": {
+    "crucifixion": "19/19",
+    "portement": "0/15",
+    "tentation": "4/5",
+    "visitation": "3/13"
+   }
+  }
+ },
+ "chance": {
+  "emblem_queries": {
+   "top1": 0.202,
+   "mAP": 0.245
+  },
+  "museum_queries": {
+   "top1": 0.263,
+   "mAP": 0.402
+  }
+ },
+ "phrases_per_picture_median": 7.0,
+ "text": "minilm-multilingual"
+}
