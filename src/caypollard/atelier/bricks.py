@@ -643,6 +643,34 @@ BRICKS: dict[tuple[str, str], Brick] = {
             16600,
             heavy=True,
         ),
+        # The three home-made heads, fixed together before any run (24/10/2026).
+        ElsewhereScene(
+            "head-pe-spatial-scene",
+            "scene",
+            "Home-made head, closed vocabulary, no language model (8 queries, 3-layer decoder, "
+            "~3.4 M parameters), trained from scratch "
+            "on the 1,200 Opus graphs, on frozen PE-Spatial large 448 px",
+            "scripts/remote_head_scene.py",
+            0,
+        ),
+        ElsewhereScene(
+            "head-dinov2-scene",
+            "scene",
+            "Home-made head, closed vocabulary, no language model (8 queries, 3-layer decoder, "
+            "~3.4 M parameters), trained from scratch "
+            "on the 1,200 Opus graphs, on frozen DINOv2-base 448 px",
+            "scripts/remote_head_scene.py",
+            0,
+        ),
+        ElsewhereScene(
+            "head-siglip2-scene",
+            "scene",
+            "Home-made head, closed vocabulary, no language model (8 queries, 3-layer decoder, "
+            "~3.4 M parameters), trained from scratch "
+            "on the 1,200 Opus graphs, on frozen SigLIP 2 base 384 px",
+            "scripts/remote_head_scene.py",
+            0,
+        ),
         # PE-Spatial and C-RADIO bricks fixed together before any run (24/10/2026).
         PerceptionEncoder(
             "pe-spatial",
