@@ -280,6 +280,8 @@ def _grid(tokens, side: int = 16):
 
     b, n, d = tokens.shape
     g = round(n**0.5)
+    if g * g != n:
+        raise ValueError(f"{n} patch tokens do not make a square grid")
     grid = tokens[:, : g * g].reshape(b, g, g, d).permute(0, 3, 1, 2).float()
     pooled = torch.nn.functional.adaptive_avg_pool2d(grid, side).flatten(2).transpose(1, 2)
     return torch.nn.functional.normalize(pooled, dim=-1).cpu().numpy().astype(np.float16)

@@ -12,7 +12,10 @@ distance matrices (``data/derived/atelier/*/*.npy``), plus ``ROOT/atelier.log``.
 """
 
 import glob
+import hashlib
+import json
 import os
+import shutil
 import subprocess
 import sys
 import tarfile
@@ -21,6 +24,7 @@ ROOT = os.environ.get("CAY_REMOTE_ROOT", "/content")
 RUNS = [r.split(":") for r in os.environ["CAY_RUNS"].split(",") if r]
 WORK = ROOT + "/cay"
 
+shutil.rmtree(WORK, ignore_errors=True)  # no result of an earlier run is carried over
 os.makedirs(WORK + "/data/derived", exist_ok=True)
 with tarfile.open(ROOT + "/code.tar") as archive:
     archive.extractall(WORK)
@@ -42,6 +46,21 @@ subprocess.run(
     check=True,
 )
 env = dict(os.environ, PYTHONPATH=WORK + "/src")
+with open(ROOT + "/code.tar", "rb") as f:
+    code_sha = hashlib.sha256(f.read()).hexdigest()
+versions = subprocess.run(
+    [
+        sys.executable,
+        "-c",
+        "import torch, transformers, timm; "
+        "print(torch.__version__, transformers.__version__, timm.__version__)",
+    ],
+    capture_output=True,
+    text=True,
+).stdout.split()
+os.makedirs(WORK + "/results/atelier", exist_ok=True)
+with open(WORK + "/results/atelier/remote-run.json", "w") as f:
+    json.dump({"code_sha256": code_sha, "torch_transformers_timm": versions, "runs": RUNS}, f)
 failed = []
 for command, bench, brick in RUNS:
     print(f"== {command} {bench} {brick}", flush=True)
@@ -58,3 +77,4 @@ with tarfile.open(ROOT + "/atelier-out.tar.gz", "w:gz") as out:
         out.add(npy, arcname=os.path.relpath(npy, WORK))
 print("failed: " + (", ".join(failed) or "none"), flush=True)
 print("done", flush=True)
+sys.exit(1 if failed else 0)
