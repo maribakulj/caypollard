@@ -1,0 +1,15 @@
+{
+ "key": {
+  "model": [
+   "davanstrien/qwen35-9b-iconclass-sft-brillfull",
+   "4d83102aec672c09eacb07568c8f81367616a1d7"
+  ],
+  "settings": "greedy|768|rep1.1|default-template|fp16|batch1|warmup3",
+  "prompt": "Classify this image using Iconclass codes. Return a JSON object with key 'iconclass-codes' containing a list of codes.",
+  "frozen_sha256": "39b5107746ce57050abce2ae3cbc11c45c86988a61abc895ec35000cc91e62f5",
+  "script_sha256": "77bdcfa50d418c8cdc8bef2f6ca3781c6b35705bf54df6f928c7692513ba0af9",
+  "transformers": "5.20.2",
+  "torch": "2.11.0+cu130",
+  "gpu": "NVIDIA L4"
+ }
+}
