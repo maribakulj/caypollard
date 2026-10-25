@@ -29,7 +29,7 @@ RADIO, RADIO_REV = "nvidia/C-RADIOv3-L", "9d0413465e8a91e67bbf2c1ad342815478d1b9
 TEST = "data/test-00000-of-00001.parquet"
 TRAIN = [f"data/train-{i:05d}-of-00011.parquet" for i in range(11)]
 SMOKE = int(os.environ.get("CAY_SMOKE", "0"))  # rows per shard in a dry run; its results are technical only
-FEATURE_CONFIG = f"{RADIO}@{RADIO_REV}|square-grey128|448|bicubic|fp16|summary+meanspatial|l2-each-then-l2"
+FEATURE_CONFIG = f"{RADIO}@{RADIO_REV}|square-grey128|448|bicubic|autocast-fp16|summary+meanspatial|l2-each-then-l2"
 dev = "cuda" if torch.cuda.is_available() else "cpu"
 torch.manual_seed(0)
 torch.cuda.manual_seed_all(0)
@@ -134,7 +134,7 @@ print("preflight ok:", {k: v["invalid_json"] for k, v in refs.items()}, flush=Tr
 # ---- Phase 1: C-RADIOv3-L features, test shard first, resumable under a manifest (amendment 3) ----
 from transformers import AutoModel, CLIPImageProcessor  # noqa: E402
 
-model = AutoModel.from_pretrained(RADIO, revision=RADIO_REV, trust_remote_code=True).to(dev).eval().half()
+model = AutoModel.from_pretrained(RADIO, revision=RADIO_REV, trust_remote_code=True).to(dev).eval()
 processor = CLIPImageProcessor.from_pretrained(RADIO, revision=RADIO_REV)
 
 
@@ -148,8 +148,9 @@ def square(im):
 
 @torch.no_grad()
 def features(images):
-    px = processor(images=[square(i) for i in images], return_tensors="pt", do_resize=False).pixel_values.to(dev).half()
-    summary, spatial = model(px)
+    px = processor(images=[square(i) for i in images], return_tensors="pt", do_resize=False).pixel_values.to(dev)
+    with torch.autocast("cuda", dtype=torch.float16, enabled=dev == "cuda"):  # RADIO normalises its input in float32 itself
+        summary, spatial = model(px)
     v = torch.cat([torch.nn.functional.normalize(summary.float(), dim=-1),
                    torch.nn.functional.normalize(spatial.float().mean(1), dim=-1)], 1)
     return torch.nn.functional.normalize(v, dim=-1).cpu().numpy().astype(np.float16)
@@ -221,7 +222,7 @@ def boot_diff(a, b):
     return {"diff": float(a.mean() - b.mean()), "low95": float(np.quantile(d, 0.025)), "high95": float(np.quantile(d, 0.975))}
 
 
-grid = [round(x, 2) for x in np.arange(0.05, 0.61, 0.05)]
+grid = [round(float(x), 2) for x in np.arange(0.05, 0.61, 0.05)]
 
 # ---- K: nearest neighbours ----
 Xtr, Ytr, Xva, Yva = X[~val], [y for y, v in zip(Y, val) if not v], X[val], [y for y, v in zip(Y, val) if v]

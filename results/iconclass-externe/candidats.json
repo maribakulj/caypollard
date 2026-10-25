@@ -1,0 +1,20 @@
+{
+ "picturae_with_notations_and_image": 13428,
+ "icai_images_hashed": 87745,
+ "copies_of_icai": 1058,
+ "books_with_a_copy": 60,
+ "kept": 7320,
+ "kept_books": 89,
+ "notations_per_kept_picture_median": 7.0,
+ "distance_histogram": [
+  153,
+  184,
+  219,
+  244,
+  258,
+  1053,
+  4422,
+  3868,
+  3027
+ ]
+}

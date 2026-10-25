@@ -1,0 +1,17 @@
+{
+ "smoke": 0,
+ "device": "cuda",
+ "torch": "2.11.0+cu130",
+ "transformers": "5.17.0",
+ "dataset": [
+  "davanstrien/iconclass-vlm-brillfull",
+  "8045366ff092a06e8e1c4e47f1eb43cb2a54d732"
+ ],
+ "feature_config": "nvidia/C-RADIOv3-L@9d0413465e8a91e67bbf2c1ad342815478d1b906|square-grey128|448|bicubic|autocast-fp16|summary+meanspatial|l2-each-then-l2",
+ "script_sha256": "22c674d47821006fff0c37affb3d80fbb6771bc91db620245d8cb6dc51c91176",
+ "preds_sha256": {
+  "passk/sft4b_1ep.json": "403ff638e4a43b37f14136ab2fc4cb8bc91b66ba770ff3d710a53559d19ff1a7",
+  "passk/sft9b_1ep.json": "ee797a4c39a9e61804aec4598635a87e5821aaf232d7885c44582125e042ed4b",
+  "passk/sft4b_orig.json": "d5d3fa2909466fa68c01234940d954c1d8c74dbb1bf40826cc62bea4afe22df7"
+ }
+}
