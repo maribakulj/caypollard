@@ -1,0 +1,100 @@
+{
+ "technical_only": false,
+ "val_scores": {
+  "K": 0.47696185353565146,
+  "T": 0.5517433451139009
+ },
+ "chosen_on_validation": "T",
+ "knn_threshold": 0.15,
+ "head": {
+  "vocab": 7907,
+  "best_epoch": 14,
+  "threshold": 0.6
+ },
+ "test_codes_out_of_vocab": {
+  "share": 0.1009837962962963,
+  "count": 349,
+  "images": 183
+ },
+ "unreadable_test_codes": 4,
+ "exact_test_copies_in_train": 3,
+ "latency_chosen_s_batch1": {
+  "median": 0.0562514066696167,
+  "p90": 0.05727648735046387
+ },
+ "author_declared_hf1": {
+  "sft4b_1ep": 0.522182759163195,
+  "sft9b_1ep": 0.5605778132141117,
+  "sft4b_orig": 0.4979688984932483
+ },
+ "excluded_from_verdict": {
+  "sft4b_orig": "contaminated per the author",
+  "frequent": "baseline"
+ },
+ "systems": {
+  "K_knn": {
+   "hier_f1": 0.4504403798732758,
+   "exact": {
+    "precision": 0.33375666751333505,
+    "recall": 0.38031837916063677,
+    "f1": 0.3555194805194805
+   },
+   "codes_per_image": 4.996192893401015
+  },
+  "T_head": {
+   "hier_f1": 0.547921570709416,
+   "exact": {
+    "precision": 0.2582781456953642,
+    "recall": 0.2934876989869754,
+    "f1": 0.2747595176805311
+   },
+   "codes_per_image": 4.982233502538071
+  },
+  "frequent": {
+   "hier_f1": 0.15381562069676738,
+   "exact": {
+    "precision": 0.07392131979695432,
+    "recall": 0.06743849493487698,
+    "f1": 0.070531254729832
+   },
+   "codes_per_image": 4.0
+  },
+  "sft4b_1ep": {
+   "hier_f1": 0.4481236779411463,
+   "exact": {
+    "precision": 0.25693160813308685,
+    "recall": 0.2011577424023155,
+    "f1": 0.22564935064935066
+   },
+   "codes_per_image": 3.432741116751269
+  },
+  "sft9b_1ep": {
+   "hier_f1": 0.48306650091559017,
+   "exact": {
+    "precision": 0.29933234421364985,
+    "recall": 0.23357452966714906,
+    "f1": 0.262396358315721
+   },
+   "codes_per_image": 3.4390862944162435
+  },
+  "sft4b_orig": {
+   "hier_f1": 0.41879735099100074,
+   "exact": {
+    "precision": 0.25181818181818183,
+    "recall": 0.16034732272069466,
+    "f1": 0.19593280282935457
+   },
+   "codes_per_image": 2.7918781725888326
+  }
+ },
+ "paired_T_head_vs_sft4b_1ep": {
+  "diff": 0.09979789276826972,
+  "low95": 0.08553629862646134,
+  "high95": 0.11371704392031223
+ },
+ "paired_T_head_vs_sft9b_1ep": {
+  "diff": 0.06485506979382588,
+  "low95": 0.05056852482425217,
+  "high95": 0.07911796293377175
+ }
+}

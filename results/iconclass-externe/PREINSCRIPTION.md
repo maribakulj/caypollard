@@ -54,3 +54,16 @@ Restent 7 320 picturae de 89 livres.
    livre, étalonnage archivé dans `results/iconclass-externe/etalonnage/` ; il redonne 7 320 picturae, 89 livres.
 6. Le 4B relancé n'est pas déclaré équivalent à ses sorties publiées (−0,37 point, IC95 [−3,76 ; +3,35] sur 50 images, fidélité 62 %) :
    sur le banc extérieur, seules ses nouvelles sorties comptent.
+
+## Amendement 7 (25/10/2026, après `prepare`, AVANT toute prédiction sur ce banc)
+
+La phase `prepare` (dossier Colab `/content/extout`, gel `results/iconclass-externe/gel/`) a retiré 56 livres sur 89 au seuil de cosinus
+0,90 et ne laissait que 192 images de test (cible 800). Étalonnage à l'œil sur des paires tirées au hasard dans chaque tranche de
+cosinus (`results/iconclass-externe/etalonnage/cos_*.jpg`, 8 paires par tranche, graine 0) :
+- **≥ 0,95** : vraies copies ou autres états/éditions du même emblème (cœurs, tour, devise) ;
+- **0,90-0,95** : presque toujours des emblèmes différents, rapprochés par la mise en page de pages entières numérisées (planches
+  doubles ou triples, marges, mire de couleur).
+Nouveau seuil : un livre est retiré si l'une de ses picturae a un cosinus **≥ 0,95** avec une image ICAI (7 livres retirés ; 5 544
+picturae et 82 livres restent). Le premier gel (`gel/`) est abandonné sans évaluation ; `prepare` est relancé dans un dossier neuf
+(`/content/extout2`), mêmes règles par ailleurs. Aucune prédiction n'a été produite ni regardée sur ce banc.
+Remarque : beaucoup de picturae Emblematica sont des pages entières ; la tête rapproche aussi les mises en page.

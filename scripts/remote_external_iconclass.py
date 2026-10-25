@@ -164,10 +164,10 @@ if PHASE == "prepare":
         s_, j = (torch.from_numpy(X[i:i + 1024]).to(dev) @ icai.T).max(1)
         best_cos += s_.cpu().tolist()
         best_j += j.cpu().tolist()
-    books_out = sorted({r["book_id"] for r, c in zip(rows, best_cos, strict=True) if c >= 0.90})
+    books_out = sorted({r["book_id"] for r, c in zip(rows, best_cos, strict=True) if c >= 0.95})
     keep = [i for i, r in enumerate(rows) if r["book_id"] not in books_out]
     json.dump({"filter1_picturae": len(rows), "filter1_books": len({r["book_id"] for r in rows}),
-               "books_out_cos_090": books_out, "kept_picturae": len(keep),
+               "books_out_cos_095": books_out, "kept_picturae": len(keep),
                "kept_books": len({rows[i]["book_id"] for i in keep}),
                "cos_histogram": np.histogram(best_cos, bins=[0, 0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95, 1.01])[0].tolist()},
               open(OUT / "filtre.json", "w"), indent=1)

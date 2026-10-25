@@ -1,0 +1,25 @@
+{
+ "filter1_picturae": 7320,
+ "filter1_books": 89,
+ "books_out_cos_095": [
+  "duodeksemblema00saub",
+  "emblematapolitic00isel",
+  "geistlichetodtsg00spo",
+  "lesdivinesoperat03mell",
+  "lesemblemesdamou00mari",
+  "mlaurentiiwolfga13woyt",
+  "pyramisodersinnr00grie"
+ ],
+ "kept_picturae": 5544,
+ "kept_books": 82,
+ "cos_histogram": [
+  0,
+  0,
+  0,
+  62,
+  1214,
+  4282,
+  1708,
+  54
+ ]
+}
