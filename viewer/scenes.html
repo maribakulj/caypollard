@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>caypollard · graphes de scène</title>
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="scenes.css">
+</head>
+<body>
+<header class="sbar">
+  <h1>caypollard · graphes de scène</h1>
+  <label>Lecteur A <select id="ra"></select></label>
+  <label>Lecteur B <select id="rb"></select></label>
+  <label>Sujet <select id="subj"><option value="">tous</option></select></label>
+  <span class="muted">banc relations, 440 images — <a href="./">retour au visualiseur</a></span>
+</header>
+<section id="filters" class="sfilters"></section>
+<section id="bysubject" class="sbysubject"></section>
+<main class="smain">
+  <nav id="grid" class="sgrid"></nav>
+  <section id="detail" class="sdetail"><p class="muted">Cliquez sur une image.</p></section>
+</main>
+<script src="scenes.js"></script>
+</body>
+</html>
