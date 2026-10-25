@@ -1,0 +1,20 @@
+{
+ "smoke": 0,
+ "device": "cuda",
+ "torch": "2.11.0+cu128",
+ "transformers": "5.16.1",
+ "torchvision": "0.26.0+cu128",
+ "script_sha256": "4fe64ea7699ee54e47470fc2f251122c5f97eb95eb798bb6b841d340c9e237e5",
+ "inputs_sha256": {
+  "a_oracle.csv": "1b57bf4719c98818eeb2d00b441653237153386fca097b476e0ce68d2f0cbb68",
+  "b_oracle.csv": "b0f1e0d996b232759f6cb72ce25d780fbf882c52cf5735944f18500bb3cff1cd",
+  "c_oracle.csv": "4b475a567236e09a754580e2678bc5e299396afcb4c4d95aec630fb5e5cb7b4d",
+  "oracle_temoins.csv": "4db9ed084aeb68e1c03b049f8116c589bb1fbe86881f9250a92d172791dc8adc",
+  "requetes_boites.csv": "ee5a5ed020bca3d7b28f52e0e2afb94e82d653e37ed6424459161d486cd63123",
+  "resultats_oracle_dinov3.csv": "ce0d5173d6f5cdad7bbea3d8191281f35fe06c478d13047a509991fefc16a7f6",
+  "cache_oracle_dinov3l_384.npy": "cba6d0601569d3e2305be2266f4317f71700636d2d2c6f848ca5b2bfe0f4a1ba"
+ },
+ "dinov3": "/tmp/dinov3",
+ "dinov3_weights_sha256": "dcb2e45127cccbf1601e5f42fef165eea275c8e5213197e8dcf3f48822718179",
+ "vitpose_sha256": "b417f546b98699e34fc1edb54ffc5a53dadc7c7975a70326341b23a4c57f2078"
+}
