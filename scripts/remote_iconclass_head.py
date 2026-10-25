@@ -25,11 +25,10 @@ from PIL import Image
 PREDS, OUT = Path(sys.argv[1]), Path(sys.argv[2])
 (OUT / "feats").mkdir(parents=True, exist_ok=True)
 REPO, REV = "davanstrien/iconclass-vlm-brillfull", "8045366ff092a06e8e1c4e47f1eb43cb2a54d732"
-RADIO, RADIO_REV = "nvidia/C-RADIOv3-L", "9d0413465e8a91e67bbf2c1ad342815478d1b906"
 TEST = "data/test-00000-of-00001.parquet"
 TRAIN = [f"data/train-{i:05d}-of-00011.parquet" for i in range(11)]
 SMOKE = int(os.environ.get("CAY_SMOKE", "0"))  # rows per shard in a dry run; its results are technical only
-FEATURE_CONFIG = f"{RADIO}@{RADIO_REV}|square-grey128|448|bicubic|autocast-fp16|summary+meanspatial|l2-each-then-l2"
+ENCODER = os.environ.get("CAY_ENCODER", "c-radio")  # pe-spatial: the open (Apache 2.0) variant, a separate brick
 dev = "cuda" if torch.cuda.is_available() else "cpu"
 torch.manual_seed(0)
 torch.cuda.manual_seed_all(0)
@@ -41,6 +40,9 @@ def sha(p):
 
 
 import transformers  # noqa: E402
+
+_REPO, _REV, _CFG = {"c-radio": ("nvidia/C-RADIOv3-L", "9d0413465e8a91e67bbf2c1ad342815478d1b906", "|square-grey128|448|bicubic|autocast-fp16|summary+meanspatial|l2-each-then-l2"), "pe-spatial": ("timm/vit_pe_spatial_large_patch14_448.fb", "ac6f424680a305470340dac75a0a9b4c47ee030f", "|square-grey128|448|bicubic|autocast-fp16|meanpatch|l2")}[ENCODER]
+FEATURE_CONFIG = f"{_REPO}@{_REV}{_CFG}"
 
 json.dump({"smoke": SMOKE, "device": dev, "torch": torch.__version__, "transformers": transformers.__version__,
            "dataset": [REPO, REV], "feature_config": FEATURE_CONFIG, "script_sha256": sha(__file__),
@@ -131,11 +133,52 @@ json.dump({k: {kk: vv for kk, vv in v.items() if kk != "preds"} for k, v in {**r
           open(OUT / "preflight.json", "w"), indent=1)
 print("preflight ok:", {k: v["invalid_json"] for k, v in refs.items()}, flush=True)
 
-# ---- Phase 1: C-RADIOv3-L features, test shard first, resumable under a manifest (amendment 3) ----
-from transformers import AutoModel, CLIPImageProcessor  # noqa: E402
+# ---- Phase 1: encoder features, test shard first, resumable under a manifest (amendment 3) ----
+ENCODERS = {  # name -> (repository, pinned revision, feature configuration written into every manifest)
+    "c-radio": ("nvidia/C-RADIOv3-L", "9d0413465e8a91e67bbf2c1ad342815478d1b906",
+                "|square-grey128|448|bicubic|autocast-fp16|summary+meanspatial|l2-each-then-l2"),
+    "pe-spatial": ("timm/vit_pe_spatial_large_patch14_448.fb", "ac6f424680a305470340dac75a0a9b4c47ee030f",
+                   "|square-grey128|448|bicubic|autocast-fp16|meanpatch|l2"),
+}
 
-model = AutoModel.from_pretrained(RADIO, revision=RADIO_REV, trust_remote_code=True).to(dev).eval()
-processor = CLIPImageProcessor.from_pretrained(RADIO, revision=RADIO_REV)
+
+def load_encoder(name):
+    """The frozen encoder and its feature function: image list -> float16 L2-normalised vectors."""
+    repo, rev, _ = ENCODERS[name]
+    if name == "c-radio":
+        from transformers import AutoModel, CLIPImageProcessor
+
+        model = AutoModel.from_pretrained(repo, revision=rev, trust_remote_code=True).to(dev).eval()
+        processor = CLIPImageProcessor.from_pretrained(repo, revision=rev)
+
+        @torch.no_grad()
+        def features(images):
+            px = processor(images=[square(i) for i in images], return_tensors="pt", do_resize=False).pixel_values.to(dev)
+            with torch.autocast("cuda", dtype=torch.float16, enabled=dev == "cuda"):  # RADIO normalises its input itself
+                summary, spatial = model(px)
+            v = torch.cat([torch.nn.functional.normalize(summary.float(), dim=-1),
+                           torch.nn.functional.normalize(spatial.float().mean(1), dim=-1)], 1)
+            return torch.nn.functional.normalize(v, dim=-1).cpu().numpy().astype(np.float16)
+
+        return features
+    import timm
+    import torchvision.transforms as T
+    from huggingface_hub import hf_hub_download
+
+    weights = hf_hub_download(repo, "model.safetensors", revision=rev)
+    model = timm.create_model("vit_pe_spatial_large_patch14_448", pretrained=True,
+                              pretrained_cfg_overlay={"file": weights}).to(dev).eval()
+    to_t = T.Compose([T.ToTensor(), T.Normalize([0.5] * 3, [0.5] * 3)])  # the model's own mean and std
+
+    @torch.no_grad()
+    def features(images):
+        x = torch.stack([to_t(square(i)) for i in images]).to(dev)
+        with torch.autocast("cuda", dtype=torch.float16, enabled=dev == "cuda"):
+            tokens = model.forward_features(x)
+        v = tokens[:, getattr(model, "num_prefix_tokens", 0):].float().mean(1)  # mean of the patch tokens (timm's own pooling)
+        return torch.nn.functional.normalize(v, dim=-1).cpu().numpy().astype(np.float16)
+
+    return features
 
 
 def square(im):
@@ -146,14 +189,8 @@ def square(im):
     return c.resize((448, 448), Image.BICUBIC)
 
 
-@torch.no_grad()
-def features(images):
-    px = processor(images=[square(i) for i in images], return_tensors="pt", do_resize=False).pixel_values.to(dev)
-    with torch.autocast("cuda", dtype=torch.float16, enabled=dev == "cuda"):  # RADIO normalises its input in float32 itself
-        summary, spatial = model(px)
-    v = torch.cat([torch.nn.functional.normalize(summary.float(), dim=-1),
-                   torch.nn.functional.normalize(spatial.float().mean(1), dim=-1)], 1)
-    return torch.nn.functional.normalize(v, dim=-1).cpu().numpy().astype(np.float16)
+assert FEATURE_CONFIG == "{}@{}{}".format(*ENCODERS[ENCODER])
+features = load_encoder(ENCODER)
 
 
 def encode_shard(shard, preloaded=None):

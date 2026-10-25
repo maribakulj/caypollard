@@ -23,15 +23,16 @@ import torch
 from PIL import Image
 
 PHASE, HEAD, EXT, OUT = sys.argv[1], Path(sys.argv[2]), Path(sys.argv[3]), Path(sys.argv[4])
-assert PHASE in ("prepare", "evaluate")
+assert PHASE in ("prepare", "evaluate", "evaluate-on")
+# evaluate-on <reference draw>: score another head (e.g. the PE-Spatial brick) on the lists frozen and looked at for an earlier
+# head, without filtering or drawing again, so that both heads face the very same images.
+REF = Path(sys.argv[5]) if PHASE == "evaluate-on" else None
 OUT.mkdir(parents=True, exist_ok=True)
 dev = "cuda" if torch.cuda.is_available() else "cpu"
 started = time.time()
 head_run = json.load(open(HEAD / "run.json"))
 assert head_run["smoke"] == 0, "the heads must come from the full run"
-RADIO, RADIO_REV = "nvidia/C-RADIOv3-L", "9d0413465e8a91e67bbf2c1ad342815478d1b906"
 FEATURE_CONFIG = head_run["feature_config"]
-assert FEATURE_CONFIG.startswith(f"{RADIO}@{RADIO_REV}|square-grey128|448|bicubic|autocast-fp16|")
 
 # ---- Copied from scripts/remote_iconclass_head.py: hierarchy and measures ----
 PART = re.compile(r"\d\d?[A-Z]{0,2}\d*(?:\([^)]*\)\d*)*")
@@ -84,10 +85,51 @@ def exact(gts, preds):
 
 
 # ---- Copied from scripts/remote_iconclass_head.py: the encoder ----
-from transformers import AutoModel, CLIPImageProcessor  # noqa: E402
+ENCODERS = {  # name -> (repository, pinned revision, feature configuration written into every manifest)
+    "c-radio": ("nvidia/C-RADIOv3-L", "9d0413465e8a91e67bbf2c1ad342815478d1b906",
+                "|square-grey128|448|bicubic|autocast-fp16|summary+meanspatial|l2-each-then-l2"),
+    "pe-spatial": ("timm/vit_pe_spatial_large_patch14_448.fb", "ac6f424680a305470340dac75a0a9b4c47ee030f",
+                   "|square-grey128|448|bicubic|autocast-fp16|meanpatch|l2"),
+}
 
-model = AutoModel.from_pretrained(RADIO, revision=RADIO_REV, trust_remote_code=True).to(dev).eval()
-processor = CLIPImageProcessor.from_pretrained(RADIO, revision=RADIO_REV)
+
+def load_encoder(name):
+    """The frozen encoder and its feature function: image list -> float16 L2-normalised vectors."""
+    repo, rev, _ = ENCODERS[name]
+    if name == "c-radio":
+        from transformers import AutoModel, CLIPImageProcessor
+
+        model = AutoModel.from_pretrained(repo, revision=rev, trust_remote_code=True).to(dev).eval()
+        processor = CLIPImageProcessor.from_pretrained(repo, revision=rev)
+
+        @torch.no_grad()
+        def features(images):
+            px = processor(images=[square(i) for i in images], return_tensors="pt", do_resize=False).pixel_values.to(dev)
+            with torch.autocast("cuda", dtype=torch.float16, enabled=dev == "cuda"):  # RADIO normalises its input itself
+                summary, spatial = model(px)
+            v = torch.cat([torch.nn.functional.normalize(summary.float(), dim=-1),
+                           torch.nn.functional.normalize(spatial.float().mean(1), dim=-1)], 1)
+            return torch.nn.functional.normalize(v, dim=-1).cpu().numpy().astype(np.float16)
+
+        return features
+    import timm
+    import torchvision.transforms as T
+    from huggingface_hub import hf_hub_download
+
+    weights = hf_hub_download(repo, "model.safetensors", revision=rev)
+    model = timm.create_model("vit_pe_spatial_large_patch14_448", pretrained=True,
+                              pretrained_cfg_overlay={"file": weights}).to(dev).eval()
+    to_t = T.Compose([T.ToTensor(), T.Normalize([0.5] * 3, [0.5] * 3)])  # the model's own mean and std
+
+    @torch.no_grad()
+    def features(images):
+        x = torch.stack([to_t(square(i)) for i in images]).to(dev)
+        with torch.autocast("cuda", dtype=torch.float16, enabled=dev == "cuda"):
+            tokens = model.forward_features(x)
+        v = tokens[:, getattr(model, "num_prefix_tokens", 0):].float().mean(1)  # mean of the patch tokens (timm's own pooling)
+        return torch.nn.functional.normalize(v, dim=-1).cpu().numpy().astype(np.float16)
+
+    return features
 
 
 def square(im):
@@ -98,14 +140,8 @@ def square(im):
     return c.resize((448, 448), Image.BICUBIC)
 
 
-@torch.no_grad()
-def features(images):
-    px = processor(images=[square(i) for i in images], return_tensors="pt", do_resize=False).pixel_values.to(dev)
-    with torch.autocast("cuda", dtype=torch.float16, enabled=dev == "cuda"):
-        summary, spatial = model(px)
-    v = torch.cat([torch.nn.functional.normalize(summary.float(), dim=-1),
-                   torch.nn.functional.normalize(spatial.float().mean(1), dim=-1)], 1)
-    return torch.nn.functional.normalize(v, dim=-1).cpu().numpy().astype(np.float16)
+ENCODER = next(k for k, (repo, rev, cfg) in ENCODERS.items() if FEATURE_CONFIG == f"{repo}@{rev}{cfg}")
+features = load_encoder(ENCODER)
 
 
 # ---- ICAI features of the full run, checked against their manifests ----
@@ -194,11 +230,25 @@ if PHASE == "prepare":
     print(f"prepared: dev {len(dev_idx)}, test {len(test_idx)}; look at the sheet, then write vu.json", flush=True)
     sys.exit(0)
 
-assert json.load(open(OUT / "vu.json"))["frozen_sha256"] == sha(OUT / "frozen.json"), "the sheet has not been looked at"
-assert json.load(open(OUT / "frozen.json")) == signature(), "something changed since the draw was frozen"
+if PHASE == "evaluate":
+    assert json.load(open(OUT / "vu.json"))["frozen_sha256"] == sha(OUT / "frozen.json"), "the sheet has not been looked at"
+    assert json.load(open(OUT / "frozen.json")) == signature(), "something changed since the draw was frozen"
+    LISTS = OUT
+else:
+    ref = json.load(open(REF / "frozen.json"))
+    assert json.load(open(REF / "vu.json"))["frozen_sha256"] == sha(REF / "frozen.json"), "reference draw not looked at"
+    for n in ("dev.json", "test.json"):
+        assert sha(REF / n) == ref[n], n
+    assert sha(EXT / "candidates.jsonl") == ref["candidates.jsonl"] and sha(EXT / "near256.json") == ref["near256.json"]
+    assert hashlib.sha256("".join(IMG_SHA).encode()).hexdigest() == ref["images_sha256"], "other images than the reference draw"
+    json.dump({"reference_frozen_sha256": sha(REF / "frozen.json"), "candidats_feats.npz": sha(OUT / "candidats_feats.npz"),
+               "head_pt": sha(HEAD / "head.pt"), "head_resultats": sha(HEAD / "resultats.json"), "head_run": sha(HEAD / "run.json"),
+               "head_feats": {f.name: sha(f) for f in sorted((HEAD / "feats").glob("*")) if f.suffix in (".npz", ".json")},
+               "feature_config": FEATURE_CONFIG, "script": sha(__file__)}, open(OUT / "reference.json", "w"), indent=1)
+    LISTS = REF
 pos = {r["filename"]: i for i, r in enumerate(rows)}
-dev_idx = [pos[x["filename"]] for x in json.load(open(OUT / "dev.json"))]
-test_idx = [pos[x["filename"]] for x in json.load(open(OUT / "test.json"))]
+dev_idx = [pos[x["filename"]] for x in json.load(open(LISTS / "dev.json"))]
+test_idx = [pos[x["filename"]] for x in json.load(open(LISTS / "test.json"))]
 assert dev_idx and test_idx, "empty lists"
 
 # ---- The system chosen on validation in the head run, as learnt (no tuning here) ----
