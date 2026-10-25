@@ -1,7 +1,0 @@
-11:33:23 input /kaggle/input/datasets/mabaku/caypollard-iconclass-pe ['candidates.jsonl', 'ext_images', 'gel2', 'near256.json', 'passk', 'remote_external_iconclass.py', 'remote_iconclass_head.py']
-11:45:36 images 7320
-11:45:36 start pe_full
-13:59:12 exit 0 (pe_full)
-13:59:12 start pe_ext
-14:08:06 exit 0 (pe_ext)
-14:08:06 CHAIN DONE ok=True

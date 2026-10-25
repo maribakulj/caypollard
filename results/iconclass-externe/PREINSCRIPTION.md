@@ -38,7 +38,7 @@ Restent 7 320 picturae de 89 livres.
 - **Brique retenue pour les codes** : le système au meilleur F1 principal sur ce test, sauf si un autre est à moins de 2 points (borne basse
   de l'écart apparié ≥ −2 points) **et** au moins 10 fois moins cher ; alors celui-ci. Les têtes T et K ne sont pas réentraînées ici.
 
-## Amendements du 25/10/2026, avant tout calcul (relecture Codex : `~/Documents/reviews/caypollard-iconclass-externe-codex-2026-10-25.md`)
+## Amendements du 25/10/2026, avant tout calcul (relecture Codex, rapport privé)
 
 1. **Projection commune** : la mesure principale retire le chapitre 86 de la vérité **et** des prédictions ; les images sans vérité
    restante sont hors du dénominateur principal (nombre publié, le même pour tous les systèmes). Le transfert ICAI → extérieur est

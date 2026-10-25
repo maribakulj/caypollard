@@ -31,3 +31,7 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# Anciennes expériences migrées (25/10/2026) : copies locales brutes et journaux, jamais dans le dépôt public
+results/decision-graphe/
+results/xanto-parties/
